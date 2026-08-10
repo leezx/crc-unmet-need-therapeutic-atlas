@@ -1,2 +1,3 @@
 dataset_id	source_url	accession	download_method	download_date	file_name	file_size	checksum	license	publication_doi	access_status	notes
-GSE224235	https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE224235	GSE224235	GEO processed files first	NA	NA	NA	NA	NCBI repository terms	NA	UNVERIFIED	Seed source from architecture.
+GSE224235	https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE224235	GSE224235	GEO sample table first	2026-08-10	GEO sample table	NA	NA	NCBI repository terms	NA	VERIFIED	Processed values are included in the sample table.
+GSE224235	https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE224235	GSE224235	GEO raw archive only if needed	2026-08-10	GSE224235_RAW.tar	170.0 KB	NA	NCBI repository terms	NA	VERIFIED	Raw archive listed by GEO; not downloaded.

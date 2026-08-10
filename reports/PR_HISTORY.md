@@ -44,3 +44,7 @@ No automatic merge or P0 download was performed. The PR remains draft until the 
 - CI: `Validate registry` completed successfully according to the web review.
 - Mergeability: reported as `mergeable: true`.
 - Recommendation: merge PR #1, then begin P0 source verification; do not add knowledge layer or data downloader to PR #1.
+
+## Phase 1 source verification
+
+After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was created for the next scoped change. The branch records first-pass verification for P0/reference candidates without downloading biological data.

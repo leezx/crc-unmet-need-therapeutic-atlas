@@ -1,2 +1,2 @@
 dataset_id	source_url	accession	download_method	download_date	file_name	file_size	checksum	license	publication_doi	access_status	notes
-PXD038149	https://www.omicsdi.org/dataset/pride/PXD038149	PXD038149	PRIDE processed files first	NA	NA	NA	NA	PRIDE/underlying dataset terms	NA	UNVERIFIED	Seed source from architecture.
+PXD038149	https://proteomecentral.proteomexchange.org/dataset/PXD038149	PXD038149	PRIDE processed files first	2026-08-10	PRIDE FTP archive	NA	NA	PRIDE/underlying dataset terms	NA	VERIFIED	Exact processed-file inventory pending; no download performed.
