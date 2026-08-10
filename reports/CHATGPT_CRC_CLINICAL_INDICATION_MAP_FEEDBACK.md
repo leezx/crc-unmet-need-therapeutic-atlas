@@ -112,3 +112,7 @@ CRC 临床适应症地图建议形成独立 knowledge/review layer，而不是�
 - HTAN 的 treatment annotation 改为 `SURGICAL_RESECTION_CONTEXT`，并明确 systemic treatment exposure unknown。
 
 下一步：可合并 PR #2；合并后继续做 processed-file inventory、checksum、license/access 和下载路径的逐项 provenance materialization。仍不下载生物数据，也不把 alias 作为独立 cohort。后续 knowledge/review layer 另开 PR。
+
+### Audit-only head confirmation
+
+最新审计提交 `b4d2b47` 仅修改三份 reports 文件，没有改变 registry、relationships、schema、source manifests 或代码。网页版 ChatGPT 快速确认结果仍为 **APPROVE**，没有新的 blocker；当时 GitHub `Validate registry` 仍在运行，但不影响技术结论。
