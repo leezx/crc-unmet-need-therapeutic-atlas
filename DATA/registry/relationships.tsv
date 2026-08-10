@@ -1,0 +1,2 @@
+source_dataset_id	canonical_dataset_id	relationship	duplicate_key	evidence_counting_rule	notes
+Zenodo_CRC_LM_scRNA	CRLM_NMP_ATLAS	ALIAS_OR_SOURCE_MIRROR	data share.zip|8.2 GB|83e6341a296d32014f19b8e3bc2cac94	COUNT_CANONICAL_ONLY	Same archive name, size and checksum observed in current manifests; underlying-study identity still requires confirmation.
