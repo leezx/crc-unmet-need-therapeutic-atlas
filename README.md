@@ -29,3 +29,9 @@ Core evidence chain: patient population → malignant cell state → surface tar
 Phase 1: dataset discovery and review. Seed resources are candidates to verify; no bulk download is started until `reports/DATASET_REVIEW.md` is approved.
 
 See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the review and update workflow.
+
+Project records:
+
+- [`reports/PROJECT_STATUS.md`](reports/PROJECT_STATUS.md)
+- [`reports/PR_HISTORY.md`](reports/PR_HISTORY.md)
+- [`reports/CHATGPT_CRC_CLINICAL_INDICATION_MAP_FEEDBACK.md`](reports/CHATGPT_CRC_CLINICAL_INDICATION_MAP_FEEDBACK.md)

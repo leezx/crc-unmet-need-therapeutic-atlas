@@ -16,7 +16,7 @@ for row in rows:
     if manifest.exists():
         with manifest.open() as fh:
             url = next(csv.DictReader(fh, delimiter="\t"), {}).get("source_url", "")
-    result = {"dataset_id": row["dataset_id"], "url": url, "checked_at": datetime.datetime.now(datetime.timezone.utc).isoformat(), "status": "OFFLINE"}
+    result = {"dataset_id": row["dataset_id"], "url": url, "status": "OFFLINE"}
     if url and not args.offline:
         try:
             req = Request(url, method="HEAD", headers={"User-Agent": "CRC-Atlas-source-scan/0.1"})
@@ -28,4 +28,5 @@ for row in rows:
 out = ROOT / "reports/generated"
 out.mkdir(parents=True, exist_ok=True)
 (out / "source_scan.json").write_text(json.dumps(results, indent=2) + "\n")
+(out / "source_scan_runs.jsonl").open("a").write(json.dumps({"checked_at": datetime.datetime.now(datetime.timezone.utc).isoformat(), "offline": args.offline, "datasets": len(results)}) + "\n")
 print(json.dumps({"datasets": len(results), "output": str(out / 'source_scan.json')}, indent=2))
