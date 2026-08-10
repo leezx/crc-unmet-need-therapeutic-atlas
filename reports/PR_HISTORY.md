@@ -48,3 +48,11 @@ No automatic merge or P0 download was performed. The PR remains draft until the 
 ## Phase 1 source verification
 
 After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was created for the next scoped change. The branch records first-pass verification for P0/reference candidates without downloading biological data.
+
+## PR #2 — Phase 1 source verification
+
+- URL: [#2](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/2)
+- Title: `Phase 1: verify first P0 data sources`
+- State: `OPEN / DRAFT`
+- Head branch: `phase1/p0-source-verification`
+- Scope: first-party metadata verification and source manifests only; no biological data download.
