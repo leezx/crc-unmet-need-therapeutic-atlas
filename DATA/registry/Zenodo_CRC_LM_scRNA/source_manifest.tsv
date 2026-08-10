@@ -1,0 +1,2 @@
+dataset_id	source_url	accession	download_method	download_date	file_name	file_size	checksum	license	publication_doi	access_status	notes
+Zenodo_CRC_LM_scRNA	https://zenodo.org/records/10073712	10.5281/zenodo.10073712	Zenodo data package after metadata review	2026-08-10	data share.zip	8.2 GB	83e6341a296d32014f19b8e3bc2cac94	Zenodo record terms	NA	VERIFIED_ENTRY	Open package; no download performed.

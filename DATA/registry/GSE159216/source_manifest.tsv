@@ -1,0 +1,2 @@
+dataset_id	source_url	accession	download_method	download_date	file_name	file_size	checksum	license	publication_doi	access_status	notes
+GSE159216	https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE159216	GSE159216	GEO processed matrix first	2026-08-10	Processed series matrix	NA	NA	NCBI repository terms	NA	VERIFIED_ENTRY	CRLM bulk subtype comparator; sample count pending.

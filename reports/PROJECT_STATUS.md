@@ -49,6 +49,7 @@
 - PR #1 已于 2026-08-10 合并，merge commit 为 `240473c`。
 - 已开始 Phase 1 P0 source verification：首批核验 GSE178318、GSE224235、GSE226997、DepMap 26Q1、PXD038149、2026 CRLM PDO biobank 和 HPA。
 - source verification draft PR #2 已建立，等待 provenance 审核。
+- 开放式搜索又补充 4 个候选，registry 从 14 增至 18 个：CRLM-NMP-ATLAS、HTAN progressive plasticity、GSE159216 和 Zenodo CRC-LM scRNA。
 - knowledge/review layer 尚未建立，仍作为后续 PR。
 
 ## 下一步顺序

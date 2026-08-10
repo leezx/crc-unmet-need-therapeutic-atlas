@@ -16,6 +16,10 @@ This is a metadata-only verification pass. No biological data were downloaded.
 - **GSE226997** — official GEO record confirms four primary CRC Visium samples and processed supplementary files. It remains `REFERENCE_ONLY`; the listed 41.2 GB raw archive is out of scope by default.
 - **DepMap 26Q1** — official release entry and 26Q1 release announcement confirm CRISPR, mutation/CNV and expression data. The portal currently applies interactive bot verification; exact CRC subset files and release terms still require recording.
 - **MCRC liver-metastasis PDO 2026** — the publication and 213-organoid/102-patient scale are confirmed, but no raw/processed repository accession has been recorded yet. It remains `CANDIDATE` and is not approved for download.
+- **CRLM-NMP-ATLAS** — Zenodo/CELLxGENE processed scRNA and spatial data from six CRLM patients with baseline and post-normothermic-perfusion windows; 75,104 cells are listed by CELLxGENE. Proposed P0 because it adds an ex vivo therapeutic-window context.
+- **HTAN progressive plasticity** — CELLxGENE collection from 31 MSS patients and 83 tumor/normal samples across primary and metastatic sites. Proposed P0 because it directly supports malignant-cell-state and plasticity analysis.
+- **GSE159216** — CRLM bulk transcriptomic subtype comparator; proposed P1.
+- **Zenodo 10.5281/zenodo.10073712** — open CRLM scRNA data/code package listed at 8.2 GB; proposed P1 pending patient/sample overlap review.
 
 ## Admission decisions
 

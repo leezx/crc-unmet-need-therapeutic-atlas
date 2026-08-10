@@ -1,0 +1,3 @@
+dataset_id	source_url	accession	download_method	download_date	file_name	file_size	checksum	license	publication_doi	access_status	notes
+CRLM_NMP_ATLAS	https://zenodo.org/records/15234826	10.5281/zenodo.15234826	Zenodo processed h5ad first	2026-08-10	data share.zip	8.2 GB	83e6341a296d32014f19b8e3bc2cac94	Zenodo record terms	NA	VERIFIED_ENTRY	Open processed package; no download performed.
+CRLM_NMP_ATLAS	https://cellxgene.cziscience.com/collections/be679cb1-35f0-46c9-9a2d-30691862a54a	CELLxGENE collection	CELLxGENE export after source verification	2026-08-10	CRLM-NMP-ATLAS	NA	NA	CELLxGENE collection terms	NA	VERIFIED_ENTRY	75,104-cell collection; exact export file inventory pending.
