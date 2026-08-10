@@ -13,9 +13,14 @@ for i, row in enumerate(rows, 2):
     if list(row) != expected:
         errors.append(f"row {i}: registry columns do not match schema")
     dataset_id = row.get("dataset_id", "")
-    if dataset_id and not (ROOT / "DATA/registry" / dataset_id).exists():
-        errors.append(f"row {i}: missing directory for {dataset_id}")
-    if row.get("status") not in {"CANDIDATE", "APPROVED", "REJECTED", "ARCHIVED"}:
+    status = row.get("status")
+    dataset_dir = ROOT / "DATA/registry" / dataset_id
+    if status == "APPROVED":
+        if not dataset_dir.exists():
+            errors.append(f"row {i}: APPROVED dataset missing directory for {dataset_id}")
+        if not (dataset_dir / "source_manifest.tsv").exists():
+            errors.append(f"row {i}: APPROVED dataset missing source manifest for {dataset_id}")
+    if status not in {"CANDIDATE", "APPROVED", "REJECTED", "ARCHIVED"}:
         errors.append(f"row {i}: invalid status {row.get('status')!r}")
 manifest_header = (ROOT / "schemas/source_manifest.tsv").read_text().splitlines()[0].split("\t")
 for manifest in sorted((ROOT / "DATA/registry").glob("*/source_manifest.tsv")):

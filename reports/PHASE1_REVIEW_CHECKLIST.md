@@ -17,7 +17,7 @@ Use this checklist in the draft PR that admits or changes a dataset candidate. I
 
 ## Decision
 
-- `P0_DOWNLOAD`: high clinical relevance and directly actionable target-discovery evidence.
+- `P0_DOWNLOAD`: required for the first therapeutic decision cycle, including directly actionable discovery evidence and required safety references such as HPA.
 - `P1_DOWNLOAD`: useful orthogonal evidence after P0 review.
 - `REFERENCE_ONLY`: comparator or safety reference; not a discovery cohort.
 - `REJECT`: does not materially support the therapeutic question.

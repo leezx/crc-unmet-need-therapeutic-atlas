@@ -41,18 +41,14 @@
 
 - 14 个候选资源尚未全部完成原始论文/仓库逐项 verification。
 - 没有开始批量下载，也没有生成 biological matrices。
-- 当前 weekly scan 仍需消除 `checked_at` timestamp noise。
-- treatment-history schema 尚未补充 refractory/intolerance/current-line 等字段。
-- validator 对 `CANDIDATE` dataset directory 的要求需要按反馈修正。
-- knowledge/review layer 尚未建立。
+- 当前代码已将 `checked_at` 移出稳定 scan output，待外部复审。
+- treatment-history schema 已补充 refractory/intolerance/current-line 等最小字段，待外部复审。
+- validator 已允许 `CANDIDATE` 没有 dataset-specific directory，待外部复审。
+- knowledge/review layer 尚未建立，仍作为后续 PR。
 
 ## 下一步顺序
 
-1. 修正 PR #1 的标题/body，使其与真实 diff 一致。
-2. 修正 candidate validation 规则。
-3. 补充最小 treatment-history schema。
-4. 统一 P0 priority 语义。
-5. 消除 weekly scan timestamp noise。
-6. 重新请求外部审核。
-7. 审核通过后再批准 P0 processed-data acquisition。
-8. 另开 knowledge/review layer PR，将临床适应症地图与 dataset evidence 对接。
+1. 将本轮代码修复推送到 PR #1。
+2. 重新请求外部审核并处理剩余意见。
+3. 审核通过后再批准 P0 processed-data acquisition。
+4. 另开 knowledge/review layer PR，将临床适应症地图与 dataset evidence 对接。
