@@ -97,3 +97,18 @@ CRC 临床适应症地图建议形成独立 knowledge/review layer，而不是�
 最新 head：`f9c7003`。
 
 结论：**APPROVE**。新增的 `validate.yml` 在 `pull_request` 和 `push main` 上运行 registry validator，并使用连续两次 offline scan + `cmp` 验证稳定输出；复审确认没有新的 blocker。ChatGPT 反馈显示该 workflow 已完成并成功，PR 可合并。
+
+## PR #2 source-verification review
+
+复审对象：[PR #2](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/2)，最新 head：`34ea67d04f3a4bad07a97b5a7bb423087e49e610`。
+
+结论：**APPROVE**。网页版 ChatGPT 检查了公开 PR 的实际 diff、GitHub CI、registry、relationship schema、README 修订和 source manifest；PR `mergeable: true`，`Validate registry` workflow 为 `completed / success`。
+
+本轮确认已解决的四项问题：
+
+- `Zenodo_CRC_LM_scRNA` 通过 `DATA/registry/relationships.tsv` 明确作为 `CRLM_NMP_ATLAS` 的 `ALIAS_OR_SOURCE_MIRROR`，并执行 `COUNT_CANONICAL_ONLY`，避免重复证据计数。
+- `CRLM_NMP_ATLAS.n_samples` 改为 `UNKNOWN`；`75,104` 只作为 CELLxGENE cell count 记录。
+- `GSE224235.target_discovery_value` 从 `3` 降为 `2`，并限定为 matched primary–CRLM context comparator；GeoMx availability 仍标为未确认。
+- HTAN 的 treatment annotation 改为 `SURGICAL_RESECTION_CONTEXT`，并明确 systemic treatment exposure unknown。
+
+下一步：可合并 PR #2；合并后继续做 processed-file inventory、checksum、license/access 和下载路径的逐项 provenance materialization。仍不下载生物数据，也不把 alias 作为独立 cohort。后续 knowledge/review layer 另开 PR。
