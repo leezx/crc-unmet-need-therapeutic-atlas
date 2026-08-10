@@ -1,0 +1,27 @@
+name: Weekly source scan
+on:
+  schedule:
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 scripts/validate_registry.py
+      - run: python3 scripts/scan_sources.py
+      - name: Open update PR when scan output changes
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "chore: refresh source scan report"
+          title: "chore: refresh weekly source scan"
+          body: "Automated metadata-only scan. Does not download data or approve P0 datasets."
+          branch: automation/weekly-source-scan
+          delete-branch: true
+          draft: true

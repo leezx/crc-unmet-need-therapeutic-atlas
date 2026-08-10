@@ -1,0 +1,14 @@
+DATA/**/raw/
+DATA/**/processed/
+*.fastq
+*.fastq.gz
+*.bam
+*.bai
+*.h5ad
+*.h5
+*.rds
+*.rda
+*.mtx
+*.mtx.gz
+reports/generated/
+__pycache__/

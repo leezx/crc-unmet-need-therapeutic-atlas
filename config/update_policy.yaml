@@ -1,0 +1,9 @@
+repository_name: crc-unmet-need-therapeutic-atlas
+registry: DATA/registry/datasets.tsv
+source_manifest_glob: DATA/registry/*/source_manifest.tsv
+scan_frequency: weekly
+download_policy: processed_first
+allow_raw_download: false
+require_pr_for_registry_changes: true
+require_human_approval_before_p0_download: true
+unknown_values: [NA, UNKNOWN, NOT_REPORTED]
