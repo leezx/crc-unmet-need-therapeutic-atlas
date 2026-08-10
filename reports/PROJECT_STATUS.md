@@ -45,11 +45,12 @@
 - treatment-history schema 已补充 refractory/intolerance/current-line 等最小字段，待外部复审。
 - validator 已允许 `CANDIDATE` 没有 dataset-specific directory，待外部复审。
 - 网页版 ChatGPT 已复审 head `47cc25c` 并给出 `APPROVE`；随后加入普通 PR/push 的轻量 validation workflow。
+- 最新 head `f9c7003` 已再次获得网页版 ChatGPT `APPROVE`；复审反馈认为 PR 可合并，且新增 CI workflow 没有引入 blocker。
 - knowledge/review layer 尚未建立，仍作为后续 PR。
 
 ## 下一步顺序
 
-1. 将本轮代码修复推送到 PR #1。
-2. 重新请求外部审核并处理剩余意见。
-3. 审核通过后再批准 P0 processed-data acquisition。
+1. 合并 PR #1。
+2. 逐个核对 P0 candidate 的论文、accession、patient composition、treatment annotation 和 processed-data availability。
+3. 仅将完成 provenance materialization 的候选转为 `APPROVED`。
 4. 另开 knowledge/review layer PR，将临床适应症地图与 dataset evidence 对接。

@@ -91,3 +91,9 @@ CRC 临床适应症地图建议形成独立 knowledge/review layer，而不是�
 - 增加普通 push/PR 的轻量 GitHub Actions validation workflow，以便每个代码 PR 都有 CI 证据；本次随后已加入 `.github/workflows/validate.yml`。
 
 复审建议下一步：合并 registry infrastructure 后，逐个完成 P0 candidate 的论文、accession、patient composition、treatment annotation 和 processed-data availability verification，再将候选转为 `APPROVED`。knowledge/review layer 应另开 PR。
+
+## 最终快速复审
+
+最新 head：`f9c7003`。
+
+结论：**APPROVE**。新增的 `validate.yml` 在 `pull_request` 和 `push main` 上运行 registry validator，并使用连续两次 offline scan + `cmp` 验证稳定输出；复审确认没有新的 blocker。ChatGPT 反馈显示该 workflow 已完成并成功，PR 可合并。
