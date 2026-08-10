@@ -29,3 +29,10 @@ The initial implementation was committed to `main` before the feature branch was
 ## Review actions
 
 No automatic merge or P0 download was performed. The PR remains draft until the five requested corrections are implemented and re-reviewed.
+
+## Follow-up review
+
+- Review surface: ChatGPT web conversation `CRC临床适应症地图`
+- Reviewed head: `47cc25c7995ed997105fd33f9a1a478075a0265f`
+- Result: `APPROVE`
+- Follow-up: added `.github/workflows/validate.yml` for ordinary push/PR validation; no merge or data download performed.

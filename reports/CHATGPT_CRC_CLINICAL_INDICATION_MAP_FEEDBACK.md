@@ -78,3 +78,16 @@ CRC 临床适应症地图建议形成独立 knowledge/review layer，而不是�
 ## 当前处理决定
 
 本次复审任务已开始执行上述五项代码修复；每次修改仍需通过本地校验并由网页版 ChatGPT 复审。
+
+## 修复后复审结果
+
+复审对象：PR #1，head `47cc25c7995ed997105fd33f9a1a478075a0265f`。
+
+结论：**APPROVE**。复审确认五项 blocker 均已解决：candidate/approved validator 语义、treatment-history schema、P0 定义、weekly scan timestamp noise，以及 PR scope/body 一致性。
+
+非阻断建议：
+
+- `HEAD` 被 GEO/PRIDE/publisher 拒绝时，未来可增加 GET fallback，或区分 `HEAD_BLOCKED` 与 `SOURCE_INVALID`；当前 scanner 只记录状态，不自动拒绝来源，因此不阻断 Phase 1。
+- 增加普通 push/PR 的轻量 GitHub Actions validation workflow，以便每个代码 PR 都有 CI 证据；本次随后已加入 `.github/workflows/validate.yml`。
+
+复审建议下一步：合并 registry infrastructure 后，逐个完成 P0 candidate 的论文、accession、patient composition、treatment annotation 和 processed-data availability verification，再将候选转为 `APPROVED`。knowledge/review layer 应另开 PR。

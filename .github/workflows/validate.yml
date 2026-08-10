@@ -1,0 +1,26 @@
+name: Validate registry
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate registry contracts
+        run: python3 scripts/validate_registry.py
+      - name: Validate stable offline scan output
+        run: |
+          python3 scripts/scan_sources.py --offline
+          cp reports/generated/source_scan.json /tmp/source_scan.before.json
+          python3 scripts/scan_sources.py --offline
+          cmp reports/generated/source_scan.json /tmp/source_scan.before.json

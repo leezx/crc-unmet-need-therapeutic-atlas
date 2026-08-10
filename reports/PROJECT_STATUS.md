@@ -44,6 +44,7 @@
 - 当前代码已将 `checked_at` 移出稳定 scan output，待外部复审。
 - treatment-history schema 已补充 refractory/intolerance/current-line 等最小字段，待外部复审。
 - validator 已允许 `CANDIDATE` 没有 dataset-specific directory，待外部复审。
+- 网页版 ChatGPT 已复审 head `47cc25c` 并给出 `APPROVE`；随后加入普通 PR/push 的轻量 validation workflow。
 - knowledge/review layer 尚未建立，仍作为后续 PR。
 
 ## 下一步顺序
