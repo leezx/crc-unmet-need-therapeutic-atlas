@@ -190,3 +190,13 @@ CRC 临床适应症地图建议形成独立 knowledge/review layer，而不是�
 审核确认：GSE117548 被保守记录为 16 个 human CRC PDO、25 个样本、Affymetrix HG-U133_Plus_2 expression array，processed availability 仅限定在 GEO sample-table/Series Matrix 层面。115.3 MB `GSE117548_RAW.tar` 明确标为 raw CEL archive，不进入默认范围；EGA `EGAS00001003140` 标为 `CONTROLLED_ACCESS`，未假设已获批或已有具体文件；补充 GitHub repository 仅作为 provenance entry。研究中“>500 compounds”的表述保持为 study context，没有声称 image-level 或 compound-level response matrix 已可下载；DOI `10.1038/s41467-022-30722-9` 与三条来源保持一致，候选仍为 `P0_DOWNLOAD / CANDIDATE`。
 
 下一步：合并 PR #9；随后对补充 GitHub repository 做 file-level provenance inventory，仍不下载 raw CEL 或受控访问数据。
+
+## PR #10 GSE117548 supplementary repository inventory review
+
+复审对象：[PR #10](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/10)，reviewed head：`942a1eb3c5c246c6630cff9922f6bfcee1028a03`。
+
+结论：**APPROVE**。网页版 ChatGPT 检查了实际 diff、`supplementary_inventory.tsv`、`source_manifest.tsv`、README，以及固定 commit `1bfec50e1f8f8deb7bbaa40aa28315262dbb1c19` 的公开 GitHub API tree；PR `mergeable: true`，`Validate registry` workflow 为 `completed / success`，没有真正 blocker。
+
+审核确认：所有 inventory URL 都锚定 full SHA，而非浮动 `master`；顶层目录和 Dockerfile、README.md、make_results.R 的路径/大小与 API 一致。分类边界保守：`data` 为 `POTENTIAL_DATA_AND_CODE`，`tables` 为 `POTENTIAL_DERIVED_DATA`，`models` 为 model artifacts，figures 不作为 biological matrix，code/notebooks 仅作为分析代码。没有把 repository tree 当作已验证 biological asset、自动下载源或可直接分析的数据包。
+
+下一步：合并 PR #10；后续如需继续，只对 `data/models/tables` 做更细的 API 文件级目录核验，仍不下载内容。
