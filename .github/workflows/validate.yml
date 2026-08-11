@@ -26,3 +26,7 @@ jobs:
           cp reports/generated/source_scan.json /tmp/source_scan.before.json
           python3 scripts/scan_sources.py --offline
           cmp reports/generated/source_scan.json /tmp/source_scan.before.json
+      - name: Validate source-only closure matrix
+        run: |
+          python3 scripts/build_source_only_closure.py
+          git diff --exit-code -- reports/SOURCE_ONLY_CLOSURE_MATRIX.tsv

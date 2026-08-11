@@ -388,3 +388,10 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Initial reviewed head: `4d899bf`; web ChatGPT result: REQUEST_CHANGES because internal closure work could be waived as an external blocker.
 - Fix reviewed head: `9ab56c6`; web ChatGPT result: APPROVE after separating mandatory internal requirements from the external-blocker allowlist.
 - Scope: define the source-only 100% endpoint, weighted dimensions and closeout checklist; no biological data, analysis or dataset approval.
+
+## PR #47 — source-only closure matrix and CI
+
+- URL: [#47](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/47)
+- Initial reviewed head: `e73c908`; web ChatGPT result: REQUEST_CHANGES because missing repository artifacts were automatically classified as external blockers.
+- Fix reviewed head: `fb5003e`; web ChatGPT result: REQUEST_CHANGES because the PR description retained stale blocker wording; description corrected and final review approved.
+- Scope: add the 19-candidate closure matrix, offline builder, CI freshness check and auditable status update from 65/100 to 70/100; missing artifacts are `INTERNAL_ACTION_REQUIRED`, not waived external blockers.

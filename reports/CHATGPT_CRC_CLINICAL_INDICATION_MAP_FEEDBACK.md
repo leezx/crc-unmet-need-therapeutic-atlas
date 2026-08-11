@@ -335,6 +335,14 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 最终复审结论：**APPROVE**。确认 source-only completion 与 dataset `APPROVED` 严格分离。
 
+## PR #47 source-only closure matrix 审核
+
+初审 head `e73c908`：**REQUEST_CHANGES**。网页版 ChatGPT 指出缺失 `source_manifest.tsv` / `file_inventory.tsv` 被自动归类为 `EXTERNAL_BLOCKED`，但创建仓库 provenance artifact 是内部工作，不能豁免。
+
+修复 head `fb5003e`：矩阵新增 `blocker_class`，将缺失 artifact 标为 `INTERNAL_ACTION_REQUIRED / INTERNAL_ARTIFACT_GAP`；同时统一 source-only 90 分 + scientific 10 分评分模型。PR 描述中的旧 external blocker 表述随后修正。
+
+最终复审结论：**APPROVE**。确认 19 行矩阵、离线生成器、CI freshness check、评分和内部/外部 blocker 边界一致。
+
 ## PR #33 source-only evidence objects review
 
 初审对象：[PR #33](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/33)，reviewed head：`b9bd08d`。

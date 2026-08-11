@@ -30,8 +30,9 @@ score_weights:
   file_indexes_and_download_paths: 20
   metadata_contracts_and_unknown_rules: 15
   update_scanning_and_ci: 15
-  pr_review_and_audit_trail: 15
-  closure_matrix_and_handoff: 10
+  pr_review_and_audit_trail: 10
+  closure_matrix_and_handoff: 5
+  scientific_clinical_readiness: 10
 gates:
   - source_manifest
   - file_or_archive_inventory

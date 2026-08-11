@@ -94,6 +94,17 @@ class GitHubScannerTests(unittest.TestCase):
             self.assertIn("b" * 40, output.read_text())
             self.assertIn("TRUE", output.read_text())
 
+    def test_source_only_closure_builder_is_offline_and_complete(self) -> None:
+        result = self.run_script("build_source_only_closure.py")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        matrix = ROOT / "reports/SOURCE_ONLY_CLOSURE_MATRIX.tsv"
+        with matrix.open(newline="") as handle:
+            rows = list(csv.DictReader(handle, delimiter="\t"))
+        self.assertEqual(len(rows), 19)
+        self.assertTrue(all(row["review_state"] == "CANDIDATE_SOURCE_ONLY" for row in rows))
+        self.assertTrue(any(row["closure_status"] == "INTERNAL_ACTION_REQUIRED" for row in rows))
+        self.assertTrue(all(row["blocker_class"] for row in rows))
+
 
 if __name__ == "__main__":
     unittest.main()
