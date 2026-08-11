@@ -327,6 +327,16 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 最终复审结论：**APPROVE**。网页版 ChatGPT 确认唯一 blocker 已解决，没有新的 blocker。
 
+## PR #32 source-only knowledge/review layer review
+
+初审对象：[PR #32](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/32)，reviewed head：`2f2d619`。
+
+结论：**REQUEST_CHANGES**。网页版 ChatGPT 指出 `PROJECT_STATUS.md` 仍错误写着 2026 CRLM PDO accession 尚未定位，而 registry 已记录 Mendeley accession `hr94h42xdc.3`。
+
+修复对象：reviewed head `79cdc46`，更新 accession 状态并保留 sample-level clinical/treatment、checksum 和 third-party terms 缺口。
+
+最终复审结论：**APPROVE**。网页版 ChatGPT 确认 blocker 已解决，没有新的 blocker。
+
 ## PR #31 PXD038149 sample-metadata gate review
 
 审核对象：[PR #31](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/31)，reviewed head：`ec01bef`。
