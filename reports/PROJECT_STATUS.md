@@ -21,7 +21,7 @@
 - file-level inventories：5 个（GSE159216、GSE178318、GSE224235、GSE226997、PXD038149）
 - sample maps：3 个（GSE178318、GSE224235、GSE226997）
 - GitHub PR：#1–#24 全部已合并；最新主分支 merge commit 为 `b11caba`
-- 当前没有开放 PR
+- 本次状态对齐由公开 PR #25 提出；该 PR 当前为 OPEN / DRAFT，待复审后合并
 
 ## 已完成能力
 
