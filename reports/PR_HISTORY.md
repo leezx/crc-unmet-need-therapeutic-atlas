@@ -287,5 +287,6 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Initial reviewed head: `b9bd08d`; web ChatGPT result: REQUEST_CHANGES because EV003 used an invalid Mendeley v3 URL with a dot instead of the `/3` path.
 - Fix reviewed head: `72b31d3`; web ChatGPT result: APPROVE for the URL-only follow-up.
 - A subsequent audit of documentation head `3bc1a11` found a second blocker: EV008 structured value said `16 patients; 25 samples`, while the source supports 16 CRC PDOs and 25 samples. Corrected locally to `16 CRC PDOs; 25 samples`; final web review is pending.
+- Review of head `e3e1223` found a third blocker: EV001/EV002 supporting-text paths omitted the `reports/` prefix. Corrected locally to the existing `reports/` paths; final web review is pending.
 - Scope: eight source-only evidence objects, evidence IDs linked to indication links, provenance/confidence/version fields, and missing-information notes; no biological data, target ranking, therapeutic-window claim or dataset approval.
 - Local validation: registry validator passed, 3 unit tests passed, diff check passed, and both TSV files passed independent column-count checks.

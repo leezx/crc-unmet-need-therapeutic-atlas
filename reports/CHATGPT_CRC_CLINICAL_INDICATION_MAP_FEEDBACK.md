@@ -341,6 +341,12 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 当前修复：已将 EV008.structured_value 改为 `16 CRC PDOs; 25 samples`，等待最新 head 的最终网页复核。
 
+第三轮复核对象：修复 head `e3e1223`。
+
+结论：**REQUEST_CHANGES**。网页版 ChatGPT 指出 EV001/EV002 的 supporting-text 路径缺少 `reports/` 前缀；已确认对应文件实际位于 `reports/P2_SAMPLE_METADATA.md` 和 `reports/P6_PXD038149_SAMPLE_METADATA_PLAN.md`。
+
+当前修复：已将两个路径补全，等待最新 head 的最终网页复核。
+
 ## PR #32 source-only knowledge/review layer review
 
 初审对象：[PR #32](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/32)，reviewed head：`2f2d619`。
