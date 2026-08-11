@@ -90,3 +90,4 @@
 - 下一阶段已建立 GSE117548 external_file_inventory.tsv：精确登记 11 个 data/external blob，并区分 repository metadata、external workbook、pathway signatures 与外部 signature workbook；未读取或下载内容。
 - PR #14 已获网页版 ChatGPT APPROVE：11 个 data/external blob、115,992 bytes 与固定 API tree/资产汇总一致；external workbook/signatures 保持 REVIEW_REQUIRED，未读取或下载内容。
 - 已新增 scripts/inventory_github_tree.py：固定 commit + path prefix 调用 GitHub Trees API，仅输出路径、大小、Git blob SHA 和固定 blob URL；遇到 truncated tree 会失败，不读取 blob 内容或下载文件。
+- PR #15 初审发现 `--commit` 可接受浮动 ref；已修复为强制 40 位十六进制 commit SHA，并通过网页版 ChatGPT 复审 APPROVE；回归测试拒绝 `master`，固定 GSE117548 commit/data/external 仍为 11 files/115,992 bytes，准备合并。
