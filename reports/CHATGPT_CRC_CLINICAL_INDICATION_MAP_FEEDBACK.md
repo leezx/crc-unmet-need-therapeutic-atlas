@@ -180,3 +180,13 @@ CRC 临床适应症地图建议形成独立 knowledge/review layer，而不是�
 审核确认：`SamplesDescription.xlsx` 的 endpoint、PRIDE category `OTHER`、8,577 bytes 和 registry entry 只是 provenance 记录；只有显式 staged 的本地文件才能进入 checksum 和解析阶段，且继续复用 offline-only `capture_checksums.py`。解析契约要求保留原始标签、对不支持字段使用 `UNKNOWN`，不从 PDO/drug-response labels 推断 systemic treatment exposure；staged file 缺失或 sample identifier 歧义时停止并进入 review。没有 downloader、自动 PRIDE 访问、dataset status 升级或 biological data 提交路径。
 
 下一步：合并 PR #8；若后续获得明确 staged workbook，再进入字段级 metadata review。
+
+## PR #9 GSE117548 CRC PDO source expansion review
+
+复审对象：[PR #9](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/9)，reviewed head：`a35a9b2580583fb85a1059c04bc5a2ba2a2d8b5c`。
+
+结论：**APPROVE**。网页版 ChatGPT 检查了实际 diff、`datasets.tsv`、GSE117548 的 `source_manifest.tsv`、README 和 CI；PR `mergeable: true`，`Validate registry` workflow 为 `completed / success`，没有真正 blocker。
+
+审核确认：GSE117548 被保守记录为 16 个 human CRC PDO、25 个样本、Affymetrix HG-U133_Plus_2 expression array，processed availability 仅限定在 GEO sample-table/Series Matrix 层面。115.3 MB `GSE117548_RAW.tar` 明确标为 raw CEL archive，不进入默认范围；EGA `EGAS00001003140` 标为 `CONTROLLED_ACCESS`，未假设已获批或已有具体文件；补充 GitHub repository 仅作为 provenance entry。研究中“>500 compounds”的表述保持为 study context，没有声称 image-level 或 compound-level response matrix 已可下载；DOI `10.1038/s41467-022-30722-9` 与三条来源保持一致，候选仍为 `P0_DOWNLOAD / CANDIDATE`。
+
+下一步：合并 PR #9；随后对补充 GitHub repository 做 file-level provenance inventory，仍不下载 raw CEL 或受控访问数据。
