@@ -80,3 +80,11 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Web ChatGPT result: `APPROVE`; CI reported `Validate registry` completed successfully.
 - Scope: file-level inventory and schema validation only; no biological data downloaded.
 - Next gate: checksum capture and sample-level metadata review.
+
+## PR #4 — GSE178318 sample relationships
+
+- URL: [#4](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/4)
+- Reviewed head: `69ccbff3d2f157cb90bc3b83fa77954afa85102e`
+- Web ChatGPT result: `APPROVE`; CI reported `Validate registry` completed successfully.
+- Scope: 15 GEO sample accessions, six patient groups, primary/liver/PBMC pairing, and conservative treatment `UNKNOWN` values.
+- Next gate: checksum capture and sample-level metadata reconciliation.
