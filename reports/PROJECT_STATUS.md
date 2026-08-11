@@ -79,3 +79,4 @@
 - PR #8 已由网页版 ChatGPT 对 reviewed head `409d6ded96620b82be63403108aee1ced9a2771a` 审核为 `APPROVE`，CI 通过，准备合并；后续只有明确 staged workbook 才进入字段级 metadata review。
 - 公开来源扩展：根据官方 GEO GSE117548 页面及其关联论文新增 CRC PDO 表达/药物筛选候选；16 个 PDO、25 个样本、processed sample-table availability、115.3 MB raw CEL archive、补充 GitHub repository 和 EGA controlled-access study 已登记，image-level/compound-level response 文件仍未声称可用。
 - PR #9 已由网页版 ChatGPT 对 reviewed head `a35a9b2580583fb85a1059c04bc5a2ba2a2d8b5c` 审核为 `APPROVE`，CI 通过，准备合并；下一门禁是补充 GitHub repository 的 file-level provenance inventory。
+- 已完成 GSE117548 补充 GitHub repository 的只读目录快照：固定 master commit `1bfec50e`，登记顶层 code/data/figures/models/notebooks/references/reports/tables 及 Docker/README/脚本入口；未 clone、未下载、未计算 checksum，data/models/tables 保持待核验。
