@@ -57,6 +57,8 @@
 - 已开始 P2 sample metadata review：GSE178318 的 15 个 sample accession、6 个 patient group、primary/liver/PBMC 配对关系已建立轻量 sample map；原论文已解析出患者级 treatment context 和 regimen，但未将其误写成独立样本测量。
 - PR #4 已获网页版 ChatGPT `APPROVE`，准备合并；sample map 未加入表达矩阵或 biological values。
 - PR #5 已获网页版 ChatGPT `APPROVE`；原论文支持的 GSE178318 treatment context 已记录，准备合并。
+- 已开始 P4 checksum/offline capture 机制和 GSE224235 sample map；17 个 GEO sample accession 已索引，治疗 regimen/timing 保留 `UNKNOWN`。
+- PR #6 已获网页版 ChatGPT `APPROVE`，准备合并；checksum 工具仅处理外部已 staged 文件，不自动下载。
 
 ## 下一步顺序
 

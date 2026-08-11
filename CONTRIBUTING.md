@@ -8,6 +8,8 @@
 6. Run `python3 scripts/validate_registry.py` and `python3 scripts/scan_sources.py --offline`.
 7. Open a draft PR. A human reviewer approves priority and any change to download scope.
 
+8. Capture checksums only from explicitly staged external files with `scripts/capture_checksums.py`. The script is offline-only: missing files remain `MISSING`, and no repository or network download is performed.
+
 The registry is not a downloader. Prefer processed matrices and metadata. Raw FASTQ/BAM requires an explicit reprocessing decision. Never commit downloaded data, credentials, or controlled-access tokens.
 
 The weekly GitHub Action runs metadata scans only and opens a draft PR for review when stable source status output changes. Per-run timestamps are kept in a separate ignored log. Approved P0 downloads remain a separate, explicitly reviewed change.

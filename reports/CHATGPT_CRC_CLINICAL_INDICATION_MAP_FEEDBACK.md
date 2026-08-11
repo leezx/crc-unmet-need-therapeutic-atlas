@@ -150,3 +150,13 @@ CRC 临床适应症地图建议形成独立 knowledge/review layer，而不是�
 审核确认原论文 [PMC8421363](https://pmc.ncbi.nlm.nih.gov/articles/PMC8421363/) 明确支持：COL15、COL17、COL18 为术前化疗患者，其余患者 treatment-naïve；COL15 为 3 cycles CAPEOX，COL17 为 4 cycles CAPEOX，COL18 为 8 cycles FOLFOX-Bev；三位患者约在末次化疗后 1 个月手术。将这些信息作为 patient-level context 下沉到 matched sample rows，未伪装成独立样本测量；肿瘤样本和 PBMC 的采集语境也未被混淆。
 
 下一步：合并 PR #5；再进入 checksum capture 和其他 P0 数据集的 sample-level reconciliation。
+
+## PR #6 checksum and GSE224235 sample review
+
+复审对象：[PR #6](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/6)，reviewed head：`d8a6f7633af26928c427deaa0fa4f6379c81667f`。
+
+结论：**APPROVE**。网页版 ChatGPT 检查了实际 diff、`capture_checksums.py`、GSE224235 的 17-row `sample_map.tsv` 和 CI；PR `mergeable: true`，`Validate registry` 为 `completed / success`。
+
+审核确认 checksum 工具只从显式 `--data-root` 读取本地文件，缺失文件输出 `MISSING`，没有 HTTP client、下载逻辑或自动写回 registry。GSE224235 的 17 个 accession 组成 8 个 primary/liver matched pairs 加 1 个 primary-only sample；`SURGICAL_RESECTION_CONTEXT` 仅表示 specimen context，regimen 和 treatment timing 保持 `UNKNOWN`。
+
+下一步：合并 PR #6；checksum 只有在外部数据被明确 staged 后才执行，继续保持仓库不存生物数据。
