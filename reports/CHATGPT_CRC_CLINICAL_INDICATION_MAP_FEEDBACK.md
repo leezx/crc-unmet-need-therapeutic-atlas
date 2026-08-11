@@ -160,3 +160,13 @@ CRC 临床适应症地图建议形成独立 knowledge/review layer，而不是�
 审核确认 checksum 工具只从显式 `--data-root` 读取本地文件，缺失文件输出 `MISSING`，没有 HTTP client、下载逻辑或自动写回 registry。GSE224235 的 17 个 accession 组成 8 个 primary/liver matched pairs 加 1 个 primary-only sample；`SURGICAL_RESECTION_CONTEXT` 仅表示 specimen context，regimen 和 treatment timing 保持 `UNKNOWN`。
 
 下一步：合并 PR #6；checksum 只有在外部数据被明确 staged 后才执行，继续保持仓库不存生物数据。
+
+## PR #7 PXD038149 PRIDE provenance review
+
+复审对象：[PR #7](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/7)，reviewed head：`fc5cd950d1c73b0325bf48b44169172c3af36f66`。
+
+结论：**APPROVE**。网页版 ChatGPT 检查了实际 diff、PXD038149 的 `file_inventory.tsv`、`source_manifest.tsv`、README 和 CI；PR `mergeable: true`，`Validate registry` workflow 为 `completed / success`，没有真正 blocker。
+
+审核确认：PRIDE API 返回的 51 个文件中，44 个 RAW 文件明确留在默认范围之外；7 个非 raw 文件逐项登记了精确 FTP URL、API 返回的字节大小和原始类别 `OTHER / SEARCH / PEAK`，仓库内部映射为 `PROCESSED / SEARCH / PEAK`。`Quantitation*.xlsx`、sample metadata、search results、peak/library 文件被保留为可下载候选，但没有被夸大为统一 biological output。license 只记录为“CC0 according to PRIDE API”，PXD038149 仍为 `CANDIDATE`，没有声称已下载或已完成 checksum capture。
+
+下一步：合并 PR #7；继续做 `SamplesDescription.xlsx` 的样本元数据解析和外部 staged 文件的 checksum capture，仍不默认下载 raw 数据。

@@ -108,6 +108,7 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 ## PR #7 — PXD038149 PRIDE provenance
 
 - URL: [#7](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/7)
-- Head: `b8bc555`
+- Reviewed head: `fc5cd950d1c73b0325bf48b44169172c3af36f66`
+- Web ChatGPT result: `APPROVE`; CI reported `Validate registry` completed successfully.
 - Scope: PRIDE API-backed inventory of seven non-raw files; 44 raw files remain out of default scope.
 - No PRIDE files downloaded; PXD038149 remains `CANDIDATE` pending sample-description review and checksum capture.
