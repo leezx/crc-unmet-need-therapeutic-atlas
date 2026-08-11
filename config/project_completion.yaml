@@ -26,12 +26,14 @@ completion_endpoint:
     - upstream_file_or_metadata_not_public
     - user_has_not_staged_external_file
 score_weights:
-  registry_and_source_manifests: 25
-  file_indexes_and_download_paths: 20
-  metadata_contracts_and_unknown_rules: 15
-  update_scanning_and_ci: 15
-  pr_review_and_audit_trail: 10
-  closure_matrix_and_handoff: 5
+  registry_admission_architecture: 10
+  source_index_layer: 15
+  validator_tests: 10
+  update_scan_system: 10
+  pr_review_audit: 10
+  p0_gate_design: 10
+  exact_dataset_provenance: 15
+  closure_handoff: 10
   scientific_clinical_readiness: 10
 gates:
   - source_manifest
