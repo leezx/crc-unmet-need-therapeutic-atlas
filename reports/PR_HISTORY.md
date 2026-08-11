@@ -143,3 +143,8 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Fix: `data/root_metadata` records `data/.DS_Store` as 1 blob / 6,148 bytes.
 - Final reviewed head: `54a3a499b7d860cb0a1d8de7545fc434d4e69de5`; web ChatGPT result: `APPROVE`, CI successful.
 - Scope: reconcile fixed-commit API totals for raw/processed/external/model/table layers; no file content read or downloaded.
+## PR #12 — GSE117548 selected file inventory
+
+- URL: [#12](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/12)
+- Reviewed head: 196606d; web ChatGPT result: APPROVE; unique blocker: none.
+- Scope: exact fixed-commit metadata for four model-layer blobs and one table blob; Git blob SHA is provenance only, not a content checksum.
