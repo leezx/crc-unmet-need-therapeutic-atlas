@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import os
 import re
 from pathlib import Path
 from urllib.parse import quote
@@ -32,7 +33,11 @@ def main() -> int:
         if not re.fullmatch(r"[0-9a-fA-F]{40}", target["commit"]):
             raise SystemExit(f"invalid pinned commit for {target['target_id']}")
         url = f"https://api.github.com/repos/{target['repository']}/commits/{quote(target['tracking_ref'], safe='')}"
-        request = Request(url, headers={"Accept": "application/vnd.github+json", "User-Agent": "CRC-Atlas-update-check/0.1"})
+        headers = {"Accept": "application/vnd.github+json", "User-Agent": "CRC-Atlas-update-check/0.1"}
+        token = os.environ.get("GITHUB_TOKEN")
+        if token:
+            headers["Authorization"] = f"Bearer {token}"
+        request = Request(url, headers=headers)
         with urlopen(request, timeout=30) as response:
             payload = json.load(response)
         latest = payload.get("sha", "")
