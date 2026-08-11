@@ -180,3 +180,10 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Initial reviewed head: `ba93d992`; web ChatGPT result: REQUEST_CHANGES for output creation before validation and an ineffective temporary-directory assertion.
 - Fix reviewed head: `4a1186a31330a63977eaa9ad62f9742dfda88bc6`; web ChatGPT result: APPROVE; Validate registry CI successful.
 - Scope: offline tests for floating-ref and duplicate-target rejection, with PR CI coverage; no network or data download.
+
+## PR #18 — pinned GitHub target drift checker
+
+- URL: [#18](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/18)
+- Initial reviewed head: `e07078a`; web ChatGPT result: REQUEST_CHANGES because GitHub commits API could return `files[].patch`.
+- Fix reviewed head: `b910ea7`; web ChatGPT result: APPROVE; Validate registry CI successful.
+- Scope: compare pinned SHA with tracking branch using Git ref metadata only; no automatic pin changes, blob reads, clone, execution, or biological-data download.

@@ -254,3 +254,13 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 修复对象：reviewed head `4a1186a31330a63977eaa9ad62f9742dfda88bc6`。
 
 最终复审：**APPROVE**。`output_dir.mkdir` 已移到全部配置、唯一性和文件名校验之后；断言已移入 `TemporaryDirectory` 作用域。网页版 ChatGPT 确认修复消除了 blocker；测试保持离线，不下载或访问生物数据。
+
+## PR #18 pinned-target drift checker review
+
+初审对象：[PR #18](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/18)，reviewed head：`0fc304a`。
+
+结论：**REQUEST_CHANGES**。网页版 ChatGPT 发现 `/commits/{ref}` 响应可能包含 `files[].patch`，违反 metadata-only 边界。
+
+修复对象：reviewed head `b910ea7`。
+
+最终复审：**APPROVE**。脚本已改用 `/git/ref/heads/{tracking_ref}`，只读取 `object.sha`，并保留仅向 `api.github.com` 发送的 Bearer token；不读取 blob、不下载 patch、不自动修改 pinned commit。CI 通过。
