@@ -135,3 +135,11 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Reviewed head: `942a1eb3c5c246c6630cff9922f6bfcee1028a03`
 - Web ChatGPT result: `APPROVE`; CI reported `Validate registry` completed successfully.
 - Scope: fixed-SHA GitHub API tree inventory for supplementary code/data/model/report assets; no clone, download, execution, or checksum capture.
+
+## PR #11 — GSE117548 asset-layer summary
+
+- URL: [#11](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/11)
+- Initial reviewed head: `6811d52bb7c4b4457d78b01305f9c4c7b6ef91c9`; web ChatGPT result: `REQUEST_CHANGES` for an aggregate count/size mismatch.
+- Fix: `data/root_metadata` records `data/.DS_Store` as 1 blob / 6,148 bytes.
+- Final reviewed head: `54a3a499b7d860cb0a1d8de7545fc434d4e69de5`; web ChatGPT result: `APPROVE`, CI successful.
+- Scope: reconcile fixed-commit API totals for raw/processed/external/model/table layers; no file content read or downloaded.
