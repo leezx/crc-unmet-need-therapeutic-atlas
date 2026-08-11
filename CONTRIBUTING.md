@@ -6,7 +6,8 @@
 4. Move to `APPROVED` only when a dataset directory and verifiable `source_manifest.tsv` exist.
 5. Preserve unknowns as `NA` or `UNKNOWN`; never infer treatment or biomarker status.
 6. Run `python3 scripts/validate_registry.py` and `python3 scripts/scan_sources.py --offline`.
-7. Open a draft PR. A human reviewer approves priority and any change to download scope.
+7. Run `python3 scripts/build_source_only_closure.py` and confirm the generated `reports/SOURCE_ONLY_CLOSURE_MATRIX.tsv` has no diff.
+8. Open a draft PR. A human reviewer approves priority and any change to download scope.
 
 8. Capture checksums only from explicitly staged external files with `scripts/capture_checksums.py`. The script is offline-only: missing files remain `MISSING`, and no repository or network download is performed.
 
