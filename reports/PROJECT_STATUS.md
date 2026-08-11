@@ -12,15 +12,25 @@
 
 当前仍处于候选数据集来源核验阶段。任何候选只有在来源、临床上下文、processed 文件、license/access 和审计门禁完成后，才可在单独 PR 中讨论 `APPROVED`；目前没有候选达到该状态。
 
+## 量化进度
+
+| 维度 | 当前进度 | 本轮变化 | 判定标准 | 当前阻塞 |
+|---|---:|---:|---|---|
+| 工程 / provenance 基础设施 | **58/80** | 56/80 → 58/80（+2） | registry、source/file inventory、validator、更新扫描、PR 审核归档和 P0 并行门禁已建立；CRLM-NMP 最新 Zenodo archive 已完成来源级索引 | DepMap exact-file/filter contract、HPA minimum-organ set、CRLM inner h5ad/sample-map 仍未完成 |
+| 科学 / 临床可用性 | **0/20** | 0/20 → 0/20（+0） | 至少一个候选完成 processed 文件、临床上下文、license/access、checksum 和 reviewed `APPROVED` admission | 当前没有 biological matrix、target ranking、therapeutic-window 或 clinical conclusion |
+| 总体项目进度 | **58/100（58%）** | 56/100 → 58/100（+2） | 固定 100 分制：工程/provenance 80 分 + 科学/临床可用性 20 分；当前总分为 58 + 0 | 下一里程碑是完成 P0 下一门禁并提交首个候选 admission review |
+
+评分明细（工程/provenance 58/80）：registry/admission architecture 10/10；source/index layer 12/15；validator/tests 10/10；update/scan system 8/10；PR/review audit 8/10；P0 gate design 5/10；exact dataset provenance materialization 5/15。科学/临床可用性 0/20，因为尚无候选通过 `APPROVED` admission，也没有 biological/clinical conclusion。
+
 ## 当前规模
 
 - 独立 GitHub 仓库：[leezx/crc-unmet-need-therapeutic-atlas](https://github.com/leezx/crc-unmet-need-therapeutic-atlas)
 - 候选数据集：19 个，全部为 `CANDIDATE`
 - 优先级：10 个 `P0_DOWNLOAD`、5 个 `P1_DOWNLOAD`、4 个 `REFERENCE_ONLY`
 - source manifests：11 个
-- file-level inventories：7 个（GSE159216、GSE178318、GSE224235、GSE226997、HPA_normal_tissue、MCRC_liver_metastasis_PDO_2026、PXD038149）
+- file-level inventories：8 个（GSE159216、GSE178318、GSE224235、GSE226997、HPA_normal_tissue、MCRC_liver_metastasis_PDO_2026、PXD038149、CRLM_NMP_ATLAS）
 - sample maps：3 个（GSE178318、GSE224235、GSE226997）
-- GitHub PR：#1–#39 全部已合并；最新主分支 merge commit 为 `ffbf8c3`
+- GitHub PR：#1–#41 全部已合并；最新主分支 merge commit 为 `2a4a39a`
 - PR #33 已合并 source-only evidence objects：EV003 URL、EV008 计数措辞、EV001/EV002 supporting-text 路径、source-only 状态措辞和 inventory 统计均已完成审核修正
 
 ## 已完成能力
@@ -47,7 +57,7 @@
 
 ## 下一步顺序
 
-1. 按 `reports/P0_NEXT_GATE_PLAN.tsv` 并行推进 DepMap exact-file/filter、HPA minimum-organ reference set 和 CRLM-NMP h5ad/sample-map 门禁。
+1. 按 `reports/P0_NEXT_GATE_PLAN.tsv` 并行推进 DepMap exact-file/filter、HPA minimum-organ reference set 和 CRLM-NMP inner h5ad/sample-map 门禁；CRLM-NMP archive-level inventory 已完成。
 2. 在明确 staged 文件出现后，运行离线 checksum capture；未 staging 时不下载、不计算。
 3. 完成每个 P0 候选的 Phase 1 checklist，再通过单独 PR 讨论是否提升为 `APPROVED`。
 4. 定位并核验 2026 CRLM PDO biobank 原始 accession、license 和 processed download path。

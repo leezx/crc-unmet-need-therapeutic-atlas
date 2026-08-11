@@ -421,6 +421,14 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 最终复审结论：**APPROVE**。确认 DOI/version、逐文件 URL、source-record MD5、CC BY 4.0 和 no-download/no-inner-h5ad 边界一致；没有 biological data、sample count、candidate approval 或 clinical conclusion 越界。
 
+## PR #42 量化项目进度审核
+
+初审 head `8f7be81`：**REQUEST_CHANGES**。网页版 ChatGPT 指出 58% 及 56%→58% 缺少可复算的分母、权重和计分清单。
+
+修复 head `a22f4aa`：在 `PROJECT_STATUS.md` 增加固定 100 分制：工程/provenance 58/80、科学/临床可用性 0/20、总体 58/100，并列出工程分项得分和计算式。
+
+最终复审结论：**APPROVE**。确认评分可复算，且 0/20 科学/临床分数与当前没有 biological matrix、candidate approval、target ranking 或 clinical conclusion 的边界一致。
+
 ## PR #31 PXD038149 sample-metadata gate review
 
 审核对象：[PR #31](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/31)，reviewed head：`ec01bef`。
