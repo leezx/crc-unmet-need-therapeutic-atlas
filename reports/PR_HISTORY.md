@@ -261,3 +261,9 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Initial reviewed head: `8643557`; web ChatGPT result: REQUEST_CHANGES because CRLM PDO `license_access=PASS` contradicted the stated pending third-party-term review.
 - Fix reviewed head: `4b291c8`; web ChatGPT result: APPROVE.
 - Scope: ten P0 candidate gate states across publication/context, treatment, molecular annotation, processed inventory, license/access and update audit; all decisions remain HOLD and all registry statuses remain CANDIDATE.
+
+## PR #30 — GSE178318 admission-gate reconciliation
+
+- URL: [#30](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/30)
+- Reviewed head: `af49234`; web ChatGPT result: APPROVE.
+- Scope: reconcile the completed 15-sample/6-patient treatment and pairing metadata with the P0 matrix; treatment context is PASS, while molecular annotation, PI-contact terms, checksums and final admission remain open; dataset status remains CANDIDATE.

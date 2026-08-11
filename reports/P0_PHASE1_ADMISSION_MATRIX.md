@@ -13,6 +13,7 @@
 - `CRC_organoid_CRISPR_dependency` 尚未定位 repository accession，因此不进入下载计划。
 - `HPA_normal_tissue` 只承担 normal-tissue safety reference 角色，不作为 malignant discovery cohort。
 - `DepMap_26Q1` 的 release-level provenance 已建立，但 CRC subset file selection 仍受 portal verification gate 阻塞。
+- `GSE178318` 的 15 个 sample、六个 patient group、primary/liver/PBMC pairing 和 patient-level treatment reconciliation 已完成；其剩余 blocker 是 PI-contact usage terms、checksum、molecular annotations 和最终 admission review。
 
 ## Admission rule
 
