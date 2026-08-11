@@ -3,11 +3,14 @@
 from __future__ import annotations
 
 import csv
+import importlib.util
+import json
 import subprocess
 import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -51,6 +54,44 @@ class GitHubScannerTests(unittest.TestCase):
             self.assertFalse(output_dir.exists())
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("duplicate target_id", result.stderr)
+
+    def test_drift_checker_uses_ref_metadata_only(self) -> None:
+        spec = importlib.util.spec_from_file_location(
+            "check_github_target_updates", ROOT / "scripts/check_github_target_updates.py"
+        )
+        module = importlib.util.module_from_spec(spec)
+        assert spec.loader is not None
+        spec.loader.exec_module(module)
+        with tempfile.TemporaryDirectory() as temp_dir:
+            config = Path(temp_dir) / "targets.tsv"
+            output = Path(temp_dir) / "updates.tsv"
+            with config.open("w", newline="") as handle:
+                writer = csv.writer(handle, delimiter="\t", lineterminator="\n")
+                writer.writerow(["target_id", "repository", "commit", "tracking_ref", "prefix", "output_name", "notes"])
+                writer.writerow(["target", "owner/name", "a" * 40, "main", "", "target.tsv", ""])
+            requested_urls = []
+
+            class Response:
+                def __enter__(self):
+                    return self
+
+                def __exit__(self, *args):
+                    return False
+
+                def read(self):
+                    return json.dumps({"object": {"sha": "a" * 40}}).encode()
+
+            def fake_urlopen(request, timeout):
+                requested_urls.append(request.full_url)
+                return Response()
+
+            argv = ["check_github_target_updates.py", "--config", str(config), "--output", str(output)]
+            with patch.object(module, "urlopen", fake_urlopen), patch.object(sys, "argv", argv):
+                self.assertEqual(module.main(), 0)
+            self.assertIn("/git/ref/heads%2Fmain", requested_urls[0])
+            self.assertNotIn("/commits/", requested_urls[0])
+            self.assertIn("a" * 40, output.read_text())
+            self.assertIn("FALSE", output.read_text())
 
 
 if __name__ == "__main__":
