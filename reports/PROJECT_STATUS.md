@@ -16,9 +16,11 @@
 
 | 维度 | 当前进度 | 本轮变化 | 判定标准 | 当前阻塞 |
 |---|---:|---:|---|---|
-| 工程 / provenance 基础设施 | **58%** | 56% → 58%（+2%） | registry、source/file inventory、validator、更新扫描、PR 审核归档和 P0 并行门禁已建立；CRLM-NMP 最新 Zenodo archive 已完成来源级索引 | DepMap exact-file/filter contract、HPA minimum-organ set、CRLM inner h5ad/sample-map 仍未完成 |
-| 科学 / 临床可用性 | **0%** | 0% → 0%（+0%） | 至少一个候选完成 processed 文件、临床上下文、license/access、checksum 和 reviewed `APPROVED` admission | 当前没有 biological matrix、target ranking、therapeutic-window 或 clinical conclusion |
-| 总体项目进度 | **58%** | 56% → 58%（+2%） | 工程完成度与科学可用性分开记录；总体以工程主线为当前阶段指标 | 下一里程碑是完成 P0 下一门禁并提交首个候选 admission review |
+| 工程 / provenance 基础设施 | **58/80** | 56/80 → 58/80（+2） | registry、source/file inventory、validator、更新扫描、PR 审核归档和 P0 并行门禁已建立；CRLM-NMP 最新 Zenodo archive 已完成来源级索引 | DepMap exact-file/filter contract、HPA minimum-organ set、CRLM inner h5ad/sample-map 仍未完成 |
+| 科学 / 临床可用性 | **0/20** | 0/20 → 0/20（+0） | 至少一个候选完成 processed 文件、临床上下文、license/access、checksum 和 reviewed `APPROVED` admission | 当前没有 biological matrix、target ranking、therapeutic-window 或 clinical conclusion |
+| 总体项目进度 | **58/100（58%）** | 56/100 → 58/100（+2） | 固定 100 分制：工程/provenance 80 分 + 科学/临床可用性 20 分；当前总分为 58 + 0 | 下一里程碑是完成 P0 下一门禁并提交首个候选 admission review |
+
+评分明细（工程/provenance 58/80）：registry/admission architecture 10/10；source/index layer 12/15；validator/tests 10/10；update/scan system 8/10；PR/review audit 8/10；P0 gate design 5/10；exact dataset provenance materialization 5/15。科学/临床可用性 0/20，因为尚无候选通过 `APPROVED` admission，也没有 biological/clinical conclusion。
 
 ## 当前规模
 
