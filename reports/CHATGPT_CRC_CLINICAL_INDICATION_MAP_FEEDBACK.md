@@ -347,6 +347,10 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 当前修复：已将两个路径补全，等待最新 head 的最终网页复核。
 
+最终复审对象：head `35a34df`。
+
+结论：**APPROVE**。网页版 ChatGPT 确认 EV003 官方 v3 URL、EV008 PDO/sample 计数措辞、EV001/EV002 supporting-text 路径、evidence/link 外键和 source-only 状态边界均正确，无新的 blocker。
+
 ## PR #32 source-only knowledge/review layer review
 
 初审对象：[PR #32](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/32)，reviewed head：`2f2d619`。
