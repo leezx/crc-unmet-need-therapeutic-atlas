@@ -325,3 +325,11 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Initial reviewed head: `37b6bb5`; web ChatGPT result: REQUEST_CHANGES because EV009/IEL009 duplicated existing EV004/IEL004.
 - Fix reviewed head: `5863b1d`; web ChatGPT result: APPROVE after consolidating the update into EV004/IEL004 and restoring the count to eight source-only evidence objects.
 - Scope: strengthen DepMap 26Q1 release-level provenance; no CRC subset, dependency result, biological data, target ranking or approval status.
+
+## PR #38 — batch HPA/CRLM provenance status
+
+- URL: [#38](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/38)
+- Initial reviewed head: `add076e`; web ChatGPT result: REQUEST_CHANGES because HPA `cell.svg` was incorrectly grouped with versioned endpoints.
+- Fix reviewed head: `aed039c`; web ChatGPT result: APPROVE after separating three v25.1 atlas exports from one static asset.
+- Scope: batch no-download/status hygiene for HPA, CRLM-NMP and main-branch status; no candidate status or biological data changes.
+- Existing issue deferred: `reports/P0_SOURCE_VERIFICATION.tsv` has historical row-width inconsistencies outside this PR scope.

@@ -389,6 +389,12 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 修正 head `5863b1d`：删除重复对象，直接增强 EV004/IEL004；网页版 ChatGPT 最终结论：**APPROVE**。source-only evidence 数量保持为 8，未新增 CRC subset 或 dependency claim。
 
+## PR #38 HPA/CRLM 批量 provenance 审核
+
+初审 head `add076e`：**REQUEST_CHANGES**。HPA `cell.svg` 被错误归类为 versioned endpoint。
+
+修正 head `aed039c`：改为 3 个 v25.1 atlas exports + 1 个 static asset；网页版 ChatGPT 最终结论：**APPROVE**。CRLM no-download 语义和 status update 也通过审核。
+
 ## PR #32 source-only knowledge/review layer review
 
 初审对象：[PR #32](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/32)，reviewed head：`2f2d619`。
