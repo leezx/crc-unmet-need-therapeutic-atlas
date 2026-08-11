@@ -327,6 +327,12 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 最终复审结论：**APPROVE**。网页版 ChatGPT 确认唯一 blocker 已解决，没有新的 blocker。
 
+## PR #27 HPA 25.1 file provenance review
+
+审核对象：[PR #27](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/27)，reviewed head：`41da9cd`。
+
+结论：**APPROVE**。网页版 ChatGPT 核验了 HPA v25.1、Ensembl v109、四个官方下载端点、CC BY 4.0 与第三方约束，并确认没有下载、checksum、therapeutic-window 或 `APPROVED` 越界声明。
+
 ## PR #26 DepMap 26Q1 release provenance review
 
 初审对象：[PR #26](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/26)，reviewed head：`ee4276e`。
