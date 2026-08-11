@@ -353,3 +353,10 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Fix reviewed head: `d81ec41`; web ChatGPT result: APPROVE after changing `source_url` to the Zenodo API `/files/<name>/content` endpoints.
 - Scope: correct the latest published Zenodo version, index three archive-level files with source-record sizes/MD5/license and direct download paths, and preserve the explicit no-download/no-inner-h5ad/no-sample-count boundary.
 - No biological data downloaded or committed; inner h5ad names and sample-level metadata remain blocked.
+
+## PR #42 — quantified project status
+
+- URL: [#42](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/42)
+- Initial reviewed head: `8f7be81`; web ChatGPT result: REQUEST_CHANGES because the 58% progress number had no reproducible denominator or scoring weights.
+- Fix reviewed head: `a22f4aa`; web ChatGPT result: APPROVE after adding a fixed 100-point scorecard with explicit engineering/provenance sub-scores and a separate 0/20 scientific/clinical readiness score.
+- Scope: reconcile merged PR/status counts and persist quantitative progress reporting; no biological data, candidate approval or clinical conclusion changes.
