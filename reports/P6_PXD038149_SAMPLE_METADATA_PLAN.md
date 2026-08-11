@@ -2,16 +2,19 @@
 
 ## Objective
 
-Define the provenance contract for the next review of `SamplesDescription.xlsx` without downloading or committing the workbook.
+Define the provenance contract for the next review of the two PRIDE sample-description workbook candidates without downloading or committing either workbook.
 
 ## Authoritative source
 
 - Dataset: `PXD038149`
-- File: `SamplesDescription.xlsx`
+- Preferred file: `SamplesDescriptionFINAL.xlsx`
+- Alternate file: `SamplesDescription.xlsx`
 - PRIDE API file category: `OTHER`
-- Recorded size: `8,577` bytes
-- Recorded endpoint: `ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2025/02/PXD038149/SamplesDescription.xlsx`
+- Recorded sizes: `9,686` bytes (`SamplesDescriptionFINAL.xlsx`) and `8,577` bytes (`SamplesDescription.xlsx`)
+- Recorded endpoints: both exact FTP paths are in `DATA/registry/PXD038149/file_inventory.tsv`
 - Registry entry: `DATA/registry/PXD038149/file_inventory.tsv`
+
+The preferred workbook is `SamplesDescriptionFINAL.xlsx` because it is the explicitly final-named sample-description artifact in the PRIDE file inventory. The alternate workbook must not be silently merged with it; if both are staged, compare their schemas and identifiers before selecting one.
 
 ## Parsing contract after explicit staging
 
@@ -25,5 +28,6 @@ Define the provenance contract for the next review of `SamplesDescription.xlsx` 
 ## Stop conditions
 
 - No staged file: metadata parsing and checksum capture stop; the registry remains source-only.
+- Both workbook candidates staged with conflicting schemas or identifiers: stop and open a review issue/PR; do not choose by filename alone.
 - Workbook schema changes or ambiguous sample identifiers: open a review issue/PR instead of guessing.
 - Raw `.wiff`/`.wiff.scan` files remain out of scope unless a separate explicit reprocessing decision is approved.

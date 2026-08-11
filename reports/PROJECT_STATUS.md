@@ -20,8 +20,8 @@
 - source manifests：11 个
 - file-level inventories：5 个（GSE159216、GSE178318、GSE224235、GSE226997、PXD038149）
 - sample maps：3 个（GSE178318、GSE224235、GSE226997）
-- GitHub PR：#1–#29 全部已合并；最新主分支 merge commit 为 `7baa199`
-- GSE178318 admission-gate reconciliation 由公开 PR #30 提出；该 PR 已通过网页版 ChatGPT 复审（APPROVE），当前待合并
+- GitHub PR：#1–#30 全部已合并；最新主分支 merge commit 为 `3a92963`
+- PXD038149 sample-metadata gate 由公开 PR #31 提出；该 PR 用于明确两个 PRIDE workbook 候选和无 staging 时的 HOLD 条件，当前待审核
 
 ## 已完成能力
 
@@ -62,3 +62,4 @@
 - [CHATGPT_CRC_CLINICAL_INDICATION_MAP_FEEDBACK.md](CHATGPT_CRC_CLINICAL_INDICATION_MAP_FEEDBACK.md)：外部审核反馈归档
 - [updates/REVIEW_CHECKLIST.md](updates/REVIEW_CHECKLIST.md)：上游 pinned-target 漂移后的人工复核流程
 - [P2_SAMPLE_METADATA.md](P2_SAMPLE_METADATA.md)：GSE178318 sample-level treatment/pairing reconciliation
+- [PXD038149_SAMPLE_METADATA_GATE.tsv](PXD038149_SAMPLE_METADATA_GATE.tsv)：PXD038149 workbook staging and sample-metadata gate
