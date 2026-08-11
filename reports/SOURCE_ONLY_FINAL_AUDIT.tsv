@@ -1,0 +1,5 @@
+audit_id	status	detail
+no_forbidden_biological_suffix	PASS	none
+no_raw_processed_or_data_paths	PASS	none
+no_tracked_file_over_50MiB	PASS	none
+required_source_only_control_files	PASS	all present

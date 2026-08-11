@@ -30,3 +30,7 @@ jobs:
         run: |
           python3 scripts/build_source_only_closure.py
           git diff --exit-code -- reports/SOURCE_ONLY_CLOSURE_MATRIX.tsv
+      - name: Audit source-only repository boundary
+        run: |
+          python3 scripts/audit_source_only.py
+          git diff --exit-code -- reports/SOURCE_ONLY_FINAL_AUDIT.tsv
