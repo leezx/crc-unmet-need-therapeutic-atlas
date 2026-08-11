@@ -121,3 +121,10 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Web ChatGPT result: `APPROVE`; CI reported `Validate registry` completed successfully.
 - Scope: record the next-stage parsing contract for `SamplesDescription.xlsx`; no file download or biological data commit.
 - Gate: sample metadata may be materialized only after an explicitly staged file is provided; checksum capture remains offline-only.
+
+## PR #9 — GSE117548 CRC PDO source expansion
+
+- URL: [#9](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/9)
+- Reviewed head: `a35a9b2580583fb85a1059c04bc5a2ba2a2d8b5c`
+- Web ChatGPT result: `APPROVE`; CI reported `Validate registry` completed successfully.
+- Scope: index GEO GSE117548 plus supplementary GitHub and EGA provenance endpoints; raw CEL and controlled-access files remain out of default scope.
