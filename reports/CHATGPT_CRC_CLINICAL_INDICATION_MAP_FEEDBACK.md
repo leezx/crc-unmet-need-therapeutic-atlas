@@ -553,3 +553,7 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 修复方向：明确区分 90 分加权工程/provenance scorecard 与 source-only completion endpoint；在配置和项目状态中保留 endpoint 为 `INCOMPLETE`，直到 `CRC_organoid_CRISPR_dependency` 与 `CRC_Perturb_seq` 的 source manifest 内部缺口完成。无数据下载、分析、候选批准或临床结论。
 
 最终复审：最新 head `ed00c72`，网页版 ChatGPT 结论：**APPROVE**。确认配置、项目状态和归档记录已经一致区分加权 scorecard 与 completion endpoint；两个内部来源缺口仍被诚实保留为未完成状态。
+
+## PR #52 remaining source identities review
+
+网页版 ChatGPT 在既有对话“PR审核与错误反馈”中审核 PR #52 head `7ed27b7`，结论：**APPROVE**。确认 GSE263580/GSE263581/GSE263582 与 EGA EGAS50000000256 的来源和 accession 可追溯，Mus musculus 工程化类器官与 HT29/SW480 受控访问 Perturb-seq 的 scope 边界已明确，两个候选仍为 `INTERNAL_ACTION_REQUIRED`，没有下载、分析、候选批准或临床结论越界。
