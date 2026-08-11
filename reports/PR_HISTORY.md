@@ -160,3 +160,10 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Reviewed head: 26597fd7972f07c18b59a721c70651c3fe2c9271
 - Web ChatGPT result: APPROVE; no data/provenance blocker.
 - Scope: exact fixed-commit metadata for all 11 data/external blobs; external references remain separate from GSE117548 biological data.
+
+## PR #15 — fixed-commit GitHub tree scanner
+
+- URL: [#15](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/15)
+- Initial reviewed head: `8f5059f`; web ChatGPT result: REQUEST_CHANGES because `--commit` accepted floating refs.
+- Fix reviewed head: `e03089eea70627c7db51e8521ce139911be0d41d`; web ChatGPT result: APPROVE; CI completed successfully.
+- Scope: dependency-free scanner for GitHub Trees API metadata, requiring a full 40-character commit SHA; outputs path, size, Git blob SHA and fixed blob URL, with no blob reads or downloads.

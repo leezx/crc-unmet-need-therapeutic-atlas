@@ -229,3 +229,13 @@ CRC 临床适应症地图建议形成独立 knowledge/review layer，而不是�
 结论：**APPROVE**。网页版 ChatGPT 确认 11 个 data/external blob 的路径、Git blob SHA 和大小与固定 commit Git tree API 一致，字节合计 115,992，与 asset-layer summary 一致。3 个 DS_Store 和 README 为 metadata/documentation；外部 XLSX、5 个 pathway TXT 和外部 signature workbook 分别为 REVIEW_REQUIRED。
 
 审核确认：这些 external assets 未被当作 GSE117548-derived biological data，notes 明确 content not read；不存在把 pathway signatures、外部 workbook 或 repository presence 误升级为 biological validation 的问题。CI 当时为 in_progress，但不是代码/数据 blocker，最终结论为 APPROVE。
+
+## PR #15 fixed-commit GitHub tree scanner review
+
+初审对象：[PR #15](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/15)，初始 reviewed head：`8f5059f`。
+
+结论：**REQUEST_CHANGES**。网页版 ChatGPT 指出唯一 blocker：`--commit` 未限制为完整 commit SHA，仍可传入 `master`、tag 或其他 ref，破坏 fixed-commit provenance 语义。
+
+修复对象：reviewed head `e03089eea70627c7db51e8521ce139911be0d41d`。
+
+复审结论：**APPROVE**。修复新增 `re.fullmatch(r"[0-9a-fA-F]{40}", args.commit)`，并将 help 文案改为 `Full 40-character commit SHA`；`master` 回归测试被拒绝，固定 commit 的 `data/external` 回归测试仍得到 11 files/115,992 bytes。网页版 ChatGPT 确认工具只访问 Git Trees API metadata，不读取 blob 内容、不 clone、不执行、不下载 repository files，truncated tree 仍硬失败，CI 为 completed / success；没有新的网络、安全或维护 blocker。
