@@ -8,7 +8,7 @@ This is a metadata-only verification pass. No biological data were downloaded.
 
 - **GSE178318** — official GEO record is public, with 15 samples from six labelled patients, matched primary CRC/liver metastasis/PBMC material, preoperative chemotherapy context, processed matrix files, and SRA raw-data availability. The record states that usage terms require contacting the PI.
 - **GSE224235** — official GEO record is public and contains matched primary/metastatic lesion material. It is a context comparator, not a genome-wide surface-target discovery dataset: the GEO record verifies NanoString nCounter PanCancer IO 360 (900 genes), while GeoMx availability remains unconfirmed. Processed values are included in the sample table and a 170 KB raw archive is listed.
-- **PXD038149** — ProteomeXchange/PRIDE record confirms advanced CRC PDOs, heavily pre-treated models, pre/post-chemotherapy liver disease PDOs, SWATH-MS, bulk RNA-seq and functional drug assays. The repository FTP archive is available; exact file inventory remains to be recorded.
+- **PXD038149** — ProteomeXchange/PRIDE record confirms advanced CRC PDOs, heavily pre-treated models, pre/post-chemotherapy liver disease PDOs, SWATH-MS, bulk RNA-seq and functional drug assays. The repository FTP archive is available; seven non-raw files are indexed, while workbook staging, parsing and checksums remain blocked.
 - **HPA** — official Human Protein Atlas portal is live and exposes tissue, single-cell, subcellular, blood, cancer and downloadable-data resources. It remains a required safety reference, not a patient discovery cohort.
 
 ## Verified reference or conditional entries
