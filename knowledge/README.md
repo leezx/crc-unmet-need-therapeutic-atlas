@@ -11,6 +11,7 @@ Current links are `SOURCE_INDEXED_NOT_ANALYZED`. They indicate that a dataset is
 Files:
 
 - `schemas/clinical_indications.tsv`: seed indication ontology nodes.
-- `schemas/indication_evidence_links.tsv`: source-level links from indication nodes to registry datasets and explicit data gaps.
+- `schemas/evidence.tsv`: source-only evidence objects with claims, provenance, confidence and explicit review status.
+- `schemas/indication_evidence_links.tsv`: source-level links from indication nodes to evidence objects and registry datasets.
 
 The seed source is the user-provided `Asset-Generation-OS-architecture.md`, especially the CRC clinical-indication ontology and evidence-chain sections. Any future claim must add a reviewed source span, evidence object and human-review status.
