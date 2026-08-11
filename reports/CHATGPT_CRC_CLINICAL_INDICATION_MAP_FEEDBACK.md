@@ -327,6 +327,12 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 最终复审结论：**APPROVE**。网页版 ChatGPT 确认唯一 blocker 已解决，没有新的 blocker。
 
+## PR #30 GSE178318 admission-gate reconciliation review
+
+审核对象：[PR #30](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/30)，reviewed head：`af49234`。
+
+结论：**APPROVE**。网页版 ChatGPT 确认 sample-level treatment/pairing 记录支持将 treatment context 标为 `PASS`，同时保留 molecular annotation、PI-contact、checksum 和最终 admission blockers；dataset 仍为 `P0_DOWNLOAD/CANDIDATE`。
+
 ## PR #29 P0 Phase 1 admission matrix review
 
 初审对象：[PR #29](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/29)，reviewed head：`8643557`。
