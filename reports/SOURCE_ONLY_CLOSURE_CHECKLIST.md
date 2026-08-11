@@ -21,6 +21,8 @@ This checklist defines completion for the current project phase. It does not req
 
 The source-only phase is complete only when all internal requirements in `config/project_completion.yaml` are complete. Upstream access, missing public metadata and absent user-staged files may remain as external blockers, but they must be recorded in the closure matrix with a named next artifact. Internal work such as the first scan disposition, validator/test run, no-data audit and final closure PR cannot be waived as an external blocker. `APPROVED` is not required for this phase and must not be inferred from source-only completion.
 
+- [x] Source-only boundary audit and CI guardrail are present; the latest audit is recorded in `reports/SOURCE_ONLY_FINAL_AUDIT.tsv`.
+
 ## Next closure batches
 
 1. Normalize candidate-level closure and update-target coverage into one machine-readable matrix.

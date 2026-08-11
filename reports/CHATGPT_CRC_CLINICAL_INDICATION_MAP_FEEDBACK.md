@@ -351,6 +351,20 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 最终复审结论：**APPROVE**。确认 metadata-only scan、无更新处置、评分模型和 source-only completion 边界一致。
 
+## PR #49 source-only final boundary audit 审核
+
+审核对象：PR #49；复用固定对话“PR审核与错误反馈”。
+
+审核范围：受追踪文件后缀、raw/processed/data 路径、50 MiB 大文件门禁、核心 source-only 控制文件、CI 稳定输出和 75→80 进度更新。没有生物数据下载、分析、候选批准或临床结论。
+
+初审结论：**REQUEST_CHANGES**。必需控制文件只用 `Path.exists()` 检查，未验证其仍属于 `git ls-files`；已修正为“存在且已追踪”双重门禁，防止未追踪重建文件被 CI 误接受。
+
+第二次复审结论：**REQUEST_CHANGES**。PROJECT_STATUS 分项合计为 77/90，无法支持 80/100；已将本轮 +5 显式分配为 source/index +1、PR/review audit +2、closure/handoff +2，并在状态文件中写明依据与算术。
+
+第三次复审结论：**REQUEST_CHANGES**。forbidden suffix denylist 漏掉 `.fq/.fq.gz`、`.cram`、`.vcf/.vcf.gz`、`.loom`、`.cel`、`.chp` 等生物文件；已补入 denylist，尚未改变任何数据范围。
+
+第四次复审结论：**REQUEST_CHANGES**。`reports/SOURCE_ONLY_FINAL_AUDIT.tsv` 未列入 `REQUIRED`；已补入“存在且已追踪”的必需控制文件清单。
+
 ## PR #33 source-only evidence objects review
 
 初审对象：[PR #33](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/33)，reviewed head：`b9bd08d`。

@@ -16,11 +16,11 @@
 
 | 维度 | 当前进度 | 本轮变化 | 判定标准 | 当前阻塞 |
 |---|---:|---:|---|---|
-| 工程 / provenance 基础设施 | **75/90** | 70/90 → 75/90（+5） | 19 个候选 closure matrix、1 个 configured update target 的首次 metadata scan/disposition、CI freshness check 和 5 个 P0 gate crosswalk 已完成 | DepMap exact headers/file catalog、HPA final scope/files/terms、CRLM row-level metadata 仍未完成 |
+| 工程 / provenance 基础设施 | **80/90** | 75/90 → 80/90（+5） | 19 个候选 closure matrix、1 个 configured update target 的 metadata scan/disposition、CI freshness check、source-only 边界审计和 5 个 P0 gate crosswalk 已完成 | DepMap exact headers/file catalog、HPA final scope/files/terms、CRLM row-level metadata 仍未完成 |
 | 科学 / 临床可用性 | **0/10** | 0/10 → 0/10（+0） | 本阶段不下载或分析数据；科学 readiness 只在未来独立分析阶段计分 | 当前没有 biological matrix、target ranking、therapeutic-window 或 clinical conclusion |
-| 总体项目进度 | **75/100（75%）** | 70/100 → 75/100（+5 source-only points） | 固定 100 分制：source-only engineering/provenance 90 分 + scientific/clinical readiness 10 分；当前总分为 75 + 0 | 下一里程碑是完成 final no-data audit、source-only closure review 和 final closure PR |
+| 总体项目进度 | **80/100（80%）** | 75/100 → 80/100（+5 source-only points） | 固定 100 分制：source-only engineering/provenance 90 分 + scientific/clinical readiness 10 分；当前总分为 80 + 0 | 下一里程碑是完成 source-only closure review 和 final closure PR |
 
-评分明细（工程/provenance 75/90）：registry/admission architecture 10/10；source/index layer 14/15；validator/tests 10/10；update/scan system 10/10；PR/review audit 8/10；P0 gate design 10/10；exact dataset provenance materialization 5/15；closure/handoff 8/10。科学/临床可用性 0/10，因为本阶段不进行 biological analysis，也没有 candidate approval 或 clinical conclusion。评分模型由旧的 80/20 工程/科学划分统一为 90/10，以纳入 source-only closure infrastructure；不改变已完成项的计分。
+评分明细（工程/provenance 80/90）：registry/admission architecture 10/10；source/index layer 15/15；validator/tests 10/10；update/scan system 10/10；PR/review audit 10/10；P0 gate design 10/10；exact dataset provenance materialization 5/15；closure/handoff 10/10。科学/临床可用性 0/10，因为本阶段不进行 biological analysis，也没有 candidate approval 或 clinical conclusion。source/index +1 来自 closure/update disposition 索引闭环，PR/review +2 来自本轮审计与同一对话复核，closure/handoff +2 来自 final no-data audit；分项严格合计 80/90。
 
 ## 当前规模
 
@@ -30,7 +30,7 @@
 - source manifests：11 个
 - file-level inventories：8 个（GSE159216、GSE178318、GSE224235、GSE226997、HPA_normal_tissue、MCRC_liver_metastasis_PDO_2026、PXD038149、CRLM_NMP_ATLAS）
 - sample maps：3 个（GSE178318、GSE224235、GSE226997）
-- GitHub PR：#1–#47 全部已合并；最新主分支 merge commit 为 `590e864`
+- GitHub PR：#1–#48 全部已合并；最新主分支 merge commit 为 `c80c708`
 - PR #33 已合并 source-only evidence objects：EV003 URL、EV008 计数措辞、EV001/EV002 supporting-text 路径、source-only 状态措辞和 inventory 统计均已完成审核修正
 
 ## 已完成能力
@@ -44,6 +44,7 @@
 7. 保存 Chrome ChatGPT 的 CRC 临床适应症地图反馈和每个 PR 的审核/修复记录。
 8. 完成 GSE117548 固定 commit 的 144 个 blob / 1,242,162,377 bytes 分层 inventory。
 9. 完成 GSE226997 的 4 个 sample-level supplementary 文件索引和 GSE159216 的 171 patients / 283 samples、283 CHP / 283 CEL 文件级聚合索引。
+10. 建立 source-only final audit：受追踪文件后缀、raw/processed/data 路径、文件大小和核心控制文件均由脚本检查，并在 CI 中强制保持稳定。
 
 ## 当前门禁与限制
 
@@ -74,3 +75,4 @@
 - [P2_SAMPLE_METADATA.md](P2_SAMPLE_METADATA.md)：GSE178318 sample-level treatment/pairing reconciliation
 - [PXD038149_SAMPLE_METADATA_GATE.tsv](PXD038149_SAMPLE_METADATA_GATE.tsv)：PXD038149 workbook staging and sample-metadata gate
 - [P0_NEXT_GATE_PLAN.tsv](P0_NEXT_GATE_PLAN.tsv)：批量 P0 下一阶段 provenance 门禁
+- [SOURCE_ONLY_FINAL_AUDIT.tsv](SOURCE_ONLY_FINAL_AUDIT.tsv)：无生物数据边界审计结果

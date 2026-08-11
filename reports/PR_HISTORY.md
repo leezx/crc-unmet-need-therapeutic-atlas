@@ -402,3 +402,7 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Initial reviewed head: `89e09c9`; web ChatGPT result: REQUEST_CHANGES because the configured score weights did not match the PROJECT_STATUS closure/handoff denominator.
 - Fix reviewed head: `1d27a62`; web ChatGPT result: APPROVE after defining source-only completion as a 90-point endpoint and separating the 10-point scientific readiness overlay.
 - Scope: record the first metadata-only scan for the single configured GitHub target (`NO_UPDATE_PIN_RETAINED`), update the closure checklist and status from 70/100 to 75/100; no blob read, pin change, download or analysis.
+
+## PR #49 — source-only final boundary audit
+
+- Scope: add a deterministic audit script and CI guardrail for forbidden biological suffixes, raw/processed/data paths, tracked files over 50 MiB and required source-only control files; update the auditable project score from 75/100 to 80/100. No data download, analysis, candidate approval or clinical conclusion.
