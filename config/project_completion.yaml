@@ -17,6 +17,11 @@ completion_endpoint:
   percent: 100
   max_points: 90
   definition: The source-only phase reaches 100% when every source-only engineering requirement is complete; scientific/clinical analysis readiness is tracked separately and is not required for this endpoint.
+  scorecard_interpretation: The 90-point weighted score measures materialized infrastructure and provenance capacity; a 90/90 score does not by itself assert that the source-only completion endpoint is closed.
+  current_status: INCOMPLETE
+  unresolved_internal_requirements:
+    - source_manifest_for_CRC_organoid_CRISPR_dependency
+    - source_manifest_for_CRC_Perturb_seq
   internal_requirements:
     - closure_matrix_is_complete
     - every_update_target_has_scan_disposition

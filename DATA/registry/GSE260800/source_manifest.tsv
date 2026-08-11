@@ -1,0 +1,2 @@
+dataset_id	source_url	accession	download_method	download_date	file_name	file_size	checksum	license	publication_doi	access_status	notes
+GSE260800	https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE260800	GSE260800	GEO metadata and processed context first	NA	NA	NA	NA	NCBI repository terms	NA	VERIFIED_ENTRY	Official GEO record is a mouse CRC-model subseries within GSE260801; retained as reference-only candidate pending scope review; no download performed.

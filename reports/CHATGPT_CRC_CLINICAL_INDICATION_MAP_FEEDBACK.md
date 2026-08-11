@@ -379,6 +379,10 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 最终结论：**APPROVE**。网页版 ChatGPT 确认结构化 disposition contract、blocker-class 映射、closure matrix、85/90 分项和 no-download/no-analysis/no-approval 边界一致。
 
+## PR #51 known-source manifest completion 审核
+
+审核范围：四个 GEO reference subseries 与 GTEx 的官方 source manifest、结构化 no-file-inventory disposition、90/90 provenance 算术，以及剩余两个未知来源候选的 blocker 保留。继续复用固定对话“PR审核与错误反馈”。
+
 ## PR #33 source-only evidence objects review
 
 初审对象：[PR #33](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/33)，reviewed head：`b9bd08d`。
@@ -542,3 +546,10 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 修复对象：reviewed head `cbfd7c8`，将 `download_date` 改为 `NA`，并明确记录 no download performed。
 
 最终复审结论：**APPROVE**。网页版 ChatGPT 确认唯一 blocker 已解决，没有新的 blocker。
+## PR #51 known-source manifest completion — initial review
+
+网页版 ChatGPT 在既有对话“PR审核与错误反馈”中审核 PR #51，结论：**REQUEST_CHANGES**。反馈指出：`90/90` 表示 source-only 端点已完成，但 closure matrix 仍有两个 `INTERNAL_ACTION_REQUIRED` 候选，且状态文档同时承认内部闭环未完成，完成度语义自相矛盾。
+
+修复方向：明确区分 90 分加权工程/provenance scorecard 与 source-only completion endpoint；在配置和项目状态中保留 endpoint 为 `INCOMPLETE`，直到 `CRC_organoid_CRISPR_dependency` 与 `CRC_Perturb_seq` 的 source manifest 内部缺口完成。无数据下载、分析、候选批准或临床结论。
+
+最终复审：最新 head `ed00c72`，网页版 ChatGPT 结论：**APPROVE**。确认配置、项目状态和归档记录已经一致区分加权 scorecard 与 completion endpoint；两个内部来源缺口仍被诚实保留为未完成状态。

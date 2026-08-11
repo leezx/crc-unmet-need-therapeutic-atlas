@@ -1,0 +1,2 @@
+dataset_id	source_url	accession	download_method	download_date	file_name	file_size	checksum	license	publication_doi	access_status	notes
+GTEx_normal_tissue	https://gtexportal.org/	GTEx	GTEx open-access portal and metadata first	NA	NA	NA	NA	GTEx/NIH data-use terms	NA	VERIFIED_ENTRY	Official GTEx portal recorded as a normal-tissue comparator source; exact release/file inventory and access terms require later review; no download performed.
