@@ -61,6 +61,7 @@
 - PR #6 已获网页版 ChatGPT `APPROVE`，准备合并；checksum 工具仅处理外部已 staged 文件，不自动下载。
 - 已完成 PXD038149 PRIDE API 文件级 provenance 核验：51 个文件中 44 个 raw、7 个非 raw；7 个 processed/metadata/search/peak 文件已登记，raw 仍不默认下载。
 - PR #7 已由网页版 ChatGPT 对 reviewed head `fc5cd950d1c73b0325bf48b44169172c3af36f66` 审核为 `APPROVE`；审核确认 API 文件类别、FTP URL、字节大小、CC0 API 记录及 raw/processed 边界无 blocker，准备合并。
+- PR #7 已于 2026-08-11 squash 合并，merge commit 为 `0b0a41a`；PXD038149 仍为 `CANDIDATE`。
 
 ## 下一步顺序
 
@@ -74,3 +75,5 @@
 
 - PR #7 合并后，下一阶段只解析 PXD038149 的 `SamplesDescription.xlsx` 元数据；不会把 sample description 解析等同于下载或 dataset approval。
 - 任何 checksum 仅在数据被用户或外部 staging 流程明确放入指定目录后离线计算；扫描器不下载生物数据。
+- 当前分支 `phase1/p6-pride-sample-metadata` 的下一门禁是为 `SamplesDescription.xlsx` 定义字段级解析和 provenance 记录，不下载文件、不提交样本值。
+- PR #8 已由网页版 ChatGPT 对 reviewed head `409d6ded96620b82be63403108aee1ced9a2771a` 审核为 `APPROVE`，CI 通过，准备合并；后续只有明确 staged workbook 才进入字段级 metadata review。

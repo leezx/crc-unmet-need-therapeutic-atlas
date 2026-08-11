@@ -112,3 +112,12 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Web ChatGPT result: `APPROVE`; CI reported `Validate registry` completed successfully.
 - Scope: PRIDE API-backed inventory of seven non-raw files; 44 raw files remain out of default scope.
 - No PRIDE files downloaded; PXD038149 remains `CANDIDATE` pending sample-description review and checksum capture.
+- Merged on 2026-08-11; squash merge commit: `0b0a41a`.
+
+## PR #8 — PXD038149 sample-metadata gate
+
+- URL: [#8](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/8)
+- Reviewed head: `409d6ded96620b82be63403108aee1ced9a2771a`
+- Web ChatGPT result: `APPROVE`; CI reported `Validate registry` completed successfully.
+- Scope: record the next-stage parsing contract for `SamplesDescription.xlsx`; no file download or biological data commit.
+- Gate: sample metadata may be materialized only after an explicitly staged file is provided; checksum capture remains offline-only.

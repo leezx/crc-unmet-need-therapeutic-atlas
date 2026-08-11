@@ -170,3 +170,13 @@ CRC 临床适应症地图建议形成独立 knowledge/review layer，而不是�
 审核确认：PRIDE API 返回的 51 个文件中，44 个 RAW 文件明确留在默认范围之外；7 个非 raw 文件逐项登记了精确 FTP URL、API 返回的字节大小和原始类别 `OTHER / SEARCH / PEAK`，仓库内部映射为 `PROCESSED / SEARCH / PEAK`。`Quantitation*.xlsx`、sample metadata、search results、peak/library 文件被保留为可下载候选，但没有被夸大为统一 biological output。license 只记录为“CC0 according to PRIDE API”，PXD038149 仍为 `CANDIDATE`，没有声称已下载或已完成 checksum capture。
 
 下一步：合并 PR #7；继续做 `SamplesDescription.xlsx` 的样本元数据解析和外部 staged 文件的 checksum capture，仍不默认下载 raw 数据。
+
+## PR #8 PXD038149 sample-metadata gate review
+
+复审对象：[PR #8](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/8)，reviewed head：`409d6ded96620b82be63403108aee1ced9a2771a`。
+
+结论：**APPROVE**。网页版 ChatGPT 检查了实际 diff；PR 只改动报告/状态文件，`mergeable: true`，`Validate registry` workflow 为 `completed / success`，没有真正 blocker。
+
+审核确认：`SamplesDescription.xlsx` 的 endpoint、PRIDE category `OTHER`、8,577 bytes 和 registry entry 只是 provenance 记录；只有显式 staged 的本地文件才能进入 checksum 和解析阶段，且继续复用 offline-only `capture_checksums.py`。解析契约要求保留原始标签、对不支持字段使用 `UNKNOWN`，不从 PDO/drug-response labels 推断 systemic treatment exposure；staged file 缺失或 sample identifier 歧义时停止并进入 review。没有 downloader、自动 PRIDE 访问、dataset status 升级或 biological data 提交路径。
+
+下一步：合并 PR #8；若后续获得明确 staged workbook，再进入字段级 metadata review。
