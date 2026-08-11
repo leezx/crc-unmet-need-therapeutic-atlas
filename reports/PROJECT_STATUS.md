@@ -27,7 +27,7 @@
 
 - 独立 GitHub 仓库：[leezx/crc-unmet-need-therapeutic-atlas](https://github.com/leezx/crc-unmet-need-therapeutic-atlas)
 - 候选数据集：19 个，全部为 `CANDIDATE`
-- 优先级：10 个 `P0_DOWNLOAD`、5 个 `P1_DOWNLOAD`、4 个 `REFERENCE_ONLY`
+- 优先级：9 个 `P0_DOWNLOAD`、5 个 `P1_DOWNLOAD`、5 个 `REFERENCE_ONLY`
 - source manifests：19 个
 - file-level inventories：8 个（GSE159216、GSE178318、GSE224235、GSE226997、HPA_normal_tissue、MCRC_liver_metastasis_PDO_2026、PXD038149、CRLM_NMP_ATLAS）
 - sample maps/contracts：4 个（GSE178318、GSE224235、GSE226997、CRLM_NMP_ATLAS）
