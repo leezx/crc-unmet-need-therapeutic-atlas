@@ -367,3 +367,9 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Reviewed head: `87b3c24`; web ChatGPT result: APPROVE.
 - Scope: add a 10-organ HPA v25.1 source-derived minimum reference contract with tissue groups, coverage roles and stop conditions; update EV005 and HPA-G1.
 - No HPA file downloaded, no checksum captured, no therapeutic-window/toxicity claim and no candidate approval.
+
+## PR #44 — progress after HPA gate
+
+- URL: [#44](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/44)
+- Reviewed head: `f986a66`; web ChatGPT result: APPROVE.
+- Scope: reconcile status after PR #43 and update the fixed score from 58/100 to 60/100 (+2) for the HPA source-derived organ contract; no biological or clinical content changes.
