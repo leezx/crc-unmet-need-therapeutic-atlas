@@ -210,3 +210,8 @@ CRC 临床适应症地图建议形成独立 knowledge/review layer，而不是�
 修复对象：[PR #11](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/11)，reviewed head：`54a3a499b7d860cb0a1d8de7545fc434d4e69de5`。
 
 结论：**APPROVE**。网页版 ChatGPT 确认 blobs 加和为 144，字节加和为 1,242,162,377；README、`asset_layer_summary.tsv` 和 `source_manifest.tsv` 一致，CI 为 `completed / success`。`data/raw` 仍为 `EXCLUDED_RAW`，`data/processed` 仍不进入本仓库下载范围，`data/.DS_Store` 为 `REPOSITORY_METADATA / NO_DOWNLOAD`，没有新的 blocker。
+## PR #12 selected model/table file inventory review
+
+复审对象：[PR #12](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/12)，reviewed head：196606d。
+
+结论：**APPROVE**。网页版 ChatGPT 最终确认唯一 blocker 为无；固定 commit 下 4 个 model-layer blob 和 1 个 table blob 的路径、Git blob SHA、字节大小与分类边界均可接受。Git blob SHA 被正确作为 provenance identifier，而非 MD5/SHA-256 checksum；model.hdf5 未执行，mutation table 未被当作已验证 clinical annotation。
