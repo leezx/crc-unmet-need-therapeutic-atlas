@@ -11,3 +11,5 @@ The asset-layer summary reports 144 selected blobs totaling 1,242,162,377 bytes.
 The exact five-file index in selected_file_inventory.tsv covers all model-layer blobs and the single table blob. Git blob SHA values are provenance identifiers, not MD5/SHA-256 checksums; no file contents were downloaded.
 
 The processed_file_inventory.tsv index covers all 27 data/processed blobs: expression assets, morphology-derived assets, and mutation-table derivatives. All remain REVIEW_REQUIRED; their presence in the upstream repository does not imply biological validation or local availability.
+
+The external_file_inventory.tsv index covers all 11 data/external blobs. Four are repository metadata/documentation files, one is an external XLSX reference, five are pathway-signature text files, and one is an external signature workbook. These are not automatically counted as GSE117548 biological data.

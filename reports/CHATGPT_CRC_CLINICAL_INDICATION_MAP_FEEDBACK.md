@@ -222,3 +222,10 @@ CRC 临床适应症地图建议形成独立 knowledge/review layer，而不是�
 结论：**APPROVE**。网页版 ChatGPT 确认 processed_file_inventory.tsv 的 27 个 data/processed blob、路径、size 和 Git blob SHA 与固定 commit Git tree API 一致；27 行字节总量为 758,189,431，与 asset_layer_summary 对齐，CI 为 completed / success。
 
 审核确认：expression、morphology 和 seq-derived mutation tables 均保持 REVIEW_REQUIRED；README/notes 明确 content not read、not biological-data validated；mutation table 不是已验证 clinical annotation。Git blob SHA 仅作为 repository object identity/provenance，没有被当作 MD5/SHA-256 checksum。
+## PR #14 GSE117548 external-file inventory review
+
+复审对象：[PR #14](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/14)，reviewed head：26597fd7972f07c18b59a721c70651c3fe2c9271。
+
+结论：**APPROVE**。网页版 ChatGPT 确认 11 个 data/external blob 的路径、Git blob SHA 和大小与固定 commit Git tree API 一致，字节合计 115,992，与 asset-layer summary 一致。3 个 DS_Store 和 README 为 metadata/documentation；外部 XLSX、5 个 pathway TXT 和外部 signature workbook 分别为 REVIEW_REQUIRED。
+
+审核确认：这些 external assets 未被当作 GSE117548-derived biological data，notes 明确 content not read；不存在把 pathway signatures、外部 workbook 或 repository presence 误升级为 biological validation 的问题。CI 当时为 in_progress，但不是代码/数据 blocker，最终结论为 APPROVE。
