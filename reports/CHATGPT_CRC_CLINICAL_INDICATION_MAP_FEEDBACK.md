@@ -365,6 +365,8 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 最终指针复核：发现上述归档修正后又产生了 head `f60bf9a`，已将 PROJECT_STATUS 实际文件更新为该当前 head。
 
+最终稳定性修复：移除会随每次审计提交失效的“当前 head”自引用，仅保留历史批准 head，并标记 PR #33 待最终复核。
+
 ## PR #32 source-only knowledge/review layer review
 
 初审对象：[PR #32](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/32)，reviewed head：`2f2d619`。

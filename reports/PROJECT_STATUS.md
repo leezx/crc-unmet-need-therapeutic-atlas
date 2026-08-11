@@ -21,7 +21,7 @@
 - file-level inventories：7 个（GSE159216、GSE178318、GSE224235、GSE226997、HPA_normal_tissue、MCRC_liver_metastasis_PDO_2026、PXD038149）
 - sample maps：3 个（GSE178318、GSE224235、GSE226997）
 - GitHub PR：#1–#32 全部已合并；最新主分支 merge commit 为 `7cab853`
-- source-only evidence objects 由公开 PR #33 提出；EV003 URL、EV008 计数措辞、EV001/EV002 supporting-text 路径、source-only 状态措辞和 inventory 统计已按网页版审核修正；历史批准 head 为 `35a34df`，当前 head `f60bf9a` 待最终复核
+- source-only evidence objects 由公开 PR #33 提出；EV003 URL、EV008 计数措辞、EV001/EV002 supporting-text 路径、source-only 状态措辞和 inventory 统计已按网页版审核修正；历史批准 head 为 `35a34df`，PR #33 当前待最终复核
 
 ## 已完成能力
 

@@ -294,5 +294,6 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Follow-up audit of head `71afa13` found PROJECT_STATUS incorrectly called the older `35a34df` approval the latest approval; corrected to distinguish historical approval from the current pending head. Final review is pending.
 - Follow-up audit of head `99c7722` found the pending-head pointer still named `71afa13`; corrected to the current head. Final review is pending.
 - Final pointer correction is recorded in the next commit because the status file itself remained at `99c7722` after the `f60bf9a` documentation commit.
+- Removed the self-referential current-head pointer from PROJECT_STATUS; it now records the historical approved head and stable pending-review state.
 - Scope: eight source-only evidence objects, evidence IDs linked to indication links, provenance/confidence/version fields, and missing-information notes; no biological data, target ranking, therapeutic-window claim or dataset approval.
 - Local validation: registry validator passed, 3 unit tests passed, diff check passed, and both TSV files passed independent column-count checks.
