@@ -361,6 +361,8 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 后续复核：网页版 ChatGPT 指出状态行把 `35a34df` 的历史 APPROVE 错写成最新 head 已批准，忽略后续 `b97f5bd` 的 REQUEST_CHANGES。已改为明确记录历史批准 head 与当前待复核 head。
 
+再次复核：网页版 ChatGPT 指出该状态行仍引用旧待复核 head `71afa13`，已更新为当前提交 `99c7722`。
+
 ## PR #32 source-only knowledge/review layer review
 
 初审对象：[PR #32](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/32)，reviewed head：`2f2d619`。

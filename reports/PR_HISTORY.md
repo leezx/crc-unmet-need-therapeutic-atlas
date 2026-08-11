@@ -292,5 +292,6 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Merge-prep audit of head `c0324f7` found stale PROJECT_STATUS wording that said no evidence object existed; corrected to distinguish eight source-only evidence objects from absent biological/clinical conclusions. Final review is pending.
 - Follow-up audit of head `b97f5bd` found PROJECT_STATUS file-level inventory count stale at 5; corrected to 7 and added HPA_normal_tissue plus MCRC_liver_metastasis_PDO_2026 to the list. Final review is pending.
 - Follow-up audit of head `71afa13` found PROJECT_STATUS incorrectly called the older `35a34df` approval the latest approval; corrected to distinguish historical approval from the current pending head. Final review is pending.
+- Follow-up audit of head `99c7722` found the pending-head pointer still named `71afa13`; corrected to the current head. Final review is pending.
 - Scope: eight source-only evidence objects, evidence IDs linked to indication links, provenance/confidence/version fields, and missing-information notes; no biological data, target ranking, therapeutic-window claim or dataset approval.
 - Local validation: registry validator passed, 3 unit tests passed, diff check passed, and both TSV files passed independent column-count checks.
