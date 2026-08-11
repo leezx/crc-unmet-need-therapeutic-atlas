@@ -11,4 +11,5 @@ DATA/**/processed/
 *.mtx
 *.mtx.gz
 reports/generated/
+reports/github_tree_scan/
 __pycache__/

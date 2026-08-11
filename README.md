@@ -37,3 +37,4 @@ Project records:
 - [`reports/CHATGPT_CRC_CLINICAL_INDICATION_MAP_FEEDBACK.md`](reports/CHATGPT_CRC_CLINICAL_INDICATION_MAP_FEEDBACK.md)
 - [`reports/P0_SOURCE_VERIFICATION.md`](reports/P0_SOURCE_VERIFICATION.md)
 GitHub supplementary repositories are indexed with fixed-commit tree metadata only; blob contents are not fetched by the registry workflow.
+Configured GitHub tree targets are scanned weekly and retained as metadata-only workflow artifacts; target commits are pinned in [`config/github_tree_targets.tsv`](config/github_tree_targets.tsv).
