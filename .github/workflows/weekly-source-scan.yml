@@ -23,7 +23,7 @@ jobs:
       - name: Check configured GitHub target refs for updates
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python3 scripts/check_github_target_updates.py
+        run: python3 scripts/check_github_target_updates.py --output reports/updates/github_tree_update_candidates.tsv
       - name: Upload fixed-commit tree inventories
         uses: actions/upload-artifact@v4
         with:
