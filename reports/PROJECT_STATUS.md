@@ -95,3 +95,4 @@
 - PR #17 初审发现 output 目录创建早于配置校验且测试断言位置无效；已修复并由网页版 ChatGPT 对 head `4a1186a31330a63977eaa9ad62f9742dfda88bc6` 复审 APPROVE，Validate registry CI 成功，准备合并。
 - PR #18 初审发现 commits API 可能返回 `files[].patch`；已改用 Git ref metadata endpoint `/git/ref/heads/{tracking_ref}`，并由网页版 ChatGPT 对 head `b910ea7` 复审 APPROVE；GSE117548 当前无 pinned-target drift，准备合并。
 - PR #19 已由网页版 ChatGPT 对 head `26edd5e` 复审 APPROVE；update candidate report 已纳入版本控制，上游变化时将通过 draft PR 进入人工审核，不自动修改 pinned SHA。
+- PR #20 初审发现 drift checker 回归测试过弱；已修复为恰好一次 Git ref metadata 请求、禁止 `/commits/`，并用不同 latest SHA 验证 drift 结果。网页版 ChatGPT 对 head `67a6f04` 最终复审为 APPROVE；下一步合并 PR #20，并继续扩展 metadata-only update checks。
