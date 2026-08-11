@@ -16,11 +16,11 @@
 
 | 维度 | 当前进度 | 本轮变化 | 判定标准 | 当前阻塞 |
 |---|---:|---:|---|---|
-| 工程 / provenance 基础设施 | **85/90** | 80/90 → 85/90（+5） | 19 个候选 closure matrix、4 个 source-manifest 候选的显式 no-file-inventory disposition、1 个 configured update target 的 metadata scan/disposition、CI freshness check、source-only 边界审计和 5 个 P0 gate crosswalk 已完成 | 7 个候选仍缺 source manifest；DepMap exact headers、HPA final scope/files/terms、CRLM row-level metadata 仍未完成 |
+| 工程 / provenance 基础设施 | **90/90** | 85/90 → 90/90（+5） | 19 个候选 closure matrix、9 个候选的结构化 source/no-file-inventory disposition、1 个 configured update target 的 metadata scan/disposition、CI freshness check、source-only 边界审计和 5 个 P0 gate crosswalk 已完成 | 2 个候选仍缺 source manifest；DepMap exact headers、HPA final scope/files/terms、CRLM row-level metadata 仍未完成 |
 | 科学 / 临床可用性 | **0/10** | 0/10 → 0/10（+0） | 本阶段不下载或分析数据；科学 readiness 只在未来独立分析阶段计分 | 当前没有 biological matrix、target ranking、therapeutic-window 或 clinical conclusion |
-| 总体项目进度 | **85/100（85%）** | 80/100 → 85/100（+5 source-only points） | 固定 100 分制：source-only engineering/provenance 90 分 + scientific/clinical readiness 10 分；当前总分为 85 + 0 | 下一里程碑是补齐剩余 source-manifest disposition，并完成 source-only closure review |
+| 总体项目进度 | **90/100（90%）** | 85/100 → 90/100（+5 source-only points） | 固定 100 分制：source-only engineering/provenance 90 分 + scientific/clinical readiness 10 分；当前总分为 90 + 0 | 下一里程碑是处理 2 个未知来源候选，并完成 source-only closure review |
 
-评分明细（工程/provenance 85/90）：registry/admission architecture 10/10；source/index layer 15/15；validator/tests 10/10；update/scan system 10/10；PR/review audit 10/10；P0 gate design 10/10；exact dataset provenance materialization 10/15；closure/handoff 10/10。科学/临床可用性 0/10，因为本阶段不进行 biological analysis，也没有 candidate approval 或 clinical conclusion。本轮 +5 来自四个 source-manifest 候选的显式 no-file-inventory disposition，使 closure matrix 能区分“有意不主张 file inventory”和“内部 artifact 缺失”；分项严格合计 85/90。
+评分明细（工程/provenance 90/90）：registry/admission architecture 10/10；source/index layer 15/15；validator/tests 10/10；update/scan system 10/10；PR/review audit 10/10；P0 gate design 10/10；exact dataset provenance materialization 15/15；closure/handoff 10/10。科学/临床可用性 0/10，因为本阶段不进行 biological analysis，也没有 candidate approval 或 clinical conclusion。本轮 +5 来自五个已知官方来源的 source manifest 和对应结构化 no-file-inventory disposition；分项严格合计 90/90。source-only completion 仍须处理剩余两个未知来源候选的内部 closure blocker。
 
 ## 当前规模
 
@@ -45,7 +45,7 @@
 8. 完成 GSE117548 固定 commit 的 144 个 blob / 1,242,162,377 bytes 分层 inventory。
 9. 完成 GSE226997 的 4 个 sample-level supplementary 文件索引和 GSE159216 的 171 patients / 283 samples、283 CHP / 283 CEL 文件级聚合索引。
 10. 建立 source-only final audit：受追踪文件后缀、raw/processed/data 路径、文件大小和核心控制文件均由脚本检查，并在 CI 中强制保持稳定。
-11. 为 DepMap、HTAN、Zenodo mirror 和 GSE117548 建立显式 no-file-inventory disposition，避免把受控的 source-only 不主张误判为内部遗漏。
+11. 为 DepMap、HTAN、Zenodo mirror、GSE117548、四个 GEO reference subseries 和 GTEx 建立结构化 no-file-inventory disposition，避免把受控的 source-only 不主张误判为内部遗漏。
 
 ## 当前门禁与限制
 

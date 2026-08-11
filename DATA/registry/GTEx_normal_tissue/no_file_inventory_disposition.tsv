@@ -1,0 +1,2 @@
+dataset_id	disposition_id	status	scope	blocker_class	rationale	next_artifact
+GTEx_normal_tissue	GTEX-NFI-001	EXPLICIT_NO_FILE_INVENTORY	metadata-only GTEx comparator index	EXTERNAL_OR_DATASET_REVIEW	Exact release/file inventory is intentionally not asserted while the selected GTEx comparator release and access terms remain under review.	Review GTEx release and open/protected access terms; do not download in this phase.

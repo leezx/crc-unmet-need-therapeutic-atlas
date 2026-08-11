@@ -1,0 +1,2 @@
+dataset_id	disposition_id	status	scope	blocker_class	rationale	next_artifact
+GSE260799	GSE260799-NFI-001	EXPLICIT_NO_FILE_INVENTORY	metadata-only GEO source index	EXTERNAL_OR_DATASET_REVIEW	Exact file inventory is intentionally not asserted for this mouse CRC-model subseries pending scope review.	Review official GEO family metadata and retain reference-only scope; do not download in this phase.
