@@ -1,2 +1,4 @@
 dataset_id	source_url	accession	download_method	download_date	file_name	file_size	checksum	license	publication_doi	access_status	notes
-GSE159216	https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE159216	GSE159216	GEO processed matrix first	2026-08-10	Processed series matrix	NA	NA	NCBI repository terms	NA	VERIFIED_ENTRY	CRLM bulk subtype comparator; sample count pending.
+GSE159216	https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE159216	GSE159216	GEO series metadata	NA	GSE159216 series record	NA	NA	NCBI repository terms	NA	VERIFIED_ENTRY	Official GEO record; 283 samples on GPL17586; no biological file downloaded.
+GSE159216	https://ftp.ncbi.nlm.nih.gov/geo/series/GSE159nnn/GSE159216/suppl/filelist.txt	GSE159216	GEO filelist metadata	NA	filelist.txt	39 KB	NA	NCBI repository terms	NA	AVAILABLE	Official file-level manifest; 283 CEL and 283 CHP files indexed without download.
+GSE159216	https://ftp.ncbi.nlm.nih.gov/geo/series/GSE159nnn/GSE159216/suppl/GSE159216_RAW.tar	GSE159216	GEO raw archive, deferred	NA	GSE159216_RAW.tar	7,476,920,320 bytes	NA	NCBI repository terms	NA	AVAILABLE	Raw archive indexed for provenance only; no download performed.
