@@ -327,6 +327,14 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 最终复审结论：**APPROVE**。网页版 ChatGPT 确认唯一 blocker 已解决，没有新的 blocker。
 
+## PR #46 source-only completion framework 审核
+
+初审 head `4d899bf`：**REQUEST_CHANGES**。网页版 ChatGPT 指出完成定义允许把首次 update scan 和 final closure PR 等内部步骤错误归类为 external blocker。
+
+修复 head `9ab56c6`：`project_completion.yaml` 增加 mandatory `internal_requirements` 和明确的 `external_blocker_allowlist`；checklist 明确内部 validator/test、no-data audit、scan disposition 和 final closure PR 不可豁免。
+
+最终复审结论：**APPROVE**。确认 source-only completion 与 dataset `APPROVED` 严格分离。
+
 ## PR #33 source-only evidence objects review
 
 初审对象：[PR #33](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/33)，reviewed head：`b9bd08d`。
