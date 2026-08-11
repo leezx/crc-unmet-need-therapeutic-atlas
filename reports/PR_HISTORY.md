@@ -445,3 +445,9 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Fix head: `f329e1f`; web ChatGPT identified a second documentation contradiction in the closure checklist.
 - Final reviewed head: `8dbeb7a`; web ChatGPT result: APPROVE after aligning the checklist with the explicit no-file-inventory disposition rule.
 - Scope: synchronize final source-only counts, completion checklist and post-closure handoff. No data download, access request, analysis, candidate approval or clinical conclusion.
+
+## PR #56 — Phase 2 therapeutic state discovery plan
+
+- URL: [#56](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/56)
+- Reviewed head: `52bdabe`; web ChatGPT result: APPROVE in the existing conversation “PR审核与错误反馈”.
+- Scope: define the falsifiable state-to-target question, novelty/feasibility screen, five-figure skeleton and initial data-lock v0. Planning only; no download, analysis, candidate approval or clinical conclusion.
