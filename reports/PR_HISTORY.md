@@ -230,5 +230,8 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 
 ## PR #25 — reconcile project status with repository state
 
+- URL: [#25](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/25)
+- Initial reviewed head: `7178051`; web ChatGPT result: REQUEST_CHANGES because the status report incorrectly said there were no open PRs while PR #25 itself was OPEN / DRAFT.
+- Fix reviewed head: `1b4fc99`; web ChatGPT result: APPROVE.
 - Scope: replace stale planning status with the current 19-candidate registry, 24 merged PRs, completed provenance components, active gates, and next-step priorities.
 - No registry data, candidate status, download policy, or biological-data boundary changed.

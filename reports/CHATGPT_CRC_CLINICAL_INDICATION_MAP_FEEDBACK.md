@@ -316,3 +316,13 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 最终修复对象：reviewed head `f789cf0`，修正为 `n_patients=171`、`n_samples=283`。
 
 最终复审结论：**APPROVE**。网页版 ChatGPT 确认 priority、患者/样本计数、文件分类和 no-download 边界一致，没有新的 blocker。
+
+## PR #25 project status reconciliation review
+
+初审对象：[PR #25](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/25)，reviewed head：`7178051`。
+
+结论：**REQUEST_CHANGES**。网页版 ChatGPT 指出 `reports/PROJECT_STATUS.md` 错误写着“当前没有开放 PR”，但 PR #25 本身处于 OPEN / DRAFT。
+
+修复对象：reviewed head `1b4fc99`，将当前 PR 状态明确记录为 OPEN / DRAFT，并保留待复审后合并的状态。
+
+最终复审结论：**APPROVE**。网页版 ChatGPT 确认唯一 blocker 已解决，没有新的 blocker。
