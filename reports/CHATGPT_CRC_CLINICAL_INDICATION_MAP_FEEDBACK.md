@@ -375,6 +375,10 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 网页版 ChatGPT 审核 PR #34 head `b7f52d6`，结论：**APPROVE**。确认该 PR 只同步 PR #33 合并状态，没有修改 registry、evidence schemas、biological data 或 clinical/target conclusions。
 
+## PR #35 PXD038149 provenance hygiene 审核
+
+网页版 ChatGPT 审核 PR #35 head `3934be9`，结论：**APPROVE**。确认 download_date 已清空为 `NA`，7 个非 raw 文件索引与状态描述一致，PXD038149 仍为 P0_DOWNLOAD/CANDIDATE，workbook staging/parsing/checksum 仍 blocked，未下载或提交 biological data。
+
 ## PR #32 source-only knowledge/review layer review
 
 初审对象：[PR #32](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/32)，reviewed head：`2f2d619`。

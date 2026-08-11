@@ -305,3 +305,10 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - URL: [#34](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/34)
 - Reviewed head: `b7f52d6`; web ChatGPT result: APPROVE.
 - Scope: synchronize post-merge status, PR history and ChatGPT feedback; no registry, evidence schema, biological data or clinical/target conclusion changes.
+
+## PR #35 — PXD038149 provenance hygiene
+
+- URL: [#35](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/35)
+- Reviewed head: `3934be9`; web ChatGPT result: APPROVE.
+- Scope: correct no-download manifest fields and stale inventory wording; PXD038149 remains P0_DOWNLOAD/CANDIDATE with workbook staging, parsing and checksum gates blocked.
+- No biological data downloaded or committed.
