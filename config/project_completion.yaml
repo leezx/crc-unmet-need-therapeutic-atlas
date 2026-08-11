@@ -18,7 +18,7 @@ completion_endpoint:
   max_points: 90
   definition: The source-only phase reaches 100% when every source-only engineering requirement is complete; scientific/clinical analysis readiness is tracked separately and is not required for this endpoint.
   scorecard_interpretation: The 90-point weighted score measures materialized infrastructure and provenance capacity; a 90/90 score does not by itself assert that the source-only completion endpoint is closed.
-  current_status: READY_FOR_FINAL_CLOSURE_PR
+  current_status: COMPLETE
   unresolved_internal_requirements: []
   internal_requirements:
     - closure_matrix_is_complete
