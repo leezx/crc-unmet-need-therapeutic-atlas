@@ -87,3 +87,4 @@
 - PR #12 已获网页版 ChatGPT APPROVE；selected_file_inventory.tsv 已固定登记 4 个 model-layer blob 和 1 个 table blob，未读取或下载内容。
 - 下一阶段已建立 GSE117548 processed_file_inventory.tsv：精确登记 27 个 data/processed blob 的固定 URL、Git blob SHA、字节大小和 review/download 边界；未读取内容。
 - PR #13 已获网页版 ChatGPT APPROVE：27 个 data/processed blob 的路径、Git blob SHA、字节大小与 758,189,431 bytes 汇总一致；未读取或下载内容。
+- 下一阶段已建立 GSE117548 external_file_inventory.tsv：精确登记 11 个 data/external blob，并区分 repository metadata、external workbook、pathway signatures 与外部 signature workbook；未读取或下载内容。
