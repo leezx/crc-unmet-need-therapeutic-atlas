@@ -4,6 +4,8 @@ The latest published Zenodo version is record `16939324` (`10.5281/zenodo.169393
 
 The inner h5ad file names, sample rows and baseline/post-perfusion window fields are not asserted because the archives have not been downloaded or staged. The CELLxGENE collection remains a second source-level access path.
 
+`sample_map_contract.tsv` defines the source-to-row metadata contract for patient, specimen, anatomic context, perfusion window, assay modality and exposure context. It intentionally contains no sample rows; absent fields remain UNKNOWN until a source-level metadata export or explicitly staged archive listing is reviewed.
+
 Primary data record: https://zenodo.org/records/15234826
 
 CELLxGENE collection: https://cellxgene.cziscience.com/collections/be679cb1-35f0-46c9-9a2d-30691862a54a
