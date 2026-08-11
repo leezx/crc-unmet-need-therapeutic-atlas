@@ -286,3 +286,13 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 复审对象：[PR #21](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/21)。
 
 结论：**APPROVE**。网页版 ChatGPT 检查了实际 diff 和现有 metadata-only 设计，确认 checklist 要求在 `update_available=TRUE` 时进行固定 commit tree/inventory reconciliation，并要求单独 PR 才能更新 pinned SHA；没有自动改 pin、blob 读取、下载、clone、执行上游代码或将上游变化当作生物学验证的问题。验证记录为 3 项 unittest、registry validation 与 `git diff --check` 全部通过。
+
+## PR #22 GSE226997 source metadata review
+
+初审对象：[PR #22](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/22)，reviewed head：`6c4db77`。
+
+结论：**REQUEST_CHANGES**。网页版 ChatGPT 指出未下载的 raw archive 在 `source_manifest.tsv` 中错误填写了 `download_date=2026-08-11`，与 deferred/no-download 语义矛盾。
+
+修复对象：reviewed head `1d1c421`，将 raw archive 的 `download_date` 改为 `NA`，并明确 `no download performed`。
+
+最终复审结论：**APPROVE**。网页版 ChatGPT 确认唯一 blocker 已解决，没有新的 provenance、treatment-context 或 no-download blocker。
