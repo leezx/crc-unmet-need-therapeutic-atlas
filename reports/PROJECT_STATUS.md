@@ -77,3 +77,4 @@
 - 任何 checksum 仅在数据被用户或外部 staging 流程明确放入指定目录后离线计算；扫描器不下载生物数据。
 - 当前分支 `phase1/p6-pride-sample-metadata` 的下一门禁是为 `SamplesDescription.xlsx` 定义字段级解析和 provenance 记录，不下载文件、不提交样本值。
 - PR #8 已由网页版 ChatGPT 对 reviewed head `409d6ded96620b82be63403108aee1ced9a2771a` 审核为 `APPROVE`，CI 通过，准备合并；后续只有明确 staged workbook 才进入字段级 metadata review。
+- 公开来源扩展：根据官方 GEO GSE117548 页面及其关联论文新增 CRC PDO 表达/药物筛选候选；16 个 PDO、25 个样本、processed sample-table availability、115.3 MB raw CEL archive、补充 GitHub repository 和 EGA controlled-access study 已登记，image-level/compound-level response 文件仍未声称可用。
