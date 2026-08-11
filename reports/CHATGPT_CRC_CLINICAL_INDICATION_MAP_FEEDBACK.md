@@ -335,7 +335,11 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 修复对象：reviewed head `72b31d3`，已修正 EV003.source_uri；未改变 evidence 内容边界或下载政策。
 
-最终复审结论：**APPROVE**。网页版 ChatGPT 确认官方 v3 URL 已修正，source-only evidence objects、evidence_id 外键、`SOURCE_INDEXED_NOT_ANALYZED` / `UNREVIEWED_FOR_CLAIM` 边界和无生物数据提交边界均无新的 blocker。
+第二轮复核对象：归档 head `3bc1a11`。
+
+结论：**REQUEST_CHANGES**。网页版 ChatGPT 指出 EV008 的 `structured_value` 把“16 个 CRC PDO”错误写成了“16 patients”；来源只支持“16 个 CRC PDO、25 个样本”。
+
+当前修复：已将 EV008.structured_value 改为 `16 CRC PDOs; 25 samples`，等待最新 head 的最终网页复核。
 
 ## PR #32 source-only knowledge/review layer review
 
