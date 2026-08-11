@@ -1,5 +1,5 @@
 dataset_id	publication_repository	human_context	treatment_context	molecular_annotation	processed_inventory	license_access	update_audit	phase1_decision	blockers
-GSE178318	PASS	PASS	PARTIAL	PARTIAL	PASS	PARTIAL	PARTIAL	HOLD	Sample-level treatment metadata, PI-contact usage terms, checksum capture and admission review remain pending.
+GSE178318	PASS	PASS	PASS	PARTIAL	PASS	PARTIAL	PARTIAL	HOLD	PI-contact usage terms, checksum capture and final admission review remain pending; molecular annotations remain incomplete.
 GSE224235	PASS	PASS	BLOCKED	BLOCKED	PARTIAL	PARTIAL	PARTIAL	HOLD	Treatment context and genome-wide target-discovery relevance are not established; 900-gene nCounter context only and GeoMx availability remains unconfirmed.
 DepMap_26Q1	PASS	PASS_CELL_LINE	NOT_APPLICABLE	PASS	BLOCKED	PARTIAL	PASS	HOLD	Interactive portal verification blocks exact release-file inventory and CRC model filtering; release terms and checksums remain pending.
 PXD038149	PASS	PARTIAL	PARTIAL	PARTIAL	PASS	PASS	PARTIAL	HOLD	PDO/sample-level clinical reconciliation and checksum capture remain pending; raw proteomics stays out of default scope.
