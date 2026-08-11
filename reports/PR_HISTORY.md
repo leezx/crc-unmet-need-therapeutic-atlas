@@ -424,3 +424,10 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - URL: [#52](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/52)
 - Reviewed head: `7ed27b7`; web ChatGPT result: APPROVE in the existing conversation “PR审核与错误反馈”.
 - Scope: identify official GEO CRISPR-screen subseries GSE263580/GSE263581/GSE263582 and EGA Perturb-seq study EGAS50000000256; preserve internal scope/access review blockers and update the offline closure test. No file download, biological data, analysis, candidate approval or clinical conclusion.
+
+## PR #53 — source-only final closure
+
+- URL: [#53](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/53)
+- Initial reviewed head: `f7e8b12`; web ChatGPT result: REQUEST_CHANGES because the resolved mouse organoid source was still labeled `P0_DOWNLOAD` despite a reference-only scope decision.
+- Fix reviewed head: `202427d`; web ChatGPT result: APPROVE after changing the candidate to `REFERENCE_ONLY` and aligning registry, scope review and source manifest semantics.
+- Scope: add final scope/access review artifacts, remove all `INTERNAL_ACTION_REQUIRED` rows from the closure matrix, and prepare the source-only endpoint for closure on merge. No download, access request, biological data, analysis, candidate approval or clinical conclusion.
