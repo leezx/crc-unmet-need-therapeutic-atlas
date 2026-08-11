@@ -32,7 +32,8 @@ def main() -> int:
     for target in targets:
         if not re.fullmatch(r"[0-9a-fA-F]{40}", target["commit"]):
             raise SystemExit(f"invalid pinned commit for {target['target_id']}")
-        url = f"https://api.github.com/repos/{target['repository']}/commits/{quote(target['tracking_ref'], safe='')}"
+        ref = quote(f"heads/{target['tracking_ref']}", safe="")
+        url = f"https://api.github.com/repos/{target['repository']}/git/ref/{ref}"
         headers = {"Accept": "application/vnd.github+json", "User-Agent": "CRC-Atlas-update-check/0.1"}
         token = os.environ.get("GITHUB_TOKEN")
         if token:
@@ -40,7 +41,7 @@ def main() -> int:
         request = Request(url, headers=headers)
         with urlopen(request, timeout=30) as response:
             payload = json.load(response)
-        latest = payload.get("sha", "")
+        latest = payload.get("object", {}).get("sha", "")
         if not re.fullmatch(r"[0-9a-fA-F]{40}", latest):
             raise SystemExit(f"GitHub returned invalid commit SHA for {target['target_id']}")
         rows.append({"target_id": target["target_id"], "repository": target["repository"], "tracking_ref": target["tracking_ref"], "pinned_commit": target["commit"], "latest_commit": latest, "update_available": str(latest.lower() != target["commit"].lower()).upper(), "source_url": url})
