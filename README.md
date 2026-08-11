@@ -19,6 +19,7 @@ Core evidence chain: patient population → malignant cell state → surface tar
 | --- | --- |
 | `DATA/registry/` | Canonical dataset registry and source manifests |
 | `schemas/` | TSV contracts for datasets, samples, and source files |
+| `knowledge/` | Source-only clinical-indication ontology and dataset evidence links |
 | `reports/` | Candidate review, scan results, and data-gap reports |
 | `config/` | Update and storage-policy configuration |
 | `scripts/` | Dependency-free validation and metadata scan scripts |
@@ -36,5 +37,6 @@ Project records:
 - [`reports/PR_HISTORY.md`](reports/PR_HISTORY.md)
 - [`reports/CHATGPT_CRC_CLINICAL_INDICATION_MAP_FEEDBACK.md`](reports/CHATGPT_CRC_CLINICAL_INDICATION_MAP_FEEDBACK.md)
 - [`reports/P0_SOURCE_VERIFICATION.md`](reports/P0_SOURCE_VERIFICATION.md)
+- [`knowledge/README.md`](knowledge/README.md)
 GitHub supplementary repositories are indexed with fixed-commit tree metadata only; blob contents are not fetched by the registry workflow.
 Configured GitHub tree targets are scanned weekly and retained as metadata-only workflow artifacts; target commits are pinned in [`config/github_tree_targets.tsv`](config/github_tree_targets.tsv).

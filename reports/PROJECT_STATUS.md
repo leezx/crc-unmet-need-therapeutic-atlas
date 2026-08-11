@@ -20,8 +20,8 @@
 - source manifests：11 个
 - file-level inventories：5 个（GSE159216、GSE178318、GSE224235、GSE226997、PXD038149）
 - sample maps：3 个（GSE178318、GSE224235、GSE226997）
-- GitHub PR：#1–#30 全部已合并；最新主分支 merge commit 为 `3a92963`
-- PXD038149 sample-metadata gate 由公开 PR #31 提出；该 PR 已通过网页版 ChatGPT 复审（APPROVE），当前待合并
+- GitHub PR：#1–#31 全部已合并；最新主分支 merge commit 为 `210f35d`
+- knowledge/review layer source-only skeleton 由公开 PR #32 提出；该 PR 用于建立 clinical-indication ontology 与 dataset evidence links，当前待审核
 
 ## 已完成能力
 
@@ -42,7 +42,7 @@
 - P0 候选尚未全部完成原始论文、治疗史、分子注释、processed availability、license/access 和下载路径核验。
 - PXD038149 的 `SamplesDescription.xlsx` 仍处于 metadata gate；没有下载或解析外部 workbook。
 - 2026 CRLM PDO biobank 的原始 accession 尚未定位完成。
-- knowledge/review layer 尚未建立，临床适应症地图尚未与 dataset evidence 形成正式关系表。
+- knowledge/review layer 目前仅建立 source-only ontology/link skeleton；尚未形成 target claim、evidence object 或临床适应症结论。
 - `DATA/registry/datasets.tsv` 中候选仍不能解释为已批准的 discovery cohort。
 
 ## 下一步顺序
