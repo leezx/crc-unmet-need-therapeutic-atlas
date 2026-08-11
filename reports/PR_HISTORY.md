@@ -200,3 +200,9 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Initial reviewed head: `2627269`; web ChatGPT result: REQUEST_CHANGES because the test checked only the first request and reused the pinned SHA as the fake latest SHA.
 - Fix reviewed head: `67a6f04`; web ChatGPT result: APPROVE; local regression suite passed (3 tests).
 - Scope: strengthen the offline test to require exactly one Git ref metadata request, reject `/commits/`, and prove the returned `object.sha` drives drift detection; no blob reads, patches, clones, downloads, or automatic pin changes.
+- Merge: squash-merged on 2026-08-11 as `43037f70b953657c6cbb1c6b5e148ac1ebf11bc0`.
+
+## PR #21 — pinned-target update review checklist
+
+- Scope: document the human review gate for `update_available=TRUE`, including fixed-commit tree comparison, inventory reconciliation, separate pin-update PRs, and no-download boundaries.
+- Web ChatGPT result: `APPROVE`; no provenance or metadata-only blocker.

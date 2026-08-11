@@ -280,3 +280,9 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 修复对象：reviewed head `67a6f04`。
 
 最终复审结论：**APPROVE**。网页版 ChatGPT 确认测试现在要求恰好一次请求、明确禁止 `/commits/`，并用不同的 `bbbb...` latest SHA 驱动 `update_available=TRUE`；本地 3 项测试通过，未发现新的 metadata-only、网络或 provenance blocker。
+
+## PR #21 pinned-target update review checklist
+
+复审对象：[PR #21](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/21)。
+
+结论：**APPROVE**。网页版 ChatGPT 检查了实际 diff 和现有 metadata-only 设计，确认 checklist 要求在 `update_available=TRUE` 时进行固定 commit tree/inventory reconciliation，并要求单独 PR 才能更新 pinned SHA；没有自动改 pin、blob 读取、下载、clone、执行上游代码或将上游变化当作生物学验证的问题。验证记录为 3 项 unittest、registry validation 与 `git diff --check` 全部通过。
