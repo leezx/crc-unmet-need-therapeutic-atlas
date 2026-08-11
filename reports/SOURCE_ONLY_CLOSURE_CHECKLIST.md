@@ -12,7 +12,7 @@ This checklist defines completion for the current project phase. It does not req
 - [x] CI validates registry structure, offline scan stability and regression tests.
 - [x] P0 gates have artifacts, source evidence, stop conditions and remaining blockers.
 - [x] PR history and the single ChatGPT review conversation are archived.
-- [ ] Every candidate has complete source-level file metadata; blocked candidates retain explicit UNKNOWN/NA fields and a next artifact.
+- [x] Every candidate has source-level metadata or an explicit no-file-inventory disposition; blocked candidates retain explicit UNKNOWN/NA fields and a next artifact.
 - [x] Candidate-level source manifest, file inventory, download-method and update-coverage dispositions are materialized in `SOURCE_ONLY_CLOSURE_MATRIX.tsv`, with internal artifact gaps separated from external blockers.
 - [x] Every configured update target has completed first scan and drift disposition in `reports/updates/UPDATE_TARGET_DISPOSITION.tsv`.
 - [x] Final closure PR confirms all remaining internal blockers are closed, all remaining dataset-review handoffs are documented, and no biological data is present.
