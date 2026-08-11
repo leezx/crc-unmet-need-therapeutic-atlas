@@ -1,0 +1,2 @@
+dataset_id	source_url	accession	download_method	download_date	file_name	file_size	checksum	license	publication_doi	access_status	notes
+CRC_Perturb_seq	https://www.ega-archive.org/studies/EGAS50000000256	EGAS50000000256	EGA study metadata and controlled-access request path first	NA	NA	NA	NA	EGA access terms	10.64898/2026.06.05.730086	CONTROLLED_ACCESS	Official EGA study for systematic genome-wide enhancer investigation in colorectal cancer; Perturb-seq in HT29 and SW480 MSS CRC cell lines; no download or access request performed.

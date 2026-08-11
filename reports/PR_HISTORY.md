@@ -418,3 +418,9 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Scope: add official GEO/GTEx source manifests and structured no-file-inventory dispositions for five known-source candidates; update the project score from 85/100 to 90/100. Two unknown-source candidates remain explicit internal blockers. No file download, biological data, analysis, candidate approval or clinical conclusion.
 - Initial web review: `REQUEST_CHANGES`. The 90/90 weighted engineering score was easy to misread as source-only endpoint completion while two candidates remained `INTERNAL_ACTION_REQUIRED`.
 - Correction: distinguish the weighted infrastructure score from the completion gate in `config/project_completion.yaml` and `reports/PROJECT_STATUS.md`; endpoint status remains `INCOMPLETE` until the two internal source manifests are materialized.
+
+## PR #52 — remaining source identities
+
+- URL: [#52](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/52)
+- Reviewed head: `7ed27b7`; web ChatGPT result: APPROVE in the existing conversation “PR审核与错误反馈”.
+- Scope: identify official GEO CRISPR-screen subseries GSE263580/GSE263581/GSE263582 and EGA Perturb-seq study EGAS50000000256; preserve internal scope/access review blockers and update the offline closure test. No file download, biological data, analysis, candidate approval or clinical conclusion.
