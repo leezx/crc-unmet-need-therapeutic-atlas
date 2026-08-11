@@ -298,3 +298,10 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Planning review of head `a50ddf0` found the next-step text still requested a new knowledge/review layer PR despite PR #32/#33 establishing the skeleton; updated to continuation and human review of the existing layer.
 - Scope: eight source-only evidence objects, evidence IDs linked to indication links, provenance/confidence/version fields, and missing-information notes; no biological data, target ranking, therapeutic-window claim or dataset approval.
 - Local validation: registry validator passed, 3 unit tests passed, diff check passed, and both TSV files passed independent column-count checks.
+- Merge: squash-merged on 2026-08-11 as `c830dba7b5fa78de4abb3234bb86c35e94795cd1`.
+
+## PR #34 — reconcile PR #33 merge status
+
+- URL: [#34](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/34)
+- Reviewed head: `b7f52d6`; web ChatGPT result: APPROVE.
+- Scope: synchronize post-merge status, PR history and ChatGPT feedback; no registry, evidence schema, biological data or clinical/target conclusion changes.
