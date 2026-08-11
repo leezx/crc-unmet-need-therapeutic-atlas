@@ -15,3 +15,5 @@ Files:
 - `schemas/indication_evidence_links.tsv`: source-level links from indication nodes to evidence objects and registry datasets.
 
 The seed source is the user-provided `Asset-Generation-OS-architecture.md`, especially the CRC clinical-indication ontology and evidence-chain sections. Any future claim must add a reviewed source span, evidence object and human-review status.
+
+Current source-only evidence objects: 9. DepMap 26Q1 is represented only at release level; its CRC subset and dependency results remain unmaterialized.
