@@ -410,4 +410,5 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 
 ## PR #50 — explicit no-file-inventory dispositions
 
+- Initial reviewed head: `239c4fb`; web ChatGPT result: APPROVE after validating the structured disposition contract, blocker-class mapping, and exact 85/90 score arithmetic in the existing conversation “PR审核与错误反馈”.
 - Scope: add four tracked source-only disposition records for candidates with source manifests but intentionally unmaterialized file inventories; update the closure builder and project score from 80/100 to 85/100. No file download, biological data, analysis, candidate approval or clinical conclusion.
