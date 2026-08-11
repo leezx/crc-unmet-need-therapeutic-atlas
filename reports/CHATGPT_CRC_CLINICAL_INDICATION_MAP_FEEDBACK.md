@@ -306,3 +306,13 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 修复对象：reviewed head `a70d5ce`。4 个 URL 已改为 sample-level 路径，并通过 HTTP HEAD 元数据检查。
 
 最终复审结论：**APPROVE**。网页版 ChatGPT 确认 URL blocker 已解决，文件名/大小与官方 filelist 元数据、`NOT_RECORDED` checksum、`NA` download_date 和 no-download 边界一致，没有新的 blocker。
+
+## PR #24 GSE159216 provenance review
+
+初审对象：[PR #24](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/24)，reviewed head：`ce4fda2`。
+
+结论：**REQUEST_CHANGES**。网页版 ChatGPT 发现 GSE159216 的 `priority=P1_DOWNLOAD` 与 comparator-only、`REFERENCE_ONLY` 和 no-download 语义矛盾；修复为 `REFERENCE_ONLY` 后，复审又发现 `n_patients` 错填为 283，官方 GEO 为 171 名患者、283 个样本。
+
+最终修复对象：reviewed head `f789cf0`，修正为 `n_patients=171`、`n_samples=283`。
+
+最终复审结论：**APPROVE**。网页版 ChatGPT 确认 priority、患者/样本计数、文件分类和 no-download 边界一致，没有新的 blocker。

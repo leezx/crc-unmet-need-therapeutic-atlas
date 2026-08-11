@@ -220,3 +220,10 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Initial reviewed head: `7a60950`; web ChatGPT result: REQUEST_CHANGES because four sample-level URLs pointed to the series directory and returned 404.
 - Fix reviewed head: `a70d5ce`; web ChatGPT result: APPROVE after sample-level URL correction and HTTP HEAD checks.
 - Scope: four exact GEO sample archives, byte sizes, fixed download URLs, and raw archive metadata; checksums remain unrecorded and no file content was downloaded.
+
+## PR #24 — GSE159216 provenance
+
+- URL: [#24](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/24)
+- Initial reviewed head: `ce4fda2`; web ChatGPT result: REQUEST_CHANGES for `priority=P1_DOWNLOAD` contradicting comparator-only/no-download semantics, followed by a second blocker identifying `n_patients=283` instead of 171.
+- Final reviewed head: `f789cf0`; web ChatGPT result: APPROVE after setting `priority=REFERENCE_ONLY`, `n_patients=171`, and `n_samples=283`.
+- Scope: official GEO/filelist metadata for 283 samples, 283 processed CHP files, 283 raw CEL files, and aggregate sizes; no biological content downloaded or read.
