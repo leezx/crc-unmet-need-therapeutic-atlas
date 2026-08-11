@@ -239,3 +239,9 @@ CRC 临床适应症地图建议形成独立 knowledge/review layer，而不是�
 修复对象：reviewed head `e03089eea70627c7db51e8521ce139911be0d41d`。
 
 复审结论：**APPROVE**。修复新增 `re.fullmatch(r"[0-9a-fA-F]{40}", args.commit)`，并将 help 文案改为 `Full 40-character commit SHA`；`master` 回归测试被拒绝，固定 commit 的 `data/external` 回归测试仍得到 11 files/115,992 bytes。网页版 ChatGPT 确认工具只访问 Git Trees API metadata，不读取 blob 内容、不 clone、不执行、不下载 repository files，truncated tree 仍硬失败，CI 为 completed / success；没有新的网络、安全或维护 blocker。
+
+PR #16 初审：**REQUEST_CHANGES**，唯一 blocker 是 wrapper 未拒绝重复 `target_id` 或 `output_name`，可能使后一个 TSV 静默覆盖前一个结果。
+
+PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`。
+
+最终复审：**APPROVE**。网页版 ChatGPT 确认重复字段现在在逐 target 循环、网络扫描、`subprocess.run()` 和 TSV 写入之前触发 `SystemExit`；40 位 commit SHA、Trees API-only、artifact 和 no-download 边界未改变。当前 head 无 PR-triggered workflow run/status，但该 workflow 仅支持 schedule/manual dispatch，不构成代码 blocker。
