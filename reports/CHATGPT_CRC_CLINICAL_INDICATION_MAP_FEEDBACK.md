@@ -569,3 +569,11 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 初审 head `1138690`：**REQUEST_CHANGES**。网页版 ChatGPT 指出 closure matrix 仍有 `SOURCE_INDEXED_REVIEW_REQUIRED` 项，而 completion gate 没有明确这些 dataset-review handoff 是否阻断完成。
 
 修正 head `e101ec5`：增加 `closure_matrix_completion_rule`，明确 19/19 source manifests 加上 file inventory/disposition、且无 `INTERNAL_ACTION_REQUIRED` 即满足 source-only closure；`SOURCE_INDEXED_REVIEW_REQUIRED` 不阻断该 endpoint。网页版 ChatGPT 最终复审结论：**APPROVE**。
+
+## PR #55 source-only handoff documentation review
+
+初审 head `57736ee`：**REQUEST_CHANGES**。优先级统计应为 9 个 `P0_DOWNLOAD`、5 个 `P1_DOWNLOAD`、5 个 `REFERENCE_ONLY`。
+
+修正 head `f329e1f`：网页版 ChatGPT 继续指出 closure checklist 将“完整 file metadata”保留为未完成，与 no-file disposition 规则冲突。
+
+最终修正 head `8dbeb7a`：将 checklist 改为“source-level metadata 或显式 no-file-inventory disposition”，网页版 ChatGPT 结论：**APPROVE**。

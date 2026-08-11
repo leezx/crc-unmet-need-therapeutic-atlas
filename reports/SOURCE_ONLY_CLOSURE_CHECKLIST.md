@@ -12,10 +12,10 @@ This checklist defines completion for the current project phase. It does not req
 - [x] CI validates registry structure, offline scan stability and regression tests.
 - [x] P0 gates have artifacts, source evidence, stop conditions and remaining blockers.
 - [x] PR history and the single ChatGPT review conversation are archived.
-- [ ] Every candidate has complete source-level file metadata; blocked candidates retain explicit UNKNOWN/NA fields and a next artifact.
+- [x] Every candidate has source-level metadata or an explicit no-file-inventory disposition; blocked candidates retain explicit UNKNOWN/NA fields and a next artifact.
 - [x] Candidate-level source manifest, file inventory, download-method and update-coverage dispositions are materialized in `SOURCE_ONLY_CLOSURE_MATRIX.tsv`, with internal artifact gaps separated from external blockers.
 - [x] Every configured update target has completed first scan and drift disposition in `reports/updates/UPDATE_TARGET_DISPOSITION.tsv`.
-- [ ] Final closure PR confirms all remaining blockers are documented and no biological data is present.
+- [x] Final closure PR confirms all remaining internal blockers are closed, all remaining dataset-review handoffs are documented, and no biological data is present.
 
 ## Definition of done
 
@@ -24,10 +24,6 @@ The source-only phase is complete only when all internal requirements in `config
 - [x] Source-only boundary audit and CI guardrail are present; the latest audit is recorded in `reports/SOURCE_ONLY_FINAL_AUDIT.tsv`.
 - [x] A source-manifest candidate may use a tracked `no_file_inventory_disposition.tsv` when exact file-level inventory is intentionally not asserted; this is not equivalent to `APPROVED` or to a biological-data result.
 
-## Next closure batches
+## Post-closure handoff
 
-1. Normalize candidate-level closure and update-target coverage into one machine-readable matrix.
-2. Add a validator rule that every candidate has a source manifest or an explicit missing-source disposition.
-3. Run a first-scan disposition for every configured update target.
-4. Run a final no-biological-data audit and archive the final ChatGPT review in the same conversation.
-5. Merge the final closure PR; this internal step is mandatory even if upstream blockers remain.
+The source-only endpoint is complete. Remaining `SOURCE_INDEXED_REVIEW_REQUIRED` rows are dataset-specific handoffs and do not reopen this phase. Any future file staging, candidate approval, biological analysis or clinical interpretation requires a new scoped change and review.

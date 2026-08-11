@@ -8,7 +8,7 @@
 
 ## 当前阶段
 
-**Phase 1 — dataset discovery and provenance materialization**
+**Phase 1 — dataset discovery and provenance materialization — SOURCE-ONLY COMPLETE**
 
 当前仍处于候选数据集来源核验阶段。任何候选只有在来源、临床上下文、processed 文件、license/access 和审计门禁完成后，才可在单独 PR 中讨论 `APPROVED`；目前没有候选达到该状态。
 
@@ -27,11 +27,11 @@
 
 - 独立 GitHub 仓库：[leezx/crc-unmet-need-therapeutic-atlas](https://github.com/leezx/crc-unmet-need-therapeutic-atlas)
 - 候选数据集：19 个，全部为 `CANDIDATE`
-- 优先级：10 个 `P0_DOWNLOAD`、5 个 `P1_DOWNLOAD`、4 个 `REFERENCE_ONLY`
-- source manifests：11 个
+- 优先级：9 个 `P0_DOWNLOAD`、5 个 `P1_DOWNLOAD`、5 个 `REFERENCE_ONLY`
+- source manifests：19 个
 - file-level inventories：8 个（GSE159216、GSE178318、GSE224235、GSE226997、HPA_normal_tissue、MCRC_liver_metastasis_PDO_2026、PXD038149、CRLM_NMP_ATLAS）
-- sample maps：3 个（GSE178318、GSE224235、GSE226997）
-- GitHub PR：#1–#49 全部已合并；最新主分支 merge commit 为 `2688cd5`
+- sample maps/contracts：4 个（GSE178318、GSE224235、GSE226997、CRLM_NMP_ATLAS）
+- GitHub PR：#1–#54 全部已合并；最新主分支 commit 为 `d04ed79`
 - PR #33 已合并 source-only evidence objects：EV003 URL、EV008 计数措辞、EV001/EV002 supporting-text 路径、source-only 状态措辞和 inventory 统计均已完成审核修正
 
 ## 已完成能力
@@ -58,13 +58,12 @@
 - knowledge/review layer 目前已建立 source-only ontology/link skeleton 和 8 个 source-only evidence objects；尚未形成 target claim、biological/clinical evidence conclusion 或临床适应症结论。
 - `DATA/registry/datasets.tsv` 中候选仍不能解释为已批准的 discovery cohort。
 
-## 下一步顺序
+## 后续 handoff（不属于已完成的 source-only endpoint）
 
-1. 按 `reports/P0_NEXT_GATE_PLAN.tsv` 并行推进 DepMap exact-file/header、HPA file-level terms 和 CRLM-NMP row-level metadata 门禁；三个 source-only contract 已建立。
-2. 在明确 staged 文件出现后，运行离线 checksum capture；未 staging 时不下载、不计算。
-3. 完成每个 P0 候选的 Phase 1 checklist，再通过单独 PR 讨论是否提升为 `APPROVED`。
-4. 定位并核验 2026 CRLM PDO biobank 原始 accession、license 和 processed download path。
-5. 在现有 knowledge/review layer 上继续人工复核 source-only evidence objects，把 CRC 临床适应症地图与 dataset evidence、证据等级和 data gaps 对接；任何 biological/clinical conclusion 仍需单独审核。
+1. 若启动下一阶段，按 `reports/P0_NEXT_GATE_PLAN.tsv` 推进 DepMap exact-file/header、HPA file-level terms 和 CRLM-NMP row-level metadata；这些是 dataset-specific review，不回写 source-only completion。
+2. 只有用户明确 staged 文件并授权后，才运行离线 checksum capture；当前不下载、不计算。
+3. 若未来申请 `APPROVED`，须对每个候选单独完成 Phase 1 checklist 和 PR 审核；当前没有候选被批准。
+4. 未来科学/临床阶段才处理 biological matrix、target ranking、therapeutic-window 和临床适应症结论；当前 overlay 保持 0/10。
 
 ## 权威项目记录
 
