@@ -416,3 +416,5 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 ## PR #51 — known-source manifest completion
 
 - Scope: add official GEO/GTEx source manifests and structured no-file-inventory dispositions for five known-source candidates; update the project score from 85/100 to 90/100. Two unknown-source candidates remain explicit internal blockers. No file download, biological data, analysis, candidate approval or clinical conclusion.
+- Initial web review: `REQUEST_CHANGES`. The 90/90 weighted engineering score was easy to misread as source-only endpoint completion while two candidates remained `INTERNAL_ACTION_REQUIRED`.
+- Correction: distinguish the weighted infrastructure score from the completion gate in `config/project_completion.yaml` and `reports/PROJECT_STATUS.md`; endpoint status remains `INCOMPLETE` until the two internal source manifests are materialized.

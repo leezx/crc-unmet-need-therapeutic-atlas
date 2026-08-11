@@ -17,10 +17,11 @@
 | 维度 | 当前进度 | 本轮变化 | 判定标准 | 当前阻塞 |
 |---|---:|---:|---|---|
 | 工程 / provenance 基础设施 | **90/90** | 85/90 → 90/90（+5） | 19 个候选 closure matrix、9 个候选的结构化 source/no-file-inventory disposition、1 个 configured update target 的 metadata scan/disposition、CI freshness check、source-only 边界审计和 5 个 P0 gate crosswalk 已完成 | 2 个候选仍缺 source manifest；DepMap exact headers、HPA final scope/files/terms、CRLM row-level metadata 仍未完成 |
+| source-only completion endpoint | **未完成** | 仍为未完成 | 只有 `closure_matrix_is_complete` 等全部 internal requirements 完成后，90 分端点才可标记为 100% | `CRC_organoid_CRISPR_dependency` 与 `CRC_Perturb_seq` 仍为 `INTERNAL_ACTION_REQUIRED` |
 | 科学 / 临床可用性 | **0/10** | 0/10 → 0/10（+0） | 本阶段不下载或分析数据；科学 readiness 只在未来独立分析阶段计分 | 当前没有 biological matrix、target ranking、therapeutic-window 或 clinical conclusion |
 | 总体项目进度 | **90/100（90%）** | 85/100 → 90/100（+5 source-only points） | 固定 100 分制：source-only engineering/provenance 90 分 + scientific/clinical readiness 10 分；当前总分为 90 + 0 | 下一里程碑是处理 2 个未知来源候选，并完成 source-only closure review |
 
-评分明细（工程/provenance 90/90）：registry/admission architecture 10/10；source/index layer 15/15；validator/tests 10/10；update/scan system 10/10；PR/review audit 10/10；P0 gate design 10/10；exact dataset provenance materialization 15/15；closure/handoff 10/10。科学/临床可用性 0/10，因为本阶段不进行 biological analysis，也没有 candidate approval 或 clinical conclusion。本轮 +5 来自五个已知官方来源的 source manifest 和对应结构化 no-file-inventory disposition；分项严格合计 90/90。source-only completion 仍须处理剩余两个未知来源候选的内部 closure blocker。
+评分明细（工程/provenance 90/90）：registry/admission architecture 10/10；source/index layer 15/15；validator/tests 10/10；update/scan system 10/10；PR/review audit 10/10；P0 gate design 10/10；exact dataset provenance materialization 15/15；closure/handoff 10/10。科学/临床可用性 0/10，因为本阶段不进行 biological analysis，也没有 candidate approval 或 clinical conclusion。本轮 +5 来自五个已知官方来源的 source manifest 和对应结构化 no-file-inventory disposition；分项严格合计 90/90。这里的 90/90 是加权基础设施评分，不等同于 source-only completion endpoint 已关闭；后者仍须处理剩余两个未知来源候选的内部 closure blocker。
 
 ## 当前规模
 
