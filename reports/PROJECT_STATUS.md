@@ -94,3 +94,4 @@
 - PR #16 初审发现重复 `target_id`/`output_name` 可静默覆盖 artifact；已在扫描前增加唯一性硬校验，并由网页版 ChatGPT 对 head `47846b469f9c2c5a87502512c189eb775f0bcfe0` 复审 APPROVE；固定目标回归仍为 11 files/115,992 bytes，准备合并。
 - PR #17 初审发现 output 目录创建早于配置校验且测试断言位置无效；已修复并由网页版 ChatGPT 对 head `4a1186a31330a63977eaa9ad62f9742dfda88bc6` 复审 APPROVE，Validate registry CI 成功，准备合并。
 - PR #18 初审发现 commits API 可能返回 `files[].patch`；已改用 Git ref metadata endpoint `/git/ref/heads/{tracking_ref}`，并由网页版 ChatGPT 对 head `b910ea7` 复审 APPROVE；GSE117548 当前无 pinned-target drift，准备合并。
+- PR #19 已由网页版 ChatGPT 对 head `26edd5e` 复审 APPROVE；update candidate report 已纳入版本控制，上游变化时将通过 draft PR 进入人工审核，不自动修改 pinned SHA。
