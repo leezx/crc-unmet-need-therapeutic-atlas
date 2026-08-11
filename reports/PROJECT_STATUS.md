@@ -20,7 +20,7 @@
 - source manifests：11 个
 - file-level inventories：7 个（GSE159216、GSE178318、GSE224235、GSE226997、HPA_normal_tissue、MCRC_liver_metastasis_PDO_2026、PXD038149）
 - sample maps：3 个（GSE178318、GSE224235、GSE226997）
-- GitHub PR：#1–#33 全部已合并；最新主分支 merge commit 为 `c830dba`
+- GitHub PR：#1–#35 全部已合并；最新主分支 merge commit 为 `29b0edf`
 - PR #33 已合并 source-only evidence objects：EV003 URL、EV008 计数措辞、EV001/EV002 supporting-text 路径、source-only 状态措辞和 inventory 统计均已完成审核修正
 
 ## 已完成能力
@@ -47,7 +47,7 @@
 
 ## 下一步顺序
 
-1. 继续完成 P0 候选的 source/file-level provenance，优先处理 PXD038149、DepMap_26Q1、HPA_normal_tissue 和 CRLM PDO biobank。
+1. PXD038149 的 source/file-level provenance 已完成第一轮；继续处理其 workbook staging gate，并优先推进 DepMap_26Q1、HPA_normal_tissue 和 CRLM PDO biobank 的 source/file-level provenance。
 2. 在明确 staged 文件出现后，运行离线 checksum capture；未 staging 时不下载、不计算。
 3. 完成每个 P0 候选的 Phase 1 checklist，再通过单独 PR 讨论是否提升为 `APPROVED`。
 4. 定位并核验 2026 CRLM PDO biobank 原始 accession、license 和 processed download path。
