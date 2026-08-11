@@ -54,6 +54,7 @@
 - PR #2 已合并为 `80a8506`；下一分支 `phase1/p1-provenance-inventory` 开始首批 processed-file inventory。
 - 已完成 GSE178318 和 GSE224235 的第一批精确文件名、大小、下载 URL 和下载优先级记录；checksum 尚未捕获，未下载生物数据。
 - PR #3 已获网页版 ChatGPT `APPROVE`，准备合并；下一步是 checksum capture 和 sample-level metadata review。
+- 已开始 P2 sample metadata review：GSE178318 的 15 个 sample accession、6 个 patient group、primary/liver/PBMC 配对关系已建立轻量 sample map；逐样本 treatment timing 仍为 `UNKNOWN`。
 
 ## 下一步顺序
 
