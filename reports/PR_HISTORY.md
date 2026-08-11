@@ -248,3 +248,9 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - URL: [#27](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/27)
 - Reviewed head: `41da9cd`; web ChatGPT result: APPROVE.
 - Scope: HPA v25.1/Ensembl v109, four official downloadable endpoints, CC BY 4.0 and third-party constraint caveat; no HPA file download, checksum capture, therapeutic-window claim, or candidate approval.
+
+## PR #28 — CRLM PDO biobank repository
+
+- URL: [#28](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/28)
+- Reviewed head: `2dd9751`; web ChatGPT result: APPROVE.
+- Scope: Mendeley Data v3 accession `hr94h42xdc.3`, DOI `10.17632/hr94h42xdc.3`, CC BY 4.0, and five Data S1–S5 processed/derived files; no file download, checksum capture, raw-sequencing claim, or candidate approval.
