@@ -59,6 +59,8 @@
 - PR #5 已获网页版 ChatGPT `APPROVE`；原论文支持的 GSE178318 treatment context 已记录，准备合并。
 - 已开始 P4 checksum/offline capture 机制和 GSE224235 sample map；17 个 GEO sample accession 已索引，治疗 regimen/timing 保留 `UNKNOWN`。
 - PR #6 已获网页版 ChatGPT `APPROVE`，准备合并；checksum 工具仅处理外部已 staged 文件，不自动下载。
+- 已完成 PXD038149 PRIDE API 文件级 provenance 核验：51 个文件中 44 个 raw、7 个非 raw；7 个 processed/metadata/search/peak 文件已登记，raw 仍不默认下载。
+- PR #7 已由网页版 ChatGPT 对 reviewed head `fc5cd950d1c73b0325bf48b44169172c3af36f66` 审核为 `APPROVE`；审核确认 API 文件类别、FTP URL、字节大小、CC0 API 记录及 raw/processed 边界无 blocker，准备合并。
 
 ## 下一步顺序
 
@@ -67,3 +69,8 @@
 3. 定位 2026 CRLM PDO biobank 的原始 accession。
 4. 仅将完成 provenance materialization 的候选转为 `APPROVED`。
 5. 另开 knowledge/review layer PR，将临床适应症地图与 dataset evidence 对接。
+
+## 当前继续执行的门禁
+
+- PR #7 合并后，下一阶段只解析 PXD038149 的 `SamplesDescription.xlsx` 元数据；不会把 sample description 解析等同于下载或 dataset approval。
+- 任何 checksum 仅在数据被用户或外部 staging 流程明确放入指定目录后离线计算；扫描器不下载生物数据。
