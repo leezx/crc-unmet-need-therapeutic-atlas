@@ -18,7 +18,7 @@
 - 候选数据集：19 个，全部为 `CANDIDATE`
 - 优先级：10 个 `P0_DOWNLOAD`、5 个 `P1_DOWNLOAD`、4 个 `REFERENCE_ONLY`
 - source manifests：11 个
-- file-level inventories：5 个（GSE159216、GSE178318、GSE224235、GSE226997、PXD038149）
+- file-level inventories：7 个（GSE159216、GSE178318、GSE224235、GSE226997、HPA_normal_tissue、MCRC_liver_metastasis_PDO_2026、PXD038149）
 - sample maps：3 个（GSE178318、GSE224235、GSE226997）
 - GitHub PR：#1–#32 全部已合并；最新主分支 merge commit 为 `7cab853`
 - source-only evidence objects 由公开 PR #33 提出；EV003 URL、EV008 计数措辞和 EV001/EV002 supporting-text 路径已按网页版审核修正，最新 head 已获网页版 ChatGPT APPROVE，当前待合并

@@ -355,6 +355,10 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 结论：**REQUEST_CHANGES**。网页版 ChatGPT 发现 PROJECT_STATUS 仍写“尚未形成 evidence object”，与本 PR 新增的 8 个 source-only evidence objects 矛盾。已改为明确区分 source-only evidence objects 与尚未形成的 biological/clinical conclusions。
 
+后续复核对象：head `b97f5bd`。
+
+结论：**REQUEST_CHANGES**。网页版 ChatGPT 发现 PROJECT_STATUS 的 file-level inventory 统计仍为 5 个，但仓库实际已有 7 个，遗漏 HPA_normal_tissue 与 MCRC_liver_metastasis_PDO_2026。已按实际仓库计数修正为 7 个。
+
 ## PR #32 source-only knowledge/review layer review
 
 初审对象：[PR #32](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/32)，reviewed head：`2f2d619`。
