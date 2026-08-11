@@ -79,7 +79,7 @@ class GitHubScannerTests(unittest.TestCase):
                     return False
 
                 def read(self):
-                    return json.dumps({"object": {"sha": "a" * 40}}).encode()
+                    return json.dumps({"object": {"sha": "b" * 40}}).encode()
 
             def fake_urlopen(request, timeout):
                 requested_urls.append(request.full_url)
@@ -88,10 +88,11 @@ class GitHubScannerTests(unittest.TestCase):
             argv = ["check_github_target_updates.py", "--config", str(config), "--output", str(output)]
             with patch.object(module, "urlopen", fake_urlopen), patch.object(sys, "argv", argv):
                 self.assertEqual(module.main(), 0)
+            self.assertEqual(len(requested_urls), 1)
             self.assertIn("/git/ref/heads%2Fmain", requested_urls[0])
             self.assertNotIn("/commits/", requested_urls[0])
-            self.assertIn("a" * 40, output.read_text())
-            self.assertIn("FALSE", output.read_text())
+            self.assertIn("b" * 40, output.read_text())
+            self.assertIn("TRUE", output.read_text())
 
 
 if __name__ == "__main__":
