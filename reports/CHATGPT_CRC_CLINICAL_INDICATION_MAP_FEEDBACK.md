@@ -383,6 +383,12 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 网页版 ChatGPT 审核 PR #36 head `b95f1fc`，结论：**APPROVE**。确认主分支 PR/merge 统计更新为 #1–#35 / `29b0edf`，PXD038149 workbook gate 保留，且没有 registry、schema、数据或临床结论变更。
 
+## PR #37 DepMap release evidence 审核
+
+初审 head `37b6bb5`：**REQUEST_CHANGES**。EV009/IEL009 与已有 EV004/IEL004 重复同一 DepMap release-level evidence。
+
+修正 head `5863b1d`：删除重复对象，直接增强 EV004/IEL004；网页版 ChatGPT 最终结论：**APPROVE**。source-only evidence 数量保持为 8，未新增 CRC subset 或 dependency claim。
+
 ## PR #32 source-only knowledge/review layer review
 
 初审对象：[PR #32](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/32)，reviewed head：`2f2d619`。
