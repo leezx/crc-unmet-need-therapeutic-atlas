@@ -42,7 +42,7 @@
 - P0 候选尚未全部完成原始论文、治疗史、分子注释、processed availability、license/access 和下载路径核验。
 - PXD038149 的 `SamplesDescription.xlsx` 仍处于 metadata gate；没有下载或解析外部 workbook。
 - 2026 CRLM PDO biobank 的 processed-data accession `hr94h42xdc.3` 已定位；sample-level clinical/treatment reconciliation、checksums 和 third-party terms 仍未完成。
-- knowledge/review layer 目前仅建立 source-only ontology/link skeleton；尚未形成 target claim、evidence object 或临床适应症结论。
+- knowledge/review layer 目前已建立 source-only ontology/link skeleton 和 8 个 source-only evidence objects；尚未形成 target claim、biological/clinical evidence conclusion 或临床适应症结论。
 - `DATA/registry/datasets.tsv` 中候选仍不能解释为已批准的 discovery cohort。
 
 ## 下一步顺序

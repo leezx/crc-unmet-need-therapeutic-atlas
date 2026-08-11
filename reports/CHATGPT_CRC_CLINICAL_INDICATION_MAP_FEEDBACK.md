@@ -351,6 +351,10 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 结论：**APPROVE**。网页版 ChatGPT 确认 EV003 官方 v3 URL、EV008 PDO/sample 计数措辞、EV001/EV002 supporting-text 路径、evidence/link 外键和 source-only 状态边界均正确，无新的 blocker。
 
+合并前归档复核对象：head `c0324f7`。
+
+结论：**REQUEST_CHANGES**。网页版 ChatGPT 发现 PROJECT_STATUS 仍写“尚未形成 evidence object”，与本 PR 新增的 8 个 source-only evidence objects 矛盾。已改为明确区分 source-only evidence objects 与尚未形成的 biological/clinical conclusions。
+
 ## PR #32 source-only knowledge/review layer review
 
 初审对象：[PR #32](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/32)，reviewed head：`2f2d619`。
