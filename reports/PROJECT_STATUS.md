@@ -51,7 +51,7 @@
 2. 在明确 staged 文件出现后，运行离线 checksum capture；未 staging 时不下载、不计算。
 3. 完成每个 P0 候选的 Phase 1 checklist，再通过单独 PR 讨论是否提升为 `APPROVED`。
 4. 定位并核验 2026 CRLM PDO biobank 原始 accession、license 和 processed download path。
-5. 另开 knowledge/review layer PR，把 CRC 临床适应症地图与 dataset evidence、证据等级和 data gaps 对接。
+5. 在现有 knowledge/review layer 上继续人工复核 source-only evidence objects，把 CRC 临床适应症地图与 dataset evidence、证据等级和 data gaps 对接；任何 biological/clinical conclusion 仍需单独审核。
 
 ## 权威项目记录
 
