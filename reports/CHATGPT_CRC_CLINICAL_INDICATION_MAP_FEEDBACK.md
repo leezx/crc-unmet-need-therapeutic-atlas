@@ -327,6 +327,12 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 最终复审结论：**APPROVE**。网页版 ChatGPT 确认唯一 blocker 已解决，没有新的 blocker。
 
+## PR #28 CRLM PDO biobank repository review
+
+审核对象：[PR #28](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/28)，reviewed head：`2dd9751`。
+
+结论：**APPROVE**。网页版 ChatGPT 核验了论文 PMID `42208542`、Mendeley Data v3 accession `hr94h42xdc.3`、DOI、CC BY 4.0 和 Data S1–S5 文件边界，确认没有下载、checksum、候选批准或 raw-sequencing 越界声明。
+
 ## PR #27 HPA 25.1 file provenance review
 
 审核对象：[PR #27](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/27)，reviewed head：`41da9cd`。

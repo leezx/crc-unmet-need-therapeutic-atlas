@@ -1,0 +1,2 @@
+dataset_id	source_url	accession	download_method	download_date	file_name	file_size	checksum	license	publication_doi	access_status	notes
+MCRC_liver_metastasis_PDO_2026	https://data.mendeley.com/datasets/hr94h42xdc/3	hr94h42xdc.3	Mendeley Data landing page Download All; processed files first	NA	Data S1-S5	25.2 MB total	NA	CC BY 4.0	10.17632/hr94h42xdc.3	VERIFIED_ENTRY	Mendeley Data v3 exposes five processed/derived files linked by sample_id; no download performed; sample-level clinical/treatment reconciliation remains pending.
