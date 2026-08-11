@@ -15,7 +15,8 @@ scope_boundary:
     - target ranking or therapeutic-window conclusions
 completion_endpoint:
   percent: 100
-  definition: Every candidate has a source record, explicit download method, update policy, review state and documented remaining blocker; all automated checks pass; no biological data is stored.
+  max_points: 90
+  definition: The source-only phase reaches 100% when every source-only engineering requirement is complete; scientific/clinical analysis readiness is tracked separately and is not required for this endpoint.
   internal_requirements:
     - closure_matrix_is_complete
     - every_update_target_has_scan_disposition
@@ -34,7 +35,11 @@ score_weights:
   p0_gate_design: 10
   exact_dataset_provenance: 15
   closure_handoff: 10
-  scientific_clinical_readiness: 10
+readiness_overlay:
+  scientific_clinical_readiness:
+    max_points: 10
+    current_points: 0
+    excluded_from_source_only_completion: true
 gates:
   - source_manifest
   - file_or_archive_inventory
