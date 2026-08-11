@@ -333,3 +333,9 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Fix reviewed head: `aed039c`; web ChatGPT result: APPROVE after separating three v25.1 atlas exports from one static asset.
 - Scope: batch no-download/status hygiene for HPA, CRLM-NMP and main-branch status; no candidate status or biological data changes.
 - Existing issue deferred: `reports/P0_SOURCE_VERIFICATION.tsv` has historical row-width inconsistencies outside this PR scope.
+
+## PR #39 — align P0 verification columns
+
+- URL: [#39](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/39)
+- Reviewed head: `615a223`; web ChatGPT result: APPROVE.
+- Scope: restore the missing `publication_or_record` field in four P0 verification rows, align all rows to the 10-column header, and synchronize post-PR #38 status; no biological or clinical content changes.
