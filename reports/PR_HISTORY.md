@@ -96,3 +96,11 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Web ChatGPT result: `APPROVE`; CI reported `Validate registry` completed successfully.
 - Scope: publication-backed patient-level treatment group, regimen and surgery timing context; no biological data.
 - Next gate: checksum capture and reconciliation of the remaining P0 datasets.
+
+## PR #6 — checksum capture and GSE224235 sample map
+
+- URL: [#6](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/6)
+- Reviewed head: `d8a6f7633af26928c427deaa0fa4f6379c81667f`
+- Web ChatGPT result: `APPROVE`; CI reported `Validate registry` completed successfully.
+- Scope: offline-only checksum utility and 17-sample GSE224235 map; no biological data downloaded.
+- Next gate: externally staged-file checksum capture and remaining P0 metadata reconciliation.
