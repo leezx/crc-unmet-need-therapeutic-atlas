@@ -21,7 +21,7 @@
 - file-level inventories：5 个（GSE159216、GSE178318、GSE224235、GSE226997、PXD038149）
 - sample maps：3 个（GSE178318、GSE224235、GSE226997）
 - GitHub PR：#1–#30 全部已合并；最新主分支 merge commit 为 `3a92963`
-- PXD038149 sample-metadata gate 由公开 PR #31 提出；该 PR 用于明确两个 PRIDE workbook 候选和无 staging 时的 HOLD 条件，当前待审核
+- PXD038149 sample-metadata gate 由公开 PR #31 提出；该 PR 已通过网页版 ChatGPT 复审（APPROVE），当前待合并
 
 ## 已完成能力
 

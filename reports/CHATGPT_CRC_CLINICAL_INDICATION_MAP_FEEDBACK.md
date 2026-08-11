@@ -327,6 +327,12 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 最终复审结论：**APPROVE**。网页版 ChatGPT 确认唯一 blocker 已解决，没有新的 blocker。
 
+## PR #31 PXD038149 sample-metadata gate review
+
+审核对象：[PR #31](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/31)，reviewed head：`ec01bef`。
+
+结论：**APPROVE**。网页版 ChatGPT 确认两个 PRIDE workbook 候选、显式 staging 前的停止条件、UNKNOWN 规则和 `P0_DOWNLOAD/CANDIDATE/HOLD` 边界一致，没有声称已解析或已批准。
+
 ## PR #30 GSE178318 admission-gate reconciliation review
 
 审核对象：[PR #30](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/30)，reviewed head：`af49234`。

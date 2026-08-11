@@ -267,3 +267,9 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - URL: [#30](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/30)
 - Reviewed head: `af49234`; web ChatGPT result: APPROVE.
 - Scope: reconcile the completed 15-sample/6-patient treatment and pairing metadata with the P0 matrix; treatment context is PASS, while molecular annotation, PI-contact terms, checksums and final admission remain open; dataset status remains CANDIDATE.
+
+## PR #31 — PXD038149 sample-metadata gate
+
+- URL: [#31](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/31)
+- Reviewed head: `ec01bef`; web ChatGPT result: APPROVE.
+- Scope: distinguish `SamplesDescriptionFINAL.xlsx` and `SamplesDescription.xlsx`, define explicit staging/schema/checksum stop conditions, and retain PXD038149 as P0_DOWNLOAD/CANDIDATE/HOLD; no workbook download or parsing.
