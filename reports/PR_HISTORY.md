@@ -104,3 +104,10 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Web ChatGPT result: `APPROVE`; CI reported `Validate registry` completed successfully.
 - Scope: offline-only checksum utility and 17-sample GSE224235 map; no biological data downloaded.
 - Next gate: externally staged-file checksum capture and remaining P0 metadata reconciliation.
+
+## PR #7 — PXD038149 PRIDE provenance
+
+- URL: [#7](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/7)
+- Head: `b8bc555`
+- Scope: PRIDE API-backed inventory of seven non-raw files; 44 raw files remain out of default scope.
+- No PRIDE files downloaded; PXD038149 remains `CANDIDATE` pending sample-description review and checksum capture.
