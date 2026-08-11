@@ -1,0 +1,6 @@
+dataset_id	gate	status	evidence	current_action	stop_condition
+PXD038149	repository_sample_workbooks	PASS	PRIDE API inventory lists SamplesDescriptionFINAL.xlsx (9,686 bytes) and SamplesDescription.xlsx (8,577 bytes)	Keep both exact FTP endpoints indexed; prefer FINAL only after staged schema comparison	Do not infer that either workbook has been parsed without a staged local copy.
+PXD038149	staged_file_presence	BLOCKED	No user/workflow-staged workbook is present in the repository or approved external staging path	Do not download, parse or calculate checksums	No staged file means metadata parsing and checksum capture stop.
+PXD038149	checksum_capture	BLOCKED	Both workbook checksums are NOT_RECORDED	Run scripts/capture_checksums.py only after explicit staging	Never substitute PRIDE byte size or FTP path for a local checksum.
+PXD038149	sample_context_reconciliation	BLOCKED	PDO identity, disease context, treatment exposure/timing and assay role require workbook inspection	Populate a source-to-row map after staging and checksum capture	Use UNKNOWN when workbook evidence is absent; do not infer systemic treatment from drug-response labels.
+PXD038149	admission_decision	HOLD	Dataset remains P0_DOWNLOAD/CANDIDATE	Review a separate PR after the metadata contract is fulfilled	No APPROVED status until sample-level provenance, access and license gates pass.
