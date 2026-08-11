@@ -16,11 +16,11 @@
 
 | 维度 | 当前进度 | 本轮变化 | 判定标准 | 当前阻塞 |
 |---|---:|---:|---|---|
-| 工程 / provenance 基础设施 | **66/80** | 60/80 → 66/80（+6） | HPA minimum-organ contract 已 source-reviewed；DepMap model-filter contract 与 CRLM sample-map/window contract 已建立；CRLM archive-level inventory 已完成 | DepMap exact headers/file catalog、HPA final scope/files/terms、CRLM row-level metadata 仍未完成 |
+| 工程 / provenance 基础设施 | **65/80** | 60/80 → 65/80（+5） | 5 个 P0 gate 已有 crosswalk；HPA minimum-organ contract 已 source-reviewed；DepMap model-filter contract 与 CRLM sample-map/window contract 已建立 | DepMap exact headers/file catalog、HPA final scope/files/terms、CRLM row-level metadata 仍未完成 |
 | 科学 / 临床可用性 | **0/20** | 0/20 → 0/20（+0） | 至少一个候选完成 processed 文件、临床上下文、license/access、checksum 和 reviewed `APPROVED` admission | 当前没有 biological matrix、target ranking、therapeutic-window 或 clinical conclusion |
-| 总体项目进度 | **66/100（66%）** | 60/100 → 66/100（+6） | 固定 100 分制：工程/provenance 80 分 + 科学/临床可用性 20 分；当前总分为 66 + 0 | 下一里程碑是完成 DepMap exact headers 或 CRLM row-level metadata 的 P0 门禁 |
+| 总体项目进度 | **65/100（65%）** | 60/100 → 65/100（+5） | 固定 100 分制：工程/provenance 80 分 + 科学/临床可用性 20 分；当前总分为 65 + 0 | 下一里程碑是完成 DepMap exact headers 或 CRLM row-level metadata 的 P0 门禁 |
 
-评分明细（工程/provenance 66/80）：registry/admission architecture 10/10；source/index layer 14/15；validator/tests 10/10；update/scan system 8/10；PR/review audit 8/10；P0 gate design 8/10；exact dataset provenance materialization 8/15。科学/临床可用性 0/20，因为尚无候选通过 `APPROVED` admission，也没有 biological/clinical conclusion。
+评分明细（工程/provenance 65/80）：registry/admission architecture 10/10；source/index layer 14/15；validator/tests 10/10；update/scan system 8/10；PR/review audit 8/10；P0 gate design 10/10；exact dataset provenance materialization 5/15。科学/临床可用性 0/20，因为尚无候选通过 `APPROVED` admission，也没有 biological/clinical conclusion。
 
 ## 当前规模
 
