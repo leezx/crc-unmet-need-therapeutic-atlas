@@ -20,7 +20,7 @@
 - source manifests：11 个
 - file-level inventories：7 个（GSE159216、GSE178318、GSE224235、GSE226997、HPA_normal_tissue、MCRC_liver_metastasis_PDO_2026、PXD038149）
 - sample maps：3 个（GSE178318、GSE224235、GSE226997）
-- GitHub PR：#1–#37 全部已合并；最新主分支 merge commit 为 `6028d2e`
+- GitHub PR：#1–#38 全部已合并；最新主分支 merge commit 为 `c114f34`
 - PR #33 已合并 source-only evidence objects：EV003 URL、EV008 计数措辞、EV001/EV002 supporting-text 路径、source-only 状态措辞和 inventory 统计均已完成审核修正
 
 ## 已完成能力

@@ -395,6 +395,10 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 修正 head `aed039c`：改为 3 个 v25.1 atlas exports + 1 个 static asset；网页版 ChatGPT 最终结论：**APPROVE**。CRLM no-download 语义和 status update 也通过审核。
 
+## PR #39 P0 verification schema 审核
+
+网页版 ChatGPT 审核 PR #39 head `615a223`，结论：**APPROVE**。确认后四行补齐 `publication_or_record` 字段，所有行与 10 列表头对齐，没有 biological 或 clinical content 变化。
+
 ## PR #32 source-only knowledge/review layer review
 
 初审对象：[PR #32](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/32)，reviewed head：`2f2d619`。
