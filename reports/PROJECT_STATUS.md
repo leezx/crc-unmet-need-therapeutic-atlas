@@ -97,3 +97,4 @@
 - PR #19 已由网页版 ChatGPT 对 head `26edd5e` 复审 APPROVE；update candidate report 已纳入版本控制，上游变化时将通过 draft PR 进入人工审核，不自动修改 pinned SHA。
 - PR #20 初审发现 drift checker 回归测试过弱；已修复为恰好一次 Git ref metadata 请求、禁止 `/commits/`，并用不同 latest SHA 验证 drift 结果。网页版 ChatGPT 对 head `67a6f04` 最终复审为 APPROVE；下一步合并 PR #20，并继续扩展 metadata-only update checks。
 - PR #20 已于 2026-08-11 squash 合并，merge commit 为 `43037f7`；合并后只读扫描显示当前未发生 pinned-target drift。PR #21 将补充 `update_available=TRUE` 时的人工复核清单，不自动修改 pinned SHA。
+- PR #21 已获网页版 ChatGPT `APPROVE`；审核确认 `update_available=TRUE` 的人工复核、固定 commit inventory reconciliation 和 no-download 边界均清晰，准备合并。

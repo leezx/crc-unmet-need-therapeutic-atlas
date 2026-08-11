@@ -205,3 +205,4 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 ## PR #21 — pinned-target update review checklist
 
 - Scope: document the human review gate for `update_available=TRUE`, including fixed-commit tree comparison, inventory reconciliation, separate pin-update PRs, and no-download boundaries.
+- Web ChatGPT result: `APPROVE`; no provenance or metadata-only blocker.
