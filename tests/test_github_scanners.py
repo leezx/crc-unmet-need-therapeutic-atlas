@@ -48,9 +48,9 @@ class GitHubScannerTests(unittest.TestCase):
                 "--config", str(config),
                 "--output-dir", str(output_dir),
             )
+            self.assertFalse(output_dir.exists())
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("duplicate target_id", result.stderr)
-        self.assertFalse(output_dir.exists())
 
 
 if __name__ == "__main__":
