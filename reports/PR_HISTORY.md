@@ -395,3 +395,10 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Initial reviewed head: `e73c908`; web ChatGPT result: REQUEST_CHANGES because missing repository artifacts were automatically classified as external blockers.
 - Fix reviewed head: `fb5003e`; web ChatGPT result: REQUEST_CHANGES because the PR description retained stale blocker wording; description corrected and final review approved.
 - Scope: add the 19-candidate closure matrix, offline builder, CI freshness check and auditable status update from 65/100 to 70/100; missing artifacts are `INTERNAL_ACTION_REQUIRED`, not waived external blockers.
+
+## PR #48 — update-target disposition
+
+- URL: [#48](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/48)
+- Initial reviewed head: `89e09c9`; web ChatGPT result: REQUEST_CHANGES because the configured score weights did not match the PROJECT_STATUS closure/handoff denominator.
+- Fix reviewed head: `1d27a62`; web ChatGPT result: APPROVE after defining source-only completion as a 90-point endpoint and separating the 10-point scientific readiness overlay.
+- Scope: record the first metadata-only scan for the single configured GitHub target (`NO_UPDATE_PIN_RETAINED`), update the closure checklist and status from 70/100 to 75/100; no blob read, pin change, download or analysis.

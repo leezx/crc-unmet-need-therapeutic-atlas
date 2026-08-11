@@ -343,6 +343,14 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 最终复审结论：**APPROVE**。确认 19 行矩阵、离线生成器、CI freshness check、评分和内部/外部 blocker 边界一致。
 
+## PR #48 update-target disposition 审核
+
+初审 head `89e09c9`：**REQUEST_CHANGES**。网页版 ChatGPT 指出 `project_completion.yaml` 的 closure 权重与 PROJECT_STATUS 的 8/10 计分不一致。
+
+修复 head `e89ae8e`：统一为 9 项 100 分模型；随后发现 source-only 100% endpoint 不应包含未来 scientific readiness，进一步修复 head `1d27a62`，将 source-only endpoint 定义为 90 分并将 scientific/clinical 作为独立 10 分 overlay。
+
+最终复审结论：**APPROVE**。确认 metadata-only scan、无更新处置、评分模型和 source-only completion 边界一致。
+
 ## PR #33 source-only evidence objects review
 
 初审对象：[PR #33](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/33)，reviewed head：`b9bd08d`。

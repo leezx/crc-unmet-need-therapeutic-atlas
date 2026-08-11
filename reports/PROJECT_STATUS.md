@@ -16,11 +16,11 @@
 
 | 维度 | 当前进度 | 本轮变化 | 判定标准 | 当前阻塞 |
 |---|---:|---:|---|---|
-| 工程 / provenance 基础设施 | **70/90** | source-only 评分模型校正后当前 70/90（本轮 +5 source-only points） | 19 个候选已生成 closure matrix；source-only completion framework、CI freshness check 和 5 个 P0 gate crosswalk 已建立 | 每个 update target 的首次 scan disposition、DepMap exact headers/file catalog、HPA final scope/files/terms、CRLM row-level metadata 仍未完成 |
+| 工程 / provenance 基础设施 | **75/90** | 70/90 → 75/90（+5） | 19 个候选 closure matrix、1 个 configured update target 的首次 metadata scan/disposition、CI freshness check 和 5 个 P0 gate crosswalk 已完成 | DepMap exact headers/file catalog、HPA final scope/files/terms、CRLM row-level metadata 仍未完成 |
 | 科学 / 临床可用性 | **0/10** | 0/10 → 0/10（+0） | 本阶段不下载或分析数据；科学 readiness 只在未来独立分析阶段计分 | 当前没有 biological matrix、target ranking、therapeutic-window 或 clinical conclusion |
-| 总体项目进度 | **70/100（70%）** | 65/100 → 70/100（+5 source-only points） | 固定 100 分制：source-only engineering/provenance 90 分 + scientific/clinical readiness 10 分；当前总分为 70 + 0 | 下一里程碑是完成每个 update target 的首次 scan disposition，并提交 final no-data audit |
+| 总体项目进度 | **75/100（75%）** | 70/100 → 75/100（+5 source-only points） | 固定 100 分制：source-only engineering/provenance 90 分 + scientific/clinical readiness 10 分；当前总分为 75 + 0 | 下一里程碑是完成 final no-data audit、source-only closure review 和 final closure PR |
 
-评分明细（工程/provenance 70/90）：registry/admission architecture 10/10；source/index layer 14/15；validator/tests 10/10；update/scan system 8/10；PR/review audit 8/10；P0 gate design 10/10；exact dataset provenance materialization 5/15；closure/handoff 5/10。科学/临床可用性 0/10，因为本阶段不进行 biological analysis，也没有 candidate approval 或 clinical conclusion。评分模型由旧的 80/20 工程/科学划分统一为 90/10，以纳入 source-only closure infrastructure；不改变已完成项的计分。
+评分明细（工程/provenance 75/90）：registry/admission architecture 10/10；source/index layer 14/15；validator/tests 10/10；update/scan system 10/10；PR/review audit 8/10；P0 gate design 10/10；exact dataset provenance materialization 5/15；closure/handoff 8/10。科学/临床可用性 0/10，因为本阶段不进行 biological analysis，也没有 candidate approval 或 clinical conclusion。评分模型由旧的 80/20 工程/科学划分统一为 90/10，以纳入 source-only closure infrastructure；不改变已完成项的计分。
 
 ## 当前规模
 
@@ -30,7 +30,7 @@
 - source manifests：11 个
 - file-level inventories：8 个（GSE159216、GSE178318、GSE224235、GSE226997、HPA_normal_tissue、MCRC_liver_metastasis_PDO_2026、PXD038149、CRLM_NMP_ATLAS）
 - sample maps：3 个（GSE178318、GSE224235、GSE226997）
-- GitHub PR：#1–#44 全部已合并；最新主分支 merge commit 为 `6502f0a`
+- GitHub PR：#1–#47 全部已合并；最新主分支 merge commit 为 `590e864`
 - PR #33 已合并 source-only evidence objects：EV003 URL、EV008 计数措辞、EV001/EV002 supporting-text 路径、source-only 状态措辞和 inventory 统计均已完成审核修正
 
 ## 已完成能力

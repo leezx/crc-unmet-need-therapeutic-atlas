@@ -1,0 +1,2 @@
+target_id	scan_date	scan_method	pinned_commit	latest_commit	update_available	disposition	review_state	action	evidence_path
+GSE117548_supplementary_external	2026-08-11	GitHub refs API metadata-only scan	1bfec50e1f8f8deb7bbaa40aa28315262dbb1c19	1bfec50e1f8f8deb7bbaa40aa28315262dbb1c19	FALSE	NO_UPDATE_PIN_RETAINED	AUTOMATED_SCAN_RECORDED	No pin change; retain fixed-commit tree inventory.	reports/updates/github_tree_update_candidates.tsv
