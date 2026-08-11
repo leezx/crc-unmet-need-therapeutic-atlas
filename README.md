@@ -36,3 +36,4 @@ Project records:
 - [`reports/PR_HISTORY.md`](reports/PR_HISTORY.md)
 - [`reports/CHATGPT_CRC_CLINICAL_INDICATION_MAP_FEEDBACK.md`](reports/CHATGPT_CRC_CLINICAL_INDICATION_MAP_FEEDBACK.md)
 - [`reports/P0_SOURCE_VERIFICATION.md`](reports/P0_SOURCE_VERIFICATION.md)
+GitHub supplementary repositories are indexed with fixed-commit tree metadata only; blob contents are not fetched by the registry workflow.
