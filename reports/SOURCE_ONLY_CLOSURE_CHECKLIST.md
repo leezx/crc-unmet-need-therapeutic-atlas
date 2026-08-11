@@ -18,10 +18,12 @@ This checklist defines completion for the current project phase. It does not req
 
 ## Definition of done
 
-The source-only phase is complete when the unchecked items are either completed or explicitly classified as external-state blockers in the closure matrix. `APPROVED` is not required for this phase and must not be inferred from source-only completion.
+The source-only phase is complete only when all internal requirements in `config/project_completion.yaml` are complete. Upstream access, missing public metadata and absent user-staged files may remain as external blockers, but they must be recorded in the closure matrix with a named next artifact. Internal work such as the first scan disposition, validator/test run, no-data audit and final closure PR cannot be waived as an external blocker. `APPROVED` is not required for this phase and must not be inferred from source-only completion.
 
 ## Next closure batches
 
 1. Normalize candidate-level closure and update-target coverage into one machine-readable matrix.
 2. Add a validator rule that every candidate has a source manifest or an explicit missing-source disposition.
-3. Run a final no-biological-data audit and archive the final ChatGPT review in the same conversation.
+3. Run a first-scan disposition for every configured update target.
+4. Run a final no-biological-data audit and archive the final ChatGPT review in the same conversation.
+5. Merge the final closure PR; this internal step is mandatory even if upstream blockers remain.

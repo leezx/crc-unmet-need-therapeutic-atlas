@@ -16,6 +16,15 @@ scope_boundary:
 completion_endpoint:
   percent: 100
   definition: Every candidate has a source record, explicit download method, update policy, review state and documented remaining blocker; all automated checks pass; no biological data is stored.
+  internal_requirements:
+    - closure_matrix_is_complete
+    - every_update_target_has_scan_disposition
+    - final_closure_pr_is_merged
+    - validator_tests_and_no_data_audit_pass
+  external_blocker_allowlist:
+    - upstream_requires_interactive_authentication
+    - upstream_file_or_metadata_not_public
+    - user_has_not_staged_external_file
 score_weights:
   registry_and_source_manifests: 25
   file_indexes_and_download_paths: 20
