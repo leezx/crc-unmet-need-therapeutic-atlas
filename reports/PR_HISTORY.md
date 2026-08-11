@@ -227,3 +227,8 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Initial reviewed head: `ce4fda2`; web ChatGPT result: REQUEST_CHANGES for `priority=P1_DOWNLOAD` contradicting comparator-only/no-download semantics, followed by a second blocker identifying `n_patients=283` instead of 171.
 - Final reviewed head: `f789cf0`; web ChatGPT result: APPROVE after setting `priority=REFERENCE_ONLY`, `n_patients=171`, and `n_samples=283`.
 - Scope: official GEO/filelist metadata for 283 samples, 283 processed CHP files, 283 raw CEL files, and aggregate sizes; no biological content downloaded or read.
+
+## PR #25 — reconcile project status with repository state
+
+- Scope: replace stale planning status with the current 19-candidate registry, 24 merged PRs, completed provenance components, active gates, and next-step priorities.
+- No registry data, candidate status, download policy, or biological-data boundary changed.
