@@ -116,3 +116,17 @@ CRC 临床适应症地图建议形成独立 knowledge/review layer，而不是�
 ### Audit-only head confirmation
 
 最新审计提交 `b4d2b47` 仅修改三份 reports 文件，没有改变 registry、relationships、schema、source manifests 或代码。网页版 ChatGPT 快速确认结果仍为 **APPROVE**，没有新的 blocker；当时 GitHub `Validate registry` 仍在运行，但不影响技术结论。
+
+## PR #3 processed-file provenance review
+
+复审对象：[PR #3](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/3)，reviewed head：`56ba66c7adcacba3d8c6d6af0951c11ae59eb9df`。
+
+结论：**APPROVE**。网页版 ChatGPT 检查了实际 diff、两个 `file_inventory.tsv`、schema、validator 和 CI；PR `mergeable: true`，`Validate registry` 为 `completed / success`，没有真正 blocker。
+
+审核确认：
+
+- GSE178318 的三个 processed 文件及 GEO 官方下载 endpoint、大小和 priority 记录正确，未把 SRA raw 数据混入当前范围。
+- GSE224235 正确区分 sample-table processed evidence 与 170 KB raw archive，没有声称 GeoMx ROI matrix 已确认公开。
+- checksum 尚未记录，且没有候选被提前升级为 `APPROVED`，符合 provenance gate。
+
+下一步：合并 PR #3；随后进入 checksum capture 和 sample-level metadata review，仍不默认下载 raw data。

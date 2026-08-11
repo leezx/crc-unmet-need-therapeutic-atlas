@@ -65,3 +65,18 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Final web review of head `34ea67d04f3a4bad07a97b5a7bb423087e49e610`: `APPROVE`.
 - Final review confirmed `mergeable: true` and successful `Validate registry` CI; no new blockers.
 - User-authorized next action: merge PR #2, then continue provenance materialization without downloading biological data.
+
+## PR #2 merge and next phase
+
+- PR #2 was marked ready and squash-merged on 2026-08-11.
+- Merge commit: `80a8506`.
+- Next branch: `phase1/p1-provenance-inventory`.
+- Initial scope: exact processed-file inventory for GSE178318 and GSE224235, with no biological data download.
+
+## PR #3 — processed-file provenance inventory
+
+- URL: [#3](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/3)
+- Reviewed head: `56ba66c7adcacba3d8c6d6af0951c11ae59eb9df`
+- Web ChatGPT result: `APPROVE`; CI reported `Validate registry` completed successfully.
+- Scope: file-level inventory and schema validation only; no biological data downloaded.
+- Next gate: checksum capture and sample-level metadata review.

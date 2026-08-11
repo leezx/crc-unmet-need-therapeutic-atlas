@@ -1,0 +1,3 @@
+dataset_id	inventory_status	processed_file_count	raw_file_count	checksum_status	license_status	next_gate	notes
+GSE178318	VERIFIED	3	0	NOT_RECORDED	PI_CONTACT_REQUIRED	Sample-level treatment/pairing review plus checksum capture	Official GEO page lists three processed files and SRA raw availability.
+GSE224235	VERIFIED	1	1	NOT_RECORDED	PUBLIC_REPOSITORY_TERMS	Confirm sample-table export and retain context-comparator limitation	Processed values are in sample table; GeoMx ROI availability unconfirmed.
