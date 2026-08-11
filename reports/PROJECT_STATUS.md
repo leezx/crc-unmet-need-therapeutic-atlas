@@ -53,6 +53,7 @@
 - knowledge/review layer 尚未建立，仍作为后续 PR。
 - PR #2 已合并为 `80a8506`；下一分支 `phase1/p1-provenance-inventory` 开始首批 processed-file inventory。
 - 已完成 GSE178318 和 GSE224235 的第一批精确文件名、大小、下载 URL 和下载优先级记录；checksum 尚未捕获，未下载生物数据。
+- PR #3 已获网页版 ChatGPT `APPROVE`，准备合并；下一步是 checksum capture 和 sample-level metadata review。
 
 ## 下一步顺序
 
