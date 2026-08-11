@@ -16,6 +16,7 @@ FIELDS = [
     "update_coverage",
     "review_state",
     "closure_status",
+    "blocker_class",
     "remaining_blocker",
     "next_artifact",
 ]
@@ -60,15 +61,18 @@ def main() -> int:
             if not has_manifest:
                 update_state = "BLOCKED_NO_SOURCE_MANIFEST"
             if not has_manifest:
-                closure = "EXTERNAL_BLOCKED"
-                blocker = "Source manifest and reproducible landing/download path not yet recorded."
+                closure = "INTERNAL_ACTION_REQUIRED"
+                blocker_class = "INTERNAL_ARTIFACT_GAP"
+                blocker = "Source manifest and reproducible landing/download path not yet recorded in the repository."
                 next_artifact = "Create source_manifest.tsv after source verification."
             elif not has_inventory:
-                closure = "EXTERNAL_BLOCKED"
-                blocker = "File/archive inventory remains incomplete or source does not expose a reviewed file list."
+                closure = "INTERNAL_ACTION_REQUIRED"
+                blocker_class = "INTERNAL_ARTIFACT_GAP"
+                blocker = "File/archive inventory or an explicit no-file-inventory disposition is not yet recorded in the repository."
                 next_artifact = "Create file_inventory.tsv or an explicit no-file-inventory disposition."
             else:
                 closure = "SOURCE_INDEXED_REVIEW_REQUIRED"
+                blocker_class = "EXTERNAL_OR_DATASET_REVIEW"
                 blocker = "Dataset-specific license, clinical context, checksum or admission review may remain pending."
                 next_artifact = "Review dataset checklist and retain UNKNOWN/NA where source evidence is absent."
             rows.append({
@@ -80,6 +84,7 @@ def main() -> int:
                 "update_coverage": update_state,
                 "review_state": "CANDIDATE_SOURCE_ONLY",
                 "closure_status": closure,
+                "blocker_class": blocker_class,
                 "remaining_blocker": blocker,
                 "next_artifact": next_artifact,
             })

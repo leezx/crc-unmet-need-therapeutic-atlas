@@ -102,7 +102,8 @@ class GitHubScannerTests(unittest.TestCase):
             rows = list(csv.DictReader(handle, delimiter="\t"))
         self.assertEqual(len(rows), 19)
         self.assertTrue(all(row["review_state"] == "CANDIDATE_SOURCE_ONLY" for row in rows))
-        self.assertTrue(any(row["closure_status"] == "EXTERNAL_BLOCKED" for row in rows))
+        self.assertTrue(any(row["closure_status"] == "INTERNAL_ACTION_REQUIRED" for row in rows))
+        self.assertTrue(all(row["blocker_class"] for row in rows))
 
 
 if __name__ == "__main__":
