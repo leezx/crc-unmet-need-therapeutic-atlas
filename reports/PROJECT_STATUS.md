@@ -100,3 +100,4 @@
 - PR #21 已获网页版 ChatGPT `APPROVE`；审核确认 `update_available=TRUE` 的人工复核、固定 commit inventory reconciliation 和 no-download 边界均清晰，准备合并。
 - PR #22 初审发现 GSE226997 未下载 raw archive 的 `download_date` 语义错误；已改为 `NA` 并由网页版 ChatGPT 对 head `1d1c421` 复审 `APPROVE`，准备合并。
 - PR #23 初审发现 4 个 GSE226997 sample-level URL 指向 series 目录；已修正为 sample supplementary 路径，网页版 ChatGPT 对 head `a70d5ce` 复审 `APPROVE`，准备合并。
+- PR #24 初审发现 GSE159216 priority 与 comparator-only 语义冲突，随后发现患者数错误；已修正为 `REFERENCE_ONLY`、171 patients/283 samples，网页版 ChatGPT 对 head `f789cf0` 最终复审 `APPROVE`，准备合并。
