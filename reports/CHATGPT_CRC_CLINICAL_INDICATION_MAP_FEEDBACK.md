@@ -200,3 +200,13 @@ CRC 临床适应症地图建议形成独立 knowledge/review layer，而不是�
 审核确认：所有 inventory URL 都锚定 full SHA，而非浮动 `master`；顶层目录和 Dockerfile、README.md、make_results.R 的路径/大小与 API 一致。分类边界保守：`data` 为 `POTENTIAL_DATA_AND_CODE`，`tables` 为 `POTENTIAL_DERIVED_DATA`，`models` 为 model artifacts，figures 不作为 biological matrix，code/notebooks 仅作为分析代码。没有把 repository tree 当作已验证 biological asset、自动下载源或可直接分析的数据包。
 
 下一步：合并 PR #10；后续如需继续，只对 `data/models/tables` 做更细的 API 文件级目录核验，仍不下载内容。
+
+### PR #11 initial review correction
+
+网页版 ChatGPT 首轮对 head `6811d52bb7c4b4457d78b01305f9c4c7b6ef91c9` 给出 **REQUEST_CHANGES**：分层计数为 143、字节合计为 1,242,156,229，但 aggregate 写成 144、1,242,162,377。核对固定 commit API tree 后确认遗漏的是根层 `data/.DS_Store`（6,148 bytes），因此新增 `data/root_metadata`，没有改动 biological-data 边界。
+
+### PR #11 final review
+
+修复对象：[PR #11](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/11)，reviewed head：`54a3a499b7d860cb0a1d8de7545fc434d4e69de5`。
+
+结论：**APPROVE**。网页版 ChatGPT 确认 blobs 加和为 144，字节加和为 1,242,162,377；README、`asset_layer_summary.tsv` 和 `source_manifest.tsv` 一致，CI 为 `completed / success`。`data/raw` 仍为 `EXCLUDED_RAW`，`data/processed` 仍不进入本仓库下载范围，`data/.DS_Store` 为 `REPOSITORY_METADATA / NO_DOWNLOAD`，没有新的 blocker。
