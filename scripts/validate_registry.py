@@ -34,6 +34,14 @@ for inventory in sorted((ROOT / "DATA/registry").glob("*/file_inventory.tsv")):
         for row_number, row in enumerate(csv.DictReader(fh, delimiter="\t"), 2):
             if row.get("dataset_id") != inventory.parent.name:
                 errors.append(f"{inventory}:{row_number}: dataset_id does not match directory")
+sample_map_header = (ROOT / "schemas/sample_map.tsv").read_text().splitlines()[0].split("\t")
+for sample_map in sorted((ROOT / "DATA/registry").glob("*/sample_map.tsv")):
+    if sample_map.read_text().splitlines()[0].split("\t") != sample_map_header:
+        errors.append(f"{sample_map}: header does not match sample map schema")
+    with sample_map.open(newline="") as fh:
+        for row_number, row in enumerate(csv.DictReader(fh, delimiter="\t"), 2):
+            if row.get("dataset_id") != sample_map.parent.name:
+                errors.append(f"{sample_map}:{row_number}: dataset_id does not match directory")
 if errors:
     print("REGISTRY VALIDATION FAILED\n" + "\n".join(f"- {e}" for e in errors))
     sys.exit(1)

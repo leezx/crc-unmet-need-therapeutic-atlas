@@ -130,3 +130,13 @@ CRC 临床适应症地图建议形成独立 knowledge/review layer，而不是�
 - checksum 尚未记录，且没有候选被提前升级为 `APPROVED`，符合 provenance gate。
 
 下一步：合并 PR #3；随后进入 checksum capture 和 sample-level metadata review，仍不默认下载 raw data。
+
+## PR #4 sample metadata review
+
+复审对象：[PR #4](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/4)，reviewed head：`69ccbff3d2f157cb90bc3b83fa77954afa85102e`。
+
+结论：**APPROVE**。网页版 ChatGPT 检查了实际 diff、`sample_map.tsv`、schema、validator 和 GitHub CI；PR `mergeable: true`，`Validate registry` 为 `completed / success`，没有真正 blocker。
+
+审核确认：15 个 GEO sample accession 已完整收录，并按 COL07、COL12、COL15、COL16、COL17、COL18 六组组织；primary CRC、liver metastasis、PBMC 配对关系内部一致。所有 sample-level treatment context 保持 `UNKNOWN`，没有把 series-level “preoperative chemotherapy”误下沉为逐样本暴露或时间点。该 PR 不含表达矩阵或其他生物数据，也没有将 sample metadata completeness 等同于 dataset approval。
+
+下一步：合并 PR #4；继续 checksum capture 和逐样本 metadata reconciliation。
