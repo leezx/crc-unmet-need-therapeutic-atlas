@@ -360,3 +360,10 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Initial reviewed head: `8f7be81`; web ChatGPT result: REQUEST_CHANGES because the 58% progress number had no reproducible denominator or scoring weights.
 - Fix reviewed head: `a22f4aa`; web ChatGPT result: APPROVE after adding a fixed 100-point scorecard with explicit engineering/provenance sub-scores and a separate 0/20 scientific/clinical readiness score.
 - Scope: reconcile merged PR/status counts and persist quantitative progress reporting; no biological data, candidate approval or clinical conclusion changes.
+
+## PR #43 — HPA minimum organ reference
+
+- URL: [#43](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/43)
+- Reviewed head: `87b3c24`; web ChatGPT result: APPROVE.
+- Scope: add a 10-organ HPA v25.1 source-derived minimum reference contract with tissue groups, coverage roles and stop conditions; update EV005 and HPA-G1.
+- No HPA file downloaded, no checksum captured, no therapeutic-window/toxicity claim and no candidate approval.
