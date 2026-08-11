@@ -273,3 +273,10 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - URL: [#31](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/31)
 - Reviewed head: `ec01bef`; web ChatGPT result: APPROVE.
 - Scope: distinguish `SamplesDescriptionFINAL.xlsx` and `SamplesDescription.xlsx`, define explicit staging/schema/checksum stop conditions, and retain PXD038149 as P0_DOWNLOAD/CANDIDATE/HOLD; no workbook download or parsing.
+
+## PR #32 — source-only knowledge/review layer skeleton
+
+- URL: [#32](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/32)
+- Initial reviewed head: `2f2d619`; web ChatGPT result: REQUEST_CHANGES because PROJECT_STATUS incorrectly said the CRLM PDO accession was not located.
+- Fix reviewed head: `79cdc46`; web ChatGPT result: APPROVE.
+- Scope: seed clinical-indication ontology and dataset evidence links with `SOURCE_INDEXED_NOT_ANALYZED` / `SEED_UNREVIEWED` statuses; no biological data, target ranking, therapeutic-window claim or dataset approval.

@@ -21,7 +21,7 @@
 - file-level inventories：5 个（GSE159216、GSE178318、GSE224235、GSE226997、PXD038149）
 - sample maps：3 个（GSE178318、GSE224235、GSE226997）
 - GitHub PR：#1–#31 全部已合并；最新主分支 merge commit 为 `210f35d`
-- knowledge/review layer source-only skeleton 由公开 PR #32 提出；该 PR 用于建立 clinical-indication ontology 与 dataset evidence links，当前待审核
+- knowledge/review layer source-only skeleton 由公开 PR #32 提出；该 PR 已通过网页版 ChatGPT 复审（APPROVE），当前待合并
 
 ## 已完成能力
 
