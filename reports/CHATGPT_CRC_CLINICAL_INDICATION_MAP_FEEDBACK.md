@@ -296,3 +296,13 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 修复对象：reviewed head `1d1c421`，将 raw archive 的 `download_date` 改为 `NA`，并明确 `no download performed`。
 
 最终复审结论：**APPROVE**。网页版 ChatGPT 确认唯一 blocker 已解决，没有新的 provenance、treatment-context 或 no-download blocker。
+
+## PR #23 GSE226997 file-level metadata review
+
+初审对象：[PR #23](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/23)，reviewed head：`7a60950`。
+
+结论：**REQUEST_CHANGES**。网页版 ChatGPT 发现 4 个 sample-level supplementary URL 指向 series 目录并返回 404；应使用各自 GEO sample supplementary 路径。
+
+修复对象：reviewed head `a70d5ce`。4 个 URL 已改为 sample-level 路径，并通过 HTTP HEAD 元数据检查。
+
+最终复审结论：**APPROVE**。网页版 ChatGPT 确认 URL blocker 已解决，文件名/大小与官方 filelist 元数据、`NOT_RECORDED` checksum、`NA` download_date 和 no-download 边界一致，没有新的 blocker。
