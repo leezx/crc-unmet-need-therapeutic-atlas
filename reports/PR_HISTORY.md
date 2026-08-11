@@ -280,3 +280,11 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Initial reviewed head: `2f2d619`; web ChatGPT result: REQUEST_CHANGES because PROJECT_STATUS incorrectly said the CRLM PDO accession was not located.
 - Fix reviewed head: `79cdc46`; web ChatGPT result: APPROVE.
 - Scope: seed clinical-indication ontology and dataset evidence links with `SOURCE_INDEXED_NOT_ANALYZED` / `SEED_UNREVIEWED` statuses; no biological data, target ranking, therapeutic-window claim or dataset approval.
+
+## PR #33 — source-only evidence objects
+
+- URL: [#33](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/33)
+- Initial reviewed head: `b9bd08d`; web ChatGPT result: REQUEST_CHANGES because EV003 used an invalid Mendeley v3 URL with a dot instead of the `/3` path.
+- Fix reviewed head: `72b31d3`; web ChatGPT result: APPROVE.
+- Scope: eight source-only evidence objects, evidence IDs linked to indication links, provenance/confidence/version fields, and missing-information notes; no biological data, target ranking, therapeutic-window claim or dataset approval.
+- Local validation: registry validator passed, 3 unit tests passed, diff check passed, and both TSV files passed independent column-count checks.

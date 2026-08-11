@@ -327,6 +327,16 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 最终复审结论：**APPROVE**。网页版 ChatGPT 确认唯一 blocker 已解决，没有新的 blocker。
 
+## PR #33 source-only evidence objects review
+
+初审对象：[PR #33](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/33)，reviewed head：`b9bd08d`。
+
+结论：**REQUEST_CHANGES**。网页版 ChatGPT 指出 `schemas/evidence.tsv` 中 EV003 的 Mendeley v3 `source_uri` 使用了无效的点号路径 `https://data.mendeley.com/datasets/hr94h42xdc.3`，官方路径应为 `https://data.mendeley.com/datasets/hr94h42xdc/3`。
+
+修复对象：reviewed head `72b31d3`，已修正 EV003.source_uri；未改变 evidence 内容边界或下载政策。
+
+最终复审结论：**APPROVE**。网页版 ChatGPT 确认官方 v3 URL 已修正，source-only evidence objects、evidence_id 外键、`SOURCE_INDEXED_NOT_ANALYZED` / `UNREVIEWED_FOR_CLAIM` 边界和无生物数据提交边界均无新的 blocker。
+
 ## PR #32 source-only knowledge/review layer review
 
 初审对象：[PR #32](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/32)，reviewed head：`2f2d619`。
