@@ -18,10 +18,10 @@
 - 候选数据集：19 个，全部为 `CANDIDATE`
 - 优先级：10 个 `P0_DOWNLOAD`、5 个 `P1_DOWNLOAD`、4 个 `REFERENCE_ONLY`
 - source manifests：11 个
-- file-level inventories：5 个（GSE159216、GSE178318、GSE224235、GSE226997、PXD038149）
+- file-level inventories：7 个（GSE159216、GSE178318、GSE224235、GSE226997、HPA_normal_tissue、MCRC_liver_metastasis_PDO_2026、PXD038149）
 - sample maps：3 个（GSE178318、GSE224235、GSE226997）
-- GitHub PR：#1–#31 全部已合并；最新主分支 merge commit 为 `210f35d`
-- knowledge/review layer source-only skeleton 由公开 PR #32 提出；该 PR 已通过网页版 ChatGPT 复审（APPROVE），当前待合并
+- GitHub PR：#1–#32 全部已合并；最新主分支 merge commit 为 `7cab853`
+- source-only evidence objects 由公开 PR #33 提出；EV003 URL、EV008 计数措辞、EV001/EV002 supporting-text 路径、source-only 状态措辞和 inventory 统计已按网页版审核修正；历史批准 head 为 `35a34df`，PR #33 当前待最终复核
 
 ## 已完成能力
 
@@ -42,7 +42,7 @@
 - P0 候选尚未全部完成原始论文、治疗史、分子注释、processed availability、license/access 和下载路径核验。
 - PXD038149 的 `SamplesDescription.xlsx` 仍处于 metadata gate；没有下载或解析外部 workbook。
 - 2026 CRLM PDO biobank 的 processed-data accession `hr94h42xdc.3` 已定位；sample-level clinical/treatment reconciliation、checksums 和 third-party terms 仍未完成。
-- knowledge/review layer 目前仅建立 source-only ontology/link skeleton；尚未形成 target claim、evidence object 或临床适应症结论。
+- knowledge/review layer 目前已建立 source-only ontology/link skeleton 和 8 个 source-only evidence objects；尚未形成 target claim、biological/clinical evidence conclusion 或临床适应症结论。
 - `DATA/registry/datasets.tsv` 中候选仍不能解释为已批准的 discovery cohort。
 
 ## 下一步顺序
@@ -51,7 +51,7 @@
 2. 在明确 staged 文件出现后，运行离线 checksum capture；未 staging 时不下载、不计算。
 3. 完成每个 P0 候选的 Phase 1 checklist，再通过单独 PR 讨论是否提升为 `APPROVED`。
 4. 定位并核验 2026 CRLM PDO biobank 原始 accession、license 和 processed download path。
-5. 另开 knowledge/review layer PR，把 CRC 临床适应症地图与 dataset evidence、证据等级和 data gaps 对接。
+5. 在现有 knowledge/review layer 上继续人工复核 source-only evidence objects，把 CRC 临床适应症地图与 dataset evidence、证据等级和 data gaps 对接；任何 biological/clinical conclusion 仍需单独审核。
 
 ## 权威项目记录
 

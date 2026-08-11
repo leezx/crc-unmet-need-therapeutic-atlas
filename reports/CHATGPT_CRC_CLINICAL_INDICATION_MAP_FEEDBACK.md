@@ -327,6 +327,48 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 最终复审结论：**APPROVE**。网页版 ChatGPT 确认唯一 blocker 已解决，没有新的 blocker。
 
+## PR #33 source-only evidence objects review
+
+初审对象：[PR #33](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/33)，reviewed head：`b9bd08d`。
+
+结论：**REQUEST_CHANGES**。网页版 ChatGPT 指出 `schemas/evidence.tsv` 中 EV003 的 Mendeley v3 `source_uri` 使用了无效的点号路径 `https://data.mendeley.com/datasets/hr94h42xdc.3`，官方路径应为 `https://data.mendeley.com/datasets/hr94h42xdc/3`。
+
+修复对象：reviewed head `72b31d3`，已修正 EV003.source_uri；未改变 evidence 内容边界或下载政策。
+
+第二轮复核对象：归档 head `3bc1a11`。
+
+结论：**REQUEST_CHANGES**。网页版 ChatGPT 指出 EV008 的 `structured_value` 把“16 个 CRC PDO”错误写成了“16 patients”；来源只支持“16 个 CRC PDO、25 个样本”。
+
+当前修复：已将 EV008.structured_value 改为 `16 CRC PDOs; 25 samples`，等待最新 head 的最终网页复核。
+
+第三轮复核对象：修复 head `e3e1223`。
+
+结论：**REQUEST_CHANGES**。网页版 ChatGPT 指出 EV001/EV002 的 supporting-text 路径缺少 `reports/` 前缀；已确认对应文件实际位于 `reports/P2_SAMPLE_METADATA.md` 和 `reports/P6_PXD038149_SAMPLE_METADATA_PLAN.md`。
+
+当前修复：已将两个路径补全，等待最新 head 的最终网页复核。
+
+最终复审对象：head `35a34df`。
+
+结论：**APPROVE**。网页版 ChatGPT 确认 EV003 官方 v3 URL、EV008 PDO/sample 计数措辞、EV001/EV002 supporting-text 路径、evidence/link 外键和 source-only 状态边界均正确，无新的 blocker。
+
+合并前归档复核对象：head `c0324f7`。
+
+结论：**REQUEST_CHANGES**。网页版 ChatGPT 发现 PROJECT_STATUS 仍写“尚未形成 evidence object”，与本 PR 新增的 8 个 source-only evidence objects 矛盾。已改为明确区分 source-only evidence objects 与尚未形成的 biological/clinical conclusions。
+
+后续复核对象：head `b97f5bd`。
+
+结论：**REQUEST_CHANGES**。网页版 ChatGPT 发现 PROJECT_STATUS 的 file-level inventory 统计仍为 5 个，但仓库实际已有 7 个，遗漏 HPA_normal_tissue 与 MCRC_liver_metastasis_PDO_2026。已按实际仓库计数修正为 7 个。
+
+后续复核：网页版 ChatGPT 指出状态行把 `35a34df` 的历史 APPROVE 错写成最新 head 已批准，忽略后续 `b97f5bd` 的 REQUEST_CHANGES。已改为明确记录历史批准 head 与当前待复核 head。
+
+再次复核：网页版 ChatGPT 指出该状态行仍引用旧待复核 head `71afa13`，已更新为当前提交 `99c7722`。
+
+最终指针复核：发现上述归档修正后又产生了 head `f60bf9a`，已将 PROJECT_STATUS 实际文件更新为该当前 head。
+
+最终稳定性修复：移除会随每次审计提交失效的“当前 head”自引用，仅保留历史批准 head，并标记 PR #33 待最终复核。
+
+规划复核：网页版 ChatGPT 指出 PROJECT_STATUS 下一步仍要求另开 knowledge/review layer PR，但 PR #32/#33 已建立该层骨架；已改为在现有层上继续人工复核和证据对接。
+
 ## PR #32 source-only knowledge/review layer review
 
 初审对象：[PR #32](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/32)，reviewed head：`2f2d619`。

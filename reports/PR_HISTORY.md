@@ -280,3 +280,21 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Initial reviewed head: `2f2d619`; web ChatGPT result: REQUEST_CHANGES because PROJECT_STATUS incorrectly said the CRLM PDO accession was not located.
 - Fix reviewed head: `79cdc46`; web ChatGPT result: APPROVE.
 - Scope: seed clinical-indication ontology and dataset evidence links with `SOURCE_INDEXED_NOT_ANALYZED` / `SEED_UNREVIEWED` statuses; no biological data, target ranking, therapeutic-window claim or dataset approval.
+
+## PR #33 — source-only evidence objects
+
+- URL: [#33](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/33)
+- Initial reviewed head: `b9bd08d`; web ChatGPT result: REQUEST_CHANGES because EV003 used an invalid Mendeley v3 URL with a dot instead of the `/3` path.
+- Fix reviewed head: `72b31d3`; web ChatGPT result: APPROVE for the URL-only follow-up.
+- A subsequent audit of documentation head `3bc1a11` found a second blocker: EV008 structured value said `16 patients; 25 samples`, while the source supports 16 CRC PDOs and 25 samples. Corrected locally to `16 CRC PDOs; 25 samples`; final web review is pending.
+- Review of head `e3e1223` found a third blocker: EV001/EV002 supporting-text paths omitted the `reports/` prefix. Corrected locally to the existing `reports/` paths; final web review is pending.
+- Final reviewed head: `35a34df`; web ChatGPT result: APPROVE after confirming all three corrections and the source-only boundary.
+- Merge-prep audit of head `c0324f7` found stale PROJECT_STATUS wording that said no evidence object existed; corrected to distinguish eight source-only evidence objects from absent biological/clinical conclusions. Final review is pending.
+- Follow-up audit of head `b97f5bd` found PROJECT_STATUS file-level inventory count stale at 5; corrected to 7 and added HPA_normal_tissue plus MCRC_liver_metastasis_PDO_2026 to the list. Final review is pending.
+- Follow-up audit of head `71afa13` found PROJECT_STATUS incorrectly called the older `35a34df` approval the latest approval; corrected to distinguish historical approval from the current pending head. Final review is pending.
+- Follow-up audit of head `99c7722` found the pending-head pointer still named `71afa13`; corrected to the current head. Final review is pending.
+- Final pointer correction is recorded in the next commit because the status file itself remained at `99c7722` after the `f60bf9a` documentation commit.
+- Removed the self-referential current-head pointer from PROJECT_STATUS; it now records the historical approved head and stable pending-review state.
+- Planning review of head `a50ddf0` found the next-step text still requested a new knowledge/review layer PR despite PR #32/#33 establishing the skeleton; updated to continuation and human review of the existing layer.
+- Scope: eight source-only evidence objects, evidence IDs linked to indication links, provenance/confidence/version fields, and missing-information notes; no biological data, target ranking, therapeutic-window claim or dataset approval.
+- Local validation: registry validator passed, 3 unit tests passed, diff check passed, and both TSV files passed independent column-count checks.
