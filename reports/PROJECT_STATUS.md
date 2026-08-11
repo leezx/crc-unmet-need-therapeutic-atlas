@@ -82,3 +82,4 @@
 - 已完成 GSE117548 补充 GitHub repository 的只读目录快照：固定 master commit `1bfec50e`，登记顶层 code/data/figures/models/notebooks/references/reports/tables 及 Docker/README/脚本入口；未 clone、未下载、未计算 checksum，data/models/tables 保持待核验。
 - PR #10 已由网页版 ChatGPT 对 reviewed head `942a1eb3c5c246c6630cff9922f6bfcee1028a03` 审核为 `APPROVE`，CI 通过，准备合并；后续若继续，仅对 data/models/tables 做更细 API 文件级核验。
 - 已完成固定 commit 的资产层 API 汇总：data/models/tables 共 144 个 blob、1,242,162,377 bytes；其中 raw 100 个/482,753,226 bytes，processed 27 个/758,189,431 bytes，models 4 个，tables 1 个；仅记录 API 元数据，未读取或下载内容。
+- PR #11 网页审核发现并定位汇总差异：根目录 data/.DS_Store 的 1 个 blob/6,148 bytes 被计入总量但此前未列层；已补为 data/root_metadata，使 144 blobs 与 1,242,162,377 bytes 的总计可加和复核。
