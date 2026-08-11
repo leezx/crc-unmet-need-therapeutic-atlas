@@ -339,3 +339,9 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - URL: [#39](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/39)
 - Reviewed head: `615a223`; web ChatGPT result: APPROVE.
 - Scope: restore the missing `publication_or_record` field in four P0 verification rows, align all rows to the 10-column header, and synchronize post-PR #38 status; no biological or clinical content changes.
+
+## PR #40 — parallel P0 next gates
+
+- URL: [#40](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/40)
+- Reviewed head: `caa6f74`; web ChatGPT result: APPROVE.
+- Scope: define five blocked/planned source-only gates for DepMap exact-file/filtering, HPA minimum-organ reference, and CRLM-NMP h5ad/sample-map work; no downloads, biological data or approval changes.

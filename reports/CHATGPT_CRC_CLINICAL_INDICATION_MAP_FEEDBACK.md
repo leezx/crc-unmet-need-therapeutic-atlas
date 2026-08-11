@@ -399,6 +399,10 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 网页版 ChatGPT 审核 PR #39 head `615a223`，结论：**APPROVE**。确认后四行补齐 `publication_or_record` 字段，所有行与 10 列表头对齐，没有 biological 或 clinical content 变化。
 
+## PR #40 P0 并行门禁计划审核
+
+网页版 ChatGPT 审核 PR #40 head `caa6f74`，结论：**APPROVE**。确认 DepMap、HPA、CRLM-NMP 五个门禁均为 `BLOCKED / PLANNED_SOURCE_ONLY`，并保留明确的 stop conditions；没有下载、biological data 或 approval 越界。
+
 ## PR #32 source-only knowledge/review layer review
 
 初审对象：[PR #32](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/32)，reviewed head：`2f2d619`。
