@@ -429,6 +429,12 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 最终复审结论：**APPROVE**。确认评分可复算，且 0/20 科学/临床分数与当前没有 biological matrix、candidate approval、target ranking 或 clinical conclusion 的边界一致。
 
+## PR #43 HPA minimum organ reference 审核
+
+审核 head `87b3c24`：**APPROVE**。网页版 ChatGPT 核对了 HPA v25.1 tissue naming、10 个来源级器官/组织的覆盖逻辑、TSV 结构和 `PROPOSED_SOURCE_ONLY` 边界。
+
+确认该 PR 没有下载 HPA 文件、checksum、biological data、therapeutic-window/toxicity 结论或 candidate approval；HPA-G1 仍保持 `BLOCKED / PLANNED_SOURCE_ONLY`，待人工确认器官集、文件级元数据和第三方条款。
+
 ## PR #31 PXD038149 sample-metadata gate review
 
 审核对象：[PR #31](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/31)，reviewed head：`ec01bef`。

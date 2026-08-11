@@ -8,6 +8,8 @@ Relevant reference layers for therapeutic-window review include normal-tissue pr
 
 License: the current HPA licence page states CC BY 4.0 for copyrightable HPA database content, with possible third-party constraints. Cite the HPA website and the relevant primary publication/data URL for any later use.
 
-Use the minimum tissue, single-cell, subcellular and blood resources required for ADC therapeutic-window assessment. Record exact release files and license before approval.
+`minimum_organ_reference.tsv` proposes a 10-organ source-level reference set for the first therapeutic-window review: liver, kidney, heart muscle, lung, bone marrow, spleen, colon, small intestine, pancreas and skin. The set is a coverage contract, not a biological result or a clinical safety conclusion; each row remains `PROPOSED_SOURCE_ONLY` until human review confirms the scope.
 
-Current gate: no HPA file was downloaded and no checksum was captured. File sizes, exact release archive hashes, third-party terms and the minimum organ subset remain to be recorded before any approval discussion.
+The selection is anchored to HPA v25.1 tissue names and tissue groups exposed on the official tissue-data page. It covers clearance organs, cardiac/respiratory/hematologic safety, immune-reticuloendothelial tissues, CRC lineage/GI context, pancreas and barrier tissue. It is intentionally minimum and may be expanded for target-specific liabilities.
+
+Current gate: no HPA file was downloaded and no checksum was captured. File sizes, exact release archive hashes, third-party terms and human review of the proposed minimum organ subset remain blocked before any approval discussion.
