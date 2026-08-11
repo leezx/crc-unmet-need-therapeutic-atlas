@@ -318,3 +318,10 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - URL: [#36](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/36)
 - Reviewed head: `b95f1fc`; web ChatGPT result: APPROVE.
 - Scope: update project status after PR #35 merge and move the next-step emphasis from PXD038149 inventory to its remaining workbook gate plus DepMap/HPA/CRLM provenance; no data or schema changes.
+
+## PR #37 — DepMap release evidence object
+
+- URL: [#37](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/37)
+- Initial reviewed head: `37b6bb5`; web ChatGPT result: REQUEST_CHANGES because EV009/IEL009 duplicated existing EV004/IEL004.
+- Fix reviewed head: `5863b1d`; web ChatGPT result: APPROVE after consolidating the update into EV004/IEL004 and restoring the count to eight source-only evidence objects.
+- Scope: strengthen DepMap 26Q1 release-level provenance; no CRC subset, dependency result, biological data, target ranking or approval status.
