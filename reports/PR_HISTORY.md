@@ -148,3 +148,9 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - URL: [#12](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/12)
 - Reviewed head: 196606d; web ChatGPT result: APPROVE; unique blocker: none.
 - Scope: exact fixed-commit metadata for four model-layer blobs and one table blob; Git blob SHA is provenance only, not a content checksum.
+## PR #13 — GSE117548 processed file inventory
+
+- URL: [#13](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/13)
+- Reviewed head: 272b66d2fd48340f193022513d9df3c257a87fc4
+- Web ChatGPT result: APPROVE; CI reported Validate registry completed successfully.
+- Scope: exact fixed-commit metadata for all 27 data/processed blobs; no content read, clone, execution, download, or checksum capture.
