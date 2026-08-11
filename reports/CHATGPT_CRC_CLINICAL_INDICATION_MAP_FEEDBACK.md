@@ -373,7 +373,7 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 ## PR #34 状态同步审核
 
-网页版 ChatGPT 审核 PR #34 head `b7f52d6)，结论：**APPROVE**。确认该 PR 只同步 PR #33 合并状态，没有修改 registry、evidence schemas、biological data 或 clinical/target conclusions。
+网页版 ChatGPT 审核 PR #34 head `b7f52d6`，结论：**APPROVE**。确认该 PR 只同步 PR #33 合并状态，没有修改 registry、evidence schemas、biological data 或 clinical/target conclusions。
 
 ## PR #32 source-only knowledge/review layer review
 
