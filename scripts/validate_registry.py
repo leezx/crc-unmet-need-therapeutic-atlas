@@ -26,6 +26,14 @@ manifest_header = (ROOT / "schemas/source_manifest.tsv").read_text().splitlines(
 for manifest in sorted((ROOT / "DATA/registry").glob("*/source_manifest.tsv")):
     if manifest.read_text().splitlines()[0].split("\t") != manifest_header:
         errors.append(f"{manifest}: header does not match schema")
+file_inventory_header = (ROOT / "schemas/file_inventory.tsv").read_text().splitlines()[0].split("\t")
+for inventory in sorted((ROOT / "DATA/registry").glob("*/file_inventory.tsv")):
+    if inventory.read_text().splitlines()[0].split("\t") != file_inventory_header:
+        errors.append(f"{inventory}: header does not match file inventory schema")
+    with inventory.open(newline="") as fh:
+        for row_number, row in enumerate(csv.DictReader(fh, delimiter="\t"), 2):
+            if row.get("dataset_id") != inventory.parent.name:
+                errors.append(f"{inventory}:{row_number}: dataset_id does not match directory")
 if errors:
     print("REGISTRY VALIDATION FAILED\n" + "\n".join(f"- {e}" for e in errors))
     sys.exit(1)

@@ -51,6 +51,8 @@
 - source verification PR #2 已建立；head `34ea67d` 已通过网页版 ChatGPT 最终复审（`APPROVE`），可合并。
 - 开放式搜索又补充 4 个候选，registry 从 14 增至 18 个：CRLM-NMP-ATLAS、HTAN progressive plasticity、GSE159216 和 Zenodo CRC-LM scRNA。
 - knowledge/review layer 尚未建立，仍作为后续 PR。
+- PR #2 已合并为 `80a8506`；下一分支 `phase1/p1-provenance-inventory` 开始首批 processed-file inventory。
+- 已完成 GSE178318 和 GSE224235 的第一批精确文件名、大小、下载 URL 和下载优先级记录；checksum 尚未捕获，未下载生物数据。
 
 ## 下一步顺序
 
