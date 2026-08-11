@@ -46,11 +46,16 @@
 - validator 已允许 `CANDIDATE` 没有 dataset-specific directory，待外部复审。
 - 网页版 ChatGPT 已复审 head `47cc25c` 并给出 `APPROVE`；随后加入普通 PR/push 的轻量 validation workflow。
 - 最新 head `f9c7003` 已再次获得网页版 ChatGPT `APPROVE`；复审反馈认为 PR 可合并，且新增 CI workflow 没有引入 blocker。
+- PR #1 已于 2026-08-10 合并，merge commit 为 `240473c`。
+- 已开始 Phase 1 P0 source verification：首批核验 GSE178318、GSE224235、GSE226997、DepMap 26Q1、PXD038149、2026 CRLM PDO biobank 和 HPA。
+- source verification PR #2 已建立；head `34ea67d` 已通过网页版 ChatGPT 最终复审（`APPROVE`），可合并。
+- 开放式搜索又补充 4 个候选，registry 从 14 增至 18 个：CRLM-NMP-ATLAS、HTAN progressive plasticity、GSE159216 和 Zenodo CRC-LM scRNA。
 - knowledge/review layer 尚未建立，仍作为后续 PR。
 
 ## 下一步顺序
 
-1. 合并 PR #1。
-2. 逐个核对 P0 candidate 的论文、accession、patient composition、treatment annotation 和 processed-data availability。
-3. 仅将完成 provenance materialization 的候选转为 `APPROVED`。
-4. 另开 knowledge/review layer PR，将临床适应症地图与 dataset evidence 对接。
+1. 审核并合并 P0 source verification PR。
+2. 补齐已确认来源的 processed-file inventory、checksums、license 和下载路径。
+3. 定位 2026 CRLM PDO biobank 的原始 accession。
+4. 仅将完成 provenance materialization 的候选转为 `APPROVED`。
+5. 另开 knowledge/review layer PR，将临床适应症地图与 dataset evidence 对接。

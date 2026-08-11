@@ -1,0 +1,2 @@
+dataset_id	source_url	accession	download_method	download_date	file_name	file_size	checksum	license	publication_doi	access_status	notes
+HPA_normal_tissue	https://www.proteinatlas.org/	HPA	Official downloadable data; minimum safety reference subset	2026-08-10	NA	NA	NA	HPA licence and citation terms	NA	VERIFIED_ENTRY	Portal and version 25.1 verified; exact release file selection pending.

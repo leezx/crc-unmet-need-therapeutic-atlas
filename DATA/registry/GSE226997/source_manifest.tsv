@@ -1,0 +1,2 @@
+dataset_id	source_url	accession	download_method	download_date	file_name	file_size	checksum	license	publication_doi	access_status	notes
+GSE226997	https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE226997	GSE226997	GEO processed supplementary files first	2026-08-10	Processed supplementary files	NA	NA	NCBI repository terms	10.1038/s41598-024-52868-0	VERIFIED	Four primary CRC patients; raw 41.2 GB archive not downloaded.

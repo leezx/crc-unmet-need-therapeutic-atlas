@@ -44,3 +44,24 @@ No automatic merge or P0 download was performed. The PR remains draft until the 
 - CI: `Validate registry` completed successfully according to the web review.
 - Mergeability: reported as `mergeable: true`.
 - Recommendation: merge PR #1, then begin P0 source verification; do not add knowledge layer or data downloader to PR #1.
+
+## Phase 1 source verification
+
+After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was created for the next scoped change. The branch records first-pass verification for P0/reference candidates without downloading biological data.
+
+## PR #2 — Phase 1 source verification
+
+- URL: [#2](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/2)
+- Title: `Phase 1: verify first P0 data sources`
+- State: `OPEN / DRAFT`
+- Head branch: `phase1/p0-source-verification`
+- Scope: first-party metadata verification and source manifests only; no biological data download.
+
+### Review cycle
+
+- Initial web review of head `f4c743b`: `REQUEST_CHANGES`.
+- Blockers: duplicate Zenodo package risk, CRLM cell/sample count confusion, GSE224235 over-strong discovery score, and HTAN treatment annotation semantics.
+- Fix commit: `34ea67d` (`fix: address atlas review findings`).
+- Final web review of head `34ea67d04f3a4bad07a97b5a7bb423087e49e610`: `APPROVE`.
+- Final review confirmed `mergeable: true` and successful `Validate registry` CI; no new blockers.
+- User-authorized next action: merge PR #2, then continue provenance materialization without downloading biological data.

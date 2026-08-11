@@ -1,2 +1,4 @@
 dataset_id	source_url	accession	download_method	download_date	file_name	file_size	checksum	license	publication_doi	access_status	notes
-GSE178318	https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE178318	GSE178318	GEO processed files first	NA	NA	NA	NA	NCBI repository terms	NA	UNVERIFIED	Seed source from architecture.
+GSE178318	https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE178318	GSE178318	GEO processed files first	2026-08-10	GSE178318_barcodes.tsv.gz	578.6 KB	NA	NCBI repository terms	10.1038/s41598-021-96568-3	VERIFIED	Official GEO record; processed file.
+GSE178318	https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE178318	GSE178318	GEO processed files first	2026-08-10	GSE178318_genes.tsv.gz	258.3 KB	NA	NCBI repository terms	10.1038/s41598-021-96568-3	VERIFIED	Official GEO record; processed file.
+GSE178318	https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE178318	GSE178318	GEO processed files first	2026-08-10	GSE178318_matrix.mtx.gz	520.7 MB	NA	NCBI repository terms	10.1038/s41598-021-96568-3	VERIFIED	Official GEO record; processed matrix.
