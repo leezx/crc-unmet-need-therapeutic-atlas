@@ -359,6 +359,8 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 结论：**REQUEST_CHANGES**。网页版 ChatGPT 发现 PROJECT_STATUS 的 file-level inventory 统计仍为 5 个，但仓库实际已有 7 个，遗漏 HPA_normal_tissue 与 MCRC_liver_metastasis_PDO_2026。已按实际仓库计数修正为 7 个。
 
+后续复核：网页版 ChatGPT 指出状态行把 `35a34df` 的历史 APPROVE 错写成最新 head 已批准，忽略后续 `b97f5bd` 的 REQUEST_CHANGES。已改为明确记录历史批准 head 与当前待复核 head。
+
 ## PR #32 source-only knowledge/review layer review
 
 初审对象：[PR #32](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/32)，reviewed head：`2f2d619`。
