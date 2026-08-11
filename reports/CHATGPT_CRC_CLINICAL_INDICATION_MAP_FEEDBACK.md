@@ -435,6 +435,10 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 确认该 PR 没有下载 HPA 文件、checksum、biological data、therapeutic-window/toxicity 结论或 candidate approval；HPA-G1 仍保持 `BLOCKED / PLANNED_SOURCE_ONLY`，待人工确认器官集、文件级元数据和第三方条款。
 
+## PR #44 HPA gate 后进度同步审核
+
+审核 head `f986a66`：**APPROVE**。网页版 ChatGPT 确认 PR #43 合并提交 `83ac83d`、HPA 门禁进度和 58/100 → 60/100 的固定评分增量一致；没有 biological data、candidate approval、target ranking 或 clinical conclusion 变化。
+
 ## PR #31 PXD038149 sample-metadata gate review
 
 审核对象：[PR #31](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/31)，reviewed head：`ec01bef`。
