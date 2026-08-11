@@ -326,3 +326,13 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 修复对象：reviewed head `1b4fc99`，将当前 PR 状态明确记录为 OPEN / DRAFT，并保留待复审后合并的状态。
 
 最终复审结论：**APPROVE**。网页版 ChatGPT 确认唯一 blocker 已解决，没有新的 blocker。
+
+## PR #26 DepMap 26Q1 release provenance review
+
+初审对象：[PR #26](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/26)，reviewed head：`ee4276e`。
+
+结论：**REQUEST_CHANGES**。网页版 ChatGPT 指出 `DATA/registry/DepMap_26Q1/source_manifest.tsv` 在明确未下载数据时填写了 `download_date=2026-08-11`，与 no-download 语义矛盾。
+
+修复对象：reviewed head `cbfd7c8`，将 `download_date` 改为 `NA`，并明确记录 no download performed。
+
+最终复审结论：**APPROVE**。网页版 ChatGPT 确认唯一 blocker 已解决，没有新的 blocker。
