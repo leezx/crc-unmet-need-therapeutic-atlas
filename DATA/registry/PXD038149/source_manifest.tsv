@@ -1,2 +1,2 @@
 dataset_id	source_url	accession	download_method	download_date	file_name	file_size	checksum	license	publication_doi	access_status	notes
-PXD038149	https://proteomecentral.proteomexchange.org/dataset/PXD038149	PXD038149	PRIDE processed files first	2026-08-10	PRIDE FTP archive	NA	NA	PRIDE/underlying dataset terms	NA	VERIFIED	Exact processed-file inventory pending; no download performed.
+PXD038149	https://proteomecentral.proteomexchange.org/dataset/PXD038149	PXD038149	PRIDE processed files first	2026-08-11	PRIDE API file inventory	51 files; 7 non-raw files listed	NA	CC0 according to PRIDE API	NA	VERIFIED	PRIDE API confirms 51 files: 44 raw and 7 non-raw metadata/processed/search/peak files; raw download remains out of scope.

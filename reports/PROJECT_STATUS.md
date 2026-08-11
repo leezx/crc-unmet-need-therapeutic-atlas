@@ -59,6 +59,7 @@
 - PR #5 已获网页版 ChatGPT `APPROVE`；原论文支持的 GSE178318 treatment context 已记录，准备合并。
 - 已开始 P4 checksum/offline capture 机制和 GSE224235 sample map；17 个 GEO sample accession 已索引，治疗 regimen/timing 保留 `UNKNOWN`。
 - PR #6 已获网页版 ChatGPT `APPROVE`，准备合并；checksum 工具仅处理外部已 staged 文件，不自动下载。
+- 已完成 PXD038149 PRIDE API 文件级 provenance 核验：51 个文件中 44 个 raw、7 个非 raw；7 个 processed/metadata/search/peak 文件已登记，raw 仍不默认下载。
 
 ## 下一步顺序
 
