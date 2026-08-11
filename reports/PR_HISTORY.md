@@ -381,3 +381,10 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Fix reviewed head: `55bd8c4`; web ChatGPT result: REQUEST_CHANGES only because the PR description retained the stale 66/100 number; description corrected to 65/100 and final review approved.
 - Scope: batch DepMap model-filter, CRLM sample-map/window and HPA source-review contracts; add the five-gate crosswalk; preserve exact provenance at 5/15 and raise the auditable overall score from 60/100 to 65/100 through source/index (+1) and P0 gate-design (+4) infrastructure.
 - No data downloads, sample rows, dependency results, target ranking, therapeutic-window or clinical conclusion.
+
+## PR #46 — source-only completion framework
+
+- URL: [#46](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/46)
+- Initial reviewed head: `4d899bf`; web ChatGPT result: REQUEST_CHANGES because internal closure work could be waived as an external blocker.
+- Fix reviewed head: `9ab56c6`; web ChatGPT result: APPROVE after separating mandatory internal requirements from the external-blocker allowlist.
+- Scope: define the source-only 100% endpoint, weighted dimensions and closeout checklist; no biological data, analysis or dataset approval.

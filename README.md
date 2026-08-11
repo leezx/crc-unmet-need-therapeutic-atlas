@@ -31,6 +31,8 @@ Phase 1: dataset discovery and review. Seed resources are candidates to verify; 
 
 See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the review and update workflow.
 
+The current source-only completion definition is [`config/project_completion.yaml`](config/project_completion.yaml), and the closeout checklist is [`reports/SOURCE_ONLY_CLOSURE_CHECKLIST.md`](reports/SOURCE_ONLY_CLOSURE_CHECKLIST.md). This phase can be complete without downloading or analyzing biological data; unresolved upstream access remains an explicit blocker rather than an inferred result.
+
 Project records:
 
 - [`reports/PROJECT_STATUS.md`](reports/PROJECT_STATUS.md)

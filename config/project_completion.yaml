@@ -1,0 +1,42 @@
+project: crc-unmet-need-therapeutic-atlas
+phase: source_only_registry
+scope_boundary:
+  includes:
+    - source landing pages and accessions
+    - file and archive inventories
+    - reproducible download paths
+    - metadata contracts and UNKNOWN rules
+    - scheduled metadata scans and update PRs
+    - review, audit and handoff records
+  excludes:
+    - biological file downloads
+    - biological matrix generation
+    - expression/dependency/drug-response analysis
+    - target ranking or therapeutic-window conclusions
+completion_endpoint:
+  percent: 100
+  definition: Every candidate has a source record, explicit download method, update policy, review state and documented remaining blocker; all automated checks pass; no biological data is stored.
+  internal_requirements:
+    - closure_matrix_is_complete
+    - every_update_target_has_scan_disposition
+    - final_closure_pr_is_merged
+    - validator_tests_and_no_data_audit_pass
+  external_blocker_allowlist:
+    - upstream_requires_interactive_authentication
+    - upstream_file_or_metadata_not_public
+    - user_has_not_staged_external_file
+score_weights:
+  registry_and_source_manifests: 25
+  file_indexes_and_download_paths: 20
+  metadata_contracts_and_unknown_rules: 15
+  update_scanning_and_ci: 15
+  pr_review_and_audit_trail: 15
+  closure_matrix_and_handoff: 10
+gates:
+  - source_manifest
+  - file_or_archive_inventory
+  - download_method
+  - update_target
+  - review_status
+  - remaining_blocker
+  - no_biological_data
