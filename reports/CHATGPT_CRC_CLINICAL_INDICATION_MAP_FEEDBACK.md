@@ -413,6 +413,14 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 最终复审结论：**APPROVE**。网页版 ChatGPT 确认 blocker 已解决，没有新的 blocker。
 
+## PR #41 CRLM-NMP 最新 Zenodo archive inventory 审核
+
+初审 head `f5b803f`：**REQUEST_CHANGES**。网页版 ChatGPT 指出 `file_inventory.tsv` 的三个 `source_url` 仍是 Zenodo record page，不是逐文件官方下载 endpoint，与“下载路径”字段语义不一致。
+
+修复 head `d81ec41`：将 `source_manifest.tsv` 和 `file_inventory.tsv` 的 `source_url` 改为 Zenodo API `/files/<name>/content` 直接下载路径，并把 record page 保留在 notes 作为核验入口。
+
+最终复审结论：**APPROVE**。确认 DOI/version、逐文件 URL、source-record MD5、CC BY 4.0 和 no-download/no-inner-h5ad 边界一致；没有 biological data、sample count、candidate approval 或 clinical conclusion 越界。
+
 ## PR #31 PXD038149 sample-metadata gate review
 
 审核对象：[PR #31](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/31)，reviewed head：`ec01bef`。

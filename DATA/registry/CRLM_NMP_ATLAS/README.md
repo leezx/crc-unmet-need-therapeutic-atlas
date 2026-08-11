@@ -1,5 +1,9 @@
 # CRLM-NMP-ATLAS
 
+The latest published Zenodo version is record `16939324` (`10.5281/zenodo.16939324`), linked to concept DOI `10.5281/zenodo.15234826`. Its source API exposes three downloadable archives: `data.zip`, `Analysis.zip`, and `environments.zip`. This repository records their names, sizes, source-record MD5 values, license and download paths only.
+
+The inner h5ad file names, sample rows and baseline/post-perfusion window fields are not asserted because the archives have not been downloaded or staged. The CELLxGENE collection remains a second source-level access path.
+
 Primary data record: https://zenodo.org/records/15234826
 
 CELLxGENE collection: https://cellxgene.cziscience.com/collections/be679cb1-35f0-46c9-9a2d-30691862a54a

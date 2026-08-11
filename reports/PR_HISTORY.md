@@ -345,3 +345,11 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - URL: [#40](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/40)
 - Reviewed head: `caa6f74`; web ChatGPT result: APPROVE.
 - Scope: define five blocked/planned source-only gates for DepMap exact-file/filtering, HPA minimum-organ reference, and CRLM-NMP h5ad/sample-map work; no downloads, biological data or approval changes.
+
+## PR #41 — latest CRLM-NMP Zenodo archive inventory
+
+- URL: [#41](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/41)
+- Initial reviewed head: `f5b803f`; web ChatGPT result: REQUEST_CHANGES because the file inventory used record-page URLs instead of file-level download endpoints.
+- Fix reviewed head: `d81ec41`; web ChatGPT result: APPROVE after changing `source_url` to the Zenodo API `/files/<name>/content` endpoints.
+- Scope: correct the latest published Zenodo version, index three archive-level files with source-record sizes/MD5/license and direct download paths, and preserve the explicit no-download/no-inner-h5ad/no-sample-count boundary.
+- No biological data downloaded or committed; inner h5ad names and sample-level metadata remain blocked.
