@@ -27,6 +27,12 @@ def main() -> int:
     required = {"target_id", "repository", "commit", "prefix", "output_name"}
     if not targets or not required.issubset(targets[0]):
         raise SystemExit(f"config must contain columns: {', '.join(sorted(required))}")
+    target_ids = [target["target_id"] for target in targets]
+    output_names = [target["output_name"] for target in targets]
+    if len(set(target_ids)) != len(target_ids):
+        raise SystemExit("config contains duplicate target_id values")
+    if len(set(output_names)) != len(output_names):
+        raise SystemExit("config contains duplicate output_name values")
 
     for target in targets:
         if not re.fullmatch(r"[A-Za-z0-9_.-]+", target["target_id"]):
