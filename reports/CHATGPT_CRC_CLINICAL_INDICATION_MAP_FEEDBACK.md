@@ -363,6 +363,8 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 再次复核：网页版 ChatGPT 指出该状态行仍引用旧待复核 head `71afa13`，已更新为当前提交 `99c7722`。
 
+最终指针复核：发现上述归档修正后又产生了 head `f60bf9a`，已将 PROJECT_STATUS 实际文件更新为该当前 head。
+
 ## PR #32 source-only knowledge/review layer review
 
 初审对象：[PR #32](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/32)，reviewed head：`2f2d619`。
