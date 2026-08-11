@@ -1,0 +1,11 @@
+dataset_id	publication_repository	human_context	treatment_context	molecular_annotation	processed_inventory	license_access	update_audit	phase1_decision	blockers
+GSE178318	PASS	PASS	PARTIAL	PARTIAL	PASS	PARTIAL	PARTIAL	HOLD	Sample-level treatment metadata, PI-contact usage terms, checksum capture and admission review remain pending.
+GSE224235	PASS	PASS	BLOCKED	BLOCKED	PARTIAL	PARTIAL	PARTIAL	HOLD	Treatment context and genome-wide target-discovery relevance are not established; 900-gene nCounter context only and GeoMx availability remains unconfirmed.
+DepMap_26Q1	PASS	PASS_CELL_LINE	NOT_APPLICABLE	PASS	BLOCKED	PARTIAL	PASS	HOLD	Interactive portal verification blocks exact release-file inventory and CRC model filtering; release terms and checksums remain pending.
+PXD038149	PASS	PARTIAL	PARTIAL	PARTIAL	PASS	PASS	PARTIAL	HOLD	PDO/sample-level clinical reconciliation and checksum capture remain pending; raw proteomics stays out of default scope.
+MCRC_liver_metastasis_PDO_2026	PASS	PASS	PARTIAL	PASS	PASS	PARTIAL	PARTIAL	HOLD	Sample-level clinical/treatment reconciliation, downloaded-file checksums and third-party terms remain pending.
+CRC_organoid_CRISPR_dependency	NOT_REVIEWED	NOT_REVIEWED	NOT_REVIEWED	NOT_REVIEWED	NOT_REVIEWED	NOT_REVIEWED	NOT_REVIEWED	HOLD	Repository accession and model-level clinical relevance have not been identified.
+HPA_normal_tissue	PASS	PASS_NORMAL_REFERENCE	NOT_APPLICABLE	PARTIAL	PASS	PARTIAL	PARTIAL	HOLD	Minimum organ subset, file sizes/checksums and third-party source terms remain pending; HPA is a safety reference, not a discovery cohort.
+CRLM_NMP_ATLAS	PASS	PASS	PASS_EX_VIVO	PARTIAL	PARTIAL	PARTIAL	PARTIAL	HOLD	Exact h5ad/file inventory, sample map, license and checksums remain pending.
+HTAN_CRC_progressive_plasticity	PASS	PASS	PARTIAL	PASS	PARTIAL	PARTIAL	PARTIAL	HOLD	Exact collection file inventory, publication DOI, treatment exposure and license/checksum details remain pending.
+GSE117548	PASS	PASS	PASS_DRUG_SCREEN	PASS	PARTIAL	PARTIAL	PARTIAL	HOLD	Image/compound-level response files, license/access terms and checksums require separate verification.

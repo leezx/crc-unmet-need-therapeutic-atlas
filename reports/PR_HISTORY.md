@@ -254,3 +254,10 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - URL: [#28](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/28)
 - Reviewed head: `2dd9751`; web ChatGPT result: APPROVE.
 - Scope: Mendeley Data v3 accession `hr94h42xdc.3`, DOI `10.17632/hr94h42xdc.3`, CC BY 4.0, and five Data S1–S5 processed/derived files; no file download, checksum capture, raw-sequencing claim, or candidate approval.
+
+## PR #29 — P0 Phase 1 admission matrix
+
+- URL: [#29](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/29)
+- Initial reviewed head: `8643557`; web ChatGPT result: REQUEST_CHANGES because CRLM PDO `license_access=PASS` contradicted the stated pending third-party-term review.
+- Fix reviewed head: `4b291c8`; web ChatGPT result: APPROVE.
+- Scope: ten P0 candidate gate states across publication/context, treatment, molecular annotation, processed inventory, license/access and update audit; all decisions remain HOLD and all registry statuses remain CANDIDATE.
