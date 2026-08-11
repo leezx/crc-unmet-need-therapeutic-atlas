@@ -242,3 +242,9 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Initial reviewed head: `ee4276e`; web ChatGPT result: REQUEST_CHANGES because `download_date` was populated despite no download being performed.
 - Fix reviewed head: `cbfd7c8`; web ChatGPT result: APPROVE.
 - Scope: official DepMap Public 26Q1 release and release-notes provenance, release-level file families, and interactive portal verification gate; no CRC subset extraction, biological data, exact download files, or checksums.
+
+## PR #27 — HPA 25.1 file provenance
+
+- URL: [#27](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/27)
+- Reviewed head: `41da9cd`; web ChatGPT result: APPROVE.
+- Scope: HPA v25.1/Ensembl v109, four official downloadable endpoints, CC BY 4.0 and third-party constraint caveat; no HPA file download, checksum capture, therapeutic-window claim, or candidate approval.
