@@ -1,0 +1,2 @@
+dataset_id	disposition_id	status	scope	blocker_class	rationale	next_artifact
+GSE117548	GSE117548-NFI-001	EXPLICIT_NO_FILE_INVENTORY	primary GEO layer	EXTERNAL_OR_DATASET_REVIEW	The primary GEO record has processed/sample-table context, while supplementary GitHub layers are separately indexed; no additional GEO file inventory is asserted until the exact primary file listing is reconciled.	Reconcile GEO filelist and supplementary layers; do not download or infer compound-response availability.

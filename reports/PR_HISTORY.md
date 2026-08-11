@@ -407,3 +407,8 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 
 - Initial reviewed head: `cd9705c` after four targeted corrections in the same PR; web ChatGPT result: APPROVE in the existing conversation “PR审核与错误反馈”.
 - Scope: add a deterministic audit script and CI guardrail for forbidden biological suffixes, raw/processed/data paths, tracked files over 50 MiB and required source-only control files; update the auditable project score from 75/100 to 80/100. No data download, analysis, candidate approval or clinical conclusion.
+
+## PR #50 — explicit no-file-inventory dispositions
+
+- Initial reviewed head: `239c4fb`; web ChatGPT result: APPROVE after validating the structured disposition contract, blocker-class mapping, and exact 85/90 score arithmetic in the existing conversation “PR审核与错误反馈”.
+- Scope: add four tracked source-only disposition records for candidates with source manifests but intentionally unmaterialized file inventories; update the closure builder and project score from 80/100 to 85/100. No file download, biological data, analysis, candidate approval or clinical conclusion.

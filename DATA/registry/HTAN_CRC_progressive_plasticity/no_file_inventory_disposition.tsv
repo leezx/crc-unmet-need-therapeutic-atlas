@@ -1,0 +1,2 @@
+dataset_id	disposition_id	status	scope	blocker_class	rationale	next_artifact
+HTAN_CRC_progressive_plasticity	HTAN-NFI-001	EXPLICIT_NO_FILE_INVENTORY	collection-level source index	EXTERNAL_OR_DATASET_REVIEW	The public CELLxGENE collection is indexed, but no archive/file-level inventory is asserted without an approved metadata export or staged archive listing.	Record collection export metadata or staged archive listing; do not download in this phase.

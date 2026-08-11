@@ -103,6 +103,8 @@ class GitHubScannerTests(unittest.TestCase):
         self.assertEqual(len(rows), 19)
         self.assertTrue(all(row["review_state"] == "CANDIDATE_SOURCE_ONLY" for row in rows))
         self.assertTrue(any(row["closure_status"] == "INTERNAL_ACTION_REQUIRED" for row in rows))
+        self.assertTrue(any(row["file_inventory"] == "NO_FILE_INVENTORY_DISPOSITION" for row in rows))
+        self.assertTrue(all(row["closure_status"] != "INTERNAL_ACTION_REQUIRED" for row in rows if row["file_inventory"] == "NO_FILE_INVENTORY_DISPOSITION"))
         self.assertTrue(all(row["blocker_class"] for row in rows))
 
 
