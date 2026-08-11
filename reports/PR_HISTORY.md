@@ -206,3 +206,10 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 
 - Scope: document the human review gate for `update_available=TRUE`, including fixed-commit tree comparison, inventory reconciliation, separate pin-update PRs, and no-download boundaries.
 - Web ChatGPT result: `APPROVE`; no provenance or metadata-only blocker.
+
+## PR #22 — GSE226997 source metadata
+
+- URL: [#22](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/22)
+- Initial reviewed head: `6c4db77`; web ChatGPT result: REQUEST_CHANGES because the not-downloaded raw archive had a non-NA download date.
+- Fix reviewed head: `1d1c421`; web ChatGPT result: APPROVE.
+- Scope: official GEO source, four sample accessions, processed supplementary-file availability, deferred raw archive, and no inferred treatment context; no biological content downloaded or stored.
