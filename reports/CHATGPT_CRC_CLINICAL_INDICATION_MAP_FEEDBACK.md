@@ -557,3 +557,9 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 ## PR #52 remaining source identities review
 
 网页版 ChatGPT 在既有对话“PR审核与错误反馈”中审核 PR #52 head `7ed27b7`，结论：**APPROVE**。确认 GSE263580/GSE263581/GSE263582 与 EGA EGAS50000000256 的来源和 accession 可追溯，Mus musculus 工程化类器官与 HT29/SW480 受控访问 Perturb-seq 的 scope 边界已明确，两个候选仍为 `INTERNAL_ACTION_REQUIRED`，没有下载、分析、候选批准或临床结论越界。
+
+## PR #53 source-only final closure review
+
+初审 head `f7e8b12`：**REQUEST_CHANGES**。网页版 ChatGPT 指出 `CRC_organoid_CRISPR_dependency` 已在 scope review 中决定为 reference-only，但 `datasets.tsv` 仍保留 `P0_DOWNLOAD`，与 scope decision 矛盾。
+
+修正 head `202427d`：将该候选改为 `REFERENCE_ONLY`，并同步明确 Mus musculus 工程化类器官来源不等同于 patient-derived-human cohort。网页版 ChatGPT 最终复审结论：**APPROVE**。

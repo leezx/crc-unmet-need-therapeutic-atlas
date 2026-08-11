@@ -16,12 +16,12 @@
 
 | 维度 | 当前进度 | 本轮变化 | 判定标准 | 当前阻塞 |
 |---|---:|---:|---|---|
-| 工程 / provenance 基础设施 | **90/90** | 85/90 → 90/90（+5） | 19 个候选 closure matrix、11 个候选的结构化 source/no-file-inventory disposition、1 个 configured update target 的 metadata scan/disposition、CI freshness check、source-only 边界审计和 5 个 P0 gate crosswalk 已完成 | DepMap exact headers、HPA final scope/files/terms、CRLM row-level metadata，以及两个新 source 的内部 scope/access review 仍未完成 |
-| source-only completion endpoint | **未完成** | 内部 source manifest 缺口已消除；门禁仍未关闭 | 只有 `closure_matrix_is_complete` 等全部 internal requirements 完成后，90 分端点才可标记为 100% | 两个新 source manifest 已记录，但各自的内部 scope/access review 仍为 `INTERNAL_ACTION_REQUIRED` |
+| 工程 / provenance 基础设施 | **90/90** | 85/90 → 90/90（+5） | 19 个候选 closure matrix、13 个候选的结构化 source/no-file-inventory/scope disposition、1 个 configured update target 的 metadata scan/disposition、CI freshness check、source-only 边界审计和 5 个 P0 gate crosswalk 已完成 | DepMap exact headers、HPA final scope/files/terms、CRLM row-level metadata 仍未完成；这些属于后续 dataset review，不再是内部 closure 缺口 |
+| source-only completion endpoint | **待最终关闭** | 内部 closure artifacts 已齐备；等待本 PR 合并作为 final closure PR | `closure_matrix_is_complete`、`every_update_target_has_scan_disposition`、validator/no-data audit 均已满足；合并本 PR 后端点标记为 100% | 等待 final closure PR 合并 |
 | 科学 / 临床可用性 | **0/10** | 0/10 → 0/10（+0） | 本阶段不下载或分析数据；科学 readiness 只在未来独立分析阶段计分 | 当前没有 biological matrix、target ranking、therapeutic-window 或 clinical conclusion |
-| 总体项目进度 | **90/100（90%）** | 90/100 → 90/100（本轮完成来源定位，不新增评分点） | 固定 100 分制：source-only engineering/provenance 90 分 + scientific/clinical readiness 10 分；当前总分为 90 + 0 | 下一里程碑是完成两个内部 scope/access review，并完成 source-only closure review |
+| 总体项目进度 | **90/100（90%）** | 90/100 → 90/100（本轮完成 closure artifacts，不新增评分点） | 固定 100 分制：source-only engineering/provenance 90 分 + scientific/clinical readiness 10 分；当前总分为 90 + 0 | 合并 final closure PR 后，source-only endpoint 达到 100%；科学/临床 overlay 仍按当前范围为 0/10 |
 
-评分明细（工程/provenance 90/90）：registry/admission architecture 10/10；source/index layer 15/15；validator/tests 10/10；update/scan system 10/10；PR/review audit 10/10；P0 gate design 10/10；exact dataset provenance materialization 15/15；closure/handoff 10/10。科学/临床可用性 0/10，因为本阶段不进行 biological analysis，也没有 candidate approval 或 clinical conclusion。本轮完成两个候选的官方来源定位和结构化 disposition，但不新增评分点；分项严格合计 90/90。这里的 90/90 是加权基础设施评分，不等同于 source-only completion endpoint 已关闭；两个候选仍需完成内部 scope/access review。
+评分明细（工程/provenance 90/90）：registry/admission architecture 10/10；source/index layer 15/15；validator/tests 10/10；update/scan system 10/10；PR/review audit 10/10；P0 gate design 10/10；exact dataset provenance materialization 15/15；closure/handoff 10/10。科学/临床可用性 0/10，因为本阶段不进行 biological analysis，也没有 candidate approval 或 clinical conclusion。本轮完成两个候选的 scope/access review artifact，不新增评分点；分项严格合计 90/90。这里的 90/90 是加权基础设施评分；本 PR 合并后 source-only completion endpoint 才正式关闭。
 
 ## 当前规模
 
