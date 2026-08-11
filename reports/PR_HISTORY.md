@@ -193,3 +193,10 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - URL: [#19](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/19)
 - Reviewed head: `26edd5e`; web ChatGPT result: APPROVE; Validate registry CI successful.
 - Scope: version-controlled metadata report and draft-PR update path; pinned commits remain unchanged until separate review.
+
+## PR #20 — drift-checker regression-test hardening
+
+- URL: [#20](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/20)
+- Initial reviewed head: `2627269`; web ChatGPT result: REQUEST_CHANGES because the test checked only the first request and reused the pinned SHA as the fake latest SHA.
+- Fix reviewed head: `67a6f04`; web ChatGPT result: APPROVE; local regression suite passed (3 tests).
+- Scope: strengthen the offline test to require exactly one Git ref metadata request, reject `/commits/`, and prove the returned `object.sha` drives drift detection; no blob reads, patches, clones, downloads, or automatic pin changes.

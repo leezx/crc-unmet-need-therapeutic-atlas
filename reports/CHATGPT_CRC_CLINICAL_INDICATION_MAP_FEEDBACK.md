@@ -270,3 +270,13 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 复审对象：[PR #19](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/19)，reviewed head：`26edd5e`。
 
 结论：**APPROVE**。网页版 ChatGPT 确认 tracked report 只保存 Git ref metadata；weekly workflow 在 report 变化时通过 draft PR 进入人工审核，不自动修改 pinned SHA，不读取 blob/patch、clone、执行或下载生物数据。
+
+## PR #20 drift-checker regression-test review
+
+初审对象：[PR #20](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/20)，初始 reviewed head：`2627269`。
+
+结论：**REQUEST_CHANGES**。网页版 ChatGPT 指出回归测试只检查第一个请求，且 fake `object.sha` 与 pinned SHA 相同，不能证明测试真正使用了 Git ref 返回的最新 SHA，也不能充分防止退回 `/commits/` endpoint。
+
+修复对象：reviewed head `67a6f04`。
+
+最终复审结论：**APPROVE**。网页版 ChatGPT 确认测试现在要求恰好一次请求、明确禁止 `/commits/`，并用不同的 `bbbb...` latest SHA 驱动 `update_available=TRUE`；本地 3 项测试通过，未发现新的 metadata-only、网络或 provenance blocker。
