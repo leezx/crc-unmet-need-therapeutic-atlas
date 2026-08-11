@@ -20,6 +20,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 scripts/scan_github_targets.py
+      - name: Check configured GitHub target refs for updates
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 scripts/check_github_target_updates.py
       - name: Upload fixed-commit tree inventories
         uses: actions/upload-artifact@v4
         with:

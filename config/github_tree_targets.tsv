@@ -1,2 +1,2 @@
-target_id	repository	commit	prefix	output_name	notes
-GSE117548_supplementary_external	boutroslab/Supp_BetgeRindtorff_2021	1bfec50e1f8f8deb7bbaa40aa28315262dbb1c19	data/external	GSE117548_supplementary_external.tsv	Fixed-commit metadata only; contents are not read or downloaded.
+target_id	repository	commit	tracking_ref	prefix	output_name	notes
+GSE117548_supplementary_external	boutroslab/Supp_BetgeRindtorff_2021	1bfec50e1f8f8deb7bbaa40aa28315262dbb1c19	master	data/external	GSE117548_supplementary_external.tsv	Fixed-commit metadata only; contents are not read or downloaded.
