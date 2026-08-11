@@ -20,7 +20,7 @@
 - source manifests：11 个
 - file-level inventories：7 个（GSE159216、GSE178318、GSE224235、GSE226997、HPA_normal_tissue、MCRC_liver_metastasis_PDO_2026、PXD038149）
 - sample maps：3 个（GSE178318、GSE224235、GSE226997）
-- GitHub PR：#1–#38 全部已合并；最新主分支 merge commit 为 `c114f34`
+- GitHub PR：#1–#39 全部已合并；最新主分支 merge commit 为 `ffbf8c3`
 - PR #33 已合并 source-only evidence objects：EV003 URL、EV008 计数措辞、EV001/EV002 supporting-text 路径、source-only 状态措辞和 inventory 统计均已完成审核修正
 
 ## 已完成能力
@@ -47,7 +47,7 @@
 
 ## 下一步顺序
 
-1. PXD038149 的 source/file-level provenance 已完成第一轮；继续处理其 workbook staging gate，并优先推进 DepMap_26Q1、HPA_normal_tissue 和 CRLM PDO biobank 的 source/file-level provenance。
+1. 按 `reports/P0_NEXT_GATE_PLAN.tsv` 并行推进 DepMap exact-file/filter、HPA minimum-organ reference set 和 CRLM-NMP h5ad/sample-map 门禁。
 2. 在明确 staged 文件出现后，运行离线 checksum capture；未 staging 时不下载、不计算。
 3. 完成每个 P0 候选的 Phase 1 checklist，再通过单独 PR 讨论是否提升为 `APPROVED`。
 4. 定位并核验 2026 CRLM PDO biobank 原始 accession、license 和 processed download path。
@@ -63,3 +63,4 @@
 - [updates/REVIEW_CHECKLIST.md](updates/REVIEW_CHECKLIST.md)：上游 pinned-target 漂移后的人工复核流程
 - [P2_SAMPLE_METADATA.md](P2_SAMPLE_METADATA.md)：GSE178318 sample-level treatment/pairing reconciliation
 - [PXD038149_SAMPLE_METADATA_GATE.tsv](PXD038149_SAMPLE_METADATA_GATE.tsv)：PXD038149 workbook staging and sample-metadata gate
+- [P0_NEXT_GATE_PLAN.tsv](P0_NEXT_GATE_PLAN.tsv)：批量 P0 下一阶段 provenance 门禁
