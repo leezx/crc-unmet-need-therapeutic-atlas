@@ -116,5 +116,8 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 
 ## PR #8 — PXD038149 sample-metadata gate
 
+- URL: [#8](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/8)
+- Reviewed head: `409d6ded96620b82be63403108aee1ced9a2771a`
+- Web ChatGPT result: `APPROVE`; CI reported `Validate registry` completed successfully.
 - Scope: record the next-stage parsing contract for `SamplesDescription.xlsx`; no file download or biological data commit.
 - Gate: sample metadata may be materialized only after an explicitly staged file is provided; checksum capture remains offline-only.
