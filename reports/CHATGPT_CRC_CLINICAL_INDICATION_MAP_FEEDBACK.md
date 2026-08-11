@@ -140,3 +140,13 @@ CRC 临床适应症地图建议形成独立 knowledge/review layer，而不是�
 审核确认：15 个 GEO sample accession 已完整收录，并按 COL07、COL12、COL15、COL16、COL17、COL18 六组组织；primary CRC、liver metastasis、PBMC 配对关系内部一致。所有 sample-level treatment context 保持 `UNKNOWN`，没有把 series-level “preoperative chemotherapy”误下沉为逐样本暴露或时间点。该 PR 不含表达矩阵或其他生物数据，也没有将 sample metadata completeness 等同于 dataset approval。
 
 下一步：合并 PR #4；继续 checksum capture 和逐样本 metadata reconciliation。
+
+## PR #5 treatment reconciliation review
+
+复审对象：[PR #5](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/5)，reviewed head：`cca8f1c8197f25571c4bf4c691ee5dba5d2e8a98`。
+
+结论：**APPROVE**。网页版 ChatGPT 检查了实际 diff、`sample_map.tsv` schema 修改和 CI；PR `mergeable: true`，`Validate registry` 为 `completed / success`。
+
+审核确认原论文 [PMC8421363](https://pmc.ncbi.nlm.nih.gov/articles/PMC8421363/) 明确支持：COL15、COL17、COL18 为术前化疗患者，其余患者 treatment-naïve；COL15 为 3 cycles CAPEOX，COL17 为 4 cycles CAPEOX，COL18 为 8 cycles FOLFOX-Bev；三位患者约在末次化疗后 1 个月手术。将这些信息作为 patient-level context 下沉到 matched sample rows，未伪装成独立样本测量；肿瘤样本和 PBMC 的采集语境也未被混淆。
+
+下一步：合并 PR #5；再进入 checksum capture 和其他 P0 数据集的 sample-level reconciliation。
