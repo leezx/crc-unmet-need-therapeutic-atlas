@@ -21,7 +21,7 @@
 - file-level inventories：5 个（GSE159216、GSE178318、GSE224235、GSE226997、PXD038149）
 - sample maps：3 个（GSE178318、GSE224235、GSE226997）
 - GitHub PR：#1–#28 全部已合并；最新主分支 merge commit 为 `b4ed6ad`
-- P0 Phase 1 admission matrix 由公开 PR #29 提出；该 PR 用于记录 10 个 P0 候选的门禁状态，当前待审核
+- P0 Phase 1 admission matrix 由公开 PR #29 提出；该 PR 已通过网页版 ChatGPT 复审（APPROVE），当前待合并
 
 ## 已完成能力
 

@@ -327,6 +327,16 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 最终复审结论：**APPROVE**。网页版 ChatGPT 确认唯一 blocker 已解决，没有新的 blocker。
 
+## PR #29 P0 Phase 1 admission matrix review
+
+初审对象：[PR #29](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/29)，reviewed head：`8643557`。
+
+结论：**REQUEST_CHANGES**。网页版 ChatGPT 指出 `MCRC_liver_metastasis_PDO_2026` 的 `license_access=PASS` 与同一行“third-party terms 尚待核验”矛盾。
+
+修复对象：reviewed head `4b291c8`，将该门禁降为 `PARTIAL`。
+
+最终复审结论：**APPROVE**。网页版 ChatGPT 确认门禁与 blocker 文本一致，没有新的 blocker。
+
 ## PR #28 CRLM PDO biobank repository review
 
 审核对象：[PR #28](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/28)，reviewed head：`2dd9751`。
