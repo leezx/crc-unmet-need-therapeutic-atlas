@@ -154,3 +154,9 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Reviewed head: 272b66d2fd48340f193022513d9df3c257a87fc4
 - Web ChatGPT result: APPROVE; CI reported Validate registry completed successfully.
 - Scope: exact fixed-commit metadata for all 27 data/processed blobs; no content read, clone, execution, download, or checksum capture.
+## PR #14 — GSE117548 external file inventory
+
+- URL: [#14](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/14)
+- Reviewed head: 26597fd7972f07c18b59a721c70651c3fe2c9271
+- Web ChatGPT result: APPROVE; no data/provenance blocker.
+- Scope: exact fixed-commit metadata for all 11 data/external blobs; external references remain separate from GSE117548 biological data.
