@@ -17,7 +17,7 @@
 | 维度 | 当前进度 | 本轮变化 | 判定标准 | 当前阻塞 |
 |---|---:|---:|---|---|
 | 工程 / provenance 基础设施 | **90/90** | 85/90 → 90/90（+5） | 19 个候选 closure matrix、13 个候选的结构化 source/no-file-inventory/scope disposition、1 个 configured update target 的 metadata scan/disposition、CI freshness check、source-only 边界审计和 5 个 P0 gate crosswalk 已完成 | DepMap exact headers、HPA final scope/files/terms、CRLM row-level metadata 仍未完成；这些属于后续 dataset review，不再是内部 closure 缺口 |
-| source-only completion endpoint | **100% COMPLETE** | final closure PR #53 已合并；内部 closure artifacts、update disposition、validator 和 no-data audit 均满足 | `closure_matrix_is_complete`、`every_update_target_has_scan_disposition`、`final_closure_pr_is_merged`、`validator_tests_and_no_data_audit_pass` 全部满足 | 无 source-only 内部 blocker；后续仅是独立 dataset review 或未来科学/临床 overlay |
+| source-only completion endpoint | **100% COMPLETE** | final closure PR #53 已合并；19/19 候选均有 source manifest，且有 file inventory 或显式 no-file-inventory disposition；无 `INTERNAL_ACTION_REQUIRED` | source-only closure rule 明确允许保留 `SOURCE_INDEXED_REVIEW_REQUIRED` 作为 dataset-review handoff；其余 internal requirements 全部满足 | 无 source-only 内部 blocker；canonical identity、GEO reconciliation、license/clinical context 等后续 review 不阻断 source-only endpoint |
 | 科学 / 临床可用性 | **0/10** | 0/10 → 0/10（+0） | 本阶段不下载或分析数据；科学 readiness 只在未来独立分析阶段计分 | 当前没有 biological matrix、target ranking、therapeutic-window 或 clinical conclusion |
 | 总体项目进度 | **90/100（90%）** | 90/100 → 90/100（source-only endpoint 已关闭；科学 overlay 不计入本阶段） | 固定 100 分制：source-only engineering/provenance 90 分 + scientific/clinical readiness 10 分；当前总分为 90 + 0 | source-only 阶段完成；科学/临床 overlay 仍按当前范围为 0/10 |
 

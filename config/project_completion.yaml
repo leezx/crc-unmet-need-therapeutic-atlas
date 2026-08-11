@@ -20,6 +20,7 @@ completion_endpoint:
   scorecard_interpretation: The 90-point weighted score measures materialized infrastructure and provenance capacity; a 90/90 score does not by itself assert that the source-only completion endpoint is closed.
   current_status: COMPLETE
   unresolved_internal_requirements: []
+  closure_matrix_completion_rule: A closure matrix is complete for the source-only endpoint when every candidate has a source manifest plus a file inventory or explicit no-file-inventory disposition, and no row has INTERNAL_ACTION_REQUIRED; SOURCE_INDEXED_REVIEW_REQUIRED rows are retained dataset-review handoffs and do not block this endpoint.
   internal_requirements:
     - closure_matrix_is_complete
     - every_update_target_has_scan_disposition
