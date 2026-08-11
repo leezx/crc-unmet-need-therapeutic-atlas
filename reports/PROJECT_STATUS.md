@@ -20,8 +20,8 @@
 - source manifests：11 个
 - file-level inventories：5 个（GSE159216、GSE178318、GSE224235、GSE226997、PXD038149）
 - sample maps：3 个（GSE178318、GSE224235、GSE226997）
-- GitHub PR：#1–#24 全部已合并；最新主分支 merge commit 为 `b11caba`
-- 本次状态对齐由公开 PR #25 提出；该 PR 已通过网页版 ChatGPT 复审（APPROVE），当前待合并
+- GitHub PR：#1–#25 全部已合并；最新主分支 merge commit 为 `0a621b7`
+- DepMap 26Q1 provenance 由公开 PR #26 提出；该 PR 已通过网页版 ChatGPT 复审（APPROVE），当前待合并
 
 ## 已完成能力
 

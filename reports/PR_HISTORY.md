@@ -235,3 +235,10 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Fix reviewed head: `1b4fc99`; web ChatGPT result: APPROVE.
 - Scope: replace stale planning status with the current 19-candidate registry, 24 merged PRs, completed provenance components, active gates, and next-step priorities.
 - No registry data, candidate status, download policy, or biological-data boundary changed.
+
+## PR #26 — DepMap 26Q1 release provenance
+
+- URL: [#26](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/26)
+- Initial reviewed head: `ee4276e`; web ChatGPT result: REQUEST_CHANGES because `download_date` was populated despite no download being performed.
+- Fix reviewed head: `cbfd7c8`; web ChatGPT result: APPROVE.
+- Scope: official DepMap Public 26Q1 release and release-notes provenance, release-level file families, and interactive portal verification gate; no CRC subset extraction, biological data, exact download files, or checksums.
