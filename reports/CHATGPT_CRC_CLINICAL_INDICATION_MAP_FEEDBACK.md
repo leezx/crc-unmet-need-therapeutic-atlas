@@ -369,6 +369,8 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 规划复核：网页版 ChatGPT 指出 PROJECT_STATUS 下一步仍要求另开 knowledge/review layer PR，但 PR #32/#33 已建立该层骨架；已改为在现有层上继续人工复核和证据对接。
 
+合并结果：PR #33 已于 2026-08-11 squash-merge，merge commit 为 `c830dba`；source-only evidence objects 已进入 main，未引入 biological data 或临床结论。
+
 ## PR #32 source-only knowledge/review layer review
 
 初审对象：[PR #32](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/32)，reviewed head：`2f2d619`。
