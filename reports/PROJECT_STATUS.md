@@ -85,3 +85,5 @@
 - PR #11 网页审核发现并定位汇总差异：根目录 data/.DS_Store 的 1 个 blob/6,148 bytes 被计入总量但此前未列层；已补为 data/root_metadata，使 144 blobs 与 1,242,162,377 bytes 的总计可加和复核。
 - PR #11 修复版 head `54a3a499b7d860cb0a1d8de7545fc434d4e69de5` 已获网页版 ChatGPT `APPROVE`，计数/字节总量和 raw/processed 边界均复核通过，准备合并。
 - PR #12 已获网页版 ChatGPT APPROVE；selected_file_inventory.tsv 已固定登记 4 个 model-layer blob 和 1 个 table blob，未读取或下载内容。
+- 下一阶段已建立 GSE117548 processed_file_inventory.tsv：精确登记 27 个 data/processed blob 的固定 URL、Git blob SHA、字节大小和 review/download 边界；未读取内容。
+- PR #13 已获网页版 ChatGPT APPROVE：27 个 data/processed blob 的路径、Git blob SHA、字节大小与 758,189,431 bytes 汇总一致；未读取或下载内容。
