@@ -443,7 +443,7 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 初审 head `2719e02`：**REQUEST_CHANGES**。网页版 ChatGPT 指出 source-only contract 不能直接计入 exact dataset provenance，要求保留 exact provenance 5/15。
 
-修复 head `55bd8c4`：增加 `P0_CONTRACT_CROSSWALK.tsv`，把 5 个 gate 的 artifact、source evidence、completed scope 和 remaining blocker 显式对齐；PROJECT_STATUS 改为固定评分 60/100 → 65/100（+5），增量只计入 P0 gate design，不计入 exact provenance。
+修复 head `55bd8c4`：增加 `P0_CONTRACT_CROSSWALK.tsv`，把 5 个 gate 的 artifact、source evidence、completed scope 和 remaining blocker 显式对齐；PROJECT_STATUS 改为固定评分 60/100 → 65/100（+5），其中 source/index +1、P0 gate design +4，exact provenance 不增加。
 
 另一个文档 blocker：PR 描述残留 66/100，已改为 65/100。最终复审结论：**APPROVE**。确认三个 source-only contract、crosswalk、评分和 no-download/no-conclusion 边界一致。
 
