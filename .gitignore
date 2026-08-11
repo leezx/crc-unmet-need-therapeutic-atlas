@@ -1,15 +1,8 @@
-DATA/**/raw/
-DATA/**/processed/
-*.fastq
-*.fastq.gz
-*.bam
-*.bai
-*.h5ad
-*.h5
-*.rds
-*.rda
-*.mtx
-*.mtx.gz
+# Phase 2 biological data are local analysis inputs and must never be committed.
+phase2/03_data/raw/
+phase2/03_data/processed/
+phase2/06_results/
+
+# Local validator/test by-products.
 reports/generated/
-reports/github_tree_scan/
 __pycache__/
