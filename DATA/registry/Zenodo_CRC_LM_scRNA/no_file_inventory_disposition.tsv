@@ -1,0 +1,2 @@
+dataset_id	disposition_id	status	scope	blocker_class	rationale	next_artifact
+Zenodo_CRC_LM_scRNA	ZEN-NFI-001	EXPLICIT_NO_FILE_INVENTORY	source-mirror provenance	EXTERNAL_OR_DATASET_REVIEW	The record is retained as a possible source mirror of CRLM_NMP_ATLAS; no independent file inventory is asserted until the underlying study/package identity is reconciled.	Resolve canonical package identity and record file-level metadata; do not count as an independent cohort.

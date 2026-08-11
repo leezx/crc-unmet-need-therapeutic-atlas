@@ -20,6 +20,9 @@ FIELDS = [
     "remaining_blocker",
     "next_artifact",
 ]
+DISPOSITION_FIELDS = ["dataset_id", "disposition_id", "status", "scope", "blocker_class", "rationale", "next_artifact"]
+ALLOWED_DISPOSITION_STATUS = "EXPLICIT_NO_FILE_INVENTORY"
+ALLOWED_BLOCKER_CLASSES = {"EXTERNAL_OR_DATASET_REVIEW", "INTERNAL_ARTIFACT_GAP"}
 
 
 def first_manifest_value(path: Path, field: str) -> str:
@@ -28,6 +31,26 @@ def first_manifest_value(path: Path, field: str) -> str:
     with path.open(newline="") as handle:
         row = next(csv.DictReader(handle, delimiter="\t"), {})
     return row.get(field, "").strip()
+
+
+def read_disposition(path: Path, dataset_id: str) -> dict[str, str] | None:
+    if not path.exists():
+        return None
+    with path.open(newline="") as handle:
+        reader = csv.DictReader(handle, delimiter="\t")
+        if reader.fieldnames != DISPOSITION_FIELDS:
+            raise ValueError(f"{path}: disposition header mismatch")
+        rows = list(reader)
+    if len(rows) != 1 or rows[0].get("dataset_id") != dataset_id:
+        raise ValueError(f"{path}: expected exactly one row for {dataset_id}")
+    row = rows[0]
+    if row.get("status") != ALLOWED_DISPOSITION_STATUS:
+        raise ValueError(f"{path}: invalid disposition status")
+    if row.get("blocker_class") not in ALLOWED_BLOCKER_CLASSES:
+        raise ValueError(f"{path}: invalid blocker_class")
+    if not all(row.get(field, "").strip() for field in ("disposition_id", "scope", "rationale", "next_artifact")):
+        raise ValueError(f"{path}: disposition_id, scope, rationale and next_artifact are required")
+    return row
 
 
 def main() -> int:
@@ -49,11 +72,14 @@ def main() -> int:
             dataset_dir = ROOT / "DATA/registry" / dataset_id
             manifest = dataset_dir / "source_manifest.tsv"
             inventory = dataset_dir / "file_inventory.tsv"
+            no_inventory_disposition = dataset_dir / "no_file_inventory_disposition.tsv"
             has_manifest = manifest.exists()
             has_inventory = inventory.exists()
+            disposition = read_disposition(no_inventory_disposition, dataset_id)
+            has_no_inventory_disposition = disposition is not None
             method = first_manifest_value(manifest, "download_method")
             source_manifest = "PRESENT" if has_manifest else "MISSING_SOURCE_RECORD"
-            file_state = "PRESENT" if has_inventory else "NOT_MATERIALIZED"
+            file_state = "PRESENT" if has_inventory else ("NO_FILE_INVENTORY_DISPOSITION" if has_no_inventory_disposition else "NOT_MATERIALIZED")
             method_state = "RECORDED" if method else "MISSING"
             update_state = "WEEKLY_SOURCE_SCAN"
             if dataset_id in target_ids:
@@ -65,16 +91,21 @@ def main() -> int:
                 blocker_class = "INTERNAL_ARTIFACT_GAP"
                 blocker = "Source manifest and reproducible landing/download path not yet recorded in the repository."
                 next_artifact = "Create source_manifest.tsv after source verification."
-            elif not has_inventory:
+            elif not (has_inventory or has_no_inventory_disposition):
                 closure = "INTERNAL_ACTION_REQUIRED"
                 blocker_class = "INTERNAL_ARTIFACT_GAP"
                 blocker = "File/archive inventory or an explicit no-file-inventory disposition is not yet recorded in the repository."
                 next_artifact = "Create file_inventory.tsv or an explicit no-file-inventory disposition."
             else:
-                closure = "SOURCE_INDEXED_REVIEW_REQUIRED"
-                blocker_class = "EXTERNAL_OR_DATASET_REVIEW"
-                blocker = "Dataset-specific license, clinical context, checksum or admission review may remain pending."
-                next_artifact = "Review dataset checklist and retain UNKNOWN/NA where source evidence is absent."
+                blocker_class = disposition["blocker_class"] if disposition else "EXTERNAL_OR_DATASET_REVIEW"
+                if blocker_class == "INTERNAL_ARTIFACT_GAP":
+                    closure = "INTERNAL_ACTION_REQUIRED"
+                    blocker = disposition["rationale"]
+                    next_artifact = disposition["next_artifact"]
+                else:
+                    closure = "SOURCE_INDEXED_REVIEW_REQUIRED"
+                    blocker = "Dataset-specific license, clinical context, checksum or admission review may remain pending."
+                    next_artifact = disposition["next_artifact"] if disposition else "Review dataset checklist and retain UNKNOWN/NA where source evidence is absent."
             rows.append({
                 "dataset_id": dataset_id,
                 "registry_status": record["status"],

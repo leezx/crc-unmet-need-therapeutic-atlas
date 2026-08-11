@@ -369,6 +369,12 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 最终结论：**APPROVE**。网页版 ChatGPT 确认审计报告自身已纳入 tracked-file 门禁，denylist、CI 稳定性、80/90 分项和 no-download/no-analysis/no-approval 边界一致。
 
+## PR #50 explicit no-file-inventory dispositions 审核
+
+审核范围：四个 source-manifest 候选的 tracked `no_file_inventory_disposition.tsv`、closure builder 对该处置的识别、80→85 进度算术，以及 no-download/no-analysis/no-approval 边界。继续复用固定对话“PR审核与错误反馈”。
+
+初审结论：**REQUEST_CHANGES**。`read_disposition()` 未强制 `disposition_id` 非空；已补上 required-field 校验，当前四个 disposition 的 ID 均非空。
+
 ## PR #33 source-only evidence objects review
 
 初审对象：[PR #33](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/33)，reviewed head：`b9bd08d`。

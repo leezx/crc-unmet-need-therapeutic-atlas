@@ -1,0 +1,2 @@
+dataset_id	disposition_id	status	scope	blocker_class	rationale	next_artifact
+DepMap_26Q1	DEP-NFI-001	EXPLICIT_NO_FILE_INVENTORY	metadata-only source registry	EXTERNAL_OR_DATASET_REVIEW	The public portal requires interactive verification for exact release files; no file-level inventory is asserted until a reproducible catalog is available.	Record exact file URLs and headers after interactive source verification; do not download in this phase.
