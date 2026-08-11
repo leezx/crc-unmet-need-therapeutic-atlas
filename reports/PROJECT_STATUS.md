@@ -92,3 +92,4 @@
 - 已新增 scripts/inventory_github_tree.py：固定 commit + path prefix 调用 GitHub Trees API，仅输出路径、大小、Git blob SHA 和固定 blob URL；遇到 truncated tree 会失败，不读取 blob 内容或下载文件。
 - PR #15 初审发现 `--commit` 可接受浮动 ref；已修复为强制 40 位十六进制 commit SHA，并通过网页版 ChatGPT 复审 APPROVE；回归测试拒绝 `master`，固定 GSE117548 commit/data/external 仍为 11 files/115,992 bytes，准备合并。
 - PR #16 初审发现重复 `target_id`/`output_name` 可静默覆盖 artifact；已在扫描前增加唯一性硬校验，并由网页版 ChatGPT 对 head `47846b469f9c2c5a87502512c189eb775f0bcfe0` 复审 APPROVE；固定目标回归仍为 11 files/115,992 bytes，准备合并。
+- PR #17 初审发现 output 目录创建早于配置校验且测试断言位置无效；已修复并由网页版 ChatGPT 对 head `4a1186a31330a63977eaa9ad62f9742dfda88bc6` 复审 APPROVE，Validate registry CI 成功，准备合并。

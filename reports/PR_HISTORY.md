@@ -173,3 +173,10 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Initial reviewed head: `09cd65288bd461fa03ecb1ca1d48f8f104ea2f82`; web ChatGPT result: REQUEST_CHANGES for duplicate `target_id`/`output_name` allowing silent TSV overwrite.
 - Fix reviewed head: `47846b469f9c2c5a87502512c189eb775f0bcfe0`; web ChatGPT result: APPROVE.
 - Scope: reviewed fixed-target configuration, duplicate-output guards, weekly metadata-only scan, and artifact upload; no blob reads, clone, execution, or biological-data download.
+
+## PR #17 — scanner safety regression tests
+
+- URL: [#17](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/17)
+- Initial reviewed head: `ba93d992`; web ChatGPT result: REQUEST_CHANGES for output creation before validation and an ineffective temporary-directory assertion.
+- Fix reviewed head: `4a1186a31330a63977eaa9ad62f9742dfda88bc6`; web ChatGPT result: APPROVE; Validate registry CI successful.
+- Scope: offline tests for floating-ref and duplicate-target rejection, with PR CI coverage; no network or data download.

@@ -18,6 +18,8 @@ jobs:
           python-version: "3.12"
       - name: Validate registry contracts
         run: python3 scripts/validate_registry.py
+      - name: Run offline scanner regression tests
+        run: python3 -m unittest discover -s tests -p 'test_*.py'
       - name: Validate stable offline scan output
         run: |
           python3 scripts/scan_sources.py --offline

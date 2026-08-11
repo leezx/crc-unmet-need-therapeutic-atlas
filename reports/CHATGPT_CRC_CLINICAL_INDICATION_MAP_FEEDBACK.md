@@ -244,3 +244,13 @@ PR #16 初审：**REQUEST_CHANGES**，唯一 blocker 是 wrapper 未拒绝重复
 PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`。
 
 最终复审：**APPROVE**。网页版 ChatGPT 确认重复字段现在在逐 target 循环、网络扫描、`subprocess.run()` 和 TSV 写入之前触发 `SystemExit`；40 位 commit SHA、Trees API-only、artifact 和 no-download 边界未改变。当前 head 无 PR-triggered workflow run/status，但该 workflow 仅支持 schedule/manual dispatch，不构成代码 blocker。
+
+## PR #17 scanner regression-test review
+
+初审对象：[PR #17](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/17)，初始 reviewed head：`ba93d992`。
+
+结论：**REQUEST_CHANGES**。网页版 ChatGPT 发现 `scan_github_targets.py` 在重复配置校验前创建 output 目录，且测试的目录断言位于临时目录清理之后，未真正验证“任何输出前失败”。
+
+修复对象：reviewed head `4a1186a31330a63977eaa9ad62f9742dfda88bc6`。
+
+最终复审：**APPROVE**。`output_dir.mkdir` 已移到全部配置、唯一性和文件名校验之后；断言已移入 `TemporaryDirectory` 作用域。网页版 ChatGPT 确认修复消除了 blocker；测试保持离线，不下载或访问生物数据。

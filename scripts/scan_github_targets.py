@@ -20,8 +20,6 @@ def main() -> int:
     args = parser.parse_args()
     config_path = args.config if args.config.is_absolute() else ROOT / args.config
     output_dir = args.output_dir if args.output_dir.is_absolute() else ROOT / args.output_dir
-    output_dir.mkdir(parents=True, exist_ok=True)
-
     with config_path.open(newline="") as handle:
         targets = list(csv.DictReader(handle, delimiter="\t"))
     required = {"target_id", "repository", "commit", "prefix", "output_name"}
@@ -40,7 +38,10 @@ def main() -> int:
         output_name = Path(target["output_name"])
         if output_name.name != target["output_name"] or output_name.suffix != ".tsv":
             raise SystemExit(f"output_name must be a plain .tsv filename: {target['output_name']}")
-        output_path = output_dir / output_name
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+    for target in targets:
+        output_path = output_dir / target["output_name"]
         command = [
             sys.executable,
             str(SCANNER),
