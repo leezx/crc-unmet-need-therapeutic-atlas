@@ -431,3 +431,9 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Initial reviewed head: `f7e8b12`; web ChatGPT result: REQUEST_CHANGES because the resolved mouse organoid source was still labeled `P0_DOWNLOAD` despite a reference-only scope decision.
 - Fix reviewed head: `202427d`; web ChatGPT result: APPROVE after changing the candidate to `REFERENCE_ONLY` and aligning registry, scope review and source manifest semantics.
 - Scope: add final scope/access review artifacts, remove all `INTERNAL_ACTION_REQUIRED` rows from the closure matrix, and prepare the source-only endpoint for closure on merge. No download, access request, biological data, analysis, candidate approval or clinical conclusion.
+
+## PR #54 — source-only completion status sync
+
+- Scope: after PR #53 merge, set `completion_endpoint.current_status` to `COMPLETE` and synchronize `PROJECT_STATUS.md` to source-only 100% completion. The weighted project score remains 90/100 because scientific/clinical readiness is explicitly out of scope and remains 0/10.
+- Initial reviewed head: `1138690`; web ChatGPT result: REQUEST_CHANGES because residual `SOURCE_INDEXED_REVIEW_REQUIRED` handoffs were not explicitly addressed by the completion rule.
+- Fix reviewed head: `e101ec5`; web ChatGPT result: APPROVE after defining the source-only closure rule and distinguishing dataset-review handoffs from internal blockers.

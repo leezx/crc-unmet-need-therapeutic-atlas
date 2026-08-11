@@ -563,3 +563,9 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 初审 head `f7e8b12`：**REQUEST_CHANGES**。网页版 ChatGPT 指出 `CRC_organoid_CRISPR_dependency` 已在 scope review 中决定为 reference-only，但 `datasets.tsv` 仍保留 `P0_DOWNLOAD`，与 scope decision 矛盾。
 
 修正 head `202427d`：将该候选改为 `REFERENCE_ONLY`，并同步明确 Mus musculus 工程化类器官来源不等同于 patient-derived-human cohort。网页版 ChatGPT 最终复审结论：**APPROVE**。
+
+## PR #54 source-only completion status review
+
+初审 head `1138690`：**REQUEST_CHANGES**。网页版 ChatGPT 指出 closure matrix 仍有 `SOURCE_INDEXED_REVIEW_REQUIRED` 项，而 completion gate 没有明确这些 dataset-review handoff 是否阻断完成。
+
+修正 head `e101ec5`：增加 `closure_matrix_completion_rule`，明确 19/19 source manifests 加上 file inventory/disposition、且无 `INTERNAL_ACTION_REQUIRED` 即满足 source-only closure；`SOURCE_INDEXED_REVIEW_REQUIRED` 不阻断该 endpoint。网页版 ChatGPT 最终复审结论：**APPROVE**。
