@@ -8,7 +8,7 @@
 
 ## 当前阶段
 
-**Phase 2 — independent validation audit complete; functional dependency and clinical translation gates open**
+**Phase 2 — external cohort coverage audit complete; matched primary/metastasis validation remains open**
 
 Phase 1 source-only endpoint remains complete. Phase 2 has locked the falsifiable Figure 1 question, marker set and GSE178318 processed inputs; the first QC pass is complete, but no biological state, target or clinical conclusion has been made.
 
@@ -18,10 +18,10 @@ Phase 1 source-only endpoint remains complete. Phase 2 has locked the falsifiabl
 |---|---:|---:|---|---|
 | 工程 / provenance 基础设施 | **90/90** | 85/90 → 90/90（+5） | 19 个候选 closure matrix、13 个候选的结构化 source/no-file-inventory/scope disposition、1 个 configured update target 的 metadata scan/disposition、CI freshness check、source-only 边界审计和 5 个 P0 gate crosswalk 已完成 | DepMap exact headers、HPA final scope/files/terms、CRLM row-level metadata 仍未完成；这些属于后续 dataset review，不再是内部 closure 缺口 |
 | source-only completion endpoint | **100% COMPLETE** | final closure PR #53 已合并；19/19 候选均有 source manifest，且有 file inventory 或显式 no-file-inventory disposition；无 `INTERNAL_ACTION_REQUIRED` | source-only closure rule 明确允许保留 `SOURCE_INDEXED_REVIEW_REQUIRED` 作为 dataset-review handoff；其余 internal requirements 全部满足 | 无 source-only 内部 blocker；canonical identity、GEO reconciliation、license/clinical context 等后续 review 不阻断 source-only endpoint |
-| 科学 / 临床可用性 | **8/10** | 7/10 → 8/10（+1） | CRLM-NMP-ATLAS provides an external 6-donor, 6-pair descriptive audit with complete locked-marker coverage; functional/clinical gates remain | 尚未完成功能依赖、therapeutic-window 或 clinical indication mapping |
-| 总体项目进度 | **98/100（98%）** | 97/100 → 98/100（+1） | 固定 100 分制：source-only engineering/provenance 90 分 + scientific/clinical readiness 10 分；当前总分为 90 + 8 | source-only endpoint 完成；Phase 2 仍需 functional dependency, therapeutic-window and clinical mapping |
+| 科学 / 临床可用性 | **7/10** | 7/10 → 7/10（+0） | CRLM-NMP-ATLAS provides external coverage and a CRLM-versus-adjacent-liver descriptive audit, but it does not reproduce the locked primary-versus-metastasis contrast; functional/clinical gates remain | 尚未完成等价的独立 primary/metastasis 验证、功能依赖、therapeutic-window 或 clinical indication mapping |
+| 总体项目进度 | **97/100（97%）** | 97/100 → 97/100（+0） | 固定 100 分制：source-only engineering/provenance 90 分 + scientific/clinical readiness 10 分；当前总分为 90 + 7 | source-only endpoint 完成；Phase 2 仍需 equivalent independent validation, functional dependency and clinical mapping |
 
-评分明细（工程/provenance 90/90）：registry/admission architecture 10/10；source/index layer 15/15；validator/tests 10/10；update/scan system 10/10；PR/review audit 10/10；P0 gate design 10/10；exact dataset provenance materialization 15/15；closure/handoff 10/10。科学/临床 readiness 8/10：HTAN source-cohort replication audit 不计为 independent validation；CRLM-NMP-ATLAS external audit 已完成但仍为 exploratory，不构成 causal, target 或 clinical conclusion。分项严格合计 98/100。
+评分明细（工程/provenance 90/90）：registry/admission architecture 10/10；source/index layer 15/15；validator/tests 10/10；update/scan system 10/10；PR/review audit 10/10；P0 gate design 10/10；exact dataset provenance materialization 15/15；closure/handoff 10/10。科学/临床 readiness 7/10：HTAN source-cohort replication audit 与 CRLM-NMP-ATLAS external coverage audit 均不计为等价 independent validation；结果仍为 exploratory，不构成 causal, target 或 clinical conclusion。分项严格合计 97/100。
 
 ## 当前规模
 

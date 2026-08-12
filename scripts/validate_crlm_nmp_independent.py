@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independent patient-level audit of FIG1_MARKER_V1 in CRLM-NMP-ATLAS."""
+"""External cohort coverage audit of FIG1_MARKER_V1 in CRLM-NMP-ATLAS."""
 
 from __future__ import annotations
 
@@ -62,7 +62,7 @@ def main() -> None:
     for role in STATE:
         values = [row["differences_crlm_minus_adjacent_liver"][role] for row in paired]
         summary[role] = {"n_pairs": len(values), "mean_difference": sum(values) / len(values) if values else None, "positive_pairs": sum(v > 0 for v in values), "negative_pairs": sum(v < 0 for v in values), "exact_two_sided_sign_flip_p": sign_flip_p(values)}
-    result = {"dataset": "CRLM_NMP_ATLAS", "asset": str(args.input), "n_cells": len(donors), "n_donors": len(set(donors)), "malignant_cells": sum(x == "malignant cell" for x in cell_types), "matched_crlm_adjacent_liver_pairs": len(paired), "marker_coverage": {role: {"genes": genes, "n_present": len(genes)} for role, genes in STATE.items()}, "sample_scores": sample_scores, "paired_effect_summary": summary, "interpretation_boundary": "Independent patient-level descriptive audit in an external CRLM cohort; no causal claim, target ranking, therapeutic-window or clinical conclusion."}
+    result = {"dataset": "CRLM_NMP_ATLAS", "asset": str(args.input), "n_cells": len(donors), "n_donors": len(set(donors)), "malignant_cells": sum(x == "malignant cell" for x in cell_types), "matched_crlm_adjacent_liver_pairs": len(paired), "marker_coverage": {role: {"genes": genes, "n_present": len(genes)} for role, genes in STATE.items()}, "sample_scores": sample_scores, "paired_effect_summary": summary, "interpretation_boundary": "External cohort coverage and descriptive audit; CRLM-versus-adjacent-liver is not equivalent to the locked primary-versus-metastasis contrast; no independent-validation, causal, target-ranking, therapeutic-window or clinical conclusion."}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2) + "\n")
     print(json.dumps({"n_cells": result["n_cells"], "n_donors": result["n_donors"], "malignant_cells": result["malignant_cells"], "matched_pairs": result["matched_crlm_adjacent_liver_pairs"], "summary": summary}, indent=2))
