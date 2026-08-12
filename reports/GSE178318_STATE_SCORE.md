@@ -5,6 +5,8 @@ Command: `python3 scripts/score_gse178318_state.py`
 
 Scores use the locked `FIG1_MARKER_V1` genes and the reviewed primary cell-QC rule (`detected_genes >= 200`, `total_counts >= 500`). Each cell contributes a library-size-normalized mean log1p marker score; inference is summarized across six matched patient pairs, not pooled cells.
 
+The output also reports sample-level mean scores for the excluded cell-cycle genes (`MKI67`, `TOP2A`, `STMN1`) and stress genes (`FOS`, `JUN`, `HSPA1A`). These confounder scores are diagnostic only and are not included in any state score or paired effect.
+
 | Program | Mean metastasis − primary | Positive pairs | Negative pairs | Exact two-sided sign-flip p |
 |---|---:|---:|---:|---:|
 | epithelial identity | -0.26450 | 2 | 4 | 0.3125 |

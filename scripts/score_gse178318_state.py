@@ -73,21 +73,25 @@ def main() -> None:
         "healing_plasticity_anchor": "plasticity_anchor",
         "noncanonical_plasticity_anchor": "noncanonical_anchor",
         "noncanonical_lineage_anchor": "noncanonical_anchor",
+        "cell_cycle_exclusion": "cell_cycle_report",
+        "stress_exclusion": "stress_report",
     }
     with args.marker_set.open(newline="") as handle:
         for row in csv.DictReader(handle, delimiter="\t"):
-            if row["role"] in role_alias and (row["use"] == "state_score" or row["role"] == "epithelial_identity"):
+            if row["role"] in role_alias and (row["use"] in {"state_score", "confounder_report"} or row["role"] == "epithelial_identity"):
                 marker_sets[role_alias[row["role"]]].append(row["gene"])
-    roles = ["epithelial_identity", "plasticity_anchor", "noncanonical_anchor"]
-    missing = sorted({gene for role in roles for gene in marker_sets[role] if gene not in gene_names})
+    state_roles = ["epithelial_identity", "plasticity_anchor", "noncanonical_anchor"]
+    report_roles = ["cell_cycle_report", "stress_report"]
+    all_roles = state_roles + report_roles
+    missing = sorted({gene for role in all_roles for gene in marker_sets[role] if gene not in gene_names})
     if missing:
         raise ValueError(f"Marker reconciliation failed: {missing}")
-    target_rows = {index: gene_names[index] for index in range(len(gene_names)) if gene_names[index] in {gene for role in roles for gene in marker_sets[role]}}
-    gene_role = {gene: role for role in roles for gene in marker_sets[role]}
+    target_rows = {index: gene_names[index] for index in range(len(gene_names)) if gene_names[index] in {gene for role in all_roles for gene in marker_sets[role]}}
+    gene_role = {gene: role for role in all_roles for gene in marker_sets[role]}
 
     totals = [0] * len(barcodes)
     detected = [0] * len(barcodes)
-    marker_counts = {role: {gene: [0] * len(barcodes) for gene in marker_sets[role]} for role in roles}
+    marker_counts = {role: {gene: [0] * len(barcodes) for gene in marker_sets[role]} for role in all_roles}
     entries = 0
     header = None
     with gzip.open(args.raw_dir / "GSE178318_matrix.mtx.gz", "rt") as handle:
@@ -115,7 +119,7 @@ def main() -> None:
             continue
         by_sample[key]["n_retained_cells"] += 1
         library_scale = 10000 / totals[cell]
-        for role in roles:
+        for role in all_roles:
             values = [math.log1p(marker_counts[role][gene][cell] * library_scale) for gene in marker_sets[role]]
             by_sample[key]["scores"][role].append(sum(values) / len(values))
 
@@ -125,7 +129,8 @@ def main() -> None:
             "patient_id": sample_map[key]["patient_id"],
             "specimen_type": sample_map[key]["specimen_type"],
             "n_retained_cells": by_sample[key]["n_retained_cells"],
-            "mean_scores": {role: sum(values) / len(values) for role, values in by_sample[key]["scores"].items()},
+            "mean_scores": {role: sum(values) / len(values) for role, values in by_sample[key]["scores"].items() if role in state_roles},
+            "confounder_scores": {role: sum(values) / len(values) for role, values in by_sample[key]["scores"].items() if role in report_roles},
         }
 
     patients = sorted({row["patient_id"] for row in sample_map.values() if row["specimen_type"] in {"PRIMARY_CRC", "LIVER_METASTASIS"}})
@@ -138,10 +143,10 @@ def main() -> None:
             "patient_id": patient,
             "primary_retained_cells": primary["n_retained_cells"],
             "metastasis_retained_cells": metastasis["n_retained_cells"],
-            "differences_metastasis_minus_primary": {role: metastasis["mean_scores"][role] - primary["mean_scores"][role] for role in roles},
+            "differences_metastasis_minus_primary": {role: metastasis["mean_scores"][role] - primary["mean_scores"][role] for role in state_roles},
         })
     paired_summary = {}
-    for role in roles:
+    for role in state_roles:
         differences = [row["differences_metastasis_minus_primary"][role] for row in paired]
         paired_summary[role] = {
             "n_pairs": len(differences),
