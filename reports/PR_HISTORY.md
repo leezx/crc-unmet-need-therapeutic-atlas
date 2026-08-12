@@ -512,3 +512,15 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Initial reviewed head: `d32ade5`; web ChatGPT result: REQUEST_CHANGES because archive return codes and missing-target behavior were not fail-closed.
 - Final reviewed head: `55fb4fd`; web ChatGPT result: APPROVE after checking archive return codes, failing on missing RNA targets and explicitly recording IHC targets without records. Overall progress remains 97/100.
 - Scope: capture official HPA v25.1 RNA tissue and normal IHC provenance/checksums and audit normal-tissue coverage for six exploratory state markers. No therapeutic-window, safety, target-approval or clinical conclusion.
+
+## PR #67 — superseded CRLM validation submission
+
+- URL: [#67](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/67)
+- Closed without merge because the reused branch name pointed to the prior HTAN head `40b29c6` instead of the CRLM commit. The corrected submission was made as PR #68 on a unique branch.
+
+## PR #68 — external CRLM cohort coverage audit
+
+- URL: [#68](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/68)
+- Initial reviewed head: `c24ad0a`; web ChatGPT result: REQUEST_CHANGES because CRLM-versus-adjacent-liver is not equivalent to the locked primary-versus-metastasis contrast, so it could not count as independent validation or raise progress to 98/100.
+- Final reviewed head: `87ba899`; web ChatGPT result: APPROVE after synchronizing PR metadata, manifest wording and project status to external cohort coverage/descriptive audit, with progress at 97/100.
+- Scope: capture and audit an external CRLM cohort; no independent-validation, causal, target-ranking, therapeutic-window or clinical conclusion.
