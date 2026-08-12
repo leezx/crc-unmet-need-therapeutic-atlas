@@ -628,3 +628,9 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 初审 head：`fffe070`，网页版 ChatGPT 结论：**REQUEST_CHANGES**。唯一 blocker 是 HTAN 数据集来自 marker set 的来源研究，不能被称为 independent validation，也不能据此增加进度。
 
 修正 head：`a30bbb1`，将 HTAN 结果、脚本边界、PR 描述统一改为 `source-cohort replication audit`，科学 readiness 保持 7/10。网页版 ChatGPT 最终轻量复核：**APPROVE**。
+
+## PR #65 HPA normal-tissue target audit review
+
+初审 head：`d32ade5`，网页版 ChatGPT 结论：**REQUEST_CHANGES**。唯一 blocker 是 HPA 解压返回码和目标缺失没有 fail-closed 处理，可能生成空的审计结果。
+
+修正 head：`55fb4fd`，检查 RNA/IHC archive 返回码；RNA 缺少任一目标时失败；IHC 中官方无记录的目标显式写入 `ihc_targets_without_records`。网页版 ChatGPT 在同一对话最终结论：**APPROVE**。
