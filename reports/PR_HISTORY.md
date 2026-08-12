@@ -504,4 +504,11 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 
 - URL: [#64](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/64)
 - Initial reviewed head: `fffe070`; web ChatGPT result: REQUEST_CHANGES because HTAN is the source study for the marker set and cannot count as independent validation.
-- Final reviewed head: `a30bbb1`; web ChatGPT result: APPROVE after aligning script/report/PR wording and keeping progress at 97/100. Independent validation remains open.
+- Final reviewed head: `40b29c6`; web ChatGPT result: APPROVE after aligning script/report/PR wording, synchronizing with main and keeping progress at 97/100. Independent validation remains open.
+
+## PR #65 — HPA normal-tissue target audit
+
+- URL: [#65](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/65)
+- Initial reviewed head: `d32ade5`; web ChatGPT result: REQUEST_CHANGES because archive return codes and missing-target behavior were not fail-closed.
+- Final reviewed head: `55fb4fd`; web ChatGPT result: APPROVE after checking archive return codes, failing on missing RNA targets and explicitly recording IHC targets without records. Overall progress remains 97/100.
+- Scope: capture official HPA v25.1 RNA tissue and normal IHC provenance/checksums and audit normal-tissue coverage for six exploratory state markers. No therapeutic-window, safety, target-approval or clinical conclusion.
