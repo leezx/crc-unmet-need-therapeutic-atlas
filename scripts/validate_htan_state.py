@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independent patient-level validation of FIG1_MARKER_V1 in HTAN/CELLxGENE."""
+"""Source-cohort replication audit of FIG1_MARKER_V1 in HTAN/CELLxGENE."""
 
 from __future__ import annotations
 
@@ -118,7 +118,7 @@ def main() -> None:
         "marker_coverage": {role: {"present": genes, "n_present": len(genes)} for role, genes in STATE.items()},
         "sample_scores": sample_scores,
         "paired_effect_summary": summary,
-        "interpretation_boundary": "Independent patient-level validation of locked marker scores; no causal claim, target ranking, therapeutic-window or clinical conclusion.",
+        "interpretation_boundary": "Source-cohort replication audit of locked marker scores; not independent validation; no causal claim, target ranking, therapeutic-window or clinical conclusion.",
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2) + "\n")
