@@ -457,3 +457,10 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - URL: [#57](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/57)
 - Reviewed head: `bfe85e8`; web ChatGPT result: APPROVE in the existing conversation “PR审核与错误反馈”.
 - Scope: download and checksum the three official GSE178318 processed inputs into an ignored local Phase 2 directory; record dimensions and data-lock metadata. No biological interpretation, target approval or clinical conclusion.
+
+## PR #58 — Figure 1 GSE178318 analysis contract
+
+- URL: [#58](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/58)
+- Initial reviewed head: `5223464`; web ChatGPT result: REQUEST_CHANGES because the marker/program list was not locked.
+- Fix reviewed head: `31ad91a`; web ChatGPT result: APPROVE in the existing conversation “PR审核与错误反馈”.
+- Scope: lock `FIG1_MARKER_V1`, separate identity/state/confounder genes, and preserve patient-level statistics and no-clinical-claim boundaries. No biological conclusion or target approval.
