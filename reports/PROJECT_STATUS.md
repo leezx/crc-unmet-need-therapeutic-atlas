@@ -52,7 +52,7 @@ Phase 1 source-only endpoint remains complete. Phase 2 has locked the falsifiabl
 ## 当前门禁与限制
 
 - Phase 2 当前下载了 data-lock 明确允许的 GSE178318 官方 processed inputs，以及 GSE224235 的 76 KB processed series matrix 用于 coverage audit；原始文件保持 Git ignored，未生成新的 biological matrix。
-- checksum 只能对用户或外部 staging 流程明确放入指定目录的文件离线计算；当前未对生物文件计算 checksum。
+- checksum 只对已明确纳入 Phase 2 data-lock、并放入指定 ignored 目录的 processed inputs 离线计算；其余未下载或未授权候选文件仍未计算 checksum。
 - P0 候选尚未全部完成原始论文、治疗史、分子注释、processed availability、license/access 和下载路径核验。
 - PXD038149 的 `SamplesDescription.xlsx` 仍处于 metadata gate；没有下载或解析外部 workbook。
 - 2026 CRLM PDO biobank 的 processed-data accession `hr94h42xdc.3` 已定位；sample-level clinical/treatment reconciliation、checksums 和 third-party terms 仍未完成。
