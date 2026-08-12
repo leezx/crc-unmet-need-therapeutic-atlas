@@ -591,3 +591,11 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 初审 head：`5223464`，网页版 ChatGPT 结论：**REQUEST_CHANGES**。唯一 blocker 是契约声称使用 prespecified marker/program list，但未锁定 marker 集及版本。
 
 修正 head：`31ad91a`，新增 `figure1_marker_set_v1.tsv`，锁定 epithelial identity、plasticity/non-canonical anchors 与 confounder genes，并规定版本在 QC 后不可变更、confounders 不进入 state score。网页版 ChatGPT 在同一对话中最终结论：**APPROVE**。
+
+## PR #59 GSE178318 structural QC review
+
+初审 head：`03a5231`，网页版 ChatGPT 结论：**REQUEST_CHANGES**。唯一 blocker 是 QC 脚本只报告 barcode/sample/marker reconciliation，没有在失败时退出。
+
+修正 head：`c2c1346`，增加 unparseable barcode、unmapped sample key 和 missing marker 的 fail-closed checks；复审发现仍缺少 `set(sample_map) - set(cell_keys)` 的反向完整性检查。
+
+最终修正 head：`6e13875`，增加双向 sample-key reconciliation；网页版 ChatGPT 在同一对话中最终结论：**APPROVE**。
