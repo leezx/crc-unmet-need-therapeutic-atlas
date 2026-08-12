@@ -611,3 +611,9 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 初审 head：`eb3aaf7`，网页版 ChatGPT 结论：**REQUEST_CHANGES**。唯一 blocker 是脚本未计算 paired effect direction，却将 retention-only 结果标为完整 `QC_STABLE`。
 
 修正 head：`d1d83be`，将结果改为 `QC_RETENTION_STABLE` / `QC_RETENTION_SENSITIVE`，并明确方向门禁延后至患者级 state analysis。网页版 ChatGPT 在同一对话中最终结论：**APPROVE**。
+
+## PR #62 patient-level state-score review
+
+初审 head：`7c1639b`，网页版 ChatGPT 结论：**REQUEST_CHANGES**。唯一 blocker 是 contract 要求报告 cell-cycle/stress confounders，但脚本未计算或输出这 6 个基因。
+
+修正 head：`55977b6`，增加 sample-level `cell_cycle_report` 与 `stress_report`，并明确不进入 state score 或 paired effect。网页版 ChatGPT 在同一对话中最终结论：**APPROVE**。

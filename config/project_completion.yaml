@@ -42,8 +42,8 @@ score_weights:
 readiness_overlay:
   scientific_clinical_readiness:
     max_points: 10
-    current_points: 5
-    current_stage: phase2_qc_retention_complete
+    current_points: 7
+    current_stage: phase2_patient_level_state_score_complete
     completed_components:
       - falsifiable_question_and_novelty_boundary
       - five_figure_evidence_skeleton
@@ -52,8 +52,9 @@ readiness_overlay:
       - GSE178318_structural_qc
       - explicit_cell_qc_rules_v1
       - three_rule_qc_retention_execution
+      - patient_level_descriptive_state_score
+      - paired_effect_direction_analysis
     remaining_components:
-      - patient_level_state_score_analysis
       - independent_validation
       - functional_dependency_and_therapeutic_window
       - clinical_indication_mapping
