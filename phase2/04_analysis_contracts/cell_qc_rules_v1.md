@@ -25,7 +25,7 @@ Repeat the patient/specimen aggregation under two prespecified alternatives:
 1. permissive: `detected_genes >= 100` and `total_counts >= 300`;
 2. stringent: `detected_genes >= 300` and `total_counts >= 1,000`.
 
-The direction of any paired primary-versus-liver-metastasis effect must be reported under all three rules. If the number of retained cells or patient-level paired specimens changes materially, the result is QC-sensitive and cannot advance to a state claim without review.
+The direction of any paired primary-versus-liver-metastasis effect must be reported under all three rules. A sensitivity run is labeled `QC_SENSITIVE` if, relative to the primary rule, any sample's retained-cell count changes by more than 20%, any matched patient loses either specimen, or the paired effect changes direction. Otherwise it is labeled `QC_STABLE` for the defined retention metric. A `QC_SENSITIVE` result cannot advance to a state claim without review.
 
 ## Statistical and interpretation boundary
 
