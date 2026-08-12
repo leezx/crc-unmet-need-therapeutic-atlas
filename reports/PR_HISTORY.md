@@ -500,7 +500,6 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Initial reviewed head: `2cdbf49`; web ChatGPT result: REQUEST_CHANGES because checksum wording in `PROJECT_STATUS.md` contradicted the newly captured Phase 2 checksums.
 - Fix reviewed head: `bfcdd89`; web ChatGPT result: APPROVE in the existing conversation “PR审核与错误反馈”.
 - Scope: download/checksum and audit GSE224235 coverage; document 17 samples, 8 matched pairs and only 2/10 locked-marker coverage as `INSUFFICIENT_FOR_FULL_STATE_VALIDATION`. No progress increase, target ranking or clinical conclusion.
-
 ## PR #64 — HTAN source-cohort replication audit
 
 - URL: [#64](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/64)
