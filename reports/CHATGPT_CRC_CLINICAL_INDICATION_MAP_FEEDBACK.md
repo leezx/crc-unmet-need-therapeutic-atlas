@@ -634,3 +634,11 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 初审 head：`d32ade5`，网页版 ChatGPT 结论：**REQUEST_CHANGES**。唯一 blocker 是 HPA 解压返回码和目标缺失没有 fail-closed 处理，可能生成空的审计结果。
 
 修正 head：`55fb4fd`，检查 RNA/IHC archive 返回码；RNA 缺少任一目标时失败；IHC 中官方无记录的目标显式写入 `ihc_targets_without_records`。网页版 ChatGPT 在同一对话最终结论：**APPROVE**。
+
+## PR #67 / #68 CRLM external cohort review
+
+PR #67 因复用旧 HTAN 分支 head `40b29c6` 而关闭，未合并；网页版 ChatGPT 已指出该 head 与声称的 CRLM 提交不一致。
+
+PR #68 初审 head：`c24ad0a`，网页版 ChatGPT 结论：**REQUEST_CHANGES**。唯一 blocker 是 CRLM-versus-adjacent-liver 不等价于锁定的 primary CRC-versus-liver metastasis 对照，不能计为 independent validation 或升至 98/100。
+
+修正 head：`87ba899`，PR 标题、描述、source manifest、脚本/报告和项目状态统一为 external cohort coverage/descriptive audit，进度保持 97/100。网页版 ChatGPT 最终结论：**APPROVE**。
