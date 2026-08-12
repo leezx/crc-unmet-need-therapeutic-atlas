@@ -87,6 +87,11 @@ def main() -> None:
     genes = read_lines(files["genes"])
     sample_map = load_sample_map(args.sample_map)
     cell_keys = [sample_key(barcode) for barcode in barcodes]
+    if any(key == "UNPARSEABLE" for key in cell_keys):
+        raise ValueError("Barcode reconciliation failed: at least one barcode is unparseable")
+    unmapped_keys = sorted({key for key in cell_keys if key not in sample_map})
+    if unmapped_keys:
+        raise ValueError(f"Barcode reconciliation failed: unmapped sample keys: {unmapped_keys}")
 
     per_cell_counts = [0] * len(barcodes)
     per_cell_detected = [0] * len(barcodes)
@@ -125,6 +130,9 @@ def main() -> None:
         row["gene"]: row["gene"] in gene_names
         for row in marker_rows
     }
+    missing_markers = sorted(gene for gene, present in marker_presence.items() if not present)
+    if missing_markers:
+        raise ValueError(f"Locked marker-set reconciliation failed: missing genes: {missing_markers}")
 
     summary = {
         "dataset": "GSE178318",
@@ -137,7 +145,7 @@ def main() -> None:
             "total_barcodes": len(barcodes),
             "parsed_barcodes": sum(key != "UNPARSEABLE" for key in cell_keys),
             "sample_keys_in_reviewed_map": sum(key in sample_map for key in set(cell_keys)),
-            "unmapped_sample_keys": sorted({key for key in cell_keys if key not in sample_map}),
+            "unmapped_sample_keys": unmapped_keys,
         },
         "per_sample": {
             key: {
@@ -153,7 +161,7 @@ def main() -> None:
             "path": str(args.marker_set),
             "version": "FIG1_MARKER_V1",
             "genes_present": sorted(gene for gene, present in marker_presence.items() if present),
-            "genes_missing": sorted(gene for gene, present in marker_presence.items() if not present),
+            "genes_missing": missing_markers,
         },
         "interpretation_boundary": "Structural and distributional QC only; no cutoffs, malignancy call, target ranking, or clinical conclusion.",
     }
