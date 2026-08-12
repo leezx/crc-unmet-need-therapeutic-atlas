@@ -599,3 +599,9 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 修正 head：`c2c1346`，增加 unparseable barcode、unmapped sample key 和 missing marker 的 fail-closed checks；复审发现仍缺少 `set(sample_map) - set(cell_keys)` 的反向完整性检查。
 
 最终修正 head：`6e13875`，增加双向 sample-key reconciliation；网页版 ChatGPT 在同一对话中最终结论：**APPROVE**。
+
+## PR #60 cell-QC rules review
+
+初审 head：`3fa0767`，网页版 ChatGPT 结论：**REQUEST_CHANGES**。唯一 blocker 是 `QC_SENSITIVE` 的“material change”没有可复现数值定义。
+
+修正 head：`efc727e`，定义 retained-cell count >20%、matched pair 丢失 specimen 或 paired effect direction reversal 为 `QC_SENSITIVE`；网页版 ChatGPT 在同一对话中最终结论：**APPROVE**。

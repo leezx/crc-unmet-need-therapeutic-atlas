@@ -42,16 +42,17 @@ score_weights:
 readiness_overlay:
   scientific_clinical_readiness:
     max_points: 10
-    current_points: 2
-    current_stage: phase2_data_lock_and_structural_qc
+    current_points: 3
+    current_stage: phase2_qc_rule_contract
     completed_components:
       - falsifiable_question_and_novelty_boundary
       - five_figure_evidence_skeleton
       - GSE178318_data_lock
       - FIG1_MARKER_V1_lock
       - GSE178318_structural_qc
+      - explicit_cell_qc_rules_v1
     remaining_components:
-      - explicit_cell_qc_cutoffs_and_sensitivity_rules
+      - execute_cell_qc_and_sensitivity_rules
       - patient_level_state_score_analysis
       - independent_validation
       - functional_dependency_and_therapeutic_window
