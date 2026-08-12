@@ -585,3 +585,9 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 ## PR #57 GSE178318 data-lock review
 
 网页版 ChatGPT 在既有对话“PR审核与错误反馈”中审核 PR #57 head `bfe85e8`，结论：**APPROVE**。确认三个官方 processed 文件的 checksum、gzip/维度核验、Git ignored 原始数据边界和 no-analysis 语义一致；未产生 target approval 或临床结论。
+
+## PR #58 Figure 1 analysis-contract review
+
+初审 head：`5223464`，网页版 ChatGPT 结论：**REQUEST_CHANGES**。唯一 blocker 是契约声称使用 prespecified marker/program list，但未锁定 marker 集及版本。
+
+修正 head：`31ad91a`，新增 `figure1_marker_set_v1.tsv`，锁定 epithelial identity、plasticity/non-canonical anchors 与 confounder genes，并规定版本在 QC 后不可变更、confounders 不进入 state score。网页版 ChatGPT 在同一对话中最终结论：**APPROVE**。
