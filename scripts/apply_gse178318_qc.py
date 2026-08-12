@@ -114,7 +114,7 @@ def main() -> None:
                 changes.append(f"retention_change_over_20pct:{key}")
         if set(result["matched_primary_liver_patients_with_retained_cells"]) != set(primary["matched_primary_liver_patients_with_retained_cells"]):
             changes.append("matched_pair_set_changed")
-        sensitivity_labels[name] = {"label": "QC_SENSITIVE" if changes else "QC_STABLE", "reasons": changes}
+        sensitivity_labels[name] = {"label": "QC_RETENTION_STABLE" if changes == [] else "QC_RETENTION_SENSITIVE", "reasons": changes, "direction_gate": "DEFERRED_TO_PATIENT_LEVEL_STATE_ANALYSIS"}
 
     output = {
         "dataset": "GSE178318",
