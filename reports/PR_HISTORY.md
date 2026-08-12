@@ -493,3 +493,10 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Initial reviewed head: `7c1639b`; web ChatGPT result: REQUEST_CHANGES because excluded cell-cycle/stress confounders were not reported.
 - Fix reviewed head: `55977b6`; web ChatGPT result: APPROVE in the existing conversation “PR审核与错误反馈”.
 - Scope: compute locked-marker descriptive patient-level scores, paired metastasis-minus-primary effects and exact sign-flip summaries; report excluded confounder scores; update progress from 95/100 to 97/100. Exploratory only; no target or clinical conclusion.
+
+## PR #63 — GSE224235 independent-validation audit
+
+- URL: [#63](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/63)
+- Initial reviewed head: `2cdbf49`; web ChatGPT result: REQUEST_CHANGES because checksum wording in `PROJECT_STATUS.md` contradicted the newly captured Phase 2 checksums.
+- Fix reviewed head: `bfcdd89`; web ChatGPT result: APPROVE in the existing conversation “PR审核与错误反馈”.
+- Scope: download/checksum and audit GSE224235 coverage; document 17 samples, 8 matched pairs and only 2/10 locked-marker coverage as `INSUFFICIENT_FOR_FULL_STATE_VALIDATION`. No progress increase, target ranking or clinical conclusion.

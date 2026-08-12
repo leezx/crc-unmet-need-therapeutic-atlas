@@ -47,11 +47,12 @@ Phase 1 source-only endpoint remains complete. Phase 2 has locked the falsifiabl
 9. 完成 GSE226997 的 4 个 sample-level supplementary 文件索引和 GSE159216 的 171 patients / 283 samples、283 CHP / 283 CEL 文件级聚合索引。
 10. 建立 source-only final audit：受追踪文件后缀、raw/processed/data 路径、文件大小和核心控制文件均由脚本检查，并在 CI 中强制保持稳定。
 11. 为 DepMap、HTAN、Zenodo mirror、GSE117548、四个 GEO reference subseries 和 GTEx 建立结构化 no-file-inventory disposition，避免把受控的 source-only 不主张误判为内部遗漏。
+12. 审计 GSE224235 官方 processed matrix：17 samples、8 matched pairs，但仅覆盖 2/10 个 `FIG1_MARKER_V1` genes，因此正式记录为 `INSUFFICIENT_FOR_FULL_STATE_VALIDATION`，不增加 scientific readiness 分数。
 
 ## 当前门禁与限制
 
-- Phase 2 当前只下载了 data-lock 明确允许的 GSE178318 官方 processed inputs；原始文件保持 Git ignored，未生成新的 biological matrix。
-- checksum 只能对用户或外部 staging 流程明确放入指定目录的文件离线计算；当前未对生物文件计算 checksum。
+- Phase 2 当前下载了 data-lock 明确允许的 GSE178318 官方 processed inputs，以及 GSE224235 的 76 KB processed series matrix 用于 coverage audit；原始文件保持 Git ignored，未生成新的 biological matrix。
+- checksum 只对已明确纳入 Phase 2 data-lock、并放入指定 ignored 目录的 processed inputs 离线计算；其余未下载或未授权候选文件仍未计算 checksum。
 - P0 候选尚未全部完成原始论文、治疗史、分子注释、processed availability、license/access 和下载路径核验。
 - PXD038149 的 `SamplesDescription.xlsx` 仍处于 metadata gate；没有下载或解析外部 workbook。
 - 2026 CRLM PDO biobank 的 processed-data accession `hr94h42xdc.3` 已定位；sample-level clinical/treatment reconciliation、checksums 和 third-party terms 仍未完成。
@@ -63,7 +64,7 @@ Phase 1 source-only endpoint remains complete. Phase 2 has locked the falsifiabl
 1. 若启动下一阶段，按 `reports/P0_NEXT_GATE_PLAN.tsv` 推进 DepMap exact-file/header、HPA file-level terms 和 CRLM-NMP row-level metadata；这些是 dataset-specific review，不回写 source-only completion。
 2. 只有用户明确 staged 文件并授权后，才运行离线 checksum capture；当前不下载、不计算。
 3. 若未来申请 `APPROVED`，须对每个候选单独完成 Phase 1 checklist 和 PR 审核；当前没有候选被批准。
-4. 下一步才可在 reviewed QC contract 下选择 cutoffs、生成 patient-level state-score intermediate objects；target ranking、therapeutic-window 和临床适应症结论仍被禁止，直到独立验证门禁通过。
+4. GSE224235 不能通过完整 state validation gate；下一步需要 marker coverage 足够的独立队列，或提交新的 cross-platform marker contract。target ranking、therapeutic-window 和临床适应症结论仍被禁止，直到独立验证门禁通过。
 
 ## 权威项目记录
 
