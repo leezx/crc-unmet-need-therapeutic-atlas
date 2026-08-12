@@ -464,3 +464,11 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Initial reviewed head: `5223464`; web ChatGPT result: REQUEST_CHANGES because the marker/program list was not locked.
 - Fix reviewed head: `31ad91a`; web ChatGPT result: APPROVE in the existing conversation “PR审核与错误反馈”.
 - Scope: lock `FIG1_MARKER_V1`, separate identity/state/confounder genes, and preserve patient-level statistics and no-clinical-claim boundaries. No biological conclusion or target approval.
+
+## PR #59 — GSE178318 structural QC
+
+- URL: [#59](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/59)
+- Initial reviewed head: `03a5231`; web ChatGPT result: REQUEST_CHANGES because reconciliation outcomes were reported but not fail-closed.
+- Intermediate fix head: `c2c1346`; web ChatGPT requested the reverse expected-key completeness check.
+- Final reviewed head: `6e13875`; web ChatGPT result: APPROVE in the existing conversation “PR审核与错误反馈”.
+- Scope: run structural QC on locked GSE178318 inputs, enforce matrix/barcode/sample/marker gates, record per-sample distributions, and update progress from 90/100 to 92/100. No cutoff selection, biological claim, target ranking or clinical conclusion.
