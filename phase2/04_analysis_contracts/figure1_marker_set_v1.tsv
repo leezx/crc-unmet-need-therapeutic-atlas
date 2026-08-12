@@ -1,0 +1,17 @@
+set_version	gene	role	source_or_rationale	use
+FIG1_MARKER_V1	EPCAM	epithelial_identity	CRC epithelial anchor; source-gated identity marker	identity_gate
+FIG1_MARKER_V1	KRT8	epithelial_identity	CRC epithelial anchor; source-gated identity marker	identity_gate
+FIG1_MARKER_V1	KRT18	epithelial_identity	CRC epithelial anchor; source-gated identity marker	identity_gate
+FIG1_MARKER_V1	KRT19	epithelial_identity	CRC epithelial anchor; source-gated identity marker	identity_gate
+FIG1_MARKER_V1	TACSTD2	healing_plasticity_anchor	TROP2 injury-repair marker described in matched CRC metastasis study	state_score
+FIG1_MARKER_V1	L1CAM	healing_plasticity_anchor	Metastasis-initiating regenerative state marker described in matched CRC metastasis study	state_score
+FIG1_MARKER_V1	EMP1	healing_plasticity_anchor	Injury-associated state marker described with L1CAM in matched CRC metastasis study	state_score
+FIG1_MARKER_V1	SOX2	noncanonical_plasticity_anchor	Multipotential stem/non-canonical marker in matched CRC metastasis study	state_score
+FIG1_MARKER_V1	CHGA	noncanonical_lineage_anchor	Neuroendocrine-like marker used to define non-canonical state	state_score
+FIG1_MARKER_V1	KRT5	noncanonical_lineage_anchor	Squamous-like marker used to define non-canonical state	state_score
+FIG1_MARKER_V1	MKI67	cell_cycle_exclusion	Cell-cycle confounder; excluded from state score	confounder_report
+FIG1_MARKER_V1	TOP2A	cell_cycle_exclusion	Cell-cycle confounder; excluded from state score	confounder_report
+FIG1_MARKER_V1	STMN1	cell_cycle_exclusion	Cell-cycle confounder; excluded from state score	confounder_report
+FIG1_MARKER_V1	FOS	stress_exclusion	Immediate-early/stress confounder; excluded from state score	confounder_report
+FIG1_MARKER_V1	JUN	stress_exclusion	Immediate-early/stress confounder; excluded from state score	confounder_report
+FIG1_MARKER_V1	HSPA1A	stress_exclusion	Heat-shock/stress confounder; excluded from state score	confounder_report

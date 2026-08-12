@@ -31,7 +31,8 @@
 
 ## State scoring contract
 
-- The first pass is descriptive and uses a prespecified marker/program list derived from the literature and independent reference data.
+- The first pass is descriptive and uses the locked `phase2/04_analysis_contracts/figure1_marker_set_v1.tsv` marker set. The file version is part of the analysis input and cannot be changed after QC without a new reviewed contract.
+- `FIG1_MARKER_V1` separates epithelial identity anchors, plasticity/non-canonical anchors and confounder genes; confounders are reported but excluded from the state score.
 - Candidate programs must be separated from cell-cycle, stress and ribosomal programs.
 - State scores are summarized by patient/specimen, not by pooled cells.
 - A program is not called malignant without epithelial identity and malignant-cell context checks.
