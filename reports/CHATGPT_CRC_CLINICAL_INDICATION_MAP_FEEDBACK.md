@@ -617,3 +617,9 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 初审 head：`7c1639b`，网页版 ChatGPT 结论：**REQUEST_CHANGES**。唯一 blocker 是 contract 要求报告 cell-cycle/stress confounders，但脚本未计算或输出这 6 个基因。
 
 修正 head：`55977b6`，增加 sample-level `cell_cycle_report` 与 `stress_report`，并明确不进入 state score 或 paired effect。网页版 ChatGPT 在同一对话中最终结论：**APPROVE**。
+
+## PR #63 GSE224235 independent-validation audit
+
+初审 head：`2cdbf49`，网页版 ChatGPT 结论：**REQUEST_CHANGES**。唯一 blocker 是 `PROJECT_STATUS.md` 仍声称没有对生物文件计算 checksum，与已完成的 Phase 2 checksum 记录冲突。
+
+修正 head：`bfcdd89`，将语义改为仅其余未下载或未授权候选文件尚未计算 checksum。网页版 ChatGPT 在同一对话中最终结论：**APPROVE**。
