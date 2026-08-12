@@ -92,6 +92,9 @@ def main() -> None:
     unmapped_keys = sorted({key for key in cell_keys if key not in sample_map})
     if unmapped_keys:
         raise ValueError(f"Barcode reconciliation failed: unmapped sample keys: {unmapped_keys}")
+    missing_expected_keys = sorted(set(sample_map) - set(cell_keys))
+    if missing_expected_keys:
+        raise ValueError(f"Barcode reconciliation failed: expected sample keys absent: {missing_expected_keys}")
 
     per_cell_counts = [0] * len(barcodes)
     per_cell_detected = [0] * len(barcodes)
@@ -146,6 +149,7 @@ def main() -> None:
             "parsed_barcodes": sum(key != "UNPARSEABLE" for key in cell_keys),
             "sample_keys_in_reviewed_map": sum(key in sample_map for key in set(cell_keys)),
             "unmapped_sample_keys": unmapped_keys,
+            "missing_expected_sample_keys": missing_expected_keys,
         },
         "per_sample": {
             key: {
