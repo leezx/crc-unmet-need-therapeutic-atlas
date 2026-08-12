@@ -479,3 +479,10 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Initial reviewed head: `3fa0767`; web ChatGPT result: REQUEST_CHANGES because `QC_SENSITIVE` lacked a reproducible material-change threshold.
 - Fix reviewed head: `efc727e`; web ChatGPT result: APPROVE in the existing conversation “PR审核与错误反馈”.
 - Scope: define primary/permissive/stringent cell-QC rules and explicit sensitivity criteria; update progress from 92/100 to 93/100. No malignancy/state claim, target ranking or clinical conclusion.
+
+## PR #61 — GSE178318 QC retention execution
+
+- URL: [#61](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/61)
+- Initial reviewed head: `eb3aaf7`; web ChatGPT result: REQUEST_CHANGES because retention-only checks were labeled complete `QC_STABLE` without paired effect-direction analysis.
+- Fix reviewed head: `d1d83be`; web ChatGPT result: APPROVE in the existing conversation “PR审核与错误反馈”.
+- Scope: execute three reviewed QC rules, report retention and matched-pair availability, label retention stability separately, and update progress from 93/100 to 95/100. No state score, target ranking or clinical conclusion.

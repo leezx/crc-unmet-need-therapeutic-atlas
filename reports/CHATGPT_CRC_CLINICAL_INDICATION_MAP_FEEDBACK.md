@@ -605,3 +605,9 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 初审 head：`3fa0767`，网页版 ChatGPT 结论：**REQUEST_CHANGES**。唯一 blocker 是 `QC_SENSITIVE` 的“material change”没有可复现数值定义。
 
 修正 head：`efc727e`，定义 retained-cell count >20%、matched pair 丢失 specimen 或 paired effect direction reversal 为 `QC_SENSITIVE`；网页版 ChatGPT 在同一对话中最终结论：**APPROVE**。
+
+## PR #61 GSE178318 QC retention execution review
+
+初审 head：`eb3aaf7`，网页版 ChatGPT 结论：**REQUEST_CHANGES**。唯一 blocker 是脚本未计算 paired effect direction，却将 retention-only 结果标为完整 `QC_STABLE`。
+
+修正 head：`d1d83be`，将结果改为 `QC_RETENTION_STABLE` / `QC_RETENTION_SENSITIVE`，并明确方向门禁延后至患者级 state analysis。网页版 ChatGPT 在同一对话中最终结论：**APPROVE**。
