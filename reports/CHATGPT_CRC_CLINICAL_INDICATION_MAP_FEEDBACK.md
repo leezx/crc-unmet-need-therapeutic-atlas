@@ -623,3 +623,9 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 初审 head：`2cdbf49`，网页版 ChatGPT 结论：**REQUEST_CHANGES**。唯一 blocker 是 `PROJECT_STATUS.md` 仍声称没有对生物文件计算 checksum，与已完成的 Phase 2 checksum 记录冲突。
 
 修正 head：`bfcdd89`，将语义改为仅其余未下载或未授权候选文件尚未计算 checksum。网页版 ChatGPT 在同一对话中最终结论：**APPROVE**。
+
+## PR #64 HTAN replication audit review
+
+初审 head：`fffe070`，网页版 ChatGPT 结论：**REQUEST_CHANGES**。唯一 blocker 是 HTAN 数据集来自 marker set 的来源研究，不能被称为 independent validation，也不能据此增加进度。
+
+修正 head：待最终复审；将 HTAN 结果改为 `source-cohort replication audit`，科学 readiness 回退至 7/10。
