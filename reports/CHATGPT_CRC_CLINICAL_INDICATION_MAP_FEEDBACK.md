@@ -628,4 +628,4 @@ PR #16 修复对象：reviewed head `47846b469f9c2c5a87502512c189eb775f0bcfe0`�
 
 初审 head：`fffe070`，网页版 ChatGPT 结论：**REQUEST_CHANGES**。唯一 blocker 是 HTAN 数据集来自 marker set 的来源研究，不能被称为 independent validation，也不能据此增加进度。
 
-修正 head：待最终复审；将 HTAN 结果改为 `source-cohort replication audit`，科学 readiness 回退至 7/10。
+修正 head：`a30bbb1`，将 HTAN 结果、脚本边界、PR 描述统一改为 `source-cohort replication audit`，科学 readiness 保持 7/10。网页版 ChatGPT 最终轻量复核：**APPROVE**。

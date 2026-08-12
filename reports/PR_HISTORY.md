@@ -505,4 +505,4 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 
 - URL: [#64](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/64)
 - Initial reviewed head: `fffe070`; web ChatGPT result: REQUEST_CHANGES because HTAN is the source study for the marker set and cannot count as independent validation.
-- Fix: relabel HTAN as source-cohort replication audit and keep progress at 97/100; independent validation remains open.
+- Final reviewed head: `a30bbb1`; web ChatGPT result: APPROVE after aligning script/report/PR wording and keeping progress at 97/100. Independent validation remains open.
