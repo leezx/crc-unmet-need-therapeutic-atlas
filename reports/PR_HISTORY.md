@@ -486,3 +486,10 @@ After PR #1 merged at `240473c`, branch `phase1/p0-source-verification` was crea
 - Initial reviewed head: `eb3aaf7`; web ChatGPT result: REQUEST_CHANGES because retention-only checks were labeled complete `QC_STABLE` without paired effect-direction analysis.
 - Fix reviewed head: `d1d83be`; web ChatGPT result: APPROVE in the existing conversation “PR审核与错误反馈”.
 - Scope: execute three reviewed QC rules, report retention and matched-pair availability, label retention stability separately, and update progress from 93/100 to 95/100. No state score, target ranking or clinical conclusion.
+
+## PR #62 — GSE178318 patient-level state scores
+
+- URL: [#62](https://github.com/leezx/crc-unmet-need-therapeutic-atlas/pull/62)
+- Initial reviewed head: `7c1639b`; web ChatGPT result: REQUEST_CHANGES because excluded cell-cycle/stress confounders were not reported.
+- Fix reviewed head: `55977b6`; web ChatGPT result: APPROVE in the existing conversation “PR审核与错误反馈”.
+- Scope: compute locked-marker descriptive patient-level scores, paired metastasis-minus-primary effects and exact sign-flip summaries; report excluded confounder scores; update progress from 95/100 to 97/100. Exploratory only; no target or clinical conclusion.
