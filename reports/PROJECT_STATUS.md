@@ -8,30 +8,31 @@ This file describes current state only. The pre-pivot status (Phase 1 source-onl
 
 Source: `Asset-Generation-OS-architecture.md` → `CRC-Atlas工业化重构`（用户手工备注）, 2026-08-21. This is a **scope pivot**, not a data loss: the repository's single task is now
 
-`ADCdb-derisked target (Module A, external) → mCRC evidence per axis (Modules B–F) → KILL / HOLD / SHORTLIST → supplementary/mechanistic evidence only for a named residual uncertainty on an already-shortlisted target`
+`ADCdb-derisked target (Module A, gated by `derisking_tier`/`repurposing_status`, external) → mCRC evidence per axis and territory (Modules B–F, `target_id x indication_id`-keyed) → KILL / HOLD / SHORTLIST for that target × territory → supplementary/mechanistic evidence only for a named residual uncertainty on an already-shortlisted target`
 
 — not the old `patient population → malignant cell state → surface target → functional dependency → normal-tissue window` chain, which required an unsupervised cell-state discovery step before a target could even exist. See [`../ADC_ATLAS_DATASET_CONTRACT.md`](../ADC_ATLAS_DATASET_CONTRACT.md), [`../modules/README.md`](../modules/README.md), and [`../knowledge/README.md`](../knowledge/README.md).
 
-This is PR #70 (`pivot/adc-target-repurposing-atlas`), currently in its **second commit round** after web-ChatGPT review (`CRC临床适应症地图` conversation, `Biotech ideas` project) returned `REQUEST_CHANGES` on the first round. See "Review history" below.
+This is PR #70 (`pivot/adc-target-repurposing-atlas`), currently in its **third commit round** after web-ChatGPT review (`CRC临床适应症地图` conversation, `Biotech ideas` project) returned `REQUEST_CHANGES` on rounds 1 and 2. See "Review history" below.
 
 ## Current scale
 
-- 32 registry candidates (20 pre-pivot + 12 added this pivot: `GSE274551`, `GSE225857`, `GSE84267`, `PXD055821`, `PXD022613`, `GSE196576`, `GSE294385`, `GSE235919`, `GSE235917`, `GSE5851`, `CSPA_PXD000589`, `CPTAC_COAD`, `HPA_CRC_cancer_tissue`). All still `status=CANDIDATE`; none of the 13 pivot-added candidates have completed Phase 1 source verification yet — their `source_manifest.tsv` records only the accession URL already cited in the architecture doc, nothing more.
-- `DATA/registry/module_classification.tsv`: 34 rows (some datasets serve two modules, e.g. `GSE178318`/`GSE225857` serve both B and C) covering all 32 datasets, each with `module`, `activation_status`, `adc_decision_axis`, `activation_rule`, `default_execution_order` — validated by `scripts/validate_module_classification.py` against a controlled vocabulary, not just free-text `reason`.
+- 32 registry candidates (19 pre-pivot + 13 added this pivot: `GSE274551`, `GSE225857`, `GSE84267`, `PXD055821`, `PXD022613`, `GSE196576`, `GSE294385`, `GSE235919`, `GSE235917`, `GSE5851`, `CSPA_PXD000589`, `CPTAC_COAD`, `HPA_CRC_cancer_tissue`). All still `status=CANDIDATE`; none of the 13 pivot-added candidates have completed Phase 1 source verification yet — their `source_manifest.tsv` records only the accession URL already cited in the architecture doc, nothing more.
+- `DATA/registry/module_classification.tsv`: 34 rows (some datasets serve two modules, e.g. `GSE178318`/`GSE225857` serve both B and C) covering all 32 datasets, each with `module`, `activation_status`, `adc_decision_axis` (now including `clinical_endpoint_context`, distinct from `persistence`), `activation_rule`, `activation_context` (added round 3), `default_execution_order` — validated by `scripts/validate_module_classification.py` against a controlled vocabulary, not just free-text `reason`.
 - `datasets.tsv`'s own `priority` column (`P0_DOWNLOAD` / `P1_DOWNLOAD` / `REFERENCE_ONLY`) is retained as **legacy Phase 1 download-priority metadata only**; it is not re-derived from the pivot and must not be read as an execution-priority signal — `module_classification.tsv` is canonical for that (see `CONTRIBUTING.md`).
-- `schemas/target_seed.tsv` and `schemas/target_evidence.tsv` are new, empty (header-only) contracts. `schemas/evidence.tsv` and `schemas/indication_evidence_links.tsv` gained a `target_id` column; all 8 existing rows are pre-pivot dataset-provenance evidence and keep `target_id = NA`.
+- `schemas/target_seed.tsv` (round 3: gained `derisking_tier`/`repurposing_status` admission fields) and `schemas/target_evidence.tsv` (round 3: gained `indication_id`, `measurement_layer`, `evidence_directness`, `source_evidence_id`) are new, empty (header-only) contracts. `schemas/evidence.tsv` and `schemas/indication_evidence_links.tsv` gained a `target_id` column (round 2); all 8 existing rows are pre-pivot dataset-provenance evidence and keep `target_id = NA`.
 - `config/external_sources.yaml` is new: Module A's two source locations and output contract are declared there via `path_env_var`, not hardcoded into prose docs.
 - `archive/phase2_fetal_state_track_v1/` now holds the full old `phase2/` tree, 4 state-validation reports, 7 scripts (all of them — `qc_gse178318.py`, `apply_gse178318_qc.py`, and `audit_hpa_target_window.py` were moved here in round 2 after review caught that they still defaulted to the old Fig1 marker panel), and the pre-pivot `PROJECT_STATUS.md` body.
 
-## Completed this pivot (round 1 + round 2 fixes)
+## Completed this pivot (rounds 1–3)
 
-1. `ADC_ATLAS_DATASET_CONTRACT.md` — per-module allowed questions / forbidden claims / activation rules.
-2. `modules/` — one working folder per Module B–F, admission language corrected to match canonical registry `status` (round 2).
-3. `DATA/registry/module_classification.tsv` + `schemas/module_classification.tsv` + `scripts/validate_module_classification.py` — single canonical execution-priority contract, machine-checkable (round 2; round 1 shipped the file without a schema/validator/controlled vocabulary).
-4. `schemas/target_seed.tsv`, `schemas/target_evidence.tsv`, `target_id` added to `schemas/evidence.tsv` / `schemas/indication_evidence_links.tsv`, `config/external_sources.yaml` — target-first is now a data model, not just prose (round 2).
-5. Old fetal-state track fully archived: `phase2/`, its 4 reports, and now all 7 of its scripts (round 2 correction — 3 were incorrectly left live in round 1).
-6. `.gitignore` restores the original `phase2/03_data/raw|processed|06_results` patterns in addition to the new archive paths, so any other existing checkout with local biological files at the old path stays protected (round 2).
-7. `knowledge/README.md` rewritten target-first; the old mandatory malignant-cell-state evidence chain is retracted (round 2).
+1. `ADC_ATLAS_DATASET_CONTRACT.md` — per-module allowed questions / forbidden claims / activation rules; round 3 added the Module A admission gate and the two-table evidence model description.
+2. `modules/` — one working folder per Module B–F; admission language corrected to match canonical registry `status` (round 2); Module C's `persistence` vs `clinical_endpoint_context` split and Module B's surface-density boundary hardened (round 3).
+3. `DATA/registry/module_classification.tsv` + `schemas/module_classification.tsv` + `scripts/validate_module_classification.py` — canonical execution-priority contract (round 2), extended round 3 with `activation_context` (names the actual RAS-mutant/RAS-WT/anti-EGFR/MRD/first-line territory instead of leaving it in free-text `reason`) and the `clinical_endpoint_context` axis.
+4. `schemas/target_seed.tsv`, `schemas/target_evidence.tsv`, `target_id` on `schemas/evidence.tsv` / `schemas/indication_evidence_links.tsv`, `config/external_sources.yaml` (round 2) — round 3 makes the two-table model explicit (`evidence.tsv` = provenance object, `target_evidence.tsv` = canonical `target_id x indication_id`-keyed interpreted output, linked via `source_evidence_id`) and adds the Module A `derisking_tier`/`repurposing_status` admission gate.
+5. Old fetal-state track fully archived: `phase2/`, its 4 reports, and all 7 of its scripts (round 2).
+6. `.gitignore` restores the original `phase2/03_data/raw|processed|06_results` patterns in addition to the new archive paths (round 2).
+7. `knowledge/README.md` rewritten target-first; the old mandatory malignant-cell-state evidence chain is retracted (round 2), then updated for the two-table model and `indication_id`-keyed dossiers (round 3).
+8. Consistency fixes (round 3): `CSPA_PXD000589`'s `datasets.tsv` reason text now says Module F, not Module A/B; this file's candidate-count arithmetic corrected to 19+13; `config/project_completion.yaml`'s remaining-component name corrected to thirteen; Module D README's HPA_CRC_cancer_tissue file-inventory claim removed (it has none yet — only `MCRC_liver_metastasis_PDO_2026` does).
 
 ## Current gates and limits
 
@@ -39,21 +40,22 @@ This is PR #70 (`pivot/adc-target-repurposing-atlas`), currently in its **second
 - No Module (B–F) has a data lock or analysis contract yet — `modules/*/README.md` define scope only.
 - `MCRC_liver_metastasis_PDO_2026`'s mIHC panel covers only 14 markers; Module D must do a `target_observable` coverage check per target before assuming RNA→protein calibration is available.
 - `knowledge/` still has only the 8 pre-pivot, non-target-specific evidence objects; no `target_evidence.tsv` row exists yet for any real ADCdb target.
-- Module A (`ADC_TARGET_SEED_UNIVERSE.tsv`) has not actually been produced against `schemas/target_seed.tsv` — the contract exists, the seed universe file does not.
+- Module A (`ADC_TARGET_SEED_UNIVERSE.tsv`) has not actually been produced against `schemas/target_seed.tsv` — the contract (including the `derisking_tier`/`repurposing_status` admission gate) exists, the seed universe file does not.
 
 ## Next handoff
 
-Per the reviewing conversation's own framing: **12 new candidate source verification → Module A target input contract → target-first B–F execution.** Concretely:
+Per the reviewing conversation's own framing: **13 new candidate source verification → Module A target input contract → target-first B–F execution, one target x indication at a time.** Concretely:
 
 1. Complete Phase 1 source verification for the 13 pivot-added candidates.
-2. Produce a first `ADC_TARGET_SEED_UNIVERSE.tsv` (even a small one) conforming to `schemas/target_seed.tsv`, sourced via `config/external_sources.yaml`.
-3. Take the first `target_id` through Modules B and E (the two `CORE_ACTIVE`/`every_target` modules) end to end, producing real `target_evidence.tsv` rows, before building out C/D/F tooling.
+2. Produce a first `ADC_TARGET_SEED_UNIVERSE.tsv` (even a small one) conforming to `schemas/target_seed.tsv`, sourced via `config/external_sources.yaml`, with `derisking_tier`/`repurposing_status` actually set (not left blank).
+3. Take the first `target_id x indication_id` through Modules B and E (the two `CORE_ACTIVE`/`every_target` modules) end to end, producing real `target_evidence.tsv` rows with `measurement_layer` and `evidence_directness` set, before building out C/D/F tooling.
 4. Not next: reactivating any `SUPPLEMENT_FROZEN` dataset (DepMap, HTAN, CRLM-NMP, Perturb-seq, …) without a named target-specific uncertainty.
 
 ## Review history
 
 - **PR #70, round 1** — Initial pivot commit. Web-ChatGPT review (`CRC临床适应症地图`, `Biotech ideas` project): `REQUEST_CHANGES`. Five blockers: (1) target-first existed only in prose, no `target_id` data model; (2) two conflicting dataset-priority sources (`module_classification.tsv` vs `datasets.tsv.priority`) with no schema/vocabulary on the new one; (3) this status file and `knowledge/README.md` still presented the old Phase 2 state as current; (4) `qc_gse178318.py` / `apply_gse178318_qc.py` / `audit_hpa_target_window.py` still carried the old Fig1 marker panel by default, and several module READMEs contradicted canonical registry status; (5) `.gitignore` dropped the legacy `phase2/03_data/raw` etc. patterns, an unnecessary data-leak risk for other checkouts. Three non-blocking suggestions: reclassify `CSPA_PXD000589` out of Module B, register a separate HPA cancer/CRC layer for Module D, flag the PDO's 14-marker mIHC coverage limit.
-- **PR #70, round 2** — this round. All five blockers and all three suggestions addressed (see "Completed this pivot" above). Not yet re-submitted for review.
+- **PR #70, round 2** — All five round-1 blockers and all three suggestions addressed. Web-ChatGPT review: `REQUEST_CHANGES` again, but explicitly confirmed the core pivot direction (target-first, old-track archival, canonical execution priority, external Module A reference, script cleanup) is now real, not surface patching. Five new items, all narrower/contract-level rather than architectural: (1) `target_evidence.tsv` didn't express target × patient-territory × evidence-directness — same target's evidence across different mCRC populations could get merged into one dossier, and RNA/protein/surface evidence could only be told apart by claim text; (2) Module C conflated `persistence` with plain `clinical_endpoint_context` (first-line/pretreatment response-association cohorts read as if they proved post-treatment persistence), and `activation_context=context_specific` had no machine-readable territory; (3) Module B's README implied Module D calibration alone could upgrade `RNA_high` to a surface-density claim, which Module D's own caveats already reject; (4) Module A's `target_seed.tsv` had no machine-readable admission rule for whether a target is even in active repurposing search; (5) a batch of consistency issues (candidate-count arithmetic, a stale `twelve_pivot_candidates` config key, an overclaimed file-inventory sentence, a stale Module A/B reason string, and a stale PR description).
+- **PR #70, round 3** — this round. All five round-2 items and all consistency issues addressed (see "Completed this pivot" above). Reviewer's own stated bar: after this round they expect to `APPROVE` and do not intend to keep expanding scope. Not yet re-submitted for review.
 
 ## 权威项目记录
 

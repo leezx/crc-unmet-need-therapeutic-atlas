@@ -9,16 +9,24 @@ DATA/registry/datasets.tsv (every dataset row is classified, every
 classified id is a real dataset). Does not touch or require biological
 data.
 
-Added 2026-08-21 after web-ChatGPT review of PR #70 (REQUEST_CHANGES,
-item 2): module_classification.tsv previously had no schema or
-controlled vocabulary, so an agent could not mechanically tell which
-dataset to touch first, when, or when it's forbidden -- it had to read
-free-text `reason` prose and interpret it. This script makes that
+Added 2026-08-21 after web-ChatGPT review of PR #70 round 1
+(REQUEST_CHANGES, item 2): module_classification.tsv previously had no
+schema or controlled vocabulary, so an agent could not mechanically tell
+which dataset to touch first, when, or when it's forbidden -- it had to
+read free-text `reason` prose and interpret it. This script makes that
 machine-checkable. datasets.tsv's own `priority` column (P0_DOWNLOAD /
 P1_DOWNLOAD / REFERENCE_ONLY) is retained as legacy Phase 1
 download-priority metadata only; it is not validated here as an
 execution-priority signal -- module_classification.tsv is canonical for
 that (see CONTRIBUTING.md).
+
+Extended after round 2 review (REQUEST_CHANGES again): added
+`clinical_endpoint_context` as a distinct adc_decision_axis from
+`persistence` (a first-line/pretreatment response-association cohort is
+not evidence of post-treatment target persistence), and added the
+`activation_context` column + controlled vocabulary so a `context_specific`
+activation_rule names its actual molecular/clinical territory instead of
+leaving it in free-text `reason`.
 """
 from __future__ import annotations
 
@@ -44,6 +52,7 @@ ACTIVATION_STATUSES = {
 DECISION_AXES = {
     "prevalence",
     "persistence",
+    "clinical_endpoint_context",
     "protein_endpoint",
     "normal_tissue_risk",
     "delivery_proof",
@@ -58,6 +67,14 @@ ACTIVATION_RULES = {
     "after_shortlist_named_uncertainty",
     "reference_annotation_only",
     "never_default",
+}
+ACTIVATION_CONTEXTS = {
+    "ANY",
+    "RAS_MUTANT",
+    "RAS_WT",
+    "ANTI_EGFR_REFRACTORY",
+    "MRD_RECURRENCE",
+    "FIRST_LINE_VALIDATION",
 }
 
 
@@ -80,6 +97,14 @@ def main() -> int:
             errors.append(f"row {i} ({row['dataset_id']}): invalid adc_decision_axis {row['adc_decision_axis']!r}")
         if row["activation_rule"] not in ACTIVATION_RULES:
             errors.append(f"row {i} ({row['dataset_id']}): invalid activation_rule {row['activation_rule']!r}")
+        context = row["activation_context"]
+        if row["module"] == "NONE":
+            if context != "NA":
+                errors.append(f"row {i} ({row['dataset_id']}): module=NONE rows must have activation_context=NA, got {context!r}")
+        elif context not in ACTIVATION_CONTEXTS:
+            errors.append(f"row {i} ({row['dataset_id']}): invalid activation_context {context!r}")
+        if row["activation_rule"] == "context_specific" and context == "ANY":
+            errors.append(f"row {i} ({row['dataset_id']}): activation_rule=context_specific must name a real activation_context, not ANY")
         order = row["default_execution_order"]
         if row["module"] == "NONE":
             if order != "NA":

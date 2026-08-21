@@ -1,1 +1,1 @@
-target_evidence_id	target_id	target_symbol	module	dataset_id	adc_decision_axis	claim	structured_value	unit	source_reference	evidence_level	confidence	review_status	notes
+target_evidence_id	target_id	target_symbol	module	dataset_id	indication_id	adc_decision_axis	measurement_layer	evidence_directness	claim	structured_value	unit	source_reference	source_evidence_id	evidence_level	confidence	review_status	notes

@@ -81,7 +81,7 @@ readiness_overlay:
       - target_seed_and_target_evidence_schemas
       - target_id_added_to_evidence_and_indication_links
     remaining_components:
-      - twelve_pivot_candidates_phase1_source_verification
+      - thirteen_pivot_candidates_phase1_source_verification
       - ADC_TARGET_SEED_UNIVERSE_produced
       - first_target_through_module_b_and_e_end_to_end
     excluded_from_source_only_completion: true

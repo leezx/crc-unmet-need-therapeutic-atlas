@@ -23,7 +23,7 @@ For each candidate X from Module A:
 
 ## Naming rule
 
-Bucket output as `RNA_no / RNA_low / RNA_high`. Never write `surface-density high` — that requires Module D protein calibration first.
+Bucket output as `RNA_no / RNA_low / RNA_high`. This can **never** be upgraded to `surface-density high` — not even by a completed Module D protein calibration. Module D only provides protein-level support/concordance (whole-tissue MS ≠ malignant-cell membrane density, PDO protein ≠ tumor surface density); a real surface-density claim requires a target-specific quantitative surface assay or equivalent direct evidence, which is neither `RNA_high` nor a Module D result. Record `evidence_directness` accordingly in `../../schemas/target_evidence.tsv` (`UNCALIBRATED_PROXY` for RNA alone, `CALIBRATED_PROXY` at best once Module D protein concordance exists, never `DIRECT` from this module).
 
 ## Cannot prove
 

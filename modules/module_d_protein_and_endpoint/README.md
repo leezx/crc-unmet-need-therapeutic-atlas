@@ -30,4 +30,4 @@ Whole-tissue MS ≠ malignant-cell-specific membrane density. Association ≠ "r
 
 ## Status
 
-Not started. `PXD055821`, `PXD022613`, and `HPA_CRC_cancer_tissue` are registered `CANDIDATE` rows with a minimal `source_manifest.tsv` (added 2026-08-21) but not yet source-verified. `MCRC_liver_metastasis_PDO_2026` and `HPA_CRC_cancer_tissue`'s existing file inventories are further along than most other candidates, but the canonical registry `status` for every dataset in this module is still `CANDIDATE`, not `APPROVED` — do not describe any of them as approved.
+Not started. `PXD055821`, `PXD022613`, and `HPA_CRC_cancer_tissue` are registered `CANDIDATE` rows with only a minimal `source_manifest.tsv` + `no_file_inventory_disposition.tsv` (added 2026-08-21) — no actual file inventory yet — and none have completed Phase 1 source verification. `MCRC_liver_metastasis_PDO_2026` is the one dataset in this module with an existing `file_inventory.tsv`, further along than most other candidates; that is still not `APPROVED` — the canonical registry `status` for every dataset in this module is `CANDIDATE`, and none should be described as approved.
