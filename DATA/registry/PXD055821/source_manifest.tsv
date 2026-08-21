@@ -1,0 +1,2 @@
+dataset_id	source_url	accession	download_method	download_date	file_name	file_size	checksum	license	publication_doi	access_status	notes
+PXD055821	https://proteomecentral.proteomexchange.org/cgi/GetDataset?ID=PXD055821	PXD055821	PRIDE/ProteomeXchange metadata first	NA	NA	NA	NA	ProteomeXchange repository terms	NA	VERIFIED_ENTRY	Official ProteomeXchange dataset URL recorded from Asset-Generation-OS-architecture.md citation; 152 human CRLM mass-spec proteomics + outcome. File inventory not yet reviewed; no download performed.

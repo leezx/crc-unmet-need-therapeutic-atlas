@@ -1,6 +1,27 @@
 # CRC Unmet-Need Therapeutic Atlas — project status
 
-更新时间：2026-08-11
+更新时间：2026-08-21
+
+## 2026-08-21 Pivot：ADC Target Repurposing Atlas
+
+来源：`Asset-Generation-OS-architecture.md` → `CRC-Atlas工业化重构`（用户手工备注）。
+
+这是一次**范围重构（industrialization pivot）**，不是删除历史记录：
+
+- 仓库不再以"泛 CRC 恶性状态发现"（原 Phase 2 fetal-state/plasticity 主线）为默认分析路径，该主线已整体归档到 `archive/phase2_fetal_state_track_v1/`（含其 `03_data/raw` 已下载的 processed inputs、4 篇 state-validation 报告，以及 4 个与已冻结数据集绑定的验证脚本），未删除任何文件。`scripts/qc_gse178318.py`、`apply_gse178318_qc.py`、`audit_hpa_target_window.py` 因 GSE178318/HPA 仍是 `CORE_ACTIVE` 而保留在 `scripts/`，只是把默认路径改指向新的 archive 位置。
+- 新增仓库根目录 `ADC_ATLAS_DATASET_CONTRACT.md`：把架构文档表格固化成每个数据集"允许回答什么问题 / 不能证明什么 / 何时激活"的契约，防止未来重新漂回 dataset-first。
+- 新增 `modules/`：Module B（`MCRC_TARGET_PREVALENCE`）、C（`REFRACTORY_PERSISTENCE`）、D（`PROTEIN_AND_ENDPOINT`）、E（`NORMAL_TISSUE_RISK`）、F（`DELIVERY_AND_CAUSALITY_LITERATURE`）五个模块工作目录，各自一个 README 定义输入数据集、目标问题和证据边界。Module A（`DERISKED_TARGET_UNIVERSE`）明确不在本仓库开发，复用 `/Volumes/Stelligen_SSD/Stelligen/DATA/1.Databases/ADCdb/ADCdb_Obsidian` 与 `.../ADCdb_Claude_redo`。
+- 新增 `DATA/registry/module_classification.tsv`：给全部 31 个候选数据集（19 个原有 + 12 个新增）打上 Module 归属和 `CORE_ACTIVE / CORE_CONTEXT / CONTEXT_ACTIVE / SUPPORT / REFERENCE_SUPPORT / REFERENCE_CORE / SUPPLEMENT / SUPPLEMENT_FROZEN` 激活状态，不改动 `datasets.tsv` 现有 schema 或 validator 行为（纯追加映射文件）。
+- `DATA/registry/datasets.tsv` 追加 12 个新候选行（GSE274551、GSE225857、GSE84267、PXD055821、PXD022613、GSE196576、GSE294385、GSE235919、GSE235917、GSE5851、CSPA_PXD000589、CPTAC_COAD），全部保持 `status=CANDIDATE`、大量字段为 `UNKNOWN`，尚未做 Phase 1 source verification——这次 pivot **没有**批准任何新下载，也没有验证任何新候选的原始论文/仓库/license。
+- `python3 scripts/validate_registry.py` 已重跑通过（31 candidates，无 schema 错误）。
+
+以下仍是本轮 pivot **未完成**的工作，留给下一步：
+
+1. 12 个新增候选的 Phase 1 source verification（原始论文、repository、license、processed availability）——目前只是从架构文档转录的占位行。
+2. 每个 Module（B–F）尚未开始实际的 data lock / analysis contract / results（`modules/*/README.md` 中已列出，尚未创建对应工作文件）。
+3. 是否需要把 `reports/` 里偏 provenance-infra 但涉及已冻结数据集（如 GSE224235、GSE226997、CRLM_NMP_ATLAS 相关 P-系列报告）的部分也移入 archive，本轮判断为"仍是有效 provenance 记录，不属于旧科学方向"而保留在原位，未移动——如后续认为需要进一步归档，另开 PR 处理。
+
+---
 
 ## 项目目标
 

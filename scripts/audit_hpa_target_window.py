@@ -15,9 +15,9 @@ TARGETS = ["TACSTD2", "L1CAM", "EMP1", "SOX2", "CHGA", "KRT5"]
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--rna", type=Path, default=Path("phase2/03_data/raw/HPA_normal_tissue/rna_tissue_hpa.tsv.zip"))
-    parser.add_argument("--ihc", type=Path, default=Path("phase2/03_data/raw/HPA_normal_tissue/normal_ihc_data.tsv.zip"))
-    parser.add_argument("--output", type=Path, default=Path("phase2/06_results/HPA_normal_tissue/target_window_audit.json"))
+    parser.add_argument("--rna", type=Path, default=Path("archive/phase2_fetal_state_track_v1/phase2/03_data/raw/HPA_normal_tissue/rna_tissue_hpa.tsv.zip"))
+    parser.add_argument("--ihc", type=Path, default=Path("archive/phase2_fetal_state_track_v1/phase2/03_data/raw/HPA_normal_tissue/normal_ihc_data.tsv.zip"))
+    parser.add_argument("--output", type=Path, default=Path("archive/phase2_fetal_state_track_v1/phase2/06_results/HPA_normal_tissue/target_window_audit.json"))
     args = parser.parse_args()
     rna = defaultdict(list)
     proc = subprocess.Popen(["unzip", "-p", str(args.rna)], stdout=subprocess.PIPE, text=True)
