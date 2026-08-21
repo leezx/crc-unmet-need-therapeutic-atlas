@@ -66,3 +66,15 @@ No candidate moves to `APPROVED`. All 13 remain `CANDIDATE`; two (`GSE274551`, `
 3. Review CNSA (CNP0002540, CNP0003321) access terms for `GSE225857`'s raw single-cell data.
 4. Use the PDC GraphQL/REST API (not the SPA UI) to resolve `CPTAC_COAD`'s exact study ID and case count.
 5. Only then consider any candidate for `APPROVED`.
+
+## 2026-08-21 corrections (PR #71 review, round 2)
+
+Web-ChatGPT review of the pass above caught that some newly-verified facts had not been propagated into the canonical registry fields, and one dataset's registered role was scientifically wrong:
+
+- **`GSE225857`** — `treatment_annotation` had been downgraded to `UNKNOWN` pending "methods-section review," but GEO's own "Overall design" field already states it verbatim: *"All the patients received preoperative chemotherapy and/or radiotherapy."* Restored to `CHEMOTHERAPY_AND_OR_RT_PREOPERATIVE`, sourced directly to that field.
+- **`GSE235917`** — was registered as Module C support for confirming a candidate is tumor-cell localized rather than bulk/TME. Its own verified `source_manifest.tsv` and the official GEO record both show this series is PBMC/tumor-infiltrating-lymphocyte scRNA-seq — immune cells, not malignant epithelial cells. It cannot support that claim. Reclassified to `SUPPLEMENT_FROZEN`, activated only for a target-specific immune/TME expression-liability question.
+- **`GSE196576`** — `n_samples=469` conflated the GEO source sample count (579) with the analytic subset used in the immune-signature outcome paper (469 primary tumors). Corrected to `n_samples=579`; the 469-primary-tumor figure is kept in `reason` as the analytic subset.
+- **`GSE5851`** — the recorded `publication`/`year` were a GEO-series-style placeholder ("Phase II exploratory pharmacogenomics study...", 2008), not the actual peer-reviewed citation. Corrected to the real publication: "Expression of epiregulin and amphiregulin and K-ras mutation status predict disease control in metastatic colorectal cancer patients treated with cetuximab," J Clin Oncol 2007, PMID 17664471, DOI 10.1200/jco.2006.10.5437.
+- **`CPTAC_COAD`** — was implicitly folded into a "13/13 Phase 1 verification complete" claim. Corrected: this candidate only reached `VERIFIED_PUBLICATION_ONLY` (its landmark publication, Vasaikar et al. Cell 2019, PMID 31031003, is confirmed) — its actual Proteomic Data Commons study identity, case count, and file inventory remain unresolved because the PDC portal is a JavaScript SPA. `PROJECT_STATUS.md` now states "12 of 13 landing-page verified, 1 publication-only" rather than "13/13 complete."
+
+No candidate moved to `APPROVED` in this correction pass either.
