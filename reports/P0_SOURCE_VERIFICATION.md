@@ -36,3 +36,33 @@ No candidate is moved to `APPROVED` in this pass. `APPROVED` requires a dataset 
 ## Relationship control
 
 Potential duplicate/source relationships are recorded in `DATA/registry/relationships.tsv`. Evidence aggregation must count the canonical dataset only until the relationship is resolved.
+
+## 2026-08-21 pass — ADC Atlas pivot candidates (13 datasets)
+
+This is the Phase 1 verification pass for the 13 datasets added by the ADC Target Repurposing Atlas pivot (`Asset-Generation-OS-architecture.md` → `CRC-Atlas工业化重构`, PR #70). Metadata-only; no biological data downloaded. Full per-candidate detail is in `P0_SOURCE_VERIFICATION.tsv`; `datasets.tsv` and each candidate's `source_manifest.tsv` carry the verified fields.
+
+**Verified via official landing page (GEO/ProteomeXchange/HPA) and publication:**
+
+- **GSE274551** — CB-839+panitumumab(+irinotecan) phase I/II trial (Ciombor et al., Clin Cancer Res 2025, PMID 39927885); 35 tumor-core biopsies, RAS-WT mCRC progressed on prior anti-EGFR. Single processed count matrix confirmed (1.1 MB); file inventory recorded.
+- **GSE225857** — Science Advances 2023 (PMID 37327339) confirms the true study scope is 27 samples / 6 patients, not the 8 GSM records formally on GEO; most raw scRNA data lives at CNSA (CNP0002540, CNP0003321) for patient-privacy reasons, a discrepancy worth flagging for anyone reading the GEO page alone.
+- **GSE84267** — genuine paired pre-cetuximab(+FOLFOX)/acquired-resistance liver biopsies, 2 patients, 4 samples, PMID 31018951. The only true longitudinal design among the new Module C candidates.
+- **GSE196576** — CALGB/SWOG 80405 trial, 579 total / 469 primary tumors analyzed, matches the architecture doc exactly; downstream immune-signature publication PMID 39779996.
+- **GSE294385** — 11 patients / 37 samples / 341,328 spatial spots, matches the architecture doc exactly; no associated publication linked on GEO yet, so none is recorded.
+- **GSE235919 / GSE235917** — MEDITREME trial RNA-seq and scRNA-seq arms respectively (RAS-mutant MSS mCRC, durvalumab+tremelimumab+chemo), shared PMID 37563240. GSE235919's processed TPM matrix is a single named file; file inventory recorded.
+- **GSE5851** — 80 samples confirmed (was `UNKNOWN` sample count before this pass); pretreatment cetuximab-monotherapy pharmacogenomics, PMID 17664471.
+- **PXD055821 / PXD022613** — proteomics cohorts confirmed (152 CRLM / 58 CRLM respectively) with real DOIs/PMIDs; file-level PRIDE API listing not yet queried.
+- **CSPA_PXD000589** — Bausch-Fluck et al., PLoS One 2015 (PMID 25894527) confirmed; the practically useful access point is the interactive database at `wlab.ethz.ch/cspa`, recorded as a second source alongside the PXD000589 deposit.
+- **CPTAC_COAD** — landmark publication confirmed (Vasaikar et al., Cell 2019, PMID 31031003); the PDC portal itself is a JavaScript SPA that could not be fetched for exact study ID or file inventory in this pass.
+- **HPA_CRC_cancer_tissue** — HPA v25.1 cancer-proteome page confirmed (20 tumor types incl. colorectal, plus prognostic/RNA/CPTAC-MS layers), distinct from `HPA_normal_tissue`.
+
+## Admission decisions (this pass)
+
+No candidate moves to `APPROVED`. All 13 remain `CANDIDATE`; two (`GSE274551`, `GSE235919`) now have a real single-file `file_inventory.tsv`, the other 11 have an updated, dataset-specific `no_file_inventory_disposition.tsv` explaining exactly what's still deferred (usually: a bundled `RAW.tar`/API listing not yet opened/queried) rather than a generic placeholder.
+
+## Next actions (this pass)
+
+1. Query the PRIDE API file listing for `PXD055821`, `PXD022613`, and `CSPA_PXD000589` (same method already used for `PXD038149`).
+2. Fetch the exact GEO suppl `filelist.txt` for `GSE196576` and `GSE235917` to name their processed files precisely.
+3. Review CNSA (CNP0002540, CNP0003321) access terms for `GSE225857`'s raw single-cell data.
+4. Use the PDC GraphQL/REST API (not the SPA UI) to resolve `CPTAC_COAD`'s exact study ID and case count.
+5. Only then consider any candidate for `APPROVED`.

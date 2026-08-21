@@ -1,0 +1,2 @@
+dataset_id	file_id	file_name	source_url	file_size	checksum	checksum_status	availability	download_priority	evidence_scope	license	access_status	notes
+GSE235919	TPM_matrix	GSE235919_TPM.txt.gz	https://ftp.ncbi.nlm.nih.gov/geo/series/GSE235nnn/GSE235919/suppl/GSE235919_TPM.txt.gz	2.7 MB	NA	NOT_RECORDED	PROCESSED	1	RNA_EXPRESSION_TPM_MATRIX	NCBI repository terms	AVAILABLE	Processed TPM matrix confirmed on GEO series record 2026-08-21; no download performed.

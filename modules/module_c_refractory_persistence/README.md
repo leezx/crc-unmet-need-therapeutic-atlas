@@ -47,4 +47,4 @@ Every output row records `adc_decision_axis` exactly as one of the three — nev
 
 ## Status
 
-Not started. `GSE274551`, `GSE84267`, `GSE178318`, `GSE225857` are registered `CANDIDATE` rows in `../../DATA/registry/datasets.tsv` with a minimal `source_manifest.tsv` (added 2026-08-21), but none have completed the Phase 1 source-verification workflow in `../../CONTRIBUTING.md` yet — that verification, not registry admission, is what still blocks any data lock here. Output rows must be `target_id x indication_id`-keyed per `../../schemas/target_evidence.tsv`.
+Not started. `GSE274551`, `GSE84267`, `GSE178318`, `GSE225857` are registered `CANDIDATE` rows in `../../DATA/registry/datasets.tsv`; `GSE274551`, `GSE84267`, `GSE294385`, `GSE196576`, `GSE235919`, `GSE235917`, `GSE5851` completed Phase 1 source verification 2026-08-21 (real publication/DOI/PMID, real sample counts — see `../../reports/P0_SOURCE_VERIFICATION.md`). Verification is not `APPROVED` admission and not a data lock — output rows must still be `target_id x indication_id`-keyed per `../../schemas/target_evidence.tsv` once real analysis starts.
