@@ -59,7 +59,7 @@ Full detail: `reports/P0_SOURCE_VERIFICATION.md` / `.tsv`.
 
 ## Next handoff
 
-Per the reviewing conversation's own framing: 13 new candidate source verification (done) → Module A target input contract → target-first B–F execution, one target x indication at a time. Concretely:
+Per the reviewing conversation's own framing: 13-candidate verification pass completed (12 landing-page verified + 1 publication-only) → Module A target input contract → target-first B–F execution, one target x indication at a time. Concretely:
 
 1. Produce a first `ADC_TARGET_SEED_UNIVERSE.tsv` (even a small one) conforming to `schemas/target_seed.tsv`, sourced via `config/external_sources.yaml`, with `derisking_tier`/`repurposing_status` actually set (not left blank).
 2. Take the first `target_id x indication_id` through Modules B and E first — the intentionally selected minimum first-pass vertical slice (**not** the only `CORE_ACTIVE`/`every_target` modules; C and D also have `CORE_ACTIVE`/`every_target` rows) — end to end, producing real `target_evidence.tsv` rows with `measurement_layer` and `evidence_directness` set, before building out C/D/F tooling.
