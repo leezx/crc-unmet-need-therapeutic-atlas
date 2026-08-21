@@ -1,0 +1,2 @@
+dataset_id	file_id	file_name	source_url	file_size	checksum	checksum_status	availability	download_priority	evidence_scope	license	access_status	notes
+GSE274551	countdata_final	GSE274551_countdata_final.csv.gz	https://ftp.ncbi.nlm.nih.gov/geo/series/GSE274nnn/GSE274551/suppl/GSE274551_countdata_final.csv.gz	1.1 MB	NA	NOT_RECORDED	PROCESSED	1	RNA_EXPRESSION_COUNT_MATRIX	NCBI repository terms	AVAILABLE	Only supplementary file listed for this series as of 2026-08-21; no download performed.
