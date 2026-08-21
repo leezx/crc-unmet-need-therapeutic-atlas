@@ -10,9 +10,9 @@ As of 2026-08-21 this repository's scope is target-first, not dataset-first:
 
 > Only collect public evidence that can move an already-derisked ADC target between KILL / HOLD / SHORTLIST for refractory mCRC.
 
-This repo builds and reviews Modules B–F of that Atlas (`MCRC_TARGET_PREVALENCE`, `REFRACTORY_PERSISTENCE`, `PROTEIN_AND_ENDPOINT`, `NORMAL_TISSUE_RISK`, `DELIVERY_AND_CAUSALITY_LITERATURE`). Module A (`DERISKED_TARGET_UNIVERSE` — ADCdb + clinical trials + publications + regulatory + patents) is reused from `/Volumes/Stelligen_SSD/Stelligen/DATA/1.Databases/ADCdb/` and is not redeveloped here. See [`ADC_ATLAS_DATASET_CONTRACT.md`](ADC_ATLAS_DATASET_CONTRACT.md) and [`modules/README.md`](modules/README.md).
+This repo builds and reviews Modules B–F of that Atlas (`MCRC_TARGET_PREVALENCE`, `REFRACTORY_PERSISTENCE`, `PROTEIN_AND_ENDPOINT`, `NORMAL_TISSUE_RISK`, `DELIVERY_AND_CAUSALITY_LITERATURE`), and every finding they produce is a `target_id`-keyed row (see `schemas/target_evidence.tsv`), not a claim that only exists in prose. Module A (`DERISKED_TARGET_UNIVERSE` — ADCdb + clinical trials + publications + regulatory + patents) is reused, not redeveloped here; its source locations are declared logically in [`config/external_sources.yaml`](config/external_sources.yaml) (resolved per-machine via environment variables), not hardcoded. See [`ADC_ATLAS_DATASET_CONTRACT.md`](ADC_ATLAS_DATASET_CONTRACT.md) and [`modules/README.md`](modules/README.md).
 
-The repository's earlier, broader scope (generic MSS/pMMR refractory metastatic CRC, RAS-mutant non-G12C metastatic CRC, and an unsupervised fetal/plasticity malignant-cell-state discovery track) is archived, not deleted — see [`archive/phase2_fetal_state_track_v1/ARCHIVE_NOTE.md`](archive/phase2_fetal_state_track_v1/ARCHIVE_NOTE.md). Its evidence chain (patient population → malignant cell state → surface target → functional dependency/payload vulnerability → normal-tissue therapeutic window) still describes how Modules B–F fit together; the change is that entry now starts from a target, not from a cell state.
+The repository's earlier, broader scope (generic MSS/pMMR refractory metastatic CRC, RAS-mutant non-G12C metastatic CRC, and an unsupervised fetal/plasticity malignant-cell-state discovery track) is archived, not deleted — see [`archive/phase2_fetal_state_track_v1/ARCHIVE_NOTE.md`](archive/phase2_fetal_state_track_v1/ARCHIVE_NOTE.md). Its evidence chain (`patient population → malignant cell state → surface target → functional dependency/payload vulnerability → normal-tissue therapeutic window`) is **not** the model Modules B–F follow — that chain required an unsupervised cell-state discovery step before a target existed, which is exactly the direction this pivot rejects. The current chain is target-first: `ADCdb-derisked target → mCRC evidence per axis (Modules B–F) → KILL/HOLD/SHORTLIST → supplementary evidence only for a named residual uncertainty on an already-shortlisted target`. See [`knowledge/README.md`](knowledge/README.md).
 
 ## Repository map
 
@@ -20,12 +20,12 @@ The repository's earlier, broader scope (generic MSS/pMMR refractory metastatic 
 | --- | --- |
 | `ADC_ATLAS_DATASET_CONTRACT.md` | Per-module dataset contract: allowed questions, forbidden claims, activation rules |
 | `modules/` | Module B–F working folders (questions, data locks, analysis contracts, results) |
-| `DATA/registry/` | Canonical dataset registry, source manifests, and `module_classification.tsv` |
-| `schemas/` | TSV contracts for datasets, samples, and source files |
-| `knowledge/` | Source-only clinical-indication ontology and dataset evidence links |
+| `DATA/registry/` | Canonical dataset registry, source manifests, and `module_classification.tsv` (validated by `scripts/validate_module_classification.py`) |
+| `schemas/` | TSV contracts for datasets, samples, source files, and (new) `target_seed.tsv` / `target_evidence.tsv` |
+| `knowledge/` | Target-first, source-only clinical-indication ontology and `target_id`-keyed evidence links |
 | `reports/` | Candidate review, scan results, and data-gap reports |
 | `archive/` | Superseded scope and analysis tracks, preserved as-is (not deleted) |
-| `config/` | Update and storage-policy configuration |
+| `config/` | Update/storage-policy configuration and `external_sources.yaml` (Module A source references) |
 | `scripts/` | Dependency-free validation and metadata scan scripts |
 | `.github/workflows/` | Scheduled scan and PR artifact generation |
 

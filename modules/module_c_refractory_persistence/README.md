@@ -27,4 +27,4 @@ This is the module that most distinguishes this Atlas from a generic CRC Atlas.
 
 ## Status
 
-Not started. `GSE274551` and `GSE84267` are not yet in `../../DATA/registry/datasets.tsv` — add as `CANDIDATE` rows and run the Phase 1 source-verification workflow in `../../CONTRIBUTING.md` before any data lock here.
+Not started. `GSE274551`, `GSE84267`, `GSE178318`, `GSE225857` are registered `CANDIDATE` rows in `../../DATA/registry/datasets.tsv` with a minimal `source_manifest.tsv` (added 2026-08-21), but none have completed the Phase 1 source-verification workflow in `../../CONTRIBUTING.md` yet — that verification, not registry admission, is what still blocks any data lock here. Output rows must be `target_id`-keyed per `../../schemas/target_evidence.tsv`.

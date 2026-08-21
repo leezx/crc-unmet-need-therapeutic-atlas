@@ -10,16 +10,15 @@ A dataset that is large, new, or scientifically interesting but does not reduce 
 
 ## Module A — external, not built in this repository
 
-`DERISKED_TARGET_UNIVERSE` (ADCdb + clinical trials + publications + regulatory + patents → `ADC_TARGET_SEED_UNIVERSE.tsv`) is reused, not redeveloped here:
+`DERISKED_TARGET_UNIVERSE` (ADCdb + clinical trials + publications + regulatory + patents) is reused, not redeveloped here. Its two source locations and its output contract are declared in `config/external_sources.yaml`, not hardcoded here — resolve each source via its `path_env_var` on whatever machine runs the pipeline. Module A's output, `ADC_TARGET_SEED_UNIVERSE.tsv`, must conform to `schemas/target_seed.tsv`, so it is a portable, machine-readable list of `target_id`s — not free text.
 
-- `/Volumes/Stelligen_SSD/Stelligen/DATA/1.Databases/ADCdb/ADCdb_Obsidian` — the published ADCdb (NAR), as-is.
-- `/Volumes/Stelligen_SSD/Stelligen/DATA/1.Databases/ADCdb/ADCdb_Claude_redo` — clinical trials + publications + regulatory + patents layer, reusable directly.
+This repository consumes Module A output as an input list of candidate targets, keyed by `target_id`; it does not maintain its own copy of the underlying ADCdb source data.
 
-This repository consumes Module A output as an input list of candidate targets; it does not maintain its own copy.
+## Modules B–F — developed and reviewed in this repository, all output keyed by `target_id`
 
-## Modules B–F — developed and reviewed in this repository
+Each module folder under `modules/` carries its own README with allowed questions and forbidden claims (summarized below). Every dataset keeps a row in `DATA/registry/datasets.tsv` (unchanged schema) plus a classification row in `DATA/registry/module_classification.tsv` — `module`, `activation_status`, `adc_decision_axis`, `activation_rule`, `default_execution_order`, validated by `scripts/validate_module_classification.py` against a controlled vocabulary (additive; does not change `datasets.tsv`'s own schema or validator). `datasets.tsv`'s `priority` column (`P0_DOWNLOAD` etc.) is legacy Phase 1 download-priority metadata only — `module_classification.tsv` is canonical for what to analyze, when, and under what rule; see `CONTRIBUTING.md`.
 
-Each module folder under `modules/` carries its own README with allowed questions and forbidden claims (summarized below). Every dataset keeps a row in `DATA/registry/datasets.tsv` (unchanged schema) plus a module/activation tag in `DATA/registry/module_classification.tsv` (additive, does not change the existing registry contract or validator).
+Every concrete finding a module produces — a prevalence call, a persistence direction, a protein-concordance result, a normal-tissue flag, a delivery/population-proof claim — must be a row keyed by `target_id` in `schemas/target_evidence.tsv` (or the existing `schemas/evidence.tsv` / `schemas/indication_evidence_links.tsv`, which now also carry `target_id`). A claim that only exists as a gene name inside prose does not count as retrievable evidence.
 
 | Module | Question it answers | Primary inputs | Cannot prove |
 | --- | --- | --- | --- |
@@ -38,7 +37,7 @@ Exposing these two as explicit `UNKNOWN` outputs is a correct result of this Atl
 
 ## Frozen by default (`SUPPLEMENT_FROZEN`)
 
-DepMap, Perturb-seq, HTAN plasticity, GSE117548, generic primary CRC scRNA, generic spatial, and NMF/fetal-state cell-state discovery are not on a default analysis path. They activate only when a target has already reached shortlist and a specific question needs them (example: "why are X-high models sensitive to TOP1 payload?" → activate DepMap for that target only). See `DATA/registry/module_classification.tsv` for the per-dataset disposition and reason.
+DepMap, Perturb-seq, HTAN plasticity, GSE117548, generic primary CRC scRNA, generic spatial, and NMF/fetal-state cell-state discovery are not on a default analysis path (`module = NONE`, `activation_rule = never_default` or `after_shortlist_named_uncertainty`). They activate only when a target has already reached shortlist and a specific question needs them (example: "why are X-high models sensitive to TOP1 payload?" → activate DepMap for that target only). See `DATA/registry/module_classification.tsv` for the per-dataset disposition and reason, and run `python3 scripts/validate_module_classification.py` to check it stays internally consistent and fully cross-referenced against `datasets.tsv`.
 
 ## Governance
 

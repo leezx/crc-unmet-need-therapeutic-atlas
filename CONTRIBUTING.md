@@ -5,13 +5,16 @@
 3. Keep `status` as `CANDIDATE` until the original publication and repository metadata are inspected. Candidates may exist only in the canonical registry.
 4. Move to `APPROVED` only when a dataset directory and verifiable `source_manifest.tsv` exist.
 5. Preserve unknowns as `NA` or `UNKNOWN`; never infer treatment or biomarker status.
-6. Run `python3 scripts/validate_registry.py` and `python3 scripts/scan_sources.py --offline`.
-7. Run `python3 scripts/build_source_only_closure.py` and confirm the generated `reports/SOURCE_ONLY_CLOSURE_MATRIX.tsv` has no diff.
-8. Open a draft PR. A human reviewer approves priority and any change to download scope.
+6. If the dataset is in scope for the ADC Target Repurposing Atlas (see `ADC_ATLAS_DATASET_CONTRACT.md`), add or update its row in `DATA/registry/module_classification.tsv` too — `module`, `activation_status`, `adc_decision_axis`, `activation_rule`, `default_execution_order` — following the controlled vocabulary in `scripts/validate_module_classification.py`.
+7. Run `python3 scripts/validate_registry.py`, `python3 scripts/validate_module_classification.py`, and `python3 scripts/scan_sources.py --offline`.
+8. Run `python3 scripts/build_source_only_closure.py` and confirm the generated `reports/SOURCE_ONLY_CLOSURE_MATRIX.tsv` has no diff (a genuinely new candidate is expected to add rows, not change existing ones).
+9. Open a draft PR. A human reviewer approves priority and any change to download scope.
 
-8. Capture checksums only from explicitly staged external files with `scripts/capture_checksums.py`. The script is offline-only: missing files remain `MISSING`, and no repository or network download is performed.
+10. Capture checksums only from explicitly staged external files with `scripts/capture_checksums.py`. The script is offline-only: missing files remain `MISSING`, and no repository or network download is performed.
 
 The registry is not a downloader. Prefer processed matrices and metadata. Raw FASTQ/BAM requires an explicit reprocessing decision. Never commit downloaded data, credentials, or controlled-access tokens.
+
+**`priority` vs `module_classification.tsv` (added 2026-08-21).** `datasets.tsv`'s `priority` column (`P0_DOWNLOAD` / `P1_DOWNLOAD` / `REFERENCE_ONLY`) is **legacy Phase 1 download-priority metadata only** — it records the original download-worthiness assessment and is not re-derived for the ADC Target Repurposing Atlas pivot. Frozen datasets (DepMap, HTAN, CRLM-NMP, …) can and do still carry an old `P0_DOWNLOAD` value; that is expected and does not mean they are active. `DATA/registry/module_classification.tsv` (`activation_status` + `activation_rule` + `default_execution_order`) is the canonical execution-priority signal for what to analyze, when, and under what rule — read that, not `priority`, to decide what to touch. "Approved P0 downloads" below refers to the same legacy Phase 1 download-approval gate, not a Module B–F activation decision.
 
 The weekly GitHub Action runs metadata scans only and opens a draft PR for review when stable source status output changes. Per-run timestamps are kept in a separate ignored log. Approved P0 downloads remain a separate, explicitly reviewed change.
 For public GitHub supplementary repositories, use scripts/inventory_github_tree.py with a full commit SHA and one or more --prefix values. It calls only the Git trees API and records paths, byte sizes, Git blob SHAs, and fixed blob URLs; it never reads blob contents or downloads repository files. A truncated API response is a hard failure and must be narrowed or handled by a separate reviewed workflow.

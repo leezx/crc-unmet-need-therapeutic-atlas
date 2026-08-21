@@ -6,7 +6,7 @@ Core support branch, kept inside this repository for management convenience. Not
 
 > X 能不能作为 ADC address？
 
-Sources: existing ADC clinical literature, preclinical ADC papers (antibody, epitope, internalization kinetics, lysosomal trafficking, ADC cytotoxicity, antigen-density relation, xenograft), target-expression pathology papers, patent literature, regulatory review/label documents.
+Sources: existing ADC clinical literature, preclinical ADC papers (antibody, epitope, internalization kinetics, lysosomal trafficking, ADC cytotoxicity, antigen-density relation, xenograft), target-expression pathology papers, patent literature, regulatory review/label documents, and `CSPA_PXD000589` (Cell Surface Protein Atlas — experimental cell-surface capture mass spec, used as a surfaceome-accessibility reference; reclassified into this module from Module B on 2026-08-21, since it carries no mCRC patient prevalence information).
 
 ## Population Proof
 
@@ -20,7 +20,7 @@ These two proofs are never collapsed into a single claim such as "X has a DepMap
 
 ## Relationship to `knowledge/`
 
-This module extends the existing source-only evidence-object schema in `../../knowledge/README.md` (`schemas/evidence.tsv`, `schemas/indication_evidence_links.tsv`) rather than replacing it. New evidence objects here should be tagged with `delivery_proof` or `population_proof` as their evidence axis, in addition to whatever indication node they attach to.
+This module extends the existing source-only evidence-object schema in `../../knowledge/README.md` (`schemas/evidence.tsv`, `schemas/indication_evidence_links.tsv`, and the new `schemas/target_evidence.tsv`) rather than replacing it. New evidence objects here must carry a `target_id` and be tagged `delivery_proof` or `population_proof` as their `adc_decision_axis`, in addition to whatever indication node they attach to.
 
 ## Cannot prove
 

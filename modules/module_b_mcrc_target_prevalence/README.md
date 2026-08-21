@@ -29,6 +29,8 @@ Bucket output as `RNA_no / RNA_low / RNA_high`. Never write `surface-density hig
 
 scRNA ≠ surface density. Small cohorts (n=6) are within-cohort descriptive statistics, not population prevalence claims until replicated.
 
+Output rows `target_id`-keyed per `../../schemas/target_evidence.tsv`.
+
 ## Status
 
-Not started. First step is a data lock + analysis contract under `analysis_contracts/`, following the same review discipline as the archived `phase2/03_data/data_lock_v0.md` / `phase2/04_analysis_contracts/` pattern — but scoped to per-target prevalence, not a global cell-state discovery question.
+Not started. First step is a data lock + analysis contract under `analysis_contracts/`, following the same review discipline as the archived `phase2/03_data/data_lock_v0.md` / `phase2/04_analysis_contracts/` pattern — but scoped to per-target prevalence, not a global cell-state discovery question. **No live QC script exists for GSE178318 right now** — the previous `qc_gse178318.py` defaulted to the old Fig1 marker set and has been archived; see `../../archive/phase2_fetal_state_track_v1/ARCHIVE_NOTE.md`. A fresh script must take a target-specific marker list as an explicit input, not a hardcoded constant.

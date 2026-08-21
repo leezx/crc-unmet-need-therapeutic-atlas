@@ -2,94 +2,65 @@
 
 更新时间：2026-08-21
 
-## 2026-08-21 Pivot：ADC Target Repurposing Atlas
+This file describes current state only. The pre-pivot status (Phase 1 source-only + Phase 2 global fetal-state discovery, through PR #66) is preserved as a historical record at [`../archive/phase2_fetal_state_track_v1/PROJECT_STATUS_LEGACY_2026-08-11.md`](../archive/phase2_fetal_state_track_v1/PROJECT_STATUS_LEGACY_2026-08-11.md) — do not read it as current.
 
-来源：`Asset-Generation-OS-architecture.md` → `CRC-Atlas工业化重构`（用户手工备注）。
+## Current stage: ADC Target Repurposing Atlas pivot (target-first)
 
-这是一次**范围重构（industrialization pivot）**，不是删除历史记录：
+Source: `Asset-Generation-OS-architecture.md` → `CRC-Atlas工业化重构`（用户手工备注）, 2026-08-21. This is a **scope pivot**, not a data loss: the repository's single task is now
 
-- 仓库不再以"泛 CRC 恶性状态发现"（原 Phase 2 fetal-state/plasticity 主线）为默认分析路径，该主线已整体归档到 `archive/phase2_fetal_state_track_v1/`（含其 `03_data/raw` 已下载的 processed inputs、4 篇 state-validation 报告，以及 4 个与已冻结数据集绑定的验证脚本），未删除任何文件。`scripts/qc_gse178318.py`、`apply_gse178318_qc.py`、`audit_hpa_target_window.py` 因 GSE178318/HPA 仍是 `CORE_ACTIVE` 而保留在 `scripts/`，只是把默认路径改指向新的 archive 位置。
-- 新增仓库根目录 `ADC_ATLAS_DATASET_CONTRACT.md`：把架构文档表格固化成每个数据集"允许回答什么问题 / 不能证明什么 / 何时激活"的契约，防止未来重新漂回 dataset-first。
-- 新增 `modules/`：Module B（`MCRC_TARGET_PREVALENCE`）、C（`REFRACTORY_PERSISTENCE`）、D（`PROTEIN_AND_ENDPOINT`）、E（`NORMAL_TISSUE_RISK`）、F（`DELIVERY_AND_CAUSALITY_LITERATURE`）五个模块工作目录，各自一个 README 定义输入数据集、目标问题和证据边界。Module A（`DERISKED_TARGET_UNIVERSE`）明确不在本仓库开发，复用 `/Volumes/Stelligen_SSD/Stelligen/DATA/1.Databases/ADCdb/ADCdb_Obsidian` 与 `.../ADCdb_Claude_redo`。
-- 新增 `DATA/registry/module_classification.tsv`：给全部 31 个候选数据集（19 个原有 + 12 个新增）打上 Module 归属和 `CORE_ACTIVE / CORE_CONTEXT / CONTEXT_ACTIVE / SUPPORT / REFERENCE_SUPPORT / REFERENCE_CORE / SUPPLEMENT / SUPPLEMENT_FROZEN` 激活状态，不改动 `datasets.tsv` 现有 schema 或 validator 行为（纯追加映射文件）。
-- `DATA/registry/datasets.tsv` 追加 12 个新候选行（GSE274551、GSE225857、GSE84267、PXD055821、PXD022613、GSE196576、GSE294385、GSE235919、GSE235917、GSE5851、CSPA_PXD000589、CPTAC_COAD），全部保持 `status=CANDIDATE`、大量字段为 `UNKNOWN`，尚未做 Phase 1 source verification——这次 pivot **没有**批准任何新下载，也没有验证任何新候选的原始论文/仓库/license。
-- `python3 scripts/validate_registry.py` 已重跑通过（31 candidates，无 schema 错误）。
+`ADCdb-derisked target (Module A, external) → mCRC evidence per axis (Modules B–F) → KILL / HOLD / SHORTLIST → supplementary/mechanistic evidence only for a named residual uncertainty on an already-shortlisted target`
 
-以下仍是本轮 pivot **未完成**的工作，留给下一步：
+— not the old `patient population → malignant cell state → surface target → functional dependency → normal-tissue window` chain, which required an unsupervised cell-state discovery step before a target could even exist. See [`../ADC_ATLAS_DATASET_CONTRACT.md`](../ADC_ATLAS_DATASET_CONTRACT.md), [`../modules/README.md`](../modules/README.md), and [`../knowledge/README.md`](../knowledge/README.md).
 
-1. 12 个新增候选的 Phase 1 source verification（原始论文、repository、license、processed availability）——目前只是从架构文档转录的占位行。
-2. 每个 Module（B–F）尚未开始实际的 data lock / analysis contract / results（`modules/*/README.md` 中已列出，尚未创建对应工作文件）。
-3. 是否需要把 `reports/` 里偏 provenance-infra 但涉及已冻结数据集（如 GSE224235、GSE226997、CRLM_NMP_ATLAS 相关 P-系列报告）的部分也移入 archive，本轮判断为"仍是有效 provenance 记录，不属于旧科学方向"而保留在原位，未移动——如后续认为需要进一步归档，另开 PR 处理。
+This is PR #70 (`pivot/adc-target-repurposing-atlas`), currently in its **second commit round** after web-ChatGPT review (`CRC临床适应症地图` conversation, `Biotech ideas` project) returned `REQUEST_CHANGES` on the first round. See "Review history" below.
 
----
+## Current scale
 
-## 项目目标
+- 32 registry candidates (20 pre-pivot + 12 added this pivot: `GSE274551`, `GSE225857`, `GSE84267`, `PXD055821`, `PXD022613`, `GSE196576`, `GSE294385`, `GSE235919`, `GSE235917`, `GSE5851`, `CSPA_PXD000589`, `CPTAC_COAD`, `HPA_CRC_cancer_tissue`). All still `status=CANDIDATE`; none of the 13 pivot-added candidates have completed Phase 1 source verification yet — their `source_manifest.tsv` records only the accession URL already cited in the architecture doc, nothing more.
+- `DATA/registry/module_classification.tsv`: 34 rows (some datasets serve two modules, e.g. `GSE178318`/`GSE225857` serve both B and C) covering all 32 datasets, each with `module`, `activation_status`, `adc_decision_axis`, `activation_rule`, `default_execution_order` — validated by `scripts/validate_module_classification.py` against a controlled vocabulary, not just free-text `reason`.
+- `datasets.tsv`'s own `priority` column (`P0_DOWNLOAD` / `P1_DOWNLOAD` / `REFERENCE_ONLY`) is retained as **legacy Phase 1 download-priority metadata only**; it is not re-derived from the pivot and must not be read as an execution-priority signal — `module_classification.tsv` is canonical for that (see `CONTRIBUTING.md`).
+- `schemas/target_seed.tsv` and `schemas/target_evidence.tsv` are new, empty (header-only) contracts. `schemas/evidence.tsv` and `schemas/indication_evidence_links.tsv` gained a `target_id` column; all 8 existing rows are pre-pivot dataset-provenance evidence and keep `target_id = NA`.
+- `config/external_sources.yaml` is new: Module A's two source locations and output contract are declared there via `path_env_var`, not hardcoded into prose docs.
+- `archive/phase2_fetal_state_track_v1/` now holds the full old `phase2/` tree, 4 state-validation reports, 7 scripts (all of them — `qc_gse178318.py`, `apply_gse178318_qc.py`, and `audit_hpa_target_window.py` were moved here in round 2 after review caught that they still defaulted to the old Fig1 marker panel), and the pre-pivot `PROJECT_STATUS.md` body.
 
-建立 registry-first 的 CRC Unmet-Need Therapeutic Atlas，为 advanced/metastatic CRC 的 ADC 和 therapeutic target discovery 提供可追溯证据来源。仓库不保存具体生物数据，只保存来源、索引、下载方式、元数据契约、审查结果和更新机制。
+## Completed this pivot (round 1 + round 2 fixes)
 
-## 当前阶段
+1. `ADC_ATLAS_DATASET_CONTRACT.md` — per-module allowed questions / forbidden claims / activation rules.
+2. `modules/` — one working folder per Module B–F, admission language corrected to match canonical registry `status` (round 2).
+3. `DATA/registry/module_classification.tsv` + `schemas/module_classification.tsv` + `scripts/validate_module_classification.py` — single canonical execution-priority contract, machine-checkable (round 2; round 1 shipped the file without a schema/validator/controlled vocabulary).
+4. `schemas/target_seed.tsv`, `schemas/target_evidence.tsv`, `target_id` added to `schemas/evidence.tsv` / `schemas/indication_evidence_links.tsv`, `config/external_sources.yaml` — target-first is now a data model, not just prose (round 2).
+5. Old fetal-state track fully archived: `phase2/`, its 4 reports, and now all 7 of its scripts (round 2 correction — 3 were incorrectly left live in round 1).
+6. `.gitignore` restores the original `phase2/03_data/raw|processed|06_results` patterns in addition to the new archive paths, so any other existing checkout with local biological files at the old path stays protected (round 2).
+7. `knowledge/README.md` rewritten target-first; the old mandatory malignant-cell-state evidence chain is retracted (round 2).
 
-**Phase 2 — external cohort coverage audit complete; matched primary/metastasis validation remains open**
+## Current gates and limits
 
-Phase 1 source-only endpoint remains complete. Phase 2 has locked the falsifiable Figure 1 question, marker set and GSE178318 processed inputs; the first QC pass is complete, but no biological state, target or clinical conclusion has been made.
+- None of the 13 pivot-added registry candidates have completed Phase 1 source verification (original publication, repository metadata, license, processed availability). Registry admission (a `source_manifest.tsv` existing) is not the same as verification.
+- No Module (B–F) has a data lock or analysis contract yet — `modules/*/README.md` define scope only.
+- `MCRC_liver_metastasis_PDO_2026`'s mIHC panel covers only 14 markers; Module D must do a `target_observable` coverage check per target before assuming RNA→protein calibration is available.
+- `knowledge/` still has only the 8 pre-pivot, non-target-specific evidence objects; no `target_evidence.tsv` row exists yet for any real ADCdb target.
+- Module A (`ADC_TARGET_SEED_UNIVERSE.tsv`) has not actually been produced against `schemas/target_seed.tsv` — the contract exists, the seed universe file does not.
 
-## 量化进度
+## Next handoff
 
-| 维度 | 当前进度 | 本轮变化 | 判定标准 | 当前阻塞 |
-|---|---:|---:|---|---|
-| 工程 / provenance 基础设施 | **90/90** | 85/90 → 90/90（+5） | 19 个候选 closure matrix、13 个候选的结构化 source/no-file-inventory/scope disposition、1 个 configured update target 的 metadata scan/disposition、CI freshness check、source-only 边界审计和 5 个 P0 gate crosswalk 已完成 | DepMap exact headers、HPA final scope/files/terms、CRLM row-level metadata 仍未完成；这些属于后续 dataset review，不再是内部 closure 缺口 |
-| source-only completion endpoint | **100% COMPLETE** | final closure PR #53 已合并；19/19 候选均有 source manifest，且有 file inventory 或显式 no-file-inventory disposition；无 `INTERNAL_ACTION_REQUIRED` | source-only closure rule 明确允许保留 `SOURCE_INDEXED_REVIEW_REQUIRED` 作为 dataset-review handoff；其余 internal requirements 全部满足 | 无 source-only 内部 blocker；canonical identity、GEO reconciliation、license/clinical context 等后续 review 不阻断 source-only endpoint |
-| 科学 / 临床可用性 | **7/10** | 7/10 → 7/10（+0） | CRLM-NMP-ATLAS provides external coverage and a CRLM-versus-adjacent-liver descriptive audit, but it does not reproduce the locked primary-versus-metastasis contrast; functional/clinical gates remain | 尚未完成等价的独立 primary/metastasis 验证、功能依赖、therapeutic-window 或 clinical indication mapping |
-| 总体项目进度 | **97/100（97%）** | 97/100 → 97/100（+0） | 固定 100 分制：source-only engineering/provenance 90 分 + scientific/clinical readiness 10 分；当前总分为 90 + 7 | source-only endpoint 完成；Phase 2 仍需 equivalent independent validation, functional dependency and clinical mapping |
+Per the reviewing conversation's own framing: **12 new candidate source verification → Module A target input contract → target-first B–F execution.** Concretely:
 
-评分明细（工程/provenance 90/90）：registry/admission architecture 10/10；source/index layer 15/15；validator/tests 10/10；update/scan system 10/10；PR/review audit 10/10；P0 gate design 10/10；exact dataset provenance materialization 15/15；closure/handoff 10/10。科学/临床 readiness 7/10：HTAN source-cohort replication audit 与 CRLM-NMP-ATLAS external coverage audit 均不计为等价 independent validation；结果仍为 exploratory，不构成 causal, target 或 clinical conclusion。分项严格合计 97/100。
+1. Complete Phase 1 source verification for the 13 pivot-added candidates.
+2. Produce a first `ADC_TARGET_SEED_UNIVERSE.tsv` (even a small one) conforming to `schemas/target_seed.tsv`, sourced via `config/external_sources.yaml`.
+3. Take the first `target_id` through Modules B and E (the two `CORE_ACTIVE`/`every_target` modules) end to end, producing real `target_evidence.tsv` rows, before building out C/D/F tooling.
+4. Not next: reactivating any `SUPPLEMENT_FROZEN` dataset (DepMap, HTAN, CRLM-NMP, Perturb-seq, …) without a named target-specific uncertainty.
 
-## 当前规模
+## Review history
 
-- 独立 GitHub 仓库：[leezx/crc-unmet-need-therapeutic-atlas](https://github.com/leezx/crc-unmet-need-therapeutic-atlas)
-- 候选数据集：19 个，全部为 `CANDIDATE`
-- 优先级：9 个 `P0_DOWNLOAD`、5 个 `P1_DOWNLOAD`、5 个 `REFERENCE_ONLY`
-- source manifests：19 个
-- file-level inventories：8 个（GSE159216、GSE178318、GSE224235、GSE226997、HPA_normal_tissue、MCRC_liver_metastasis_PDO_2026、PXD038149、CRLM_NMP_ATLAS）
-- sample maps/contracts：4 个（GSE178318、GSE224235、GSE226997、CRLM_NMP_ATLAS）
-- GitHub PR：#1–#66 全部已合并；PR #65 的 HPA 审计与 PR #66 的审核归档均已完成；主分支随后以最新合并 commit 为准
-- PR #33 已合并 source-only evidence objects：EV003 URL、EV008 计数措辞、EV001/EV002 supporting-text 路径、source-only 状态措辞和 inventory 统计均已完成审核修正
-
-## 已完成能力
-
-1. 建立独立 registry、dataset README、source manifest、file inventory 和 sample metadata schema。
-2. 建立 `CANDIDATE`、`P0_DOWNLOAD`、`P1_DOWNLOAD`、`REFERENCE_ONLY` 等 admission 语义和 Phase 1 review checklist。
-3. 固化 processed-first policy：不默认下载 FASTQ/BAM/CEL/raw archive，不在仓库存储 biological matrices。
-4. 建立 registry validator、landing-page scanner、offline checksum capture 工具和稳定输出检查。
-5. 建立 GitHub supplementary repository 的 fixed-commit Trees API metadata inventory；不读取 blob、不 clone、不执行、不下载。
-6. 建立 weekly metadata scan、pinned-target drift checker、update candidate report 和人工复核清单；上游变化不自动修改 pinned SHA。
-7. 保存 Chrome ChatGPT 的 CRC 临床适应症地图反馈和每个 PR 的审核/修复记录。
-8. 完成 GSE117548 固定 commit 的 144 个 blob / 1,242,162,377 bytes 分层 inventory。
-9. 完成 GSE226997 的 4 个 sample-level supplementary 文件索引和 GSE159216 的 171 patients / 283 samples、283 CHP / 283 CEL 文件级聚合索引。
-10. 建立 source-only final audit：受追踪文件后缀、raw/processed/data 路径、文件大小和核心控制文件均由脚本检查，并在 CI 中强制保持稳定。
-11. 为 DepMap、HTAN、Zenodo mirror、GSE117548、四个 GEO reference subseries 和 GTEx 建立结构化 no-file-inventory disposition，避免把受控的 source-only 不主张误判为内部遗漏。
-12. 审计 GSE224235 官方 processed matrix：17 samples、8 matched pairs，但仅覆盖 2/10 个 `FIG1_MARKER_V1` genes，因此正式记录为 `INSUFFICIENT_FOR_FULL_STATE_VALIDATION`，不增加 scientific readiness 分数。
-
-## 当前门禁与限制
-
-- Phase 2 当前下载了 data-lock 明确允许的 GSE178318 官方 processed inputs，以及 GSE224235 的 76 KB processed series matrix 用于 coverage audit；原始文件保持 Git ignored，未生成新的 biological matrix。
-- checksum 只对已明确纳入 Phase 2 data-lock、并放入指定 ignored 目录的 processed inputs 离线计算；其余未下载或未授权候选文件仍未计算 checksum。
-- P0 候选尚未全部完成原始论文、治疗史、分子注释、processed availability、license/access 和下载路径核验。
-- PXD038149 的 `SamplesDescription.xlsx` 仍处于 metadata gate；没有下载或解析外部 workbook。
-- 2026 CRLM PDO biobank 的 processed-data accession `hr94h42xdc.3` 已定位；sample-level clinical/treatment reconciliation、checksums 和 third-party terms 仍未完成。
-- knowledge/review layer 目前已建立 source-only ontology/link skeleton 和 8 个 source-only evidence objects；尚未形成 target claim、biological/clinical evidence conclusion 或临床适应症结论。
-- `DATA/registry/datasets.tsv` 中候选仍不能解释为已批准的 discovery cohort。
-
-## 后续 handoff（不属于已完成的 source-only endpoint）
-
-1. 若启动下一阶段，按 `reports/P0_NEXT_GATE_PLAN.tsv` 推进 DepMap exact-file/header、HPA file-level terms 和 CRLM-NMP row-level metadata；这些是 dataset-specific review，不回写 source-only completion。
-2. 只有用户明确 staged 文件并授权后，才运行离线 checksum capture；当前不下载、不计算。
-3. 若未来申请 `APPROVED`，须对每个候选单独完成 Phase 1 checklist 和 PR 审核；当前没有候选被批准。
-4. GSE224235 不能通过完整 state validation gate；下一步需要 marker coverage 足够的独立队列，或提交新的 cross-platform marker contract。target ranking、therapeutic-window 和临床适应症结论仍被禁止，直到独立验证门禁通过。
+- **PR #70, round 1** — Initial pivot commit. Web-ChatGPT review (`CRC临床适应症地图`, `Biotech ideas` project): `REQUEST_CHANGES`. Five blockers: (1) target-first existed only in prose, no `target_id` data model; (2) two conflicting dataset-priority sources (`module_classification.tsv` vs `datasets.tsv.priority`) with no schema/vocabulary on the new one; (3) this status file and `knowledge/README.md` still presented the old Phase 2 state as current; (4) `qc_gse178318.py` / `apply_gse178318_qc.py` / `audit_hpa_target_window.py` still carried the old Fig1 marker panel by default, and several module READMEs contradicted canonical registry status; (5) `.gitignore` dropped the legacy `phase2/03_data/raw` etc. patterns, an unnecessary data-leak risk for other checkouts. Three non-blocking suggestions: reclassify `CSPA_PXD000589` out of Module B, register a separate HPA cancer/CRC layer for Module D, flag the PDO's 14-marker mIHC coverage limit.
+- **PR #70, round 2** — this round. All five blockers and all three suggestions addressed (see "Completed this pivot" above). Not yet re-submitted for review.
 
 ## 权威项目记录
 
 - [README.md](../README.md)：仓库目标、范围和 repository map
+- [ADC_ATLAS_DATASET_CONTRACT.md](../ADC_ATLAS_DATASET_CONTRACT.md)：Module A-F 数据契约
+- [modules/README.md](../modules/README.md)：模块工作目录索引
+- [knowledge/README.md](../knowledge/README.md)：target-first evidence chain 和 schema
 - [DATASET_REVIEW.md](DATASET_REVIEW.md)：Phase 1 候选、数据缺口和 stop condition
 - [PHASE1_REVIEW_CHECKLIST.md](PHASE1_REVIEW_CHECKLIST.md)：逐候选 admission gate
 - [PR_HISTORY.md](PR_HISTORY.md)：PR、网页版 ChatGPT 审核和合并记录
@@ -97,6 +68,6 @@ Phase 1 source-only endpoint remains complete. Phase 2 has locked the falsifiabl
 - [updates/REVIEW_CHECKLIST.md](updates/REVIEW_CHECKLIST.md)：上游 pinned-target 漂移后的人工复核流程
 - [P2_SAMPLE_METADATA.md](P2_SAMPLE_METADATA.md)：GSE178318 sample-level treatment/pairing reconciliation
 - [PXD038149_SAMPLE_METADATA_GATE.tsv](PXD038149_SAMPLE_METADATA_GATE.tsv)：PXD038149 workbook staging and sample-metadata gate
-- [P0_NEXT_GATE_PLAN.tsv](P0_NEXT_GATE_PLAN.tsv)：批量 P0 下一阶段 provenance 门禁
 - [SOURCE_ONLY_FINAL_AUDIT.tsv](SOURCE_ONLY_FINAL_AUDIT.tsv)：无生物数据边界审计结果
 - `DATA/registry/*/no_file_inventory_disposition.tsv`：显式不主张 file-level inventory 的 source-only 处置
+- [../archive/phase2_fetal_state_track_v1/PROJECT_STATUS_LEGACY_2026-08-11.md](../archive/phase2_fetal_state_track_v1/PROJECT_STATUS_LEGACY_2026-08-11.md)：pre-pivot status, historical only
