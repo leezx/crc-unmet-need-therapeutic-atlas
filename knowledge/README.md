@@ -4,9 +4,9 @@ This directory links clinical-indication ontology nodes to registry datasets wit
 
 **Target-first, as of 2026-08-21** (revised after web-ChatGPT review of PR #70, `REQUEST_CHANGES` items 1 and 3). The evidence chain here previously read `patient population → malignant cell state → surface target → functional dependency/payload vulnerability → normal-tissue therapeutic window`, which treats an unsupervised malignant-cell-state discovery step as a required intermediary between patient population and target. That framing is the old, now-archived Phase 2 fetal-state/plasticity direction (see `../archive/phase2_fetal_state_track_v1/ARCHIVE_NOTE.md`) and has been explicitly rejected as a required step. The current chain is:
 
-`ADCdb-derisked target (Module A, external; gated by `derisking_tier`/`repurposing_status`) → mCRC evidence per axis and per territory (Modules B–F: prevalence, persistence, clinical_endpoint_context, protein/endpoint, normal-tissue risk, delivery proof, population proof) → KILL / HOLD / SHORTLIST decision for that target × indication → activate supplementary/mechanistic evidence (e.g. DepMap, spatial) only for a named residual uncertainty on an already-shortlisted target`
+`ADCdb-derisked target (Module A, external; gated by `derisking_tier`/`repurposing_status`) → mCRC evidence per axis and per territory (Modules B–F: prevalence, refractory_or_treated_presence, longitudinal_persistence, clinical_endpoint_context, protein/endpoint, normal-tissue risk, delivery proof, population proof) → KILL / HOLD / SHORTLIST decision for that target × indication → activate supplementary/mechanistic evidence (e.g. DepMap, spatial) only for a named residual uncertainty on an already-shortlisted target`
 
-Malignant-cell state can still appear as one *input* to the prevalence/persistence axes (e.g. "is this candidate detected in malignant cells vs adjacent normal") — it is no longer a mandatory discovery stage that has to run before a target exists.
+Malignant-cell state can still appear as one *input* to the prevalence/presence axes (e.g. "is this candidate detected in malignant cells vs adjacent normal") — it is no longer a mandatory discovery stage that has to run before a target exists.
 
 **Two-table evidence model** (revised 2026-08-21, round 3 of the same PR #70 review). `schemas/evidence.tsv` and `schemas/indication_evidence_links.tsv` stay the **source/provenance object** layer — what a dataset's registry metadata plausibly indexes, `SOURCE_INDEXED_NOT_ANALYZED` until reviewed. Both now carry `target_id` (added round 2). The **canonical, target-level interpreted output** of Modules B–F is `schemas/target_evidence.tsv`, which does not just carry `target_id` but also:
 
@@ -18,7 +18,7 @@ The 8 existing `evidence.tsv` objects predate the pivot, are dataset-provenance-
 
 The initial ontology follows the architecture requirement that a CRC indication is defined by more than a cancer label: disease state, molecular context, treatment line/history and anatomy must remain explicit. That indication-level context is `target_evidence.tsv`'s `indication_id` field, not a separate discovery stage:
 
-`indication_id (defined mCRC population/territory) x target_id x ADC decision axis (prevalence / persistence / clinical_endpoint_context / protein_endpoint / normal_tissue_risk / delivery_proof / population_proof) → measurement_layer + evidence_directness`
+`indication_id (defined mCRC population/territory) x target_id x ADC decision axis (prevalence / refractory_or_treated_presence / longitudinal_persistence / clinical_endpoint_context / protein_endpoint / normal_tissue_risk / delivery_proof / population_proof) → measurement_layer + evidence_directness`
 
 Current `indication_evidence_links.tsv` rows are `SOURCE_INDEXED_NOT_ANALYZED`. They indicate that a dataset is a plausible source for an evidence axis based on its registry metadata; they do not establish a biological claim, therapeutic window, target ranking or clinical efficacy.
 

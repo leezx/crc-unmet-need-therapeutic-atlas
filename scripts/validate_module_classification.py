@@ -27,6 +27,16 @@ not evidence of post-treatment target persistence), and added the
 `activation_context` column + controlled vocabulary so a `context_specific`
 activation_rule names its actual molecular/clinical territory instead of
 leaving it in free-text `reason`.
+
+Extended again after round 3 review (REQUEST_CHANGES a third time): a
+bare `persistence` axis was itself a proxy-upgrade risk -- GSE274551 is a
+single-timepoint baseline biopsy in refractory tissue (per its official
+GEO design), not a paired pre/post-treatment measurement, so calling it
+`persistence` silently upgraded "still present in refractory disease" to
+"retained across treatment". Retired `persistence`; replaced with
+`refractory_or_treated_presence` (single-timepoint presence in
+treated/refractory/metastatic tissue) and `longitudinal_persistence`
+(a real paired pre/post-treatment design on the same patient/lesion).
 """
 from __future__ import annotations
 
@@ -51,7 +61,8 @@ ACTIVATION_STATUSES = {
 }
 DECISION_AXES = {
     "prevalence",
-    "persistence",
+    "refractory_or_treated_presence",
+    "longitudinal_persistence",
     "clinical_endpoint_context",
     "protein_endpoint",
     "normal_tissue_risk",
