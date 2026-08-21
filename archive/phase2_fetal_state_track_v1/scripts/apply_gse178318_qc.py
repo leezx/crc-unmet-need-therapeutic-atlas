@@ -37,9 +37,9 @@ def load_map(path: Path) -> dict[str, dict[str, str]]:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--raw-dir", type=Path, default=Path("phase2/03_data/raw/GSE178318"))
+    parser.add_argument("--raw-dir", type=Path, default=Path("archive/phase2_fetal_state_track_v1/phase2/03_data/raw/GSE178318"))
     parser.add_argument("--sample-map", type=Path, default=Path("DATA/registry/GSE178318/sample_map.tsv"))
-    parser.add_argument("--output", type=Path, default=Path("phase2/06_results/GSE178318/qc_retention.json"))
+    parser.add_argument("--output", type=Path, default=Path("archive/phase2_fetal_state_track_v1/phase2/06_results/GSE178318/qc_retention.json"))
     args = parser.parse_args()
 
     barcodes_path = args.raw_dir / "GSE178318_barcodes.tsv.gz"

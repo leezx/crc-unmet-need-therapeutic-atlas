@@ -1,0 +1,2 @@
+dataset_id	source_url	accession	download_method	download_date	file_name	file_size	checksum	license	publication_doi	access_status	notes
+HPA_CRC_cancer_tissue	https://www.proteinatlas.org/humanproteome/cancer/data	HPA_cancer	HPA portal metadata first	NA	NA	NA	NA	HPA repository terms	NA	VERIFIED_ENTRY	Official HPA cancer-proteome landing page URL recorded from Asset-Generation-OS-architecture.md citation; distinct from HPA_normal_tissue. Colorectal-cancer-specific IHC scope and CPTAC-MS cross-reference not yet reviewed; no download performed.

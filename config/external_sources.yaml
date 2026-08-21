@@ -1,0 +1,32 @@
+# Logical references to Module A (DERISKED_TARGET_UNIVERSE), which is
+# maintained outside this repository and not redeveloped here. Added
+# 2026-08-21 after web-ChatGPT review of PR #70 (REQUEST_CHANGES, item 1):
+# do not hardcode machine-specific paths in prose docs (README.md,
+# ADC_ATLAS_DATASET_CONTRACT.md, modules/README.md) — reference this file
+# instead, and resolve each source's actual location via its path_env_var
+# on whatever machine is running the pipeline.
+module_a_derisked_target_universe:
+  description: >
+    ADCdb-derived seed target universe (clinical trials, publications,
+    regulatory filings, patents). This repository consumes its output
+    (see output_contract below) as an input list of candidate targets;
+    it does not maintain its own copy of the underlying source data.
+  sources:
+    - id: adcdb_published
+      description: Published ADCdb (Nucleic Acids Research), as-is.
+      path_env_var: ADCDB_PUBLISHED_PATH
+      example_local_path: /Volumes/Stelligen_SSD/Stelligen/DATA/1.Databases/ADCdb/ADCdb_Obsidian
+    - id: adcdb_claude_redo
+      description: >
+        Clinical trials + publications + regulatory + patents layer,
+        reusable directly (no redevelopment needed in this repository).
+      path_env_var: ADCDB_CLAUDE_REDO_PATH
+      example_local_path: /Volumes/Stelligen_SSD/Stelligen/DATA/1.Databases/ADCdb/ADCdb_Claude_redo
+  output_contract: schemas/target_seed.tsv
+  output_file_name: ADC_TARGET_SEED_UNIVERSE.tsv
+  notes: >
+    example_local_path values are informational only (what resolves on the
+    machine that authored this pivot) and must never be read directly by a
+    script; scripts must resolve the corresponding path_env_var and fail
+    closed with a clear error if it is unset, not fall back to the example
+    path.

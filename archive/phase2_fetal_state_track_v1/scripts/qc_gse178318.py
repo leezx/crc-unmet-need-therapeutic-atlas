@@ -71,10 +71,10 @@ def load_sample_map(path: Path) -> dict[str, dict[str, str]]:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--raw-dir", type=Path, default=Path("phase2/03_data/raw/GSE178318"))
+    parser.add_argument("--raw-dir", type=Path, default=Path("archive/phase2_fetal_state_track_v1/phase2/03_data/raw/GSE178318"))
     parser.add_argument("--sample-map", type=Path, default=Path("DATA/registry/GSE178318/sample_map.tsv"))
-    parser.add_argument("--marker-set", type=Path, default=Path("phase2/04_analysis_contracts/figure1_marker_set_v1.tsv"))
-    parser.add_argument("--output", type=Path, default=Path("phase2/06_results/GSE178318/qc_summary.json"))
+    parser.add_argument("--marker-set", type=Path, default=Path("archive/phase2_fetal_state_track_v1/phase2/04_analysis_contracts/figure1_marker_set_v1.tsv"))
+    parser.add_argument("--output", type=Path, default=Path("archive/phase2_fetal_state_track_v1/phase2/06_results/GSE178318/qc_summary.json"))
     args = parser.parse_args()
 
     raw = args.raw_dir

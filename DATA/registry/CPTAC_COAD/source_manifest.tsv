@@ -1,0 +1,2 @@
+dataset_id	source_url	accession	download_method	download_date	file_name	file_size	checksum	license	publication_doi	access_status	notes
+CPTAC_COAD	https://datacommons.cancer.gov/repository/proteomic-data-commons	CPTAC-COAD	Proteomic Data Commons (PDC) portal metadata first	NA	NA	NA	NA	NCI/PDC repository terms	NA	VERIFIED_ENTRY	Generic PDC portal URL recorded from Asset-Generation-OS-architecture.md citation; CPTAC-COAD-specific study page and file inventory not yet located or reviewed. Candidate-specific orthogonal check only. No download performed.

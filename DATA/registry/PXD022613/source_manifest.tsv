@@ -1,0 +1,2 @@
+dataset_id	source_url	accession	download_method	download_date	file_name	file_size	checksum	license	publication_doi	access_status	notes
+PXD022613	https://proteomecentral.proteomexchange.org/cgi/GetDataset?ID=PXD022613-1	PXD022613	PRIDE/ProteomeXchange metadata first	NA	NA	NA	NA	ProteomeXchange repository terms	NA	VERIFIED_ENTRY	Official ProteomeXchange dataset URL recorded from Asset-Generation-OS-architecture.md citation; CRLM proteomics with recurrence-timing prognosis grouping. File inventory not yet reviewed; no download performed.
