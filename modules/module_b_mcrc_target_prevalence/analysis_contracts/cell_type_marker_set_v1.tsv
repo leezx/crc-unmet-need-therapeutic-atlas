@@ -1,0 +1,18 @@
+gene	category	rationale
+EPCAM	epithelial	Pan-epithelial adhesion molecule, standard first marker for separating epithelial from stromal/immune compartments in CRC scRNA-seq.
+KRT8	epithelial	Type II cytokeratin, epithelial cytoskeleton, broadly expressed in colonic and hepatic epithelium.
+KRT18	epithelial	Type I cytokeratin, obligate KRT8 partner, same rationale as KRT8.
+KRT19	epithelial	Ductal/glandular cytokeratin, commonly used alongside EPCAM/KRT8/18 for CRC epithelial calls.
+CDH1	epithelial	E-cadherin, epithelial adherens-junction marker.
+PTPRC	immune	CD45, pan-leukocyte marker -- the single most standard immune-vs-non-immune discriminator.
+CD3D	immune	T-cell receptor complex subunit, T-lymphocyte marker.
+CD3E	immune	T-cell receptor complex subunit, T-lymphocyte marker.
+CD68	immune	Macrophage/monocyte lineage marker.
+CD14	immune	Monocyte/macrophage marker.
+COL1A1	fibroblast	Type I collagen, canonical fibroblast/stromal marker.
+COL1A2	fibroblast	Type I collagen, canonical fibroblast/stromal marker.
+DCN	fibroblast	Decorin, stromal/fibroblast proteoglycan marker.
+PDGFRB	fibroblast	Pericyte/fibroblast marker.
+PECAM1	endothelial	CD31, canonical endothelial marker.
+VWF	endothelial	Von Willebrand factor, endothelial marker.
+CDH5	endothelial	VE-cadherin, endothelial adherens-junction marker.
