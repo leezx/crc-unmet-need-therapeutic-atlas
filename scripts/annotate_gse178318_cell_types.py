@@ -69,8 +69,14 @@ NON_EPITHELIAL_CATEGORIES = ("immune", "fibroblast", "endothelial")
 TREATED_PATIENTS = {"COL15", "COL17", "COL18"}
 UNTREATED_PATIENTS = {"COL07", "COL12", "COL16"}
 
-# QC thresholds, taken verbatim from GSE178318's own publication (Cell
-# Discovery 2021, DOI 10.1038/s41421-021-00312-y) Methods section.
+# QC thresholds. MIN_DETECTED_GENES and MAX_MITO_FRACTION are taken verbatim
+# from GSE178318's own publication (Cell Discovery 2021, DOI
+# 10.1038/s41421-021-00312-y) Methods section. BATCH_OUTLIER_SD=3.0 is the
+# paper's own stated rule for its log10(total UMI) outlier step; the paper's
+# gene-count outlier step only says "unusually high or low number of genes"
+# without stating 3-SD explicitly for that step -- the same 3-SD rule is
+# applied to gene count here as a paper-aligned operationalization, not a
+# literal quote (PR #74 round 2 review).
 MIN_DETECTED_GENES = 500
 MAX_MITO_FRACTION = 0.15
 BATCH_OUTLIER_SD = 3.0
@@ -257,7 +263,8 @@ def main():
         print(f"ERROR: matrix dimension mismatch: header={header}, genes={len(gene_symbols)}, cells={n_cells}, entries={entries}", file=sys.stderr)
         sys.exit(1)
 
-    # QC filter, per the paper's own thresholds. Batch = each of the 15
+    # QC filter, paper-aligned operationalization (see the QC-thresholds
+    # comment above). Batch = each of the 15
     # patient/specimen sample keys, matching how this dataset's own
     # sample_map.tsv already groups cells.
     by_sample_indices = defaultdict(list)
