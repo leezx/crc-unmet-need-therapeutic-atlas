@@ -4,7 +4,7 @@ Paired with the Module E run for the same target (see `../../module_e_normal_tis
 
 > **在 `mcrc_preop_chemotherapy_crlm` 这个 indication（preoperative chemo/RT 后的 matched primary/CRLM 标本）里，CEACAM5 是否有足够多能被地址访问的恶性上皮细胞？**
 
-`indication_id = mcrc_preop_chemotherapy_crlm` — chosen because it is exactly the territory `GSE225857` and `GSE178318` (this module's two `CORE_ACTIVE`/`every_target` datasets per `DATA/registry/module_classification.tsv`) actually sample, not a broader indication their data can't speak to.
+`indication_id = mcrc_preop_chemotherapy_crlm` — chosen because it is the territory `GSE225857` and `GSE178318` (this module's two `CORE_ACTIVE`/`every_target` datasets per `DATA/registry/module_classification.tsv`) sample, not a broader indication their data can't speak to. Its `prior_therapy` field was loosened 2026-08-23 (PR #73 round 1 review) from a specific regimen (`CAPEOX_OR_FOLFOX_BEV`) to `PREOPERATIVE_CHEMOTHERAPY_AND_OR_RT`, matching what `GSE225857`'s own metadata actually supports — `GSE178318` is itself a mixed cohort where only 3 of 6 patients received a matching regimen (per `DATA/registry/GSE178318/sample_map.tsv`) and the other 3 are treatment-naive, so neither dataset is uniformly "this indication."
 
 ## Status: BLOCKED, not answered
 

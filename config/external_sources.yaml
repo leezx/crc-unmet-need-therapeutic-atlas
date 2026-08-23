@@ -31,40 +31,35 @@ module_a_derisked_target_universe:
     closed with a clear error if it is unset, not fall back to the example
     path.
 
-# Logical references to Module E's bulk-RNA normal-tissue screen. Added
-# 2026-08-23 for the first real Module E target run. HPA_normal_tissue and
-# GTEx_normal_tissue are registered CANDIDATE datasets in
-# DATA/registry/datasets.tsv (module_classification.tsv: CORE_ACTIVE /
-# REFERENCE_SUPPORT) -- this section does not change that registry status.
-# It documents where an already-fetched, checksum-verified local copy of
-# each dataset's RNA-only component can be read from, on whatever machine
-# runs scripts/extract_normal_tissue_rna.py -- same fail-closed
-# path_env_var pattern as Module A, and the same rule: this is not a new
-# download, and the script must never read example_local_path directly.
-module_e_normal_tissue_bulk_rna_reference:
+# Logical reference to Module E's GTEx bulk-RNA component. Added 2026-08-23,
+# corrected round 2 of PR #73's review: the HPA half of Module E's normal-
+# tissue screen (both RNA and IHC) is NOT an external path_env_var resource --
+# it is this repository's own canonical DATA/registry/HPA_normal_tissue
+# dataset, whose two files (rna_tissue_hpa.tsv.zip, normal_ihc_data.tsv.zip)
+# are already tracked with SHA256 in that dataset's own source_manifest.tsv
+# and physically present (gitignored) at
+# archive/phase2_fetal_state_track_v1/phase2/03_data/raw/HPA_normal_tissue/,
+# downloaded 2026-08-11 during the pre-pivot phase2 track. See
+# scripts/extract_normal_tissue_rna.py, which resolves that fixed
+# repo-relative path directly and checksum-verifies against the manifest --
+# no env var needed for something this repository already tracks itself.
+# Only GTEx v11 median TPM is a genuinely external, cross-project resource
+# (reused from another project's DATA/1.Databases entry), so only it needs
+# the fail-closed path_env_var pattern below, same as Module A.
+module_e_gtex_bulk_rna_reference:
   description: >
-    Official HPA RNA-tissue-consensus and GTEx v11 adult median-TPM bulk RNA
-    references. Bulk tissue RNA only -- not IHC, not cell-type-resolved, not
-    protein. Module E's own README requires a "protein/IHC-first triage" as
-    the ideal; this reference is an UNCALIBRATED_PROXY screen pending that,
-    per the module's own evidence_directness discipline. It can flag a
-    tissue as *worth checking further* but a low/absent value here is never
-    grounds to call a target "safe" in that tissue.
+    GTEx v11 adult gene-level median TPM by tissue, 68 tissues. Bulk tissue
+    RNA only. GTEx_normal_tissue is a registered CANDIDATE dataset in
+    DATA/registry/datasets.tsv (module_classification.tsv: REFERENCE_SUPPORT)
+    -- this section does not change that registry status; its own
+    source_manifest.tsv is backfilled with the exact file this points to.
   sources:
-    - id: hpa_rna_tissue_consensus
-      description: >
-        HPA RNA tissue consensus, long-format gene x tissue nTPM, 40
-        tissues. The RNA-only component of the broader HPA_normal_tissue
-        registry entry (which also covers IHC + ~76 annotated cell types,
-        not available locally in this form).
-      path_env_var: HPA_RNA_TISSUE_CONSENSUS_PATH
-      example_local_path: /Volumes/Stelligen_SSD/Stelligen/DATA/1.Databases/HPA_RNA_tissue_consensus
     - id: gtex_v11_median_tpm
       description: GTEx v11 adult gene-level median TPM by tissue, 68 tissues.
       path_env_var: GTEX_V11_MEDIAN_TPM_PATH
       example_local_path: /Volumes/Stelligen_SSD/Stelligen/DATA/1.Databases/GTEx_v11_median_tpm
   output_contract: schemas/target_evidence.tsv
   notes: >
-    example_local_path values are informational only and must never be read
-    directly by a script; scripts must resolve the corresponding
-    path_env_var and fail closed with a clear error if it is unset.
+    example_local_path is informational only and must never be read directly
+    by a script; scripts must resolve path_env_var and fail closed with a
+    clear error if it is unset.
