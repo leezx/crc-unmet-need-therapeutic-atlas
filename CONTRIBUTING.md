@@ -6,7 +6,7 @@
 4. Move to `APPROVED` only when a dataset directory and verifiable `source_manifest.tsv` exist.
 5. Preserve unknowns as `NA` or `UNKNOWN`; never infer treatment or biomarker status.
 6. If the dataset is in scope for the ADC Target Repurposing Atlas (see `ADC_ATLAS_DATASET_CONTRACT.md`), add or update its row in `DATA/registry/module_classification.tsv` too — `module`, `activation_status`, `adc_decision_axis`, `activation_rule`, `default_execution_order` — following the controlled vocabulary in `scripts/validate_module_classification.py`.
-7. Run `python3 scripts/validate_registry.py`, `python3 scripts/validate_module_classification.py`, and `python3 scripts/scan_sources.py --offline`.
+7. Run `python3 scripts/validate_registry.py`, `python3 scripts/validate_module_classification.py`, `python3 scripts/scan_sources.py --offline`, and `python3 -m unittest discover -s tests -p 'test_*.py'` — this last one is what `.github/workflows/validate.yml` actually runs as the required CI check; it was skipped from the manual pre-merge sweep across PR #70/#71 and a stale hardcoded row count in `tests/test_github_scanners.py` silently failed CI on `main` for two merges before being caught in PR #72. Don't repeat that gap.
 8. Run `python3 scripts/build_source_only_closure.py` and confirm the generated `reports/SOURCE_ONLY_CLOSURE_MATRIX.tsv` has no diff (a genuinely new candidate is expected to add rows, not change existing ones).
 9. Open a draft PR. A human reviewer approves priority and any change to download scope.
 
