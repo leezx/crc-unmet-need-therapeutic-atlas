@@ -63,3 +63,26 @@ module_e_gtex_bulk_rna_reference:
     example_local_path is informational only and must never be read directly
     by a script; scripts must resolve path_env_var and fail closed with a
     clear error if it is unset.
+
+# Logical reference to the local HGNC gene-position database used by
+# scripts/infercnv_lite_gse178318.py to build a gene -> chromosome-arm
+# mapping for the arm-level CNV score (see
+# modules/module_b_mcrc_target_prevalence/analysis_contracts/
+# infercnv_lite_gse178318.md for the full method). Added 2026-08-23.
+module_b_gene_position_reference:
+  description: >
+    HGNC's own gene-to-cytogenetic-band table (Ensembl gene ID + Chromosome
+    columns), used only to derive a coarse chromosome-arm bucket per gene --
+    not a base-pair-resolution genome annotation. Already-fetched, reused
+    from a separate project's DATA/1.Databases entry, same external-reuse
+    pattern as Module A's ADCdb sources and Module E's GTEx reference.
+  sources:
+    - id: hgnc_gene_id_mapping
+      description: HGNC custom download (raw/hgnc_custom_download.tsv), Ensembl gene ID + Chromosome columns.
+      path_env_var: HGNC_GENE_ID_MAPPING_PATH
+      example_local_path: /Volumes/Stelligen_SSD/Stelligen/DATA/1.Databases/HGNC_gene_id_mapping
+  output_contract: schemas/target_evidence.tsv
+  notes: >
+    example_local_path is informational only and must never be read directly
+    by a script; scripts must resolve path_env_var and fail closed with a
+    clear error if it is unset.
