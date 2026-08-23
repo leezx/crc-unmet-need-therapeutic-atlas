@@ -73,7 +73,7 @@ readiness_overlay:
   # scored numerically -- no target has gone through Modules B-F end to
   # end, so there is nothing to weight a score against.
   adc_target_repurposing_readiness:
-    current_stage: module_a_seed_universe_produced
+    current_stage: module_e_first_target_run_module_b_blocked
     completed_components:
       - ADC_ATLAS_DATASET_CONTRACT
       - modules_b_through_f_scoped
@@ -82,8 +82,11 @@ readiness_overlay:
       - target_id_added_to_evidence_and_indication_links
       - thirteen_pivot_candidates_phase1_source_verification
       - ADC_TARGET_SEED_UNIVERSE_produced
+      - target_evidence_schema_and_validator_populated
+      - tgt_ceacam5_module_e_normal_tissue_screen
     remaining_components:
-      - first_target_through_module_b_and_e_end_to_end
+      - tgt_ceacam5_module_b_prevalence_screen_blocked_on_scrna_data_access
+      - modules_c_d_f_first_target_runs
       - target_seed_universe_coverage_beyond_a_clinical_tier
     excluded_from_source_only_completion: true
 gates:
