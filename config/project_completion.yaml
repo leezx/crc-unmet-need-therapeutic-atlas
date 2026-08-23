@@ -73,17 +73,18 @@ readiness_overlay:
   # scored numerically -- no target has gone through Modules B-F end to
   # end, so there is nothing to weight a score against.
   adc_target_repurposing_readiness:
-    current_stage: contract_and_scaffolding_only
+    current_stage: module_a_seed_universe_produced
     completed_components:
       - ADC_ATLAS_DATASET_CONTRACT
       - modules_b_through_f_scoped
       - module_classification_schema_and_validator
       - target_seed_and_target_evidence_schemas
       - target_id_added_to_evidence_and_indication_links
-    remaining_components:
       - thirteen_pivot_candidates_phase1_source_verification
       - ADC_TARGET_SEED_UNIVERSE_produced
+    remaining_components:
       - first_target_through_module_b_and_e_end_to_end
+      - target_seed_universe_coverage_beyond_a_clinical_tier
     excluded_from_source_only_completion: true
 gates:
   - source_manifest

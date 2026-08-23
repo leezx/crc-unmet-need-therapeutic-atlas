@@ -1,0 +1,31 @@
+asset_entity_id	asset_name	antigen_display_name	resolution_note
+ADC_CANDIDATE_GEMTUZUMAB_OZOGAMICIN	Gemtuzumab ozogamicin	Myeloid cell surface antigen CD33 (CD33)	antigen resolved via ADCdb_Obsidian/ADCs/Gemtuzumab ozogamicin.md 'antigen:' wikilink field
+ADC_CANDIDATE_BRENTUXIMAB_VEDOTIN	Brentuximab vedotin	Tumor necrosis factor receptor superfamily member 8 (TNFRSF8)	antigen resolved via ADCdb_Obsidian/ADCs/Brentuximab vedotin.md 'antigen:' wikilink field
+ADC_CANDIDATE_TRASTUZUMAB_EMTANSINE	Trastuzumab emtansine	Receptor tyrosine-protein kinase erbB-2 (HER2)	antigen resolved via ADCdb_Obsidian/ADCs/Trastuzumab emtansine.md 'antigen:' wikilink field
+ADC_CANDIDATE_INOTUZUMAB_OZOGAMICIN	Inotuzumab ozogamicin	B-cell receptor CD22 (CD22)	antigen resolved via ADCdb_Obsidian/ADCs/Inotuzumab ozogamicin.md 'antigen:' wikilink field
+ADC_CANDIDATE_POLATUZUMAB_VEDOTIN	Polatuzumab vedotin	B-cell antigen receptor complex-associated protein beta chain (CD79B)	antigen resolved via ADCdb_Obsidian/ADCs/Polatuzumab vedotin.md 'antigen:' wikilink field
+ADC_CANDIDATE_ENFORTUMAB_VEDOTIN	Enfortumab vedotin	Nectin-4 (NECTIN4)	antigen resolved via ADCdb_Obsidian/ADCs/Enfortumab vedotin.md 'antigen:' wikilink field
+ADC_CANDIDATE_TRASTUZUMAB_DERUXTECAN	Trastuzumab deruxtecan	Receptor tyrosine-protein kinase erbB-2 (HER2)	antigen resolved via ADCdb_Obsidian/ADCs/Trastuzumab deruxtecan.md 'antigen:' wikilink field
+ADC_CANDIDATE_SACITUZUMAB_GOVITECAN	Sacituzumab govitecan	Tumor-associated calcium signal transducer 2 (TROP2)	antigen resolved via ADCdb_Obsidian/ADCs/Sacituzumab govitecan.md 'antigen:' wikilink field
+ADC_CANDIDATE_BELANTAMAB_MAFODOTIN	Belantamab mafodotin	Tumor necrosis factor receptor superfamily member 17 (TNFRSF17)	antigen resolved via ADCdb_Obsidian/ADCs/Belantamab mafodotin.md 'antigen:' wikilink field
+ADC_CANDIDATE_LONCASTUXIMAB_TESIRINE	Loncastuximab tesirine	B-lymphocyte antigen CD19 (CD19)	antigen resolved via ADCdb_Obsidian/ADCs/Loncastuximab tesirine.md 'antigen:' wikilink field
+ADC_CANDIDATE_TISOTUMAB_VEDOTIN	Tisotumab vedotin	Tissue factor (F3)	antigen resolved via ADCdb_Obsidian/ADCs/Tisotumab vedotin.md 'antigen:' wikilink field
+ADC_CANDIDATE_MIRVETUXIMAB_SORAVTANSINE	Mirvetuximab soravtansine	Folate receptor alpha (FOLR1)	antigen resolved via ADCdb_Obsidian/ADCs/Mirvetuximab soravtansine.md 'antigen:' wikilink field
+ADC_CANDIDATE_DISITAMAB_VEDOTIN	Disitamab vedotin	Receptor tyrosine-protein kinase erbB-2 (HER2)	antigen resolved via ADCdb_Obsidian/ADCs/Disitamab vedotin.md 'antigen:' wikilink field
+ADC_CANDIDATE_DATOPOTAMAB_DERUXTECAN	Datopotamab deruxtecan	Tumor-associated calcium signal transducer 2 (TROP2)	antigen resolved via ADCdb_Obsidian/ADCs/Datopotamab deruxtecan.md 'antigen:' wikilink field
+ADC_CANDIDATE_ADC_SUFFIX_5a33565c2c4a	Labetuzumab Govitecan	Carcinoembryonic antigen-related cell adhesion molecule 5 (CEACAM5)	antigen resolved via ADCdb_Obsidian/ADCs/Labetuzumab govitecan.md 'antigen:' wikilink field
+ADC_CANDIDATE_ADC_SUFFIX_f5c595efeea1	Pinatuzumab Vedotin	B-cell receptor CD22 (CD22)	antigen resolved via ADCdb_Obsidian/ADCs/Pinatuzumab vedotin.md 'antigen:' wikilink field
+ADC_CANDIDATE_ADC_SUFFIX_1c9d743cf54f	ladiratuzumab vedotin	Zinc transporter ZIP6 (SLC39A6)	antigen resolved via ADCdb_Obsidian/ADCs/Ladiratuzumab vedotin.md 'antigen:' wikilink field
+ADC_CANDIDATE_ADC_SUFFIX_8e37de9e1d6b	Telisotuzumab vedotin	Hepatocyte growth factor receptor (MET)	antigen resolved via ADCdb_Obsidian/ADCs/Telisotuzumab vedotin.md 'antigen:' wikilink field
+ADC_CANDIDATE_ADC_SUFFIX_6e0bdde22a85	glembatumumab vedotin		UNRESOLVED: ADC file referenced in ADC.index.md is missing from local ADCdb_Obsidian vault (broken wikilink); target not assigned, excluded from seed universe
+ADC_CANDIDATE_ADC_SUFFIX_9ba9a67ff4b7	Depatuxizumab mafodotin	Epidermal growth factor receptor (EGFR)	antigen resolved via ADCdb_Obsidian/ADCs/Depatuxizumab mafodotin.md 'antigen:' wikilink field
+ADC_CANDIDATE_ADC_SUFFIX_4e000bdcb848	denintuzumab mafodotin	B-lymphocyte antigen CD19 (CD19)	antigen resolved via ADCdb_Obsidian/ADCs/Denintuzumab-2i.md 'antigen:' wikilink field
+ADC_CANDIDATE_ADC_SUFFIX_f9862657f765	Rovalpituzumab tesirine	Delta-like protein 3 (DLL3)	antigen resolved via ADCdb_Obsidian/ADCs/Rovalpituzumab tesirine.md 'antigen:' wikilink field
+ADC_CANDIDATE_ADC_SUFFIX_76452e9163ef	Patritumab Deruxtecan	Receptor tyrosine-protein kinase erbB-3 (HER3)	antigen resolved via ADCdb_Obsidian/ADCs/Patritumab deruxtecan.md 'antigen:' wikilink field
+ADC_CANDIDATE_ADC_SUFFIX_8a46197896f6	Enapotamab vedotin	Tyrosine-protein kinase receptor UFO (AXL)	antigen resolved via ADCdb_Obsidian/ADCs/Enapotamab vedotin.md 'antigen:' wikilink field
+ADC_CANDIDATE_ADC_SUFFIX_5d5b94f8644a	Ifinatamab Deruxtecan	CD276 antigen (CD276)	antigen resolved via ADCdb_Obsidian/ADCs/Ifinatamab deruxtecan.md 'antigen:' wikilink field
+ADC_CANDIDATE_ADC_SUFFIX_c96d607d7f9f	Ozuriftamab Vedotin	Tyrosine-protein kinase transmembrane receptor ROR2 (ROR2)	antigen resolved via ADCdb_Obsidian/ADCs/Ozuriftamab vedotin.md 'antigen:' wikilink field
+ADC_CANDIDATE_ADC_SUFFIX_1a81094bebf4	sigvotatug vedotin	Integrin beta-6 (ITGB6)	no dedicated ADCs/sigvotatug vedotin.md file in vault; antigen resolved via ADCdb_Obsidian/Antigens/Integrin beta-6 (ITGB6).md 'Related ADCs' backlink listing this drug's development code
+ADC_CANDIDATE_ADC_SUFFIX_9feb2b8bd0bf	Zilovertamab vedotin	Inactive tyrosine-protein kinase transmembrane receptor ROR1 (ROR1)	antigen resolved via ADCdb_Obsidian/ADCs/Zilovertamab vedotin.md 'antigen:' wikilink field
+ADC_CANDIDATE_ADC_SUFFIX_d82b69ba971c	Raludotatug Deruxtecan	Cadherin-6 (CDH6)	antigen resolved via ADCdb_Obsidian/ADCs/Raludotatug deruxtecan.md 'antigen:' wikilink field
+ADC_CANDIDATE_ADC_SUFFIX_e1a3cb555c56	bulumtatug fuvedotin	Nectin-4 (NECTIN4)	no dedicated ADCs/bulumtatug fuvedotin.md file in vault; antigen resolved via ADCdb_Obsidian/Antigens/Nectin-4 (NECTIN4).md 'Related ADCs' backlink listing this drug's development code

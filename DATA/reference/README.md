@@ -1,0 +1,8 @@
+# DATA/reference/
+
+Small, versioned lookup tables that `scripts/build_target_seed_universe.py` joins against the two external Module A sources (see `config/external_sources.yaml`). These are checked in because they encode a one-time verification pass, not something the build script should silently re-derive or fabricate at run time.
+
+- `adcdb_asset_antigen_crossref.tsv` — for each ADC candidate row in `ADCDB_CLAUDE_REDO_PATH/DATA/feasibility/adc_candidates.tsv`, the antigen (surface target) it was manually cross-referenced against in `ADCDB_PUBLISHED_PATH/ADCs/*.md`'s `antigen:` wikilink field, plus a `resolution_note` recording how the match was made (direct filename match, an indirect antigen-file backlink for two development-code-only assets, or `UNRESOLVED` for the one asset — `glembatumumab vedotin` — whose ADC detail file is referenced from `ADC.index.md` but missing from the local vault). Built 2026-08-23; re-verify and regenerate this file, not just append to it, if `adcdb_candidates.tsv` gains rows.
+- `uniprot_accession_map.tsv` — UniProt accession per gene symbol, retrieved from the UniProt REST API (`source_query_url`) on 2026-08-23 and cross-checked against each antigen file's own `Uniprot Entry` mnemonic (e.g. `ERBB2_HUMAN`) in `ADCDB_PUBLISHED_PATH/Antigens/*.md` — all 23 matched exactly. `ADCDB_PUBLISHED_PATH`'s own antigen pages carry an HGNC ID and gene symbol but not a UniProt accession number, hence this separate lookup.
+
+Both files are inputs to Module A's `ADC_TARGET_SEED_UNIVERSE.tsv` build, not outputs — see `scripts/build_target_seed_universe.py` and `DATA/registry/ADC_TARGET_SEED_UNIVERSE.tsv`.

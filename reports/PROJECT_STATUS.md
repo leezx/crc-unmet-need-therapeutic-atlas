@@ -1,6 +1,6 @@
 # CRC Unmet-Need Therapeutic Atlas — project status
 
-更新时间：2026-08-21
+更新时间：2026-08-23
 
 This file describes current state only. The pre-pivot status (Phase 1 source-only + Phase 2 global fetal-state discovery, through PR #66) is preserved as a historical record at [`../archive/phase2_fetal_state_track_v1/PROJECT_STATUS_LEGACY_2026-08-11.md`](../archive/phase2_fetal_state_track_v1/PROJECT_STATUS_LEGACY_2026-08-11.md) — do not read it as current.
 
@@ -12,14 +12,14 @@ Source: `Asset-Generation-OS-architecture.md` → `CRC-Atlas工业化重构`（�
 
 — not the old `patient population → malignant cell state → surface target → functional dependency → normal-tissue window` chain, which required an unsupervised cell-state discovery step before a target could even exist. See [`../ADC_ATLAS_DATASET_CONTRACT.md`](../ADC_ATLAS_DATASET_CONTRACT.md), [`../modules/README.md`](../modules/README.md), and [`../knowledge/README.md`](../knowledge/README.md).
 
-PR #70 (`pivot/adc-target-repurposing-atlas`) **merged into `main`** after four review rounds with web-ChatGPT (`CRC临床适应症地图` conversation, `Biotech ideas` project): `REQUEST_CHANGES` on rounds 1–3, `APPROVE` on round 4 (head `b00d7ec`). PR #71 (`phase1-verify-pivot-candidates`, Phase 1 source verification for the 13 pivot-added candidates) **merged into `main`** after three further review rounds: `REQUEST_CHANGES` on rounds 1–2, `APPROVE` on round 3 (head `2a93817`). See "Review history" below.
+PR #70 (`pivot/adc-target-repurposing-atlas`) **merged into `main`** after four review rounds with web-ChatGPT (`CRC临床适应症地图` conversation, `Biotech ideas` project): `REQUEST_CHANGES` on rounds 1–3, `APPROVE` on round 4 (head `b00d7ec`). PR #71 (`phase1-verify-pivot-candidates`, Phase 1 source verification for the 13 pivot-added candidates) **merged into `main`** after three further review rounds: `REQUEST_CHANGES` on rounds 1–2, `APPROVE` on round 3 (head `2a93817`). PR #72 (Module A: `ADC_TARGET_SEED_UNIVERSE.tsv` v1 build) is the current in-review work — see "Module A seed universe build" and "Review history" below.
 
 ## Current scale
 
 - 32 registry candidates (19 pre-pivot + 13 added this pivot: `GSE274551`, `GSE225857`, `GSE84267`, `PXD055821`, `PXD022613`, `GSE196576`, `GSE294385`, `GSE235919`, `GSE235917`, `GSE5851`, `CSPA_PXD000589`, `CPTAC_COAD`, `HPA_CRC_cancer_tissue`). All still `status=CANDIDATE` — 12 of the 13 have official landing-page source verification (real publication/DOI/PMID, real sample counts where stated) as of 2026-08-21; `CPTAC_COAD` is publication-verified only (`VERIFIED_PUBLICATION_ONLY`) — its Proteomic Data Commons study identity, case count, and file inventory are still unresolved because the PDC portal is a JavaScript SPA that could not be fetched (see "Phase 1 verification pass" below). Verification is not the same as `APPROVED`.
 - `DATA/registry/module_classification.tsv`: 34 rows (some datasets serve two modules, e.g. `GSE178318`/`GSE225857` serve both B and C) covering all 32 datasets, each with `module`, `activation_status`, `adc_decision_axis`, `activation_rule`, `activation_context` (added round 3), `default_execution_order` — validated by `scripts/validate_module_classification.py` against a controlled vocabulary, not just free-text `reason`. Module C's axis was `persistence` (round 1) → split into `persistence`/`clinical_endpoint_context` (round 3) → `persistence` retired entirely and split further into `longitudinal_persistence` (a real paired pre/post-treatment design — only `GSE84267` qualifies) and `refractory_or_treated_presence` (single-timepoint presence in treated/refractory tissue — `GSE274551`, `GSE178318`, `GSE225857`, `GSE294385`) (round 4), because a bare `persistence` label was itself a proxy-upgrade risk.
 - `datasets.tsv`'s own `priority` column (`P0_DOWNLOAD` / `P1_DOWNLOAD` / `REFERENCE_ONLY`) is retained as **legacy Phase 1 download-priority metadata only**; it is not re-derived from the pivot and must not be read as an execution-priority signal — `module_classification.tsv` is canonical for that (see `CONTRIBUTING.md`).
-- `schemas/target_seed.tsv` (round 3: gained `derisking_tier`/`repurposing_status` admission fields) and `schemas/target_evidence.tsv` (round 3: gained `indication_id`, `measurement_layer`, `evidence_directness`, `source_evidence_id`) are new, empty (header-only) contracts. `schemas/evidence.tsv` and `schemas/indication_evidence_links.tsv` gained a `target_id` column (round 2); all 8 existing rows are pre-pivot dataset-provenance evidence and keep `target_id = NA`.
+- `schemas/target_seed.tsv` (round 3: gained `derisking_tier`/`repurposing_status` admission fields) is now populated: `DATA/registry/ADC_TARGET_SEED_UNIVERSE.tsv` has 23 `A_CLINICAL`/`ACTIVE` target rows, validated by `scripts/validate_target_seed.py` (see "Module A seed universe build" below). `schemas/target_evidence.tsv` (round 3: gained `indication_id`, `measurement_layer`, `evidence_directness`, `source_evidence_id`) is still an empty (header-only) contract — no Module B–F finding has been recorded against any of the 23 targets yet. `schemas/evidence.tsv` and `schemas/indication_evidence_links.tsv` gained a `target_id` column (round 2); all 8 existing rows are pre-pivot dataset-provenance evidence and keep `target_id = NA`.
 - `config/external_sources.yaml` is new: Module A's two source locations and output contract are declared there via `path_env_var`, not hardcoded into prose docs.
 - `archive/phase2_fetal_state_track_v1/` now holds the full old `phase2/` tree, 4 state-validation reports, 7 scripts (all of them — `qc_gse178318.py`, `apply_gse178318_qc.py`, and `audit_hpa_target_window.py` were moved here in round 2 after review caught that they still defaulted to the old Fig1 marker panel), and the pre-pivot `PROJECT_STATUS.md` body.
 
@@ -42,7 +42,7 @@ PR #70 (`pivot/adc-target-repurposing-atlas`) **merged into `main`** after four 
 - No Module (B–F) has a data lock or analysis contract yet — `modules/*/README.md` define scope only.
 - `MCRC_liver_metastasis_PDO_2026`'s mIHC panel covers only 14 markers; Module D must do a `target_observable` coverage check per target before assuming RNA→protein calibration is available.
 - `knowledge/` still has only the 8 pre-pivot, non-target-specific evidence objects; no `target_evidence.tsv` row exists yet for any real ADCdb target.
-- Module A (`ADC_TARGET_SEED_UNIVERSE.tsv`) has not actually been produced against `schemas/target_seed.tsv` — the contract (including the `derisking_tier`/`repurposing_status` admission gate) exists, the seed universe file does not.
+- Module A's v1 `ADC_TARGET_SEED_UNIVERSE.tsv` covers only the 23 targets behind an already-approved-or-clinical-stage ADC construct (`adc_candidates.tsv`, `status=VALIDATED`); it does **not** enumerate ADCdb's broader ~300-antigen universe (`B_PRECLINICAL_ADC` / `C_ANTIBODY_OR_BIOLOGY_ONLY` tier candidates that would default to `FUTURE`) — extending coverage there is future work, not started.
 
 ## Phase 1 verification pass (2026-08-21)
 
@@ -57,13 +57,26 @@ The pass surfaced newly-discovered facts that required correcting the *canonical
 
 Full detail: `reports/P0_SOURCE_VERIFICATION.md` / `.tsv`.
 
+## Module A seed universe build (2026-08-23)
+
+`DATA/registry/ADC_TARGET_SEED_UNIVERSE.tsv` was generated by the new `scripts/build_target_seed_universe.py`, which resolves both Module A source locations from `config/external_sources.yaml` via their `path_env_var` (fails closed if unset — never falls back to `example_local_path`) and joins:
+
+- `$ADCDB_CLAUDE_REDO_PATH/DATA/feasibility/adc_candidates.tsv` — 30 curated, `status=VALIDATED` known-ADC-asset rows (14 approved, 16 clinical-stage).
+- `DATA/reference/adcdb_asset_antigen_crossref.tsv` (new, checked in) — each asset's antigen manually cross-referenced against `$ADCDB_PUBLISHED_PATH/ADCs/*.md`'s own `antigen:` wikilink field (source-verified per asset, not inferred from drug-name conventions). 29 of 30 assets resolved; `glembatumumab vedotin` is excluded — its ADC detail file is linked from `ADC.index.md` but missing from the local vault (broken wikilink), and no target was assigned rather than guessing one from memory.
+- `$ADCDB_PUBLISHED_PATH/Antigens/<name>.md` — each antigen's own General Information table (`Gene Name`, `HGNC ID`, `Antigen ID`).
+- `DATA/reference/uniprot_accession_map.tsv` (new, checked in) — UniProt accession per gene symbol, retrieved from the UniProt REST API and cross-checked against each antigen file's own `Uniprot Entry` mnemonic (all 23 matched exactly).
+
+Result: **23 unique targets**, all `derisking_tier=A_CLINICAL` / `repurposing_status=ACTIVE` (an ADC construct against each is approved or has been dosed in a human trial, per the contract's own admission-gate definition — see `ADC_ATLAS_DATASET_CONTRACT.md`). `adcdb_cancer_types_with_precedent` is a distilled, deduplicated list of each target's documented trial/label indications (colorectal/colon/rectal-relevant terms are always surfaced first, ahead of the alphabetical cap, so CRC precedent is never silently truncated out). **Five targets have real, source-recorded CRC/mCRC precedent**: `CEACAM5` (Labetuzumab govitecan), `ERBB2`/HER2 (Trastuzumab emtansine/deruxtecan, Disitamab vedotin), `F3`/Tissue Factor (Tisotumab vedotin), `NECTIN4` (Enfortumab vedotin), `TACSTD2`/Trop-2 (Sacituzumab govitecan, Datopotamab deruxtecan) — none of this is a CRC efficacy or safety claim, only documented trial/label indication text; whether any of these five actually clears Modules B–F for a specific `indication_id` is unknown and untested.
+
+**Scope boundary, stated explicitly, not hidden**: this v1 build only covers targets behind an already-clinical-or-approved ADC construct (`adc_candidates.tsv`'s curated 30-asset registry). ADCdb's broader local snapshot (`ADCDB_PUBLISHED_PATH/Antigens/`) lists ~300 additional antigens that would need per-target preclinical-evidence review to classify as `B_PRECLINICAL_ADC` vs `C_ANTIBODY_OR_BIOLOGY_ONLY` — that classification pass has not been started and is not part of this build.
+
+Validated by `python3 scripts/validate_target_seed.py` against `schemas/target_seed.tsv` (header match, `target_id`/`target_symbol` uniqueness, `tgt_<symbol>` naming convention, controlled vocabulary, and the tier→status default-rule check).
+
 ## Next handoff
 
-Per the reviewing conversation's own framing: 13-candidate verification pass completed (12 landing-page verified + 1 publication-only) → Module A target input contract → target-first B–F execution, one target x indication at a time. Concretely:
-
-1. Produce a first `ADC_TARGET_SEED_UNIVERSE.tsv` (even a small one) conforming to `schemas/target_seed.tsv`, sourced via `config/external_sources.yaml`, with `derisking_tier`/`repurposing_status` actually set (not left blank).
-2. Take the first `target_id x indication_id` through Modules B and E first — the intentionally selected minimum first-pass vertical slice (**not** the only `CORE_ACTIVE`/`every_target` modules; C and D also have `CORE_ACTIVE`/`every_target` rows) — end to end, producing real `target_evidence.tsv` rows with `measurement_layer` and `evidence_directness` set, before building out C/D/F tooling.
-3. Optional lower-priority follow-ups from the verification pass: query the PRIDE API file listing for `PXD055821`/`PXD022613`/`CSPA_PXD000589`; fetch exact GEO `filelist.txt` for `GSE196576`/`GSE235917`; review CNSA access terms for `GSE225857`; resolve `CPTAC_COAD`'s exact PDC study ID via its GraphQL/REST API instead of the unfetchable SPA UI.
+1. Take the first `target_id x indication_id` through Modules B and E first — the intentionally selected minimum first-pass vertical slice (**not** the only `CORE_ACTIVE`/`every_target` modules; C and D also have `CORE_ACTIVE`/`every_target` rows) — end to end, producing real `target_evidence.tsv` rows with `measurement_layer` and `evidence_directness` set, before building out C/D/F tooling. The five CRC-precedented targets above (`CEACAM5`, `ERBB2`, `F3`, `NECTIN4`, `TACSTD2`) are a reasonable starting shortlist for picking that first target, but this file does not itself recommend one.
+2. Extend `ADC_TARGET_SEED_UNIVERSE.tsv` coverage into ADCdb's `B_PRECLINICAL_ADC` / `C_ANTIBODY_OR_BIOLOGY_ONLY` tiers (the ~300-antigen pool not yet reviewed) — lower priority than item 1; a target-first repurposing search should be proven on the clinically-derisked slice before widening intake.
+3. Optional lower-priority follow-ups from the Phase 1 verification pass: query the PRIDE API file listing for `PXD055821`/`PXD022613`/`CSPA_PXD000589`; fetch exact GEO `filelist.txt` for `GSE196576`/`GSE235917`; review CNSA access terms for `GSE225857`; resolve `CPTAC_COAD`'s exact PDC study ID via its GraphQL/REST API instead of the unfetchable SPA UI.
 4. Not next: reactivating any `SUPPLEMENT_FROZEN` dataset (DepMap, HTAN, CRLM-NMP, Perturb-seq, …) without a named target-specific uncertainty.
 
 ## Review history
