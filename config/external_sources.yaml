@@ -30,3 +30,36 @@ module_a_derisked_target_universe:
     script; scripts must resolve the corresponding path_env_var and fail
     closed with a clear error if it is unset, not fall back to the example
     path.
+
+# Logical reference to Module E's GTEx bulk-RNA component. Added 2026-08-23,
+# corrected round 2 of PR #73's review: the HPA half of Module E's normal-
+# tissue screen (both RNA and IHC) is NOT an external path_env_var resource --
+# it is this repository's own canonical DATA/registry/HPA_normal_tissue
+# dataset, whose two files (rna_tissue_hpa.tsv.zip, normal_ihc_data.tsv.zip)
+# are already tracked with SHA256 in that dataset's own source_manifest.tsv
+# and physically present (gitignored) at
+# archive/phase2_fetal_state_track_v1/phase2/03_data/raw/HPA_normal_tissue/,
+# downloaded 2026-08-11 during the pre-pivot phase2 track. See
+# scripts/extract_normal_tissue_rna.py, which resolves that fixed
+# repo-relative path directly and checksum-verifies against the manifest --
+# no env var needed for something this repository already tracks itself.
+# Only GTEx v11 median TPM is a genuinely external, cross-project resource
+# (reused from another project's DATA/1.Databases entry), so only it needs
+# the fail-closed path_env_var pattern below, same as Module A.
+module_e_gtex_bulk_rna_reference:
+  description: >
+    GTEx v11 adult gene-level median TPM by tissue, 68 tissues. Bulk tissue
+    RNA only. GTEx_normal_tissue is a registered CANDIDATE dataset in
+    DATA/registry/datasets.tsv (module_classification.tsv: REFERENCE_SUPPORT)
+    -- this section does not change that registry status; its own
+    source_manifest.tsv is backfilled with the exact file this points to.
+  sources:
+    - id: gtex_v11_median_tpm
+      description: GTEx v11 adult gene-level median TPM by tissue, 68 tissues.
+      path_env_var: GTEX_V11_MEDIAN_TPM_PATH
+      example_local_path: /Volumes/Stelligen_SSD/Stelligen/DATA/1.Databases/GTEx_v11_median_tpm
+  output_contract: schemas/target_evidence.tsv
+  notes: >
+    example_local_path is informational only and must never be read directly
+    by a script; scripts must resolve path_env_var and fail closed with a
+    clear error if it is unset.
