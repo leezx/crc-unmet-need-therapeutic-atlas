@@ -100,7 +100,13 @@ class GitHubScannerTests(unittest.TestCase):
         matrix = ROOT / "reports/SOURCE_ONLY_CLOSURE_MATRIX.tsv"
         with matrix.open(newline="") as handle:
             rows = list(csv.DictReader(handle, delimiter="\t"))
-        self.assertEqual(len(rows), 19)
+        with (ROOT / "DATA/registry/datasets.tsv").open(newline="") as handle:
+            registry_row_count = sum(1 for _ in csv.DictReader(handle, delimiter="\t"))
+        # Compare against the live registry count rather than a hardcoded number --
+        # a literal 19 here silently went stale across PR #70/#71 (registry grew to 32)
+        # without failing CI, because this test wasn't run as part of the manual
+        # validation sweep those PRs actually checked. See reports/PROJECT_STATUS.md.
+        self.assertEqual(len(rows), registry_row_count)
         self.assertTrue(all(row["review_state"] == "CANDIDATE_SOURCE_ONLY" for row in rows))
         internal_ids = {row["dataset_id"] for row in rows if row["closure_status"] == "INTERNAL_ACTION_REQUIRED"}
         self.assertEqual(internal_ids, set())
