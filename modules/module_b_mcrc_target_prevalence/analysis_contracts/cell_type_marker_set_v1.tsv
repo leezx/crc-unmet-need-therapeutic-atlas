@@ -1,0 +1,18 @@
+gene	category	status	rationale
+EPCAM	epithelial	active_in_scoring	Pan-epithelial adhesion molecule. Used ALONE for the epithelial category score (scripts/annotate_gse178318_cell_types.py reads this gene directly, not via this file's category grouping), matching GSE178318's own publication's method ("EPCs were identified using the higher expression of EPCAM").
+KRT8	epithelial	reference_only	Type II cytokeratin. NOT read by the current script -- also expressed in normal hepatic epithelium, a real confound in LIVER_METASTASIS samples if included in the epithelial score (PR #74 round 1 review). Kept as a documented, considered-and-rejected marker, not an active input.
+KRT18	epithelial	reference_only	Type I cytokeratin, obligate KRT8 partner. NOT read by the current script, same rationale as KRT8.
+KRT19	epithelial	reference_only	Ductal/glandular cytokeratin. NOT read by the current script -- dropped alongside KRT8/KRT18/CDH1 in favor of EPCAM alone.
+CDH1	epithelial	reference_only	E-cadherin. NOT read by the current script, same rationale as KRT8.
+PTPRC	immune	active_in_scoring	CD45, pan-leukocyte marker -- the single most standard immune-vs-non-immune discriminator.
+CD3D	immune	active_in_scoring	T-cell receptor complex subunit, T-lymphocyte marker.
+CD3E	immune	active_in_scoring	T-cell receptor complex subunit, T-lymphocyte marker.
+CD68	immune	active_in_scoring	Macrophage/monocyte lineage marker.
+CD14	immune	active_in_scoring	Monocyte/macrophage marker.
+COL1A1	fibroblast	active_in_scoring	Type I collagen, canonical fibroblast/stromal marker.
+COL1A2	fibroblast	active_in_scoring	Type I collagen, canonical fibroblast/stromal marker.
+DCN	fibroblast	active_in_scoring	Decorin, stromal/fibroblast proteoglycan marker.
+PDGFRB	fibroblast	active_in_scoring	Pericyte/fibroblast marker.
+PECAM1	endothelial	active_in_scoring	CD31, canonical endothelial marker.
+VWF	endothelial	active_in_scoring	Von Willebrand factor, endothelial marker.
+CDH5	endothelial	active_in_scoring	VE-cadherin, endothelial adherens-junction marker.
