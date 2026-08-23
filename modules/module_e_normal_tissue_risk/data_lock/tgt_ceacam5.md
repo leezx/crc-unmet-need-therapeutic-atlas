@@ -19,5 +19,5 @@ Revised 2026-08-23 (PR #73 round 1 review) after web-ChatGPT caught that the fir
 ## Exclusion rules
 
 - Bulk tissue RNA (HPA "RNA expression (HPA)", GTEx) cannot separate a genuinely accessible, cell-surface-positive population from background/stromal/rare-cell contribution — `evidence_directness=UNCALIBRATED_PROXY` for both.
-- Cell-type IHC is closer to real biology but is still not a quantitative surface-density assay — `evidence_directness=CALIBRATED_PROXY`, not `DIRECT`. IHC intensity != accessible antigen density.
+- Cell-type IHC is closer to real biology than bulk RNA but is not itself a calibration step — no target-specific quantitative surface assay, flow-cytometry antigen-density calibration, or IHC-to-surface-density mapping exists here, so it stays `evidence_directness=UNCALIBRATED_PROXY`, not `CALIBRATED_PROXY` and not `DIRECT` (corrected 2026-08-23, PR #73 round 2 review — `measurement_layer=IHC` already distinguishes it from RNA without needing a directness upgrade). IHC intensity != accessible antigen density.
 - GTEx subregion columns (e.g. `Colon_Transverse_Mucosa` vs `Colon_Transverse_Muscularis`) are treated as informative, not averaged away.
