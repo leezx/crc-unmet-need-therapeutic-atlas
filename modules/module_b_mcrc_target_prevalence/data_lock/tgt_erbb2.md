@@ -1,6 +1,6 @@
 # Module B data lock — `tgt_erbb2`
 
-Status: **`GSE178318` — LOCKED, QC-filtered, epithelial-proxy screened (NOT malignancy-confirmed). `GSE225857` — still blocked on data access.**
+Status: **`GSE178318` — LOCKED, QC-filtered, epithelial-proxy screened (NOT malignancy-confirmed). `GSE225857` — LOCKED, non-immune tumor-cell screen complete (2026-08-24, PR #81); its CNSA raw-sequencing route remains `CONTROLLED_ACCESS` but was never needed.**
 
 ## `GSE178318` — same locked matrix/gene index/sample annotation as `tgt_ceacam5`, re-scored for `ERBB2`
 
@@ -13,7 +13,7 @@ Status: **`GSE178318` — LOCKED, QC-filtered, epithelial-proxy screened (NOT ma
 
 ## `GSE225857` — still genuinely no local processed data
 
-Unchanged from `tgt_ceacam5.md`: no raw sequencing file and no count matrix for `GSE225857` exists anywhere on the machine that ran this pass; `access_status=CONTROLLED_ACCESS`, CNSA access terms independently reviewed 2026-08-24 and confirmed a real (DAC-application, HGR-compliance) blocker for that route specifically. The public-GEO-metadata route has now been checked and confirmed to carry real patient/site resolution (2026-08-24) -- see `tgt_ceacam5.md` for the full finding; the CNSA route now looks unnecessary for Module B, though target-gene detectability itself is still unconfirmed since only metadata, not the count matrices, has been opened.
+Method, pre-flight checks, and full results table: `tgt_ceacam5.md` and `analysis_contracts/gse225857_tumor_cell_screen.md` — same run, re-scored for `ERBB2` (`target_evidence.tsv` `TE028`, `evidence.tsv` `EV036`). `ERBB2` is the flattest of the five targets in this cohort: every patient x site cell buckets `RNA_low` (7.3%-30.9%), never `RNA_high` or `RNA_no` — a consistently mid-range detection pattern across all 5 patients and both sites, unlike `CEACAM5`'s wide spread. `access_status=CONTROLLED_ACCESS` for the CNSA raw-sequencing route is unchanged and was never needed for this result.
 
 ## Both datasets remain `status=CANDIDATE`
 
