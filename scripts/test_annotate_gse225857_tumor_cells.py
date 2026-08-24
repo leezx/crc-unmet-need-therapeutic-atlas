@@ -25,6 +25,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from annotate_gse225857_tumor_cells import (
     dequote, bucket, load_metadata, read_counts_header, find_gene_row, validate_metadata,
+    EXPECTED_PATIENTS, EXPECTED_ORGANS,
 )
 
 failures = []
@@ -83,13 +84,21 @@ def write_counts_gz(path, cell_ids, gene_rows):
 # 11 Tu clusters (one cell each, to satisfy the exact-Tu01-Tu11 check) plus
 # one fibroblast and one endothelial cell, all QC-clean (predicted.doublet=
 # False, doublet=singlet), matching a real metadata file's expected shape.
+# Patients/organs are spread across the real EXPECTED_PATIENTS/EXPECTED_ORGANS
+# sets (not placeholder IDs) so this fixture is a genuine positive case for
+# the patient-set/organ-set checks too, not just the cluster/doublet ones.
+REAL_PATIENTS = sorted(EXPECTED_PATIENTS)  # s0107, s0115, s0813, s0920, s1231
+REAL_ORGANS = sorted(EXPECTED_ORGANS)  # CCT, LCT
 FULL_TUMOR_SET_ROWS = [
-    (f"cellTu{i:02d}-1", "pX", "CCT", f"Tu{i:02d}_MARKER{i}", "False", "singlet")
+    (f"cellTu{i:02d}-1", REAL_PATIENTS[i % len(REAL_PATIENTS)], REAL_ORGANS[i % len(REAL_ORGANS)],
+     f"Tu{i:02d}_MARKER{i}", "False", "singlet")
     for i in range(1, 12)
 ] + [
-    ("cellF-1", "pX", "CCT", "F01_fibroblast_PRELP", "False", "singlet"),
-    ("cellE-1", "pY", "LCT", "E01_endothelial_SELP", "False", "singlet"),
+    ("cellF-1", REAL_PATIENTS[0], REAL_ORGANS[0], "F01_fibroblast_PRELP", "False", "singlet"),
+    ("cellE-1", REAL_PATIENTS[1], REAL_ORGANS[1], "E01_endothelial_SELP", "False", "singlet"),
 ]
+assert {r[1] for r in FULL_TUMOR_SET_ROWS} == EXPECTED_PATIENTS, "fixture must cover every expected patient"
+assert {r[2] for r in FULL_TUMOR_SET_ROWS} == EXPECTED_ORGANS, "fixture must cover every expected organ"
 
 # --- end-to-end on a tiny synthetic dataset ---
 with tempfile.TemporaryDirectory() as tmp:
@@ -165,7 +174,8 @@ with tempfile.TemporaryDirectory() as tmp:
                 lambda: validate_metadata(empty_cluster_rows))
 
     # --- validate_metadata: an unexpected extra tumor label (Tu12) must fail closed.
-    extra_label_rows = list(FULL_TUMOR_SET_ROWS) + [("cellTu12-1", "pX", "CCT", "Tu12_EXTRA", "False", "singlet")]
+    extra_label_rows = list(FULL_TUMOR_SET_ROWS) + [
+        ("cellTu12-1", REAL_PATIENTS[0], REAL_ORGANS[0], "Tu12_EXTRA", "False", "singlet")]
     expect_exit("validate_metadata rejects a fixture with an unexpected Tu12 label",
                 lambda: validate_metadata(extra_label_rows))
 
@@ -175,6 +185,22 @@ with tempfile.TemporaryDirectory() as tmp:
                         doublet_rows[0][3], "True", "doublet")
     expect_exit("validate_metadata rejects a fixture with a real predicted doublet",
                 lambda: validate_metadata(doublet_rows))
+
+    # --- validate_metadata: an unrecognized patient ID must fail closed (PR #81 round 2 review --
+    # the round-1 fixture used placeholder pX/pY IDs that this check would not have caught).
+    unknown_patient_rows = list(FULL_TUMOR_SET_ROWS)
+    unknown_patient_rows[0] = ("cellUnknownPatient-1", "sUNKNOWN", unknown_patient_rows[0][2],
+                                unknown_patient_rows[0][3], "False", "singlet")
+    expect_exit("validate_metadata rejects a fixture with an unrecognized patient ID",
+                lambda: validate_metadata(unknown_patient_rows))
+
+    # --- validate_metadata: an unrecognized organ code must fail closed -- otherwise it would
+    # silently fall through ORGAN_LABELS.get(organ, organ) in the main pipeline, uncaught.
+    unknown_organ_rows = list(FULL_TUMOR_SET_ROWS)
+    unknown_organ_rows[0] = ("cellUnknownOrgan-1", unknown_organ_rows[0][1], "PBT",
+                              unknown_organ_rows[0][3], "False", "singlet")
+    expect_exit("validate_metadata rejects a fixture with an unrecognized organ code",
+                lambda: validate_metadata(unknown_organ_rows))
 
 if failures:
     print(f"\n{len(failures)} test(s) FAILED: {failures}")

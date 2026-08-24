@@ -18,13 +18,18 @@ predicted.doublet=False / doublet=singlet already true for every cell
 -- no additional QC filtering is applied here, unlike GSE178318's raw,
 unfiltered barcode deposit).
 
-All four of those pre-flight claims are actually checked in code below
+All of those pre-flight claims are actually checked in code below
 (validate_metadata()), not just asserted in prose -- PR #81 round 1
 review caught that an earlier version of this script only checked the
 cell-ID join and gene-index presence, while claiming (inaccurately) that
 cluster completeness, the exact Tu01-Tu11 set, and the doublet-field
 claim were "built-in and fail-closed" when they were not actually
-verified in code. Every check below raises/exits on failure; none is
+verified in code. Round 2 review then caught that the round-1 fix still
+didn't check the two cohort invariants the canonical claim ("these five
+specific patients x CC/LC sites") actually depends on: the exact patient
+set and the exact organ set -- an unrecognized organ code would have
+silently fallen through ORGAN_LABELS.get(organ, organ) uncaught. Both are
+now checked too. Every check below raises/exits on failure; none is
 assumed.
 
 This is a materially stronger starting point than GSE178318's screen:
@@ -82,6 +87,13 @@ ORGAN_LABELS = {"CCT": "CC_primary", "LCT": "LC_liver_metastasis"}
 # per the source publication's stated "11 tumor cell clusters" (Wang et al.,
 # Sci Adv 2023, PMID 37327339). Checked, not assumed -- see validate_metadata().
 EXPECTED_TUMOR_CLUSTER_PREFIXES = {f"Tu{n:02d}" for n in range(1, 12)}
+# The two cohort invariants the canonical claim ("these five specific
+# patients x CC/LC sites, indication_id=mcrc_preop_chemotherapy_crlm") is
+# actually about -- checked in code, not just asserted (PR #81 round 2
+# review). A silent new patient or an unrecognized organ code must fail
+# closed, not fall through ORGAN_LABELS.get(organ, organ) unnoticed.
+EXPECTED_PATIENTS = {"s0107", "s0115", "s0813", "s0920", "s1231"}
+EXPECTED_ORGANS = {"CCT", "LCT"}
 
 RNA_NO_MAX = 0.05
 RNA_HIGH_MIN = 0.50
@@ -178,13 +190,30 @@ def validate_metadata(meta_rows):
                        f"doublet=singlet (expected 0 -- the 'already doublet-filtered, no additional QC needed' "
                        f"claim does not hold; this script does not apply its own doublet filtering).")
 
+    observed_patients = {r[1] for r in meta_rows}
+    if observed_patients != EXPECTED_PATIENTS:
+        missing = EXPECTED_PATIENTS - observed_patients
+        unexpected = observed_patients - EXPECTED_PATIENTS
+        errors.append(f"Patient set does not match the expected 5 (missing={sorted(missing)}, "
+                       f"unexpected={sorted(unexpected)}). The canonical claim is scoped to exactly "
+                       f"{sorted(EXPECTED_PATIENTS)} -- a silent new or missing patient must not pass unnoticed.")
+
+    observed_organs = {r[2] for r in meta_rows}
+    if observed_organs != EXPECTED_ORGANS:
+        missing = EXPECTED_ORGANS - observed_organs
+        unexpected = observed_organs - EXPECTED_ORGANS
+        errors.append(f"Organ set does not match the expected {sorted(EXPECTED_ORGANS)} "
+                       f"(missing={sorted(missing)}, unexpected={sorted(unexpected)}). An unrecognized organ "
+                       f"code must not silently fall through ORGAN_LABELS.get(organ, organ) unnoticed.")
+
     if errors:
         print("ERROR: metadata pre-flight validation failed:", file=sys.stderr)
         for e in errors:
             print(f"  - {e}", file=sys.stderr)
         sys.exit(1)
     print(f"Validated: cluster 100% populated, tumor-cluster labels are exactly "
-          f"{sorted(EXPECTED_TUMOR_CLUSTER_PREFIXES)}, all {len(meta_rows)} rows are "
+          f"{sorted(EXPECTED_TUMOR_CLUSTER_PREFIXES)}, patient set is exactly {sorted(EXPECTED_PATIENTS)}, "
+          f"organ set is exactly {sorted(EXPECTED_ORGANS)}, all {len(meta_rows)} rows are "
           f"predicted.doublet=False/doublet=singlet.", file=sys.stderr)
 
 
