@@ -22,6 +22,7 @@ Usage: python3 scripts/infercnv_lite_gse178318.py --gene CEACAM5
 import argparse
 import csv
 import gzip
+import hashlib
 import math
 import os
 import random
@@ -68,20 +69,80 @@ def aggregate_cnv_score(signal, ref_mean, ref_sd, usable_arms):
     return sum(z2) / len(z2)
 
 
+def sha256(path):
+    d = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            d.update(chunk)
+    return d.hexdigest()
+
+
+def load_gene_position_source_config(path):
+    """Minimal, targeted extraction of the module_b_gene_position_reference.sources
+    list's id: hgnc_gene_id_mapping / path_env_var: pair from config/external_sources.yaml
+    -- same narrow, dependency-free parsing pattern as build_target_seed_universe.py's
+    load_external_sources_config() (not shared as a common helper; each script's copy is
+    scoped to the one block it actually reads, matching existing repo precedent). This is
+    the source of truth for the env var name -- it must never be duplicated as a hardcoded
+    string literal in this script."""
+    if not path.is_file():
+        print(f"ERROR: {path} not found.", file=sys.stderr)
+        sys.exit(1)
+    var_name = None
+    current_id = None
+    for line in path.read_text().splitlines():
+        m_id = re.match(r"\s*-\s*id:\s*(\S+)", line)
+        if m_id:
+            current_id = m_id.group(1)
+            continue
+        m_var = re.match(r"\s*path_env_var:\s*(\S+)", line)
+        if m_var and current_id == "hgnc_gene_id_mapping":
+            var_name = m_var.group(1)
+            break
+    if not var_name:
+        print(
+            f"ERROR: could not find a 'path_env_var' for source id 'hgnc_gene_id_mapping' in "
+            f"{path} -- the YAML structure may have changed; update this parser.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    return var_name
+
+
 def resolve_hgnc_path():
-    var_name = "HGNC_GENE_ID_MAPPING_PATH"
+    var_name = load_gene_position_source_config(REPO_ROOT / "config" / "external_sources.yaml")
     val = os.environ.get(var_name)
     if not val:
         print(
             f"ERROR: {var_name} is not set. This script resolves the local HGNC gene-position "
-            f"reference only via this env var -- it will not guess a path. Set {var_name} to the "
-            f"directory containing raw/hgnc_custom_download.tsv and re-run.",
+            f"reference only via config/external_sources.yaml's path_env_var -- it will not "
+            f"fall back to any example_local_path. Set {var_name} to the directory containing "
+            f"raw/hgnc_custom_download.tsv and re-run.",
             file=sys.stderr,
         )
         sys.exit(1)
     p = Path(val) / "raw" / "hgnc_custom_download.tsv"
     if not p.is_file():
         print(f"ERROR: {p} not found.", file=sys.stderr)
+        sys.exit(1)
+    lock_path = REPO_ROOT / "DATA" / "reference" / "hgnc_gene_id_mapping_source_lock.tsv"
+    if not lock_path.is_file():
+        print(f"ERROR: {lock_path} not found.", file=sys.stderr)
+        sys.exit(1)
+    with open(lock_path, newline="") as f:
+        lock = {r["file_name"]: r for r in csv.DictReader(f, delimiter="\t")}
+    expected = lock.get(p.name, {}).get("sha256", "")
+    if not expected:
+        print(f"ERROR: no checksum recorded for {p.name} in {lock_path}.", file=sys.stderr)
+        sys.exit(1)
+    actual = sha256(p)
+    if actual != expected:
+        print(
+            f"ERROR: checksum mismatch for {p}: lock file says {expected}, file is {actual}. "
+            f"The external HGNC reference has changed since this analysis was locked -- "
+            f"re-verify before proceeding, do not silently rescore against a different file.",
+            file=sys.stderr,
+        )
         sys.exit(1)
     return p
 
@@ -269,38 +330,64 @@ def main():
         return aggregate_cnv_score(arm_signal(i), ref_mean, ref_sd, usable_arms)
 
     holdout_scores = sorted(cnv_score(i) for i in ref_holdout_idx)
-    threshold_idx = int(len(holdout_scores) * CNV_REFERENCE_PERCENTILE)
-    threshold = holdout_scores[min(threshold_idx, len(holdout_scores) - 1)]
-    print(f"CNV_HIGH threshold (holdout-reference {CNV_REFERENCE_PERCENTILE:.0%}ile): {threshold:.4f}", file=sys.stderr)
+    n_holdout = len(holdout_scores)
+    threshold_idx = int(n_holdout * CNV_REFERENCE_PERCENTILE)
+    threshold = holdout_scores[min(threshold_idx, n_holdout - 1)]
+    print(
+        f"CNV_HIGH threshold (held-out reference half's own {CNV_REFERENCE_PERCENTILE:.0%}ile, "
+        f"n_holdout={n_holdout}): {threshold:.4f}",
+        file=sys.stderr,
+    )
 
     epithelial_idx = [
         i for i in range(n_cells)
         if passes_qc[i] and cell_category[i] == "epithelial"
         and sample_map[cell_keys[i]]["specimen_type"] in ("PRIMARY_CRC", "LIVER_METASTASIS")
     ]
-    print(f"Epithelial-proxy cells scored: {len(epithelial_idx)}", file=sys.stderr)
+    n_epithelial = len(epithelial_idx)
+    print(f"Epithelial-proxy cells scored: {n_epithelial}", file=sys.stderr)
 
     # Diagnostic transparency: report the full score distribution, not just
     # counts above/below the pre-registered threshold, so the write-up can
     # honestly characterize how the population sits relative to it rather
-    # than only reporting a binary pass/fail count.
+    # than only reporting a binary pass/fail count. Every "reference"
+    # comparison number below is computed from the HELD-OUT half -- the same
+    # half the threshold itself came from -- never the fit half (which only
+    # ever supplies the per-arm mean/SD used inside cnv_score(), and whose
+    # own score distribution is a different, non-comparable quantity).
     all_epi_scores = sorted(cnv_score(i) for i in epithelial_idx)
 
-    def pct(p):
-        idx = min(int(len(all_epi_scores) * p), len(all_epi_scores) - 1)
-        return all_epi_scores[idx]
+    def pct(sorted_vals, p):
+        idx = min(int(len(sorted_vals) * p), len(sorted_vals) - 1)
+        return sorted_vals[idx]
 
     print(
-        f"Epithelial-proxy CNV score distribution: "
-        f"min={all_epi_scores[0]:.3f} p10={pct(0.10):.3f} p25={pct(0.25):.3f} "
-        f"median={pct(0.50):.3f} p75={pct(0.75):.3f} p90={pct(0.90):.3f} "
-        f"p99={pct(0.99):.3f} max={all_epi_scores[-1]:.3f}  (threshold={threshold:.3f})",
+        f"Epithelial-proxy CNV score distribution (n={n_epithelial}): "
+        f"min={all_epi_scores[0]:.3f} p10={pct(all_epi_scores, 0.10):.3f} p25={pct(all_epi_scores, 0.25):.3f} "
+        f"median={pct(all_epi_scores, 0.50):.3f} p75={pct(all_epi_scores, 0.75):.3f} p90={pct(all_epi_scores, 0.90):.3f} "
+        f"p99={pct(all_epi_scores, 0.99):.3f} max={all_epi_scores[-1]:.3f}",
         file=sys.stderr,
     )
     print(
-        f"Reference (fit-half) CNV score distribution for comparison: "
-        + ", ".join(f"{p:.0%}ile={sorted(cnv_score(i) for i in ref_fit_idx)[min(int(len(ref_fit_idx)*p), len(ref_fit_idx)-1)]:.3f}"
-                     for p in (0.5, 0.9, 0.99)),
+        f"Held-out reference CNV score distribution (n={n_holdout}; the threshold above is this "
+        f"half's own {CNV_REFERENCE_PERCENTILE:.0%}ile, so its own exceedance rate over that "
+        f"threshold is NOT independent evidence -- it is the ~1% null rate by construction, "
+        f"reported below only as the honest baseline the epithelial-proxy rate is compared "
+        f"against): median={pct(holdout_scores, 0.50):.3f} p90={pct(holdout_scores, 0.90):.3f} "
+        f"p99={pct(holdout_scores, 0.99):.3f} (threshold={threshold:.3f})",
+        file=sys.stderr,
+    )
+
+    n_epi_high = sum(1 for s in all_epi_scores if s > threshold)
+    n_holdout_high = sum(1 for s in holdout_scores if s > threshold)
+    epi_high_frac = n_epi_high / n_epithelial
+    holdout_high_frac = n_holdout_high / n_holdout
+    enrichment = (epi_high_frac / holdout_high_frac) if holdout_high_frac > 0 else float("inf")
+    print(
+        f"CNV_HIGH (score > threshold): epithelial-proxy {n_epi_high}/{n_epithelial} "
+        f"({epi_high_frac:.2%}) vs held-out reference's own {n_holdout_high}/{n_holdout} "
+        f"({holdout_high_frac:.2%}) -- enrichment ratio {enrichment:.2f}x over the reference's "
+        f"own null exceedance rate at this same threshold.",
         file=sys.stderr,
     )
 
@@ -333,7 +420,11 @@ def main():
             f"{gene}_pos_frac_cnv_low": round(frac_low, 4) if frac_low is not None else "NA",
         })
 
-    out_path = REPO_ROOT / "modules" / "module_b_mcrc_target_prevalence" / "results" / f"tgt_{gene.lower()}_cnv_confirmed_prevalence.tsv"
+    # Filename and console text deliberately avoid "confirmed" -- this method
+    # is exploratory and underpowered (see the analysis contract), and a
+    # filename claiming otherwise is more likely to mislead a future reader
+    # than any amount of prose disclaimer.
+    out_path = REPO_ROOT / "modules" / "module_b_mcrc_target_prevalence" / "results" / f"tgt_{gene.lower()}_cnv_lite_attempt.tsv"
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with open(out_path, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(out_rows[0].keys()), delimiter="\t")
@@ -342,7 +433,7 @@ def main():
             w.writerow(r)
     print(f"\nWrote {len(out_rows)} sample rows to {out_path}")
 
-    print(f"\nCNV-confirmed CEACAM5 prevalence per sample:")
+    print(f"\nCNV_HIGH exploratory subset per sample (NOT confirmatory -- see analysis contract):")
     for r in out_rows:
         group = "TREATED" if r["patient_id"] in TREATED_PATIENTS else ("UNTREATED" if r["patient_id"] in UNTREATED_PATIENTS else "PBMC-n/a")
         print(f"  {r['sample_key']:14s} [{group:9s}] n_epi={r['n_epithelial_proxy']:5d} "
