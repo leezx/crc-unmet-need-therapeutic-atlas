@@ -13,7 +13,7 @@ Status: **`GSE178318` — LOCKED, QC-filtered, epithelial-proxy screened (NOT ma
 
 ## `GSE225857` — still genuinely no local processed data
 
-Unchanged from `tgt_ceacam5.md`: no raw or processed file for `GSE225857` exists anywhere on the machine that ran this pass; `access_status=CONTROLLED_ACCESS`, CNSA access terms independently reviewed 2026-08-24 and confirmed a real (DAC-application, HGR-compliance) blocker for that route specifically -- a separate, cheaper, unverified public-GEO-metadata route may also exist (see `tgt_ceacam5.md`).
+Unchanged from `tgt_ceacam5.md`: no raw sequencing file and no count matrix for `GSE225857` exists anywhere on the machine that ran this pass; `access_status=CONTROLLED_ACCESS`, CNSA access terms independently reviewed 2026-08-24 and confirmed a real (DAC-application, HGR-compliance) blocker for that route specifically. The public-GEO-metadata route has now been checked and confirmed to carry real patient/site resolution (2026-08-24) -- see `tgt_ceacam5.md` for the full finding; the CNSA route now looks unnecessary for Module B, though target-gene detectability itself is still unconfirmed since only metadata, not the count matrices, has been opened.
 
 ## Both datasets remain `status=CANDIDATE`
 
