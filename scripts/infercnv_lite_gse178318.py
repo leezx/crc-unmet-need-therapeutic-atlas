@@ -69,6 +69,117 @@ def aggregate_cnv_score(signal, ref_mean, ref_sd, usable_arms):
     return sum(z2) / len(z2)
 
 
+def build_populations(n_cells, passes_qc, cell_category, cell_keys, sample_map, patient_filter):
+    """Reference (immune) and epithelial-proxy cell indices, tumor-site samples
+    only (PRIMARY_CRC/LIVER_METASTASIS, never PBMC). patient_filter: a set of
+    patient_ids to restrict to (e.g. TREATED_PATIENTS), or None for all
+    patients pooled -- callers must not silently mix the two: a pooled
+    population must never be reported under an indication_id that names one
+    specific treatment cohort (PR #75 round-2 review; the same class of bug
+    PR #74 round 1 caught for the epithelial-proxy screen itself)."""
+    def keep(i):
+        info = sample_map[cell_keys[i]]
+        if info["specimen_type"] not in ("PRIMARY_CRC", "LIVER_METASTASIS"):
+            return False
+        if patient_filter is not None and info["patient_id"] not in patient_filter:
+            return False
+        return True
+    reference_idx = [i for i in range(n_cells) if passes_qc[i] and cell_category[i] == "immune" and keep(i)]
+    epithelial_idx = [i for i in range(n_cells) if passes_qc[i] and cell_category[i] == "epithelial" and keep(i)]
+    return reference_idx, epithelial_idx
+
+
+def score_population(reference_idx, epithelial_idx, arm_signal, usable_arms, seed, label):
+    """Fit/holdout split of `reference_idx`, threshold from the held-out
+    half's own 99th percentile, score `epithelial_idx` against it. `label` is
+    only for the stderr diagnostics below -- it does not change any number."""
+    random.seed(seed)
+    if len(reference_idx) < 200:
+        print(f"ERROR: [{label}] reference population too small (<200 cells, n={len(reference_idx)}) "
+              f"for a stable null distribution.", file=sys.stderr)
+        sys.exit(1)
+
+    shuffled = reference_idx[:]
+    random.shuffle(shuffled)
+    half = len(shuffled) // 2
+    ref_fit_idx, ref_holdout_idx = shuffled[:half], shuffled[half:]
+
+    ref_arm_values = defaultdict(list)
+    for i in ref_fit_idx:
+        sig = arm_signal(i)
+        for arm, v in sig.items():
+            ref_arm_values[arm].append(v)
+    ref_mean = {arm: sum(vals) / len(vals) for arm, vals in ref_arm_values.items()}
+    ref_sd = {
+        arm: (sum((v - ref_mean[arm]) ** 2 for v in vals) / len(vals)) ** 0.5
+        for arm, vals in ref_arm_values.items()
+    }
+    ref_sd = {arm: (sd if sd > 1e-9 else 1e-9) for arm, sd in ref_sd.items()}
+
+    def cnv_score(i):
+        return aggregate_cnv_score(arm_signal(i), ref_mean, ref_sd, usable_arms)
+
+    holdout_scores = sorted(cnv_score(i) for i in ref_holdout_idx)
+    n_holdout = len(holdout_scores)
+    threshold_idx = int(n_holdout * CNV_REFERENCE_PERCENTILE)
+    threshold = holdout_scores[min(threshold_idx, n_holdout - 1)]
+    print(
+        f"[{label}] Reference: n={len(reference_idx)} (fit n={len(ref_fit_idx)}, holdout n={n_holdout}); "
+        f"CNV_HIGH threshold (held-out half's own {CNV_REFERENCE_PERCENTILE:.0%}ile): {threshold:.4f}",
+        file=sys.stderr,
+    )
+
+    all_epi_scores = sorted(cnv_score(i) for i in epithelial_idx)
+    n_epithelial = len(all_epi_scores)
+    print(f"[{label}] Epithelial-proxy cells scored: {n_epithelial}", file=sys.stderr)
+
+    def pct(sorted_vals, p):
+        idx = min(int(len(sorted_vals) * p), len(sorted_vals) - 1)
+        return sorted_vals[idx]
+
+    if n_epithelial:
+        print(
+            f"[{label}] Epithelial-proxy CNV score distribution (n={n_epithelial}): "
+            f"min={all_epi_scores[0]:.3f} p10={pct(all_epi_scores, 0.10):.3f} p25={pct(all_epi_scores, 0.25):.3f} "
+            f"median={pct(all_epi_scores, 0.50):.3f} p75={pct(all_epi_scores, 0.75):.3f} p90={pct(all_epi_scores, 0.90):.3f} "
+            f"p99={pct(all_epi_scores, 0.99):.3f} max={all_epi_scores[-1]:.3f}",
+            file=sys.stderr,
+        )
+    print(
+        f"[{label}] Held-out reference CNV score distribution (n={n_holdout}; the threshold above is "
+        f"this half's own {CNV_REFERENCE_PERCENTILE:.0%}ile, so its own exceedance rate over that "
+        f"threshold is the ~1% null rate by construction, not independent evidence -- reported below "
+        f"only as the honest baseline the epithelial-proxy rate is compared against): "
+        f"median={pct(holdout_scores, 0.50):.3f} p90={pct(holdout_scores, 0.90):.3f} "
+        f"p99={pct(holdout_scores, 0.99):.3f} (threshold={threshold:.3f})",
+        file=sys.stderr,
+    )
+
+    n_epi_high = sum(1 for s in all_epi_scores if s > threshold)
+    n_holdout_high = sum(1 for s in holdout_scores if s > threshold)
+    epi_high_frac = n_epi_high / n_epithelial if n_epithelial else 0.0
+    holdout_high_frac = n_holdout_high / n_holdout if n_holdout else 0.0
+    enrichment = (epi_high_frac / holdout_high_frac) if holdout_high_frac > 0 else float("inf")
+    print(
+        f"[{label}] CNV_HIGH (score > threshold): epithelial-proxy {n_epi_high}/{n_epithelial} "
+        f"({epi_high_frac:.2%}) vs held-out reference's own {n_holdout_high}/{n_holdout} "
+        f"({holdout_high_frac:.2%}) -- enrichment ratio {enrichment:.2f}x over the reference's own "
+        f"null exceedance rate at this same threshold.",
+        file=sys.stderr,
+    )
+
+    return {
+        "threshold": threshold, "cnv_score": cnv_score,
+        "n_reference": len(reference_idx), "n_fit": len(ref_fit_idx), "n_holdout": n_holdout,
+        "holdout_median": pct(holdout_scores, 0.50), "holdout_p90": pct(holdout_scores, 0.90),
+        "holdout_p99": pct(holdout_scores, 0.99),
+        "n_epithelial": n_epithelial,
+        "epi_median": pct(all_epi_scores, 0.50) if n_epithelial else None,
+        "n_epi_high": n_epi_high, "n_holdout_high": n_holdout_high,
+        "epi_high_frac": epi_high_frac, "holdout_high_frac": holdout_high_frac, "enrichment": enrichment,
+    }
+
+
 def sha256(path):
     d = hashlib.sha256()
     with path.open("rb") as f:
@@ -298,102 +409,35 @@ def main():
     def arm_signal(i):
         return cell_arm_signal({arm: arm_sums[arm][i] for arm in usable_arms}, total_counts[i], usable_arms)
 
-    # Reference: QC-passing, immune-classified cells in PRIMARY_CRC/LIVER_METASTASIS only (not PBMC).
-    reference_idx = [
-        i for i in range(n_cells)
-        if passes_qc[i] and cell_category[i] == "immune"
-        and sample_map[cell_keys[i]]["specimen_type"] in ("PRIMARY_CRC", "LIVER_METASTASIS")
-    ]
-    print(f"Reference (tumor-site immune) cells: {len(reference_idx)}", file=sys.stderr)
-    if len(reference_idx) < 200:
-        print("ERROR: reference population too small (<200 cells) for a stable null distribution.", file=sys.stderr)
-        sys.exit(1)
+    # Canonical, treated-only pipeline: TE006/EV014 are keyed to
+    # indication_id=mcrc_preop_chemotherapy_crlm (the same territory as
+    # TE004), so both the reference population and the epithelial-proxy
+    # population scored against it must be restricted to TREATED_PATIENTS
+    # (COL15/COL17/COL18) -- pooling all six patients here and reporting it
+    # under a treated-only indication_id was the round-2 review's blocker
+    # (the same class of cohort-mismatch bug PR #74 round 1 caught).
+    print("\n=== Canonical treated-only run (COL15/COL17/COL18, indication_id=mcrc_preop_chemotherapy_crlm) ===",
+          file=sys.stderr)
+    treated_reference_idx, treated_epithelial_idx = build_populations(
+        n_cells, passes_qc, cell_category, cell_keys, sample_map, TREATED_PATIENTS)
+    canonical = score_population(treated_reference_idx, treated_epithelial_idx, arm_signal, usable_arms,
+                                  args.seed, "treated-only")
 
-    shuffled = reference_idx[:]
-    random.shuffle(shuffled)
-    half = len(shuffled) // 2
-    ref_fit_idx, ref_holdout_idx = shuffled[:half], shuffled[half:]
+    # Pooled six-patient run: kept ONLY as a method diagnostic (larger n,
+    # general sanity check of the score's behavior) -- never written to the
+    # output TSV or used for TE006/EV014's canonical numbers, since it mixes
+    # treated and treatment-naive patients under a treated-only indication_id.
+    print("\n=== Pooled six-patient diagnostic (method sanity check only, NOT canonical) ===", file=sys.stderr)
+    all_reference_idx, all_epithelial_idx = build_populations(
+        n_cells, passes_qc, cell_category, cell_keys, sample_map, None)
+    score_population(all_reference_idx, all_epithelial_idx, arm_signal, usable_arms, args.seed, "pooled-diagnostic")
 
-    ref_arm_values = defaultdict(list)
-    for i in ref_fit_idx:
-        sig = arm_signal(i)
-        for arm, v in sig.items():
-            ref_arm_values[arm].append(v)
-    ref_mean = {arm: sum(vals) / len(vals) for arm, vals in ref_arm_values.items()}
-    ref_sd = {
-        arm: (sum((v - ref_mean[arm]) ** 2 for v in vals) / len(vals)) ** 0.5
-        for arm, vals in ref_arm_values.items()
-    }
-    ref_sd = {arm: (sd if sd > 1e-9 else 1e-9) for arm, sd in ref_sd.items()}
-
-    def cnv_score(i):
-        return aggregate_cnv_score(arm_signal(i), ref_mean, ref_sd, usable_arms)
-
-    holdout_scores = sorted(cnv_score(i) for i in ref_holdout_idx)
-    n_holdout = len(holdout_scores)
-    threshold_idx = int(n_holdout * CNV_REFERENCE_PERCENTILE)
-    threshold = holdout_scores[min(threshold_idx, n_holdout - 1)]
-    print(
-        f"CNV_HIGH threshold (held-out reference half's own {CNV_REFERENCE_PERCENTILE:.0%}ile, "
-        f"n_holdout={n_holdout}): {threshold:.4f}",
-        file=sys.stderr,
-    )
-
-    epithelial_idx = [
-        i for i in range(n_cells)
-        if passes_qc[i] and cell_category[i] == "epithelial"
-        and sample_map[cell_keys[i]]["specimen_type"] in ("PRIMARY_CRC", "LIVER_METASTASIS")
-    ]
-    n_epithelial = len(epithelial_idx)
-    print(f"Epithelial-proxy cells scored: {n_epithelial}", file=sys.stderr)
-
-    # Diagnostic transparency: report the full score distribution, not just
-    # counts above/below the pre-registered threshold, so the write-up can
-    # honestly characterize how the population sits relative to it rather
-    # than only reporting a binary pass/fail count. Every "reference"
-    # comparison number below is computed from the HELD-OUT half -- the same
-    # half the threshold itself came from -- never the fit half (which only
-    # ever supplies the per-arm mean/SD used inside cnv_score(), and whose
-    # own score distribution is a different, non-comparable quantity).
-    all_epi_scores = sorted(cnv_score(i) for i in epithelial_idx)
-
-    def pct(sorted_vals, p):
-        idx = min(int(len(sorted_vals) * p), len(sorted_vals) - 1)
-        return sorted_vals[idx]
-
-    print(
-        f"Epithelial-proxy CNV score distribution (n={n_epithelial}): "
-        f"min={all_epi_scores[0]:.3f} p10={pct(all_epi_scores, 0.10):.3f} p25={pct(all_epi_scores, 0.25):.3f} "
-        f"median={pct(all_epi_scores, 0.50):.3f} p75={pct(all_epi_scores, 0.75):.3f} p90={pct(all_epi_scores, 0.90):.3f} "
-        f"p99={pct(all_epi_scores, 0.99):.3f} max={all_epi_scores[-1]:.3f}",
-        file=sys.stderr,
-    )
-    print(
-        f"Held-out reference CNV score distribution (n={n_holdout}; the threshold above is this "
-        f"half's own {CNV_REFERENCE_PERCENTILE:.0%}ile, so its own exceedance rate over that "
-        f"threshold is NOT independent evidence -- it is the ~1% null rate by construction, "
-        f"reported below only as the honest baseline the epithelial-proxy rate is compared "
-        f"against): median={pct(holdout_scores, 0.50):.3f} p90={pct(holdout_scores, 0.90):.3f} "
-        f"p99={pct(holdout_scores, 0.99):.3f} (threshold={threshold:.3f})",
-        file=sys.stderr,
-    )
-
-    n_epi_high = sum(1 for s in all_epi_scores if s > threshold)
-    n_holdout_high = sum(1 for s in holdout_scores if s > threshold)
-    epi_high_frac = n_epi_high / n_epithelial
-    holdout_high_frac = n_holdout_high / n_holdout
-    enrichment = (epi_high_frac / holdout_high_frac) if holdout_high_frac > 0 else float("inf")
-    print(
-        f"CNV_HIGH (score > threshold): epithelial-proxy {n_epi_high}/{n_epithelial} "
-        f"({epi_high_frac:.2%}) vs held-out reference's own {n_holdout_high}/{n_holdout} "
-        f"({holdout_high_frac:.2%}) -- enrichment ratio {enrichment:.2f}x over the reference's "
-        f"own null exceedance rate at this same threshold.",
-        file=sys.stderr,
-    )
+    threshold = canonical["threshold"]
+    cnv_score = canonical["cnv_score"]
 
     per_sample = defaultdict(lambda: {"n_epithelial": 0, "n_cnv_high": 0, "n_cnv_high_target_pos": 0,
                                        "n_cnv_low": 0, "n_cnv_low_target_pos": 0})
-    for i in epithelial_idx:
+    for i in treated_epithelial_idx:
         key = cell_keys[i]
         s = per_sample[key]
         s["n_epithelial"] += 1
@@ -421,9 +465,9 @@ def main():
         })
 
     # Filename and console text deliberately avoid "confirmed" -- this method
-    # is exploratory and underpowered (see the analysis contract), and a
-    # filename claiming otherwise is more likely to mislead a future reader
-    # than any amount of prose disclaimer.
+    # is exploratory and its signal is ambiguous, not confirmatory (see the
+    # analysis contract), and a filename claiming otherwise is more likely to
+    # mislead a future reader than any amount of prose disclaimer.
     out_path = REPO_ROOT / "modules" / "module_b_mcrc_target_prevalence" / "results" / f"tgt_{gene.lower()}_cnv_lite_attempt.tsv"
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with open(out_path, "w", newline="") as f:
