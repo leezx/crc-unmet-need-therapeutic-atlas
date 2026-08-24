@@ -1,0 +1,9 @@
+# Module B question — `tgt_tacstd2`
+
+Paired with the Module E run for the same target (`../../module_e_normal_tissue_risk/question/tgt_tacstd2.md`). Same `indication_id=mcrc_preop_chemotherapy_crlm` territory and dataset pair as the prior three targets.
+
+> **在 `mcrc_preop_chemotherapy_crlm` 这个 indication 里，TACSTD2 是否有足够多能被地址访问的恶性上皮细胞？**
+
+## Status: `GSE178318` has an epithelial-proxy answer — the malignant-cell question itself is still open
+
+Same method as prior targets (`data_lock/tgt_tacstd2.md`, `analysis_contracts/tgt_tacstd2.md`): QC-filtered, EPCAM-based epithelial-proxy screen, **not malignancy-confirmed**, no CNV-based confirmation attempt for this target in this pass. `TE025` (3 treated patients) and `TE026` (3 treatment-naive patients, context evidence) are the real, QC-filtered result. `GSE225857` remains genuinely blocked on CNSA access; no row exists for it.

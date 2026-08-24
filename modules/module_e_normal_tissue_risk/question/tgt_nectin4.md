@@ -1,0 +1,9 @@
+# Module E question — `tgt_nectin4`
+
+Fourth of the four remaining `ADC_TARGET_SEED_UNIVERSE.tsv` targets, run 2026-08-24, same method as the prior three.
+
+> **明显不值得继续的正常组织 liability——NECTIN4 在 colon/rectum 以外的正常组织里是否有明显的 accessible target-positive 群体？**
+
+`NECTIN4`'s ADC precedent and admission rationale are recorded in Module A (`DATA/registry/ADC_TARGET_SEED_UNIVERSE.tsv`, `derisking_tier=A_CLINICAL`) — not restated here (corrected 2026-08-24, PR #76 round 2 review, same correction as `tgt_erbb2.md`). This run reports only what this repository's own screen shows.
+
+Note on gene-symbol history: HPA and GTEx (this module's two sources) both index this gene under its current HGNC-approved symbol, `NECTIN4`. `GSE178318` (Module B's dataset, a separate source with its own, older gene annotation) indexes the identical Ensembl gene (`ENSG00000143217`) under `NECTIN4`'s prior HGNC symbol, `PVRL4` — see `../../module_b_mcrc_target_prevalence/data_lock/tgt_nectin4.md` for how Module B's script call handles that.
