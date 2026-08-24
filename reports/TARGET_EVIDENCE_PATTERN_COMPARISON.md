@@ -1,6 +1,6 @@
 # Horizontal evidence-pattern comparison — five CRC-precedented targets
 
-2026-08-24. First cross-target synthesis after PR #76: `CEACAM5`, `ERBB2`, `F3`, `NECTIN4`, `TACSTD2` now all have comparable Module B (prevalence-screen) + Module E (normal-tissue) evidence for `indication_id=mcrc_preop_chemotherapy_crlm`. This compares them side by side — no new data, no new script runs; every number below already exists in `schemas/target_evidence.tsv` and its cited `analysis_contracts/tgt_<x>.md` files.
+2026-08-24. First cross-target synthesis after PR #76: `CEACAM5`, `ERBB2`, `F3`, `NECTIN4`, `TACSTD2` now all have structurally parallel Module B (prevalence-screen) + Module E (normal-tissue) evidence for `indication_id=mcrc_preop_chemotherapy_crlm` — same schema, same pipeline per module, run side by side, not a claim that the underlying measurement scales are calibrated across targets (see the two comparability limits below). This compares them side by side — no new data, no new script runs; every number below already exists in `schemas/target_evidence.tsv` and its cited `analysis_contracts/tgt_<x>.md` files.
 
 ## What this is and is not
 
@@ -29,15 +29,17 @@ Read within its own row (never across rows as a strength ranking): `CEACAM5`'s d
 
 ## Normal-tissue pattern (Module E): RNA + cell-type IHC, within-target distribution only
 
-| Target | Colon / rectum HPA RNA (nTPM) | IHC High/Medium rows (of total scored) | Tissue distribution (within this target's own antibody/assay only) |
-|---|---:|---:|---|
-| `CEACAM5` | 920.3 / 885.1 | 18/109 — 12 High, all Appendix/Colon/Rectum epithelium; 6 Medium | Concentrated in colorectal/appendix tissue; the one non-GI RNA flag (lung) is not corroborated by IHC (lung alveolar cells both Low) |
-| `TACSTD2` | 0.9 / 0.9 | 15/99 — 7 High, all skin (two independent samples); 8 Medium spanning bronchus/cervix/esophagus/kidney/nasopharynx/oral mucosa/seminal vesicle/urinary bladder | Spans the most distinct tissues/cell types of any target in this set (skin plus 8 others) |
-| `ERBB2` | 63.8 / 45.5 | 19/126 — 0 High, 19 Medium spanning cardiomyocytes/lung alveolar/breast/cervix/endometrium/fallopian tube/placenta/skeletal muscle/skin/testis/urinary bladder | Also spans many tissues/cell types, all at Medium; no single dominant tissue |
-| `NECTIN4` | 1.4 / 1.6 | 8/80 — 0 High, 8 Medium, skin + upper-GI/oropharyngeal squamous (esophagus/oral mucosa/tonsil) | Concentrated in skin/squamous epithelium; fewer distinct tissues than `ERBB2`/`TACSTD2` |
+The only cross-target statement this section safely supports is a **count of distinct HPA tissues each target's own IHC scores at least one High/Medium cell-type row in** — a fixed, countable unit, not an intensity or risk comparison. Counted this way, from each target's own table:
+
+| Target | Colon / rectum HPA RNA (nTPM) | IHC High/Medium rows (of total scored) | Distinct HPA tissues with ≥1 High/Medium row |
+|---|---:|---:|---:|
+| `ERBB2` | 63.8 / 45.5 | 19/126 — 0 High, 19 Medium | **13** — Appendix, Breast, Cervix, Endometrium, Fallopian tube, Heart muscle, Lung, Nasopharynx, Placenta, Skeletal muscle, Skin, Testis, Urinary bladder |
+| `TACSTD2` | 0.9 / 0.9 | 15/99 — 7 High (skin only), 8 Medium | **9** — Skin (High), Bronchus, Cervix, Esophagus, Kidney, Nasopharynx, Oral mucosa, Seminal vesicle, Urinary bladder |
+| `CEACAM5` | 920.3 / 885.1 | 18/109 — 12 High, 6 Medium | **6** — Appendix, Colon, Rectum (High); Esophagus, Oral mucosa, Stomach (Medium) |
+| `NECTIN4` | 1.4 / 1.6 | 8/80 — 0 High, 8 Medium | **6** — Breast, Esophagus, Oral mucosa, Skin, Tonsil, Urinary bladder |
 | `F3` | 35.6 / 39.5 | No usable IHC data (1 row, `Reliability=Uncertain`) | Genuine `UNKNOWN` at the protein layer — not favorable, not unfavorable, unassessed |
 
-The only cross-target statement this table safely supports is a count of *how many distinct tissues/cell types* each target's own IHC scores High or Medium in, and whether that footprint sits inside or outside the colorectal tissue the indication itself is anchored to. It does **not** support ranking targets by exposure "intensity" or "risk/benefit" — `TACSTD2`'s High-level calls and `ERBB2`'s Medium-level calls are not on the same measured scale, and this module cannot establish accessible antigen density or a therapeutic window for any target (see "What this comparison cannot do").
+By this count, `ERBB2` actually has the broadest tissue footprint of the five (an earlier version of this document wrongly called `TACSTD2` the broadest — corrected in round 2 review), followed by `TACSTD2`; `CEACAM5` and `NECTIN4` are both narrower and roughly tied; `F3` is unmeasured. Two things this count does *not* support: it says nothing about exposure "intensity" (`TACSTD2`'s High-level calls and `ERBB2`'s Medium-level calls are not on the same measured scale — different antibodies, different staining runs), and it cannot establish accessible antigen density or a therapeutic window for any target (see "What this comparison cannot do"). `CEACAM5`'s narrow count sits entirely inside colorectal/appendix tissue (the one non-GI RNA flag, lung, is not corroborated by IHC — lung alveolar cells both Low); `NECTIN4`'s narrow count is concentrated in skin/squamous epithelium instead.
 
 ## Reading the two axes together: what's actually worth doing next, not who should be eliminated
 
@@ -45,7 +47,7 @@ No target gets a `KILL`/`HOLD`/`SHORTLIST` call from this pass — the two axes 
 
 - **`CEACAM5`** — RNA detection is the most stable of the five in this assay (reaches `RNA_high` in the largest sample), and its normal-tissue signal is anatomically concentrated in colorectal/GI tissue rather than spread elsewhere. That concentration does **not** by itself resolve normal-tissue risk — normal colon/rectum is still normal tissue, and an accessible antigen there could still carry a real on-target/off-tumor liability regardless of anatomic overlap with the indication (treating organ-overlap as inherently safe would be a dangerous heuristic this repository should not encode). The pattern is anatomically concentrated; the safety implication (accessible antigen, tumor-normal differential, therapeutic window) remains unresolved. What's worth prioritizing next: an independent cohort (`GSE225857`, once unblocked) or real protein/surface evidence, rather than a further CNV-lite iteration (per the PR #75 reviewer's own recommendation).
 - **`NECTIN4`** — the lowest RNA detection fraction of the five, including two samples at exactly zero. Worth prioritizing next: verifying whether this low signal actually replicates (a second cohort, or a different detection method) before drawing any conclusion about this target in this indication — a single low reading in a 3-patient cohort is itself an unconfirmed finding, not evidence to act on directly.
-- **`TACSTD2` / `ERBB2`** — both show normal-tissue expression spanning many distinct tissues/cell types outside the indication's own organ. Worth prioritizing next: real, more direct surface/protein-density or clinical-context evidence before any further investment decision — categorical IHC breadth alone cannot support one.
+- **`ERBB2` / `TACSTD2`** — both show normal-tissue expression spanning many distinct tissues outside the indication's own organ (`ERBB2` the broadest of the five by tissue count, `TACSTD2` second). Worth prioritizing next: real, more direct surface/protein-density or clinical-context evidence before any further investment decision — categorical IHC breadth alone cannot support one.
 - **`F3`** — the normal-tissue protein axis is a genuine `UNKNOWN`, not a clean result. Whether it is worth the effort to fill this gap (a different IHC source, a research antibody study) depends on whether `F3`'s other axes (or Module C/D findings) justify the investment first — this comparison alone does not settle that.
 
 ## What this comparison cannot do
@@ -59,4 +61,4 @@ No target gets a `KILL`/`HOLD`/`SHORTLIST` call from this pass — the two axes 
 
 ## Suggested next step
 
-Not a ranking or a decision this repository should make unilaterally — see the per-target "next piece of evidence" above. If forced to sequence, `CEACAM5`'s next step (an independent cohort or protein evidence) and `NECTIN4`'s next step (verifying whether its low detection fraction replicates) look like the two lowest-cost, highest-information moves among the five; `TACSTD2`/`ERBB2` need a materially different (protein/surface) evidence type before their normal-tissue pattern can be interpreted as risk; `F3`'s gap-filling priority depends on evidence this comparison does not have.
+Not a ranking or a decision this repository should make unilaterally — see the per-target "next piece of evidence" above. If forced to sequence, `CEACAM5`'s next step (an independent cohort or protein evidence) and `NECTIN4`'s next step (verifying whether its low detection fraction replicates) look like the two highest-information next checks under the current plan (no cost analysis backs a "lowest-cost" claim, and `CEACAM5`'s own suggested next step, `GSE225857`, is itself still blocked on CNSA access); `ERBB2`/`TACSTD2` need a materially different (protein/surface) evidence type before their normal-tissue pattern can be interpreted as risk; `F3`'s gap-filling priority depends on evidence this comparison does not have.
