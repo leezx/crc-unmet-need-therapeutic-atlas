@@ -13,7 +13,7 @@ Status: **`GSE178318` — LOCKED, QC-filtered, epithelial-proxy screened (NOT ma
 
 ## `GSE225857` — still genuinely no local processed data
 
-Unchanged from `tgt_ceacam5.md`: no raw or processed file for `GSE225857` exists anywhere on the machine that ran this pass; `access_status=CONTROLLED_ACCESS`, CNSA access terms independently reviewed 2026-08-24 and confirmed a real (DAC-application, HGR-compliance) blocker, not just unreviewed.
+Unchanged from `tgt_ceacam5.md`: no raw or processed file for `GSE225857` exists anywhere on the machine that ran this pass; `access_status=CONTROLLED_ACCESS`, CNSA access terms independently reviewed 2026-08-24 and confirmed a real (DAC-application, HGR-compliance) blocker for that route specifically -- a separate, cheaper, unverified public-GEO-metadata route may also exist (see `tgt_ceacam5.md`).
 
 ## Both datasets remain `status=CANDIDATE`
 
