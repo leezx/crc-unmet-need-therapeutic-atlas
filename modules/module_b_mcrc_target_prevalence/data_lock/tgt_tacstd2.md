@@ -11,7 +11,7 @@ Status: **`GSE178318` — LOCKED, QC-filtered, epithelial-proxy screened (NOT ma
 
 ## `GSE225857` — non-immune tumor-cell screen complete (2026-08-24, PR #81)
 
-Method, pre-flight checks, and full results table: `tgt_ceacam5.md` and `analysis_contracts/gse225857_tumor_cell_screen.md` — same run, re-scored for `TACSTD2` (`target_evidence.tsv` `TE031`, `evidence.tsv` `EV039`). `TACSTD2` reaches `RNA_high` in exactly one patient x site cell (`s0115` LC, n=55 tumor cells — a small sample), `RNA_low` in all other 9 cells, never `RNA_no`. `access_status=CONTROLLED_ACCESS` for the CNSA raw-sequencing route is unchanged and was never needed for this result.
+Method, pre-flight checks, and full results table: `tgt_ceacam5.md` and `analysis_contracts/gse225857_tumor_cell_screen.md` — same run, re-scored for `TACSTD2` (`target_evidence.tsv` `TE031`, `evidence.tsv` `EV039`). `TACSTD2` reaches `RNA_high` in exactly one of the 10 patient x site strata (`s0115` LC, n=55 tumor cells in that stratum — a small sample), `RNA_low` in the other 9 strata, never `RNA_no`. `access_status=CONTROLLED_ACCESS` for the CNSA raw-sequencing route is unchanged and was never needed for this result.
 
 ## Both datasets remain `status=CANDIDATE`
 

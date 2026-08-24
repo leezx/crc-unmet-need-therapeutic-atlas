@@ -12,7 +12,7 @@ Status: **`GSE178318` — LOCKED, QC-filtered, epithelial-proxy screened (NOT ma
 
 ## `GSE225857` — non-immune tumor-cell screen complete (2026-08-24, PR #81)
 
-Method, pre-flight checks, and full results table: `tgt_ceacam5.md` and `analysis_contracts/gse225857_tumor_cell_screen.md` — same run, re-scored for `NECTIN4` (`target_evidence.tsv` `TE030`, `evidence.tsv` `EV038`). `NECTIN4` is found in `GSE225857`'s gene index under its current canonical symbol directly, unlike `GSE178318` which required the `PVRL4` alias. Reaches `RNA_no` in three patient x site cells (`s0107` LC, `s0115` LC, `s0920` both sites), `RNA_low` elsewhere, never `RNA_high` in this cohort. `access_status=CONTROLLED_ACCESS` for the CNSA raw-sequencing route is unchanged and was never needed for this result.
+Method, pre-flight checks, and full results table: `tgt_ceacam5.md` and `analysis_contracts/gse225857_tumor_cell_screen.md` — same run, re-scored for `NECTIN4` (`target_evidence.tsv` `TE030`, `evidence.tsv` `EV038`). `NECTIN4` is found in `GSE225857`'s gene index under its current canonical symbol directly, unlike `GSE178318` which required the `PVRL4` alias. Reaches `RNA_no` in 4 of 10 patient x site strata (`s0107` LC, `s0115` LC, `s0920` CC, `s0920` LC — not concentrated by patient cell yield: `s0920` is this cohort's highest-yield patient by a wide margin, not the lowest), `RNA_low` elsewhere, never `RNA_high` in this cohort. `access_status=CONTROLLED_ACCESS` for the CNSA raw-sequencing route is unchanged and was never needed for this result.
 
 ## Both datasets remain `status=CANDIDATE`
 

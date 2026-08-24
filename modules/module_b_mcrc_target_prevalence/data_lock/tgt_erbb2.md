@@ -13,7 +13,7 @@ Status: **`GSE178318` — LOCKED, QC-filtered, epithelial-proxy screened (NOT ma
 
 ## `GSE225857` — still genuinely no local processed data
 
-Method, pre-flight checks, and full results table: `tgt_ceacam5.md` and `analysis_contracts/gse225857_tumor_cell_screen.md` — same run, re-scored for `ERBB2` (`target_evidence.tsv` `TE028`, `evidence.tsv` `EV036`). `ERBB2` is the flattest of the five targets in this cohort: every patient x site cell buckets `RNA_low` (7.3%-30.9%), never `RNA_high` or `RNA_no` — a consistently mid-range detection pattern across all 5 patients and both sites, unlike `CEACAM5`'s wide spread. `access_status=CONTROLLED_ACCESS` for the CNSA raw-sequencing route is unchanged and was never needed for this result.
+Method, pre-flight checks, and full results table: `tgt_ceacam5.md` and `analysis_contracts/gse225857_tumor_cell_screen.md` — same run, re-scored for `ERBB2` (`target_evidence.tsv` `TE028`, `evidence.tsv` `EV036`). All 10 patient x site strata for `ERBB2` bucket `RNA_low` (7.3%-30.9%), never `RNA_high` or `RNA_no` — an assay-internal descriptive pattern, not a cross-target comparison to `CEACAM5`'s spread (per-gene detection fractions are not a calibrated cross-gene scale). `access_status=CONTROLLED_ACCESS` for the CNSA raw-sequencing route is unchanged and was never needed for this result.
 
 ## Both datasets remain `status=CANDIDATE`
 

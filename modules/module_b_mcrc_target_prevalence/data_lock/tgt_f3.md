@@ -11,7 +11,7 @@ Status: **`GSE178318` — LOCKED, QC-filtered, epithelial-proxy screened (NOT ma
 
 ## `GSE225857` — non-immune tumor-cell screen complete (2026-08-24, PR #81)
 
-Method, pre-flight checks, and full results table: `tgt_ceacam5.md` and `analysis_contracts/gse225857_tumor_cell_screen.md` — same run, re-scored for `F3` (`target_evidence.tsv` `TE029`, `evidence.tsv` `EV037`). `F3` reaches `RNA_no` in the two lowest-yield patients (`s0115` CC, `s0920` both sites), `RNA_low` elsewhere, never `RNA_high` in this cohort. `access_status=CONTROLLED_ACCESS` for the CNSA raw-sequencing route is unchanged and was never needed for this result.
+Method, pre-flight checks, and full results table: `tgt_ceacam5.md` and `analysis_contracts/gse225857_tumor_cell_screen.md` — same run, re-scored for `F3` (`target_evidence.tsv` `TE029`, `evidence.tsv` `EV037`). `F3` reaches `RNA_no` in 3 of 10 patient x site strata (`s0115` CC, `s0920` CC, `s0920` LC — not concentrated by patient cell yield: `s0920` is this cohort's highest-yield patient by a wide margin, not the lowest), `RNA_low` elsewhere, never `RNA_high` in this cohort. `access_status=CONTROLLED_ACCESS` for the CNSA raw-sequencing route is unchanged and was never needed for this result.
 
 ## Both datasets remain `status=CANDIDATE`
 
