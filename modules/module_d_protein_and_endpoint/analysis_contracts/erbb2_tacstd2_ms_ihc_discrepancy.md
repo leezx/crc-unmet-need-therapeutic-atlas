@@ -1,0 +1,53 @@
+# Module D follow-up — `ERBB2`/`TACSTD2` MS-vs-IHC discrepancy investigation
+
+**Status: LOCKED. Does not resolve the discrepancy. Adds one verified provenance fact (HPA antibody attribution) and one assay-internal signal-rank observation — neither is a biological explanation.**
+
+Built 2026-08-25, per Next-handoff item `3e(a)` (surfaced by the Module D first pass, `reports/PROJECT_STATUS.md`), following explicit user direction to investigate this specific gap. Revised 2026-08-25 (PR #86 round 1 review) after two blockers: (1) an earlier version of this file's DIA-NN percentile section overclaimed a calibrated cross-protein biological-abundance interpretation this repository's own Module D contract already forbids; (2) an earlier version incorrectly stated HPA's colorectal-cancer pathology page doesn't identify which antibody generated the staining shown — it does, and this file's own independent re-verification (below) confirms an exact match to `TE038`/`TE041`. Revised again 2026-08-25 (PR #86 round 2 review): "disagree in direction" downgraded to an unreconciled cross-assay pattern (the two sources don't share a common measurement scale, so "directional disagreement" implies more comparability than exists), and the `CEACAM5` cross-source composite claim ("strongest positive signal in both sources") split back into two separate, non-combined per-source observations.
+
+## The pattern, restated precisely
+
+`PXD055821` mass-spec and `HPA_CRC_cancer_tissue` IHC are not calibrated to a common scale: MS reports specimen-level nonzero-intensity frequency plus an arbitrary DIA-NN intensity value; HPA IHC reports an antibody-specific categorical staining call (`High`/`Medium`/`Low`/`Not detected`). There is no shared detection threshold and no shared quantitative unit between them. What the two sources show, on their own separate terms, for the same two targets:
+
+| Target | `PXD055821` MS (whole-tissue, CRC-LM-specific) | `HPA_CRC_cancer_tissue` IHC (cancer-cell-focused, generic CRC cohort) |
+|---|---|---|
+| `ERBB2` | detected (nonzero) in 56/60 specimens (93.3%) — TE033 | n=11: High=0, Medium=3, Low=2, **Not detected=6** — TE038 |
+| `TACSTD2` | detected (nonzero) in 43/60 specimens (71.7%) — TE036 | n=12: High=0, Medium=0, Low=3, **Not detected=9** — TE041 |
+
+**The two assays show an unreconciled cross-assay pattern: frequent nonzero MS values versus predominantly `Low`/`Not detected` categorical IHC.** Because the readouts are not calibrated to a common scale, this is not treated as a quantitative directional contradiction — only as an apparent, unexplained pattern this file investigates, without guessing at an answer the data doesn't support.
+
+## Investigated: cohort-composition difference (checked, not resolved either way)
+
+`PXD055821`'s Sydney-cohort matrix is explicitly CRC **liver-metastasis** specimens (`pxd055821_protein_abundance.md`). `HPA_CRC_cancer_tissue`'s `cancer_data.tsv` "colorectal cancer" category is `indication_id=surface_target_therapeutic_window` in this repository's own `target_evidence.tsv` precisely because it is **not** documented as liver-metastasis-specific (`hpa_cancer_ihc.md`). If HPA's cohort is primary-tumor-only or a primary/met mix different from `PXD055821`'s, that alone could produce a real biological difference in measured `ERBB2`/`TACSTD2` protein level between the two cohorts — not an assay artifact at all.
+
+Independently fetched HPA's own cancer-tissue pathology pages for `ERBB2` and `TACSTD2` 2026-08-25 to check this directly. **HPA's own downloadable-data documentation states its cancer atlas is built from 20 tumor-tissue types profiled by IHC on tissue microarrays; it does not publish primary-vs-metastatic cohort composition for the colorectal-cancer category.** This candidate explanation stays genuinely unresolved from what HPA discloses. **This candidate explanation is left open, not ruled in or out.**
+
+## Investigated and corrected: HPA antibody attribution (round 1 review of PR #86)
+
+An earlier version of this file stated HPA's colorectal-cancer pathology pages don't identify which antibody generated the staining shown — **that was wrong.** HPA's per-gene cancer-tissue pages (`proteinatlas.org/<ENSG>-<GENE>/cancer/colorectal+cancer`) do expose per-antibody, per-patient IHC calls (image thumbnails whose URLs and tooltips carry both the antibody catalog code and the staining level). Independently re-fetched and parsed (not merely taken on the reviewer's word) 2026-08-25:
+
+- `ERBB2` has four listed antibodies (`HPA001383`, `CAB000043`, `CAB020416`, `CAB062555`). Tallying each antibody's own patient-level staining calls from HPA's page: **`CAB020416`'s tally is High=0, Medium=3, Low=2, Not detected=6 (n=11) — an exact match to `TE038`'s vector.**
+- `TACSTD2` has three listed antibodies (`HPA043104`, `HPA055067`, `CAB072852`). Tallying the same way: **`HPA043104`'s tally is High=0, Medium=0, Low=3, Not detected=9 (n=12) — an exact match to `TE041`'s vector.**
+
+`cancer_data.tsv` itself (the file `hpa_cancer_ihc.md`/`TE038`/`TE041` are actually built from) is a single aggregate row per gene x cancer-type and does not itself carry an antibody-ID column. **This repository has not independently confirmed HPA's own rule for which antibody(-ies) populate that single aggregate row** (e.g., whether `cancer_data.tsv` is guaranteed to always reflect one specific, consistently-chosen antibody per gene, some other combination rule, or whether this is coincidental agreement) — so this is recorded as an **exact-vector match** between `TE038`/`TE041` and one specific antibody's own per-patient tally on HPA's current site, not as a formally documented file-level antibody mapping. It does not, by itself, resolve the primary-vs-metastatic cohort-composition question above (HPA's per-antibody pages carry the same lack of primary/metastatic annotation as the aggregate file).
+
+## Investigated: same-matrix DIA-NN signal-intensity rank (revised framing, round 1 review of PR #86)
+
+What can be checked directly, with no new data source, is where `ERBB2`/`TACSTD2`'s own DIA-NN signal values rank within `PXD055821`'s own matrix output — i.e., relative to every other gene-group column this one mass-spec run produced. New `scripts/analyze_pxd055821_abundance_percentile.py` computes, for every one of the matrix's 9,263 genes, the same detection-fraction and median-intensity statistics `extract_pxd055821_protein_abundance.py` already computes per-target, then ranks each `A_CLINICAL` target's own value against that full gene population (results: `results/pxd055821_abundance_percentile.tsv`, gitignored/regenerable).
+
+**This is an assay-internal signal-rank descriptor, not a calibrated cross-protein biological-abundance percentile.** This repository's own Module D contract, already locked by PR #82 (`TE032`-`TE041`'s own `unit` field: "arbitrary DIA-NN intensity units, not directly comparable across genes"), forbids treating raw DIA-NN gene-group intensity as a cross-protein-comparable abundance scale — and that constraint holds *within* one matrix exactly as much as across matrices or cohorts. Differing tryptic-peptide count, ionization efficiency, digestion/sequence properties, protein-inference/gene-group aggregation, and DIA detectability are all per-protein properties; a lower raw DIA-NN intensity for gene X than gene Y does **not** establish gene X's protein is biologically less abundant than gene Y's.
+
+| Target | detection fraction | frac. signal-rank percentile (of 9,263 genes) | median intensity (arbitrary units) | median signal-rank percentile (of genes w/ nonzero median) |
+|---|---:|---:|---:|---:|
+| `CEACAM5` | 60/60 (100%) | 64.2 | 3.715e+07 | 99.3 |
+| `ERBB2` | 56/60 (93.3%) | 49.4 | 2.191e+05 | 35.0 |
+| `TACSTD2` | 43/60 (71.7%) | 32.5 | 3.025e+05 | 45.2 |
+| `F3` | 16/60 (26.7%) | 10.6 | 1.384e+05 | 20.8 |
+| `NECTIN4` | 13/60 (21.7%) | 8.3 | 6.913e+04 | 4.8 |
+
+`ERBB2`/`TACSTD2` rank in the lower half of this matrix's own signal-intensity distribution (35th/45th percentile) despite frequent nonzero detection; `CEACAM5` has the highest DIA-NN signal rank of the five (99.3rd percentile) on this one run's own uncalibrated, assay-internal scale. **This is reported only as an assay-internal signal-rank fact, not as evidence toward or against any biological explanation for the ERBB2/TACSTD2 MS-vs-IHC split** — it does not establish that `ERBB2`/`TACSTD2` protein is biologically less abundant than `CEACAM5`'s, and it is not used here to argue that MS's nonzero-value detection rule is more "permissive" than IHC scoring (that nonzero-value rule is this repository's own operational definition for `summarize_detection()`, not an independently characterized DIA-NN limit-of-detection). It neither supports nor rules out the cohort-composition explanation above.
+
+Separately, per-source, not combined into one cross-source claim (round 2 review of PR #86: composing a single "strongest in both sources" statement across two uncalibrated scales re-introduces the cross-target/cross-assay calibration problem PR #77/#82 already forbid): **`CEACAM5` is the only one of the five targets with any HPA `High`-category IHC calls** (`hpa_cancer_ihc.md`); **independently, `CEACAM5` also has the highest DIA-NN signal rank of the five on `PXD055821`'s own assay-internal scale** (above, not the same measurement and not composed with the IHC observation). Not characterized as "the only concordant target": `NECTIN4` also shows a real, limited/low-signal pattern in both `PXD055821` and HPA cancer IHC (a different but still directionally-consistent pattern, per `pxd055821_protein_abundance.md`/`hpa_cancer_ihc.md`).
+
+## What remains unresolved
+
+The `ERBB2`/`TACSTD2` MS-vs-IHC split stays exactly what it was before this file: a real, unreconciled cross-source pattern (`TE033`/`TE036`/`TE038`/`TE041`'s own notes). This file adds two things: (1) a verified, specific fact — `TE038`/`TE041`'s HPA vectors exactly match one specific antibody's (`CAB020416`/`HPA043104`) current per-patient tally on HPA's own site, though the file-level antibody-selection rule for `cancer_data.tsv` is not independently confirmed; (2) an assay-internal DIA-NN signal-rank observation that is explicitly *not* a biological-abundance claim. Neither resolves the split. No `evidence_directness`, `evidence_level`, or `confidence` field on `TE033`/`TE036`/`TE038`/`TE041` changes. Determining what actually explains the split (if either candidate factor alone does) would require either patient-level HPA cohort metadata (not published) or a matched primary/metastatic IHC cohort — neither is available in this environment.
