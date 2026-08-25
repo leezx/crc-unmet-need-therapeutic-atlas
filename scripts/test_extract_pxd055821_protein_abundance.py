@@ -52,6 +52,17 @@ check("scientific-notation median is correct", abs(stats[0] - 4.325e7) < 1)
 n_det, n_tot, frac, stats = summarize_detection([])
 check("empty column list: fraction is None, not a division-by-zero crash", frac is None)
 
+# --- a literal "0" value is NOT detected -- matches the claim text ("detected = nonzero
+# intensity"), not just "non-missing" (round-1 review of PR #82 caught an earlier version
+# silently counting "0" as detected, inconsistent with its own claim text). ---
+n_det, n_tot, frac, stats = summarize_detection(["10", "0", "20"])
+check("a literal '0' value is excluded from detected (not just blanks)", n_det == 2)
+check("'0' does not appear in the computed stats (median of [10, 20] == 15, not affected by 0)",
+      stats[0] == 15)
+n_det, n_tot, frac, stats = summarize_detection(["0", "0.0", "0"])
+check("all-zero row: n_detected == 0 (zero is not detection, even though it's non-blank)", n_det == 0)
+check("all-zero row: no stats computed", stats is None)
+
 if failures:
     print(f"\n{len(failures)} test(s) FAILED: {failures}")
     sys.exit(1)
