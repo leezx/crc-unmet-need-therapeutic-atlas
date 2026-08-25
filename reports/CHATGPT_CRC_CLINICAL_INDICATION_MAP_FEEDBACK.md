@@ -763,9 +763,17 @@ PR #68 初审 head：`c24ad0a`，网页版 ChatGPT 结论：**REQUEST_CHANGES**�
 
 最终修正 head `b2e9985`（round 3）：两个一行级问题都修了——`module_classification.tsv` 的 reason 字段更新为反映 file inventory 已经落地的现状（tier/status 没动：仍是 `CORE_SUPPORT`/`CANDIDATE`）；`source_manifest.tsv` 改成准确描述这个文件本身的 pan-cancer scope。没有碰任何分析代码、evidence 数值或 ontology。网页版 ChatGPT 最终结论：**APPROVE**——确认两处收尾都真正修好，没有发现新的 evidence/ontology/classification/计算 blocker，CI 绿，PR mergeable。Reviewer 尝试把正式 APPROVE review 写回 GitHub，但连接器返回 `403 Resource not accessible by integration`（跟之前几个 PR 一样），APPROVE 结论本身在对话里是明确的。合并。
 
+## PR #83 归档 PR #82 审核记录
+
+来源：同一对话 [CRC临床适应症地图](https://chatgpt.com/g/g-p-68c041b4df6881918a83a55e2dd7ac70/c/6a7a21a5-9474-83ea-895e-859b789fbe7c)。纯文档 PR，一轮修正后 APPROVE。
+
+初审 head `dab7155`：纯文档，把 PR #82 完整的 4 轮审核记录归档进 `CHATGPT_CRC_CLINICAL_INDICATION_MAP_FEEDBACK.md`/`PR_HISTORY.md`/`PROJECT_STATUS.md`。网页版 ChatGPT 结论：**REQUEST_CHANGES**——4 处历史准确性问题，都是归档文本本身的问题，不涉及 PR #82 的实质记录：(1) `PXD055821` 的 60 列被归档成"60 个独立患者样本"——初审 head 真正的问题其实是含混的"sample"单位，不是错误宣称"60 个独立患者"；(2) 中文归档"PXD022613 调查后降级处理"容易误读成 classification tier 被降级，实际是 deprioritize，从未 reclassify；(3) 403 event provenance 说每一轮都尝试过正式写回 GitHub，实际只有最终 APPROVE 那轮尝试过，而且现在 PR #82 自己的 body 也已经带着 round history 了；(4) `PR_HISTORY.md` 的 Scope 一句说"三轮审核"，但 PR #82 实际是四轮。
+
+最终修正 head `0d24320`（round 1）：四项全部修复，没有碰 PR #82 的任何实质内容。网页版 ChatGPT 最终结论：**APPROVE**——确认四处修正都落地，CI 绿，PR mergeable。合并。
+
 ## PR #84 Module D 第二批：MCRC_liver_metastasis_PDO_2026 的 ERBB2 mIHC，带一个关键警告
 
-来源：同一对话 [CRC临床适应症地图](https://chatgpt.com/g/g-p-68c041b4df6881918a83a55e2dd7ac70/c/6a7a21a5-9474-83ea-895e-859b789fbe7c)。三轮审核；最终 APPROVE 时尝试提交正式 GitHub review，连接器再次返回 403。按用户明确选择（PR #82 round-3 reviewer 提到的 Next-handoff 项 3e(b)）：把 MCRC_liver_metastasis_PDO_2026 的 ERBB2 mIHC 数据并入。
+来源：同一对话 [CRC临床适应症地图](https://chatgpt.com/g/g-p-68c041b4df6881918a83a55e2dd7ac70/c/6a7a21a5-9474-83ea-895e-859b789fbe7c)。三轮审核；最终 APPROVE 由网页版 ChatGPT 给出，本轮没有尝试提交 GitHub formal review（修正 2026-08-25，PR #85 round 1 review：之前这里机械照搬了 PR #82/#83 的"连接器 403"事件描述，但这一轮实际没有尝试过写回 GitHub，PR #84 的 GitHub timeline 本身也是空的，不能推断成同样发生过 403——纯 event provenance 修正，不影响任何科学内容）。按用户明确选择（PR #82 round-3 reviewer 提到的 Next-handoff 项 3e(b)）：把 MCRC_liver_metastasis_PDO_2026 的 ERBB2 mIHC 数据并入。
 
 初审 head `d0e8c22`：真下载并校验了 Data S3.xlsx（Mendeley hr94h42xdc.3，114.6KB）——一个真实的、已处理好的 multiplex-IHC 表。14-marker panel 里只有 ERBB2 是本仓库五个 A_CLINICAL target 之一。**动手前先独立核实了原始论文全文（PMC13293968），跟 PXD055821 round 1 review 建立的规矩一样**，结果发现一个关键事实：论文自己的 Methods 原文写道——"KRT7 and ERBB2 were excluded from analysis due to no or very low expression levels, respectively."（KRT7 和 ERBB2 因为无信号/信号太弱，被原作者排除在正式分析之外）。这个发现实质性改变了这个数据源的价值判断，所以在动手实现前先跟用户确认了方向——用户明确决定：仍然并入，但在每一处出现的地方都重度标注这个警告。新增 target_evidence.tsv TE042（backed by EV050），evidence_directness 保持 UNCALIBRATED_PROXY 不变，但 evidence_level 用 EXPLORATORY_UNDERPOWERED / confidence 用 LOW（比这个 module 平时用的 SCREENING_LEVEL/MEDIUM 低一档）。顺手发现并修了两处此前就存在的 provenance 小问题（source_manifest.tsv 笼统的"no download performed"、module README 此前就错误地写着"real ERBB2 mIHC data was downloaded"）。网页版 ChatGPT 结论：**REQUEST_CHANGES**——方向和架构本身没问题（TE042/EV050 单独存在、evidence_directness 不升级、PDO 与 primary tissue 分离、67 patients 用 publication-stated denominator、mcrc_liver_metastasis 映射都认可），但初版实现把原论文的"very low expression levels"这个发现擅自升级成了"reagent unreliable"/"assay noise"这种原论文没说过的话；机器可读层的 structured_value 编码成"detected=136;fraction=1.0"，但数值 >0 不等于生物学意义上的"检出"（agent 如果只读机器字段不读文字说明，可能会误读成强阳性证据）；EXCLUDED_MARKERS 字典把 KRT7 和 ERBB2 两个不同的排除原因合并成同一个字符串，把原文的"respectively"抹掉了；抗体 catalog 拼错了（AO485 应该是 A0485，原论文自己的 Key Resources Table 就是这么写的）；"raw per-PDO values"这个说法也不准确——Data S3 本身就是处理过、normalize 过的表。
 
