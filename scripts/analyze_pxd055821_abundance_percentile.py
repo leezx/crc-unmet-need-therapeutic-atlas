@@ -38,7 +38,9 @@ targets' own same-matrix DIA-NN signal-intensity percentile -- where
 its detection fraction and median detected intensity rank among every
 other gene-group column in this one run. This is useful only as an
 assay-internal descriptive statistic (e.g. "is this gene's signal near
-the noisy/sparse tail of this specific run's output, or not") -- not as
+the lower/sparse end of this assay-output distribution, or not" --
+"sparse" describes rank position, not a claim about measurement noise,
+which this script has no model for) -- not as
 evidence toward, or against, any biological explanation for the
 ERBB2/TACSTD2 MS-vs-IHC split. The cohort-composition question (whether
 HPA's cancer_data.tsv cohort is liver-metastasis-specific like
