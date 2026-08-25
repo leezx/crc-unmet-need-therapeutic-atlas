@@ -1,41 +1,50 @@
 #!/usr/bin/env python3
-"""Module D follow-up: where do ERBB2/TACSTD2 sit in PXD055821's own
-whole-matrix abundance distribution?
+"""Module D follow-up: where do ERBB2/TACSTD2's DIA-NN signal values rank
+within PXD055821's own matrix?
 
 Context (Next-handoff item 3e(a)): `ERBB2` and `TACSTD2` show a real,
 unreconciled split between `PXD055821` mass-spec (frequent nonzero
 detection: 56/60 and 43/60 specimens respectively) and HPA cancer-tissue
 IHC (mostly `Low`/`Not detected`: TE038, TE041). This script does not
-resolve that split -- it cannot determine, from data alone, whether the
-gap reflects cohort-composition differences (PXD055821 is CRC-liver-
-metastasis-specific; HPA's cancer_data.tsv cohort is a generic, not
-liver-metastasis-specific, colorectal-cancer cohort -- confirmed by
-independently fetching HPA's own pathology pages 2026-08-25, which do
-not state whether HPA's colorectal-cancer IHC cohort is primary,
-metastatic, or mixed, and do not identify which of ERBB2's four listed
-antibodies (HPA001383/CAB000043/CAB020416/CAB062555) generated the
-colorectal-cancer-category staining specifically), a genuine difference
-in assay sensitivity between whole-tissue DIA-NN mass-spec (a
-continuous-intensity method whose practical detection floor is well
-below what produces visible IHC staining) and HPA's categorical IHC
-scoring, or some mix of both.
+resolve that split and does not attempt to explain it biologically.
 
-What this script *can* add, computed directly from the same
-already-downloaded `PXD055821` DIA-NN matrix used by
-`extract_pxd055821_protein_abundance.py` (no new data source): where
-each of the five `A_CLINICAL` targets' own median detected-intensity and
-detection-fraction fall relative to every other gene measured in this
-same 60-specimen matrix. This is a same-matrix relative-abundance
-percentile, not a cross-target ranking of ADC suitability and not a
-claim about any other dataset. A target sitting in this matrix's lower
-half of the abundance distribution -- while still frequently "detected"
-by nonzero-intensity DIA-NN -- is one concrete, checkable partial factor
-consistent with (not proof of) the idea that whole-tissue MS's very
-permissive "any nonzero signal" detection threshold can register
-lower-abundance proteins that a categorical IHC staining call would not
-score above `Low`/`Not detected`. This does not rule out the cohort-
-composition explanation above, and this script does not attempt to
-adjudicate between the two.
+**This is an assay-internal signal-rank descriptor, not a calibrated
+cross-protein abundance percentile** (round 1 review of PR #86). This
+repository's own Module D contract, already locked by PR #82/TE032-041,
+states DIA-NN gene-group intensity is in "arbitrary DIA-NN intensity
+units, not directly comparable across genes" -- and that holds within
+one matrix just as much as across matrices/cohorts. Protein-specific MS
+response (differing tryptic-peptide count, ionization efficiency,
+digestion/sequence properties, protein-inference/gene-group aggregation,
+and DIA detectability, all per-protein) means a lower raw DIA-NN
+intensity for one gene than another does NOT establish that the first
+gene's protein is biologically less abundant than the second's. This
+script therefore does NOT claim ERBB2/TACSTD2 are "modest-abundance" or
+sit in a "lower half of the abundance range" in any biological sense --
+only that their own nonzero DIA-NN signal values rank there among this
+one matrix's ~9,263 gene-group columns, on this matrix's own,
+uncalibrated signal scale. It also does NOT characterize DIA-NN's
+nonzero-value detection rule as a "very permissive" or generically
+low assay-detection threshold -- "detected = nonzero, non-missing
+intensity" is this repository's own operational definition (see
+`extract_pxd055821_protein_abundance.py`'s `summarize_detection()`),
+not an independently established property of DIA-NN's actual limit of
+detection, so it cannot be used to explain why IHC scores lower.
+
+What this script *does* add, computed directly from the same
+already-downloaded `PXD055821` matrix (no new data source, no new
+claim about biological abundance): each of the five `A_CLINICAL`
+targets' own same-matrix DIA-NN signal-intensity percentile -- where
+its detection fraction and median detected intensity rank among every
+other gene-group column in this one run. This is useful only as an
+assay-internal descriptive statistic (e.g. "is this gene's signal near
+the noisy/sparse tail of this specific run's output, or not") -- not as
+evidence toward, or against, any biological explanation for the
+ERBB2/TACSTD2 MS-vs-IHC split. The cohort-composition question (whether
+HPA's cancer_data.tsv cohort is liver-metastasis-specific like
+PXD055821's Sydney cohort) remains a separate, still-open candidate
+factor, addressed in `analysis_contracts/erbb2_tacstd2_ms_ihc_discrepancy.md`,
+not by this script.
 
 Usage: python3 scripts/analyze_pxd055821_abundance_percentile.py
 """
@@ -81,6 +90,12 @@ def main():
     all_stats = load_all_gene_stats(path)
     n_genes = len(all_stats)
 
+    missing = [g for g in A_CLINICAL_TARGETS if g not in all_stats]
+    if missing:
+        print(f"ERROR: {missing} not found in the {n_genes}-gene matrix -- "
+              f"refusing to report a partial/incomplete result set.", file=sys.stderr)
+        sys.exit(1)
+
     fracs_all = sorted(v[2] for v in all_stats.values() if v[2] is not None)
     medians_all = sorted(v[3] for v in all_stats.values() if v[3] is not None)
 
@@ -88,12 +103,9 @@ def main():
     out_path.parent.mkdir(parents=True, exist_ok=True)
     rows = []
     print(f"Matrix: {n_genes} genes x 60 specimens (PXD055821 Sydney cohort).\n")
-    print(f"{'gene':<10}{'n_detected/60':<16}{'frac_detected':<16}{'frac_percentile':<18}"
-          f"{'median_intensity':<20}{'median_percentile':<18}")
+    print(f"{'gene':<10}{'n_detected/60':<16}{'frac_detected':<16}{'frac_signal_rank_pct':<22}"
+          f"{'median_intensity':<20}{'median_signal_rank_pct':<22}")
     for gene in A_CLINICAL_TARGETS:
-        if gene not in all_stats:
-            print(f"{gene}: NOT FOUND in matrix", file=sys.stderr)
-            continue
         n_det, n_tot, frac, median = all_stats[gene]
         frac_pct = percentile_rank(fracs_all, frac) if frac is not None else None
         med_pct = percentile_rank(medians_all, median) if median is not None else None
@@ -102,12 +114,12 @@ def main():
             "n_detected": n_det,
             "n_total": n_tot,
             "frac_detected": f"{frac:.4f}" if frac is not None else "NA",
-            "frac_detected_percentile_among_9263_genes": f"{frac_pct:.1f}" if frac_pct is not None else "NA",
-            "median_intensity": f"{median:.4g}" if median is not None else "NA",
-            "median_intensity_percentile_among_genes_with_nonzero_median": f"{med_pct:.1f}" if med_pct is not None else "NA",
+            "frac_detected_signal_rank_percentile_among_9263_genes": f"{frac_pct:.1f}" if frac_pct is not None else "NA",
+            "median_intensity_arbitrary_units": f"{median:.4g}" if median is not None else "NA",
+            "median_intensity_signal_rank_percentile_among_genes_with_nonzero_median": f"{med_pct:.1f}" if med_pct is not None else "NA",
         })
-        print(f"{gene:<10}{f'{n_det}/{n_tot}':<16}{frac:<16.3f}{frac_pct:<18.1f}"
-              f"{median:<20.4g}{med_pct:<18.1f}")
+        print(f"{gene:<10}{f'{n_det}/{n_tot}':<16}{frac:<16.3f}{frac_pct:<22.1f}"
+              f"{median:<20.4g}{med_pct:<22.1f}")
 
     with open(out_path, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0].keys()), delimiter="\t")
@@ -115,10 +127,12 @@ def main():
         for r in rows:
             w.writerow(r)
     print(f"\nWrote {len(rows)} rows to {out_path}")
-    print(f"\nAll percentiles are same-matrix relative-abundance ranks among this matrix's "
-          f"{n_genes} genes -- not a cross-dataset or cross-target ADC-suitability ranking, "
-          f"and not a resolution of the ERBB2/TACSTD2 MS-vs-IHC split (see this script's own "
-          f"docstring for what it does and does not establish).")
+    print(f"\nThese are same-matrix, assay-internal DIA-NN signal-rank percentiles on this "
+          f"matrix's own uncalibrated intensity scale -- NOT a calibrated cross-protein "
+          f"biological-abundance ranking, NOT a cross-dataset or cross-target ADC-suitability "
+          f"ranking, and NOT a resolution (or biological explanation) of the ERBB2/TACSTD2 "
+          f"MS-vs-IHC split (see this script's own docstring for exactly what it does and "
+          f"does not establish).")
 
 
 if __name__ == "__main__":
