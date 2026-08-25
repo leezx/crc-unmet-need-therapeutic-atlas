@@ -8,40 +8,66 @@ tumor heterogeneity and predict patient survival and drug sensitivity",
 Mendeley Data v3, doi:10.17632/hr94h42xdc.3; publication PMC13293968) is
 a living biobank of 213 CRC liver-metastasis (CRLM) patient-derived
 organoids (PDOs) from 102 patients. Its Data S3.xlsx is a small
-(114.6 KB), already-processed multiplex-fluorescent-IHC (mIHC) table:
-one row per PDO x protein-marker x staining-round, with a continuous
-`mean_express_PDO` value (mean relative fluorescence intensity per PDO
-image, normalized to total cellular content -- not a raw pixel count
+(114.6 KB), source-provided *processed* multiplex-fluorescent-IHC
+(mIHC) table -- not a raw measurement: one row per PDO x protein-marker
+x staining-round, with a continuous `mean_express_PDO` value (mean
+relative fluorescence intensity per PDO image, already normalized to
+total cellular content by the source authors -- not a raw pixel count
 and not a High/Medium/Low/Not-detected category).
 
 Per the source publication's own methods text (independently fetched
-and confirmed 2026-08-25, PR #84 review): "Fluorescence-based multiplex
-immunohistochemistry and digital image analyses were used to analyze in
-situ expression of fourteen proteins in 136 PDOs and two corresponding
-tumor tissue samples from 67 patients." Only `ERBB2` (of this
-repository's five `A_CLINICAL` targets) is among those fourteen
+and confirmed 2026-08-25, PR #84 round 1 review): "Fluorescence-based
+multiplex immunohistochemistry and digital image analyses were used to
+analyze in situ expression of fourteen proteins in 136 PDOs and two
+corresponding tumor tissue samples from 67 patients." Only `ERBB2` (of
+this repository's five `A_CLINICAL` targets) is among those fourteen
 markers.
 
-*** IMPORTANT DATA-QUALITY CAVEAT, not a formality: the source
+*** IMPORTANT CAVEAT, not a formality -- and precisely worded, not
+upgraded past what the source publication actually says: the source
 publication's own methods text states, verbatim: "KRT7 and ERBB2 were
 excluded from analysis due to no or very low expression levels,
-respectively." The 136 raw per-PDO `ERBB2` values are still physically
-present in Data S3.xlsx (this script reads them, unmodified), but the
-original authors themselves judged this marker's signal in this
-14-plex panel unreliable and excluded it from every downstream analysis
-in their own paper. This is not a claim this repository is making about
-the data (e.g. "low expression" as a biological finding) -- it is the
-source authors' own QC judgment about assay/antibody performance in
-this specific multiplex context, and it is reported here for that
-reason, not suppressed. Elsewhere in the same publication, a *different*
-ERBB2 antibody clone (single-plex DAB IHC, clone CB11) was used
-successfully for a case-report figure (Pt137) -- consistent with the
-multiplex panel's ERBB2 reagent (polyclonal, catalog AO485) being the
-specific problem, not ERBB2 IHC in general. Given this, evidence_directness
-for this evidence row is UNCALIBRATED_PROXY (same tier as this
-repository's other Module D IHC/MS sources) but the claim/notes text
-must always carry the exclusion caveat verbatim -- never presented as
-clean corroborating evidence without it.
+respectively." Per that "respectively": `KRT7` was excluded for NO
+expression; `ERBB2` was excluded for VERY LOW expression -- a real
+distinction this script's own EXCLUDED_MARKERS dict preserves (round 1
+review of PR #84 caught an earlier version collapsing both markers to
+the same "no or very low" string, erasing "respectively").
+
+The 136 per-PDO `ERBB2` values are still present in Data S3.xlsx and are
+what this script reports (unmodified). **This repository does not claim
+those values represent unreliable measurements, a failed reagent, or
+assay noise** -- the source publication says only that the measured
+expression was very low, not that the assay/antibody malfunctioned.
+**This repository cannot determine, from what the source publication
+states, whether this reflects genuinely low ERBB2 protein abundance in
+these PDOs, limited sensitivity/performance of this specific multiplex
+assay configuration (polyclonal antibody, catalog A0485), or both** --
+and does not resolve that ambiguity by guessing. (Elsewhere in the same
+publication, a *different* ERBB2 antibody clone, single-plex DAB IHC,
+clone CB11, was used for a single-patient case-report figure -- Pt137,
+a patient later found to have ERBB2-amplified, heterogeneously
+expressed tumors -- but that one patient's result does not establish
+that the cohort-wide multiplex signal was a reagent artifact rather
+than real biology or assay-sensitivity limits, or some mix of both.)
+`ERBB2` was excluded only from downstream analyses of this specific
+multiplex protein-expression panel -- the same publication does go on
+to analyze `ERBB2` amplification, single-plex `ERBB2` IHC, and
+anti-`ERBB2` treatment response elsewhere, so "excluded from every
+downstream analysis in their own paper" would overclaim.
+
+Because a numeric value greater than zero is not evidence of
+biologically "detected" `ERBB2` protein (the source publication states
+no assay-detection threshold, and these are the very values the source
+authors themselves judged too low to trust), this script does NOT
+report a "detected/undetected" fraction. It reports how many of the 136
+`ERBB2` rows carry a positive numeric `mean_express_PDO` value --
+`summarize_values()`, not "summarize_detection()" -- and leaves any
+detection/prevalence claim unmade. `evidence_directness` for the
+resulting evidence row is `UNCALIBRATED_PROXY` (same tier as this
+repository's other Module D IHC/MS sources), but the claim/notes text
+must always carry the source-exclusion caveat verbatim, framed exactly
+as the source publication frames it -- never as "reagent failure" or
+"assay noise," which this repository cannot establish.
 
 PDO-to-patient mapping: the source publication states the fourteen-
 protein mIHC panel covers "136 PDOs ... from 67 patients" as its own
@@ -51,8 +77,7 @@ PDO_id values carry decimal suffixes, e.g. "Pt54.2", whose meaning --
 distinct patient vs. a second lesion/re-resection from the same patient
 -- is not resolved in the fetched text and is not guessed at here).
 This script's own per-marker patient-level breakdown is therefore not
-computed; only the PDO (organoid)-level detection count/summary
-statistics are reported.
+computed; only the PDO (organoid)-level value summary is reported.
 
 Usage: python3 scripts/extract_pdo_erbb2_mihc.py --gene ERBB2
 """
@@ -76,9 +101,12 @@ PANEL_MARKERS = {
     "ABCB1", "ABCG2", "CDH1", "CDX2", "CFTR", "ERBB2", "HSF1", "KI67",
     "KRT20", "KRT7", "RCC2", "RIPK1", "TP53", "UGT1A",
 }
+# Per the source publication's own "respectively" -- KRT7 and ERBB2 were
+# excluded for two DIFFERENT reasons, not the same one. Do not collapse
+# these back into one shared string (round 1 review of PR #84).
 EXCLUDED_MARKERS = {
-    "ERBB2": "no or very low expression levels",
-    "KRT7": "no or very low expression levels",
+    "KRT7": "no expression",
+    "ERBB2": "very low expression levels",
 }
 
 
@@ -90,18 +118,21 @@ def sha256(path):
     return d.hexdigest()
 
 
-def summarize_detection(values):
-    """A blank/missing cell is not detected; a genuinely nonzero
-    mean_express_PDO value is detected; a literal 0 is NOT detected.
-    Returns (n_detected, n_total, fraction_detected, (median, min, max)
-    or None -- computed over detected values only)."""
+def summarize_values(values):
+    """A blank/missing cell is not a numeric value; any other parsed
+    float, including 0, is a numeric value. Returns (n_nonzero, n_total,
+    fraction_nonzero, (median, min, max) or None -- computed over the
+    nonzero values only). This function does NOT claim nonzero implies
+    biologically "detected" -- the source publication states no
+    assay-detection threshold, so this script reports counts and
+    summary statistics only, never a detection/prevalence claim."""
     parsed = [float(v) for v in values if v is not None and str(v).strip()]
-    detected = [f for f in parsed if f != 0]
-    n_detected = len(detected)
+    nonzero = [f for f in parsed if f != 0]
+    n_nonzero = len(nonzero)
     n_total = len(values)
-    frac = n_detected / n_total if n_total else None
-    stats = (statistics.median(detected), min(detected), max(detected)) if detected else None
-    return n_detected, n_total, frac, stats
+    frac = n_nonzero / n_total if n_total else None
+    stats = (statistics.median(nonzero), min(nonzero), max(nonzero)) if nonzero else None
+    return n_nonzero, n_total, frac, stats
 
 
 def resolve_file():
@@ -163,7 +194,7 @@ def main():
         sys.exit(1)
 
     values = [v for _pdo, v in marker_rows]
-    n_detected, n_total, frac_detected, stats = summarize_detection(values)
+    n_nonzero, n_total, frac_nonzero, stats = summarize_values(values)
     distinct_pdos = sorted({pdo for pdo, _v in marker_rows})
 
     out_path = Path(args.out) if args.out else (
@@ -181,17 +212,21 @@ def main():
     print(f"\n{gene}: {len(distinct_pdos)} distinct PDOs measured in the 14-marker mIHC panel.")
     if stats:
         median, lo, hi = stats
-        print(f"{gene} mIHC mean_express_PDO (arbitrary units, normalized fluorescence intensity): "
-              f"detected (nonzero) in {n_detected}/{n_total} rows ({frac_detected:.1%}); "
+        print(f"{gene} mIHC mean_express_PDO (this study's own normalized relative fluorescence "
+              f"intensity scale; source publication states no assay-detection threshold, so this "
+              f"is a numeric-value summary, not a detection/prevalence claim): "
+              f"{n_nonzero}/{n_total} rows ({frac_nonzero:.1%}) carry a positive numeric value; "
               f"median={median:.4g}, min={lo:.4g}, max={hi:.4g}.")
     else:
-        print(f"{gene}: detected (nonzero) in 0/{n_total} rows.")
+        print(f"{gene}: 0/{n_total} rows carry a positive numeric value.")
 
     if gene in EXCLUDED_MARKERS:
         print(f"\n*** CAVEAT: the source publication's own methods text states '{gene}' was "
-              f"excluded from analysis due to '{EXCLUDED_MARKERS[gene]}' in this 14-plex panel. "
-              f"These raw values are reported as-is; they are not the source authors' own "
-              f"validated result.", file=sys.stderr)
+              f"excluded from downstream analyses of this multiplex protein-expression panel "
+              f"due to '{EXCLUDED_MARKERS[gene]}'. This repository cannot determine whether "
+              f"that reflects genuinely low protein abundance, limited assay sensitivity, or "
+              f"both -- these source-provided processed values are reported as-is, with no "
+              f"detection/prevalence claim.", file=sys.stderr)
 
 
 if __name__ == "__main__":
