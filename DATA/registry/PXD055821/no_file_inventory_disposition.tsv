@@ -1,2 +1,0 @@
-dataset_id	disposition_id	status	scope	blocker_class	rationale	next_artifact
-PXD055821	PXD055821-NFI-001	EXPLICIT_NO_FILE_INVENTORY	Source verified against official landing page/publication 2026-08-21; exact file-level inventory intentionally deferred	EXTERNAL_OR_DATASET_REVIEW	ProteomeXchange/PRIDE record verified (152 CRLM samples, 3 proteomic phenotypes) but the file-level API listing was not fetched in this pass.	Query the PRIDE API file listing (as done for PXD038149) to record per-file names/sizes before any download.
