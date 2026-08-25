@@ -9,11 +9,20 @@ counts by IHC staining level, one row per gene x cancer type), a small
 DATA/registry/HPA_normal_tissue (normal-tissue IHC, Module E only) --
 this is HPA_CRC_cancer_tissue, tumor-tissue IHC, Module D.
 
-This is whole-tumor-section IHC scoring, not malignant-cell-specific
-membrane/surface density, and typical HPA Pathology Atlas cohorts are
-small (n~10-12 patients per cancer type) -- per this repository's own
-Module D contract, this does NOT establish surface-density on its own.
-evidence_directness stays UNCALIBRATED_PROXY, measurement_layer=IHC.
+This is a cancer-cell-focused categorical IHC annotation, not a bulk
+whole-tumor-section score -- HPA's own cancer-methods page
+(https://www.proteinatlas.org/humanproteome/cancer/method, independently
+fetched and confirmed 2026-08-25, PR #82 round 1 review) states:
+"All images were then analyzed by pathologists and annotated with
+respect to staining intensity and fraction of positive cancer cells for
+all approved antibodies. The result of immunohistochemistry-based
+protein expression was then summarized as high, medium, low or not
+detected." Still NOT membrane-specific, NOT quantitative antigen
+density, and NOT a calibrated surface assay -- typical HPA Pathology
+Atlas cohorts are small (n~10-12 patients per cancer type) -- per this
+repository's own Module D contract, this does NOT establish
+surface-density on its own. evidence_directness stays
+UNCALIBRATED_PROXY, measurement_layer=IHC.
 
 Usage: python3 scripts/extract_hpa_cancer_ihc.py --gene CEACAM5
 """
