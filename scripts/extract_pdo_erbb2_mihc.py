@@ -58,7 +58,8 @@ downstream analysis in their own paper" would overclaim.
 Because a numeric value greater than zero is not evidence of
 biologically "detected" `ERBB2` protein (the source publication states
 no assay-detection threshold, and these are the very values the source
-authors themselves judged too low to trust), this script does NOT
+authors excluded from this panel's downstream analyses because measured
+expression was very low), this script does NOT
 report a "detected/undetected" fraction. It reports how many of the 136
 `ERBB2` rows carry a positive numeric `mean_express_PDO` value --
 `summarize_values()`, not "summarize_detection()" -- and leaves any
