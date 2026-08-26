@@ -1,0 +1,23 @@
+# Dependencies for scripts/infercnv_gse178318.py and
+# scripts/build_ensembl_gene_positions.py only. Every other script in this
+# repository is deliberately dependency-free (Python standard library
+# only) -- this is the first and, as of 2026-08-26, only exception,
+# because real gene-window InferCNV genuinely needs a maintained
+# scanpy-ecosystem package (infercnvpy) rather than a from-scratch
+# reimplementation of a peer-established algorithm.
+#
+# Install with: pip3 install -r scripts/requirements_infercnv.txt
+#
+# Versions pinned to what was actually verified working in this
+# environment 2026-08-26 (pandas>=3.0's new default Arrow-backed string
+# dtype breaks infercnvpy 0.6.1's internal gene-window indexing --
+# scripts/infercnv_gse178318.py works around this at runtime via
+# pd.set_option("future.infer_string", False) rather than requiring an
+# older pandas, so newer pandas 3.x releases should also work, but this
+# exact set is what was confirmed).
+infercnvpy==0.6.1
+scanpy==1.12.3
+anndata==0.13.2
+pandas==3.0.2
+numpy==2.4.4
+scipy==1.17.1
