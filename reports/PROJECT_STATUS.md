@@ -246,6 +246,7 @@ Given that positive result, implemented and ran it. New `DATA/reference/ensembl_
 ## 权威项目记录
 
 - [README.md](../README.md)：仓库目标、范围和 repository map
+- [PIVOT_INDUSTRIALIZATION_PROGRESS_SUMMARY_ZH.md](PIVOT_INDUSTRIALIZATION_PROGRESS_SUMMARY_ZH.md)：中文叙述性总结，覆盖 2026-08-21 起「工业化重构」全程（PR #70–#89）；为方便利益相关者审核而写，汇总本文件与已合并 PR 的 review history，不引入新证据
 - [ADC_ATLAS_DATASET_CONTRACT.md](../ADC_ATLAS_DATASET_CONTRACT.md)：Module A-F 数据契约
 - [modules/README.md](../modules/README.md)：模块工作目录索引
 - [knowledge/README.md](../knowledge/README.md)：target-first evidence chain 和 schema
