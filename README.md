@@ -41,6 +41,7 @@ The current source-only completion definition is [`config/project_completion.yam
 Project records:
 
 - [`reports/PROJECT_STATUS.md`](reports/PROJECT_STATUS.md)
+- [`reports/PIVOT_INDUSTRIALIZATION_PROGRESS_SUMMARY_ZH.md`](reports/PIVOT_INDUSTRIALIZATION_PROGRESS_SUMMARY_ZH.md) — Chinese-language narrative summary of the full 2026-08-21 pivot (PR #70–#89), for stakeholder review; not a source of new evidence
 - [`reports/PR_HISTORY.md`](reports/PR_HISTORY.md)
 - [`reports/TARGET_EVIDENCE_PATTERN_COMPARISON.md`](reports/TARGET_EVIDENCE_PATTERN_COMPARISON.md)
 - [`reports/CHATGPT_CRC_CLINICAL_INDICATION_MAP_FEEDBACK.md`](reports/CHATGPT_CRC_CLINICAL_INDICATION_MAP_FEEDBACK.md)
