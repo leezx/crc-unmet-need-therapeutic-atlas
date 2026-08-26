@@ -441,23 +441,60 @@ def report_cnv_summary(result, label):
           f"enrichment descriptor)", file=sys.stderr)
 
 
+def find_contiguous_runs(chrom_profile):
+    """Within one chromosome's signed window-value sequence, find maximal
+    contiguous runs of same-sign values (a real copy-number gain/loss
+    should show a spatially contiguous run of same-direction signal along
+    the chromosome, not scattered same-magnitude-but-opposite-sign
+    windows). A value of exactly 0 (dynamic_threshold-denoised) breaks a
+    run rather than extending it, since it carries no directional signal.
+    Returns a list of (start_idx, end_idx_exclusive, sign, sum_abs_value)
+    tuples, one per run, chromosome-local indices."""
+    signs = np.sign(chrom_profile)
+    runs = []
+    i = 0
+    n = len(signs)
+    while i < n:
+        if signs[i] == 0:
+            i += 1
+            continue
+        j = i
+        while j < n and signs[j] == signs[i]:
+            j += 1
+        runs.append((i, j, int(signs[i]), float(np.abs(chrom_profile[i:j]).sum())))
+        i = j
+    return runs
+
+
 def block_coherence_report(result, label):
-    """Round 1 review of PR #89's core requested sanity check: does the
-    CNV_HIGH epithelial-proxy subset's signal look like a real, focal,
-    chromosome-block-structured copy-number pattern (concentrated in a
-    small number of genomic windows), or a diffuse, roughly-uniform
-    elevation across the whole genome (which a lineage-driven expression
-    difference, unrelated to copy number, could also produce)? Computes
-    each group's own mean CNV profile across all cells in that group, and
-    what fraction of that profile's total |signal| is carried by its own
-    top 5% of windows -- a spread-out/uniform profile concentrates close
-    to 5% of its own signal in its own top 5% of windows; a focal profile
-    concentrates much more than that. This is a descriptive check, not a
-    formal statistical test -- reported plainly, not as a pass/fail
-    verdict this script assigns unilaterally."""
+    """Round 1 review of PR #89's requested sanity check, corrected in
+    round 2 review: the round-1 version measured only signal
+    FOCALITY/CONCENTRATION (what fraction of |signal| a group's top 5% of
+    windows carry) -- round 2 review correctly pointed out that this does
+    NOT establish genomic-BLOCK COHERENCE, since it never checked whether
+    the high-signal windows are spatially contiguous on a chromosome, or
+    whether adjacent windows keep a consistent gain/loss sign (both
+    properties a real, focal copy-number alteration should have, and
+    which a diffuse epithelial-vs-immune expression difference need not).
+    This function now reports BOTH: the round-1 focality/concentration
+    metric (kept, but no longer described as establishing spatial
+    coherence on its own) AND, new, the actual longest same-sign
+    contiguous window runs per chromosome per group, with each run's
+    sign (gain-like positive vs. loss-like negative) -- specifically so
+    chr7/chr20 (the chromosomes round 1's focality metric flagged as
+    independently-confirmed recurrent CRC gain hotspots) can be checked
+    for whether their high-magnitude signal is actually a contiguous,
+    consistently-signed run, not scattered same-chromosome windows of
+    mixed direction. This remains a descriptive check, not a formal
+    spatial-statistics test."""
     X_cnv, roles, threshold, cnv_score = result["X_cnv"], result["roles"], result["threshold"], result["cnv_score"]
     chr_pos = result["chr_pos"]
     sorted_chr_starts = sorted(chr_pos.items(), key=lambda kv: kv[1])
+    n_windows_total = X_cnv.shape[1]
+    chrom_bounds = []  # (chrom_name, start, end_exclusive)
+    for k, (name_c, start_c) in enumerate(sorted_chr_starts):
+        end_c = sorted_chr_starts[k + 1][1] if k + 1 < len(sorted_chr_starts) else n_windows_total
+        chrom_bounds.append((name_c, start_c, end_c))
 
     def window_to_chrom(w):
         chrom = sorted_chr_starts[0][0]
@@ -474,6 +511,7 @@ def block_coherence_report(result, label):
         "CNV_LOW_epithelial": epi_mask & (cnv_score <= threshold),
         "reference_holdout": roles == "reference_holdout",
     }
+    from collections import Counter
     for name, mask in groups.items():
         n = int(mask.sum())
         if n == 0:
@@ -482,18 +520,43 @@ def block_coherence_report(result, label):
         sub = X_cnv[mask, :]
         profile = np.asarray(sub.todense()).mean(axis=0).flatten() if hasattr(sub, "todense") else np.asarray(sub).mean(axis=0)
         abs_profile = np.abs(profile)
-        n_windows = len(abs_profile)
-        n_top = max(1, int(n_windows * 0.05))
+        n_top = max(1, int(n_windows_total * 0.05))
         order = np.argsort(abs_profile)[::-1]
         top_idx = order[:n_top]
         total = abs_profile.sum()
         concentration = (abs_profile[top_idx].sum() / total) if total > 0 else 0.0
-        from collections import Counter
         top_chrom_counts = Counter(window_to_chrom(w) for w in top_idx)
-        print(f"[{label}] {name} (n={n} cells, {n_windows} windows): top-5%-of-windows share of total "
-              f"|mean profile| = {concentration:.3f} (a perfectly uniform/diffuse profile would show ~0.05; "
-              f"higher values indicate the group's signal concentrates in fewer, specific genomic windows). "
-              f"Chromosomes represented in that top 5%: {top_chrom_counts.most_common(5)}", file=sys.stderr)
+        print(f"[{label}] {name} (n={n} cells, {n_windows_total} windows): FOCALITY/CONCENTRATION metric "
+              f"(NOT spatial coherence by itself) -- top-5%-of-windows share of total |mean profile| = "
+              f"{concentration:.3f} (a perfectly uniform/diffuse profile would show ~0.05). Chromosomes "
+              f"represented in that top 5%: {top_chrom_counts.most_common(5)}", file=sys.stderr)
+
+        # New (round 2 review): actual contiguous same-sign run detection,
+        # per chromosome, so a claim of "gain-like block" can be checked
+        # directly instead of inferred from focality alone.
+        all_runs = []  # (chrom, local_start, local_end, sign, sum_abs, global_start)
+        for chrom_name, start_c, end_c in chrom_bounds:
+            chrom_profile = profile[start_c:end_c]
+            for (ls, le, sign, sum_abs) in find_contiguous_runs(chrom_profile):
+                all_runs.append((chrom_name, ls, le, sign, sum_abs, start_c + ls))
+        all_runs.sort(key=lambda r: r[4], reverse=True)
+        top_runs = all_runs[:5]
+        print(f"[{label}] {name}: top contiguous same-sign window runs (chromosome, run length, sign, "
+              f"sum|signal| over the run):", file=sys.stderr)
+        for chrom_name, ls, le, sign, sum_abs, _ in top_runs:
+            direction = "gain-like (+)" if sign > 0 else "loss-like (-)"
+            print(f"    {chrom_name}: windows [{ls},{le}) (length {le - ls}), {direction}, "
+                  f"sum|signal|={sum_abs:.4f}", file=sys.stderr)
+        for target_chrom in ("chr7", "chr20"):
+            chrom_runs = [r for r in all_runs if r[0] == target_chrom]
+            if not chrom_runs:
+                continue
+            longest = max(chrom_runs, key=lambda r: (r[2] - r[1]))
+            direction = "gain-like (+)" if longest[3] > 0 else "loss-like (-)"
+            print(f"    [{target_chrom} check] longest same-sign run on {target_chrom}: "
+                  f"windows [{longest[1]},{longest[2]}) (length {longest[2]-longest[1]}), {direction}, "
+                  f"sum|signal|={longest[4]:.4f} (out of {len(chrom_runs)} same-sign runs total on this "
+                  f"chromosome in this group's mean profile)", file=sys.stderr)
 
 
 def per_sample_target_table(result, cell_keys, sample_map, gene, target_counts_full, write_none=False):

@@ -18,7 +18,7 @@ import numpy as np
 import scipy.sparse as sp
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from infercnv_gse178318 import compute_qc_and_categories, run_qc_and_classify, load_gene_positions
+from infercnv_gse178318 import compute_qc_and_categories, run_qc_and_classify, load_gene_positions, find_contiguous_runs
 from annotate_gse178318_cell_types import classify_cell
 
 failures = []
@@ -110,6 +110,28 @@ check("classify_cell() directly agrees with run_qc_and_classify()'s cell0 call",
       classify_cell(total_counts[0], epcam_counts[0],
                     {cat: category_sums[cat][0] for cat in ("immune", "fibroblast", "endothelial")},
                     category_gene_counts) == "epithelial")
+
+# ============================================================
+# find_contiguous_runs() -- added round 2 review of PR #89: the block-
+# coherence check must find actual spatially-contiguous, same-sign
+# window runs, not just which windows have the largest magnitude.
+# ============================================================
+runs = find_contiguous_runs(np.array([1.0, 2.0, 3.0, -1.0, -2.0, 0.0, 0.5]))
+check("a simple +/-/0/+ sequence splits into 3 runs (0 breaks a run, not extends it)",
+      len(runs) == 3)
+check("first run is the 3 positive values, indices [0,3), sign +1",
+      runs[0] == (0, 3, 1, 6.0))
+check("second run is the 2 negative values, indices [3,5), sign -1, sum|value|=3.0",
+      runs[1] == (3, 5, -1, 3.0))
+check("third run is the single trailing positive value, indices [6,7), sign +1",
+      runs[2] == (6, 7, 1, 0.5))
+
+check("all-zero profile produces zero runs (no directional signal anywhere)",
+      find_contiguous_runs(np.array([0.0, 0.0, 0.0])) == [])
+check("a single contiguous run spanning the whole profile is detected as one run",
+      find_contiguous_runs(np.array([1.0, 1.0, 1.0])) == [(0, 3, 1, 3.0)])
+check("alternating-sign single windows produce as many runs as windows (no false contiguity)",
+      len(find_contiguous_runs(np.array([1.0, -1.0, 1.0, -1.0]))) == 4)
 
 if failures:
     print(f"\n{len(failures)} test(s) FAILED: {failures}")
